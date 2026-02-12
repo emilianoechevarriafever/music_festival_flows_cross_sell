@@ -123,7 +123,7 @@
     .section-header h2 { font-size: 18px; font-weight: 700; color: var(--color-text-main); }
     .section-header a { font-size: 14px; font-weight: 600; color: var(--color-primary); text-decoration: none; }
 
-    /* Card Carousel */
+    /* Card Carousel — uniform image size for all cards */
     .card-scroll {
       display: flex;
       gap: 16px;
@@ -132,6 +132,14 @@
       scrollbar-width: none;
     }
     .card-scroll::-webkit-scrollbar { display: none; }
+    .card-scroll .card-img {
+      width: 150px;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .card-scroll .card-img img { width: 100%; height: 100%; object-fit: cover; }
 
     /* Event Card */
     .event-card {
@@ -203,18 +211,18 @@
       color: var(--color-text-main);
     }
 
-    /* Featured Card (larger) */
+    /* Featured Card (same size as event-card for uniform carousel) */
     .featured-card {
       flex-shrink: 0;
-      width: 216px;
+      width: 150px;
       text-decoration: none;
       color: inherit;
       transition: transform 0.15s;
     }
     .featured-card:hover { transform: translateY(-2px); }
     .featured-card .card-img {
-      width: 216px;
-      height: 270px;
+      width: 150px;
+      height: 200px;
       border-radius: 12px;
       overflow: hidden;
       position: relative;
