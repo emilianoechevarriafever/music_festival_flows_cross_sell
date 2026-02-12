@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abonos Polar Sound Occident Festival 2026</title>
+  <title>Polar Sound Occident 2026: Alojamientos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
       --color-primary: #0079ca;
       --color-primary-weak: #e6f4ff;
@@ -20,38 +20,20 @@
       --color-border: #ccd2d8;
       --color-border-light: #ddd;
       --color-accent: #6f41d7;
-      --color-danger: #eb0052;
-      --color-danger-text: #f43d7a;
-      --color-success: #00c798;
-      --color-warning: #f9b132;
       --color-bg: #ffffff;
       --color-bg-disable: #f6f6f6;
-      --color-bg-dark: #06232c;
       --font: 'Montserrat', sans-serif;
     }
-    body {
-      font-family: var(--font);
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      color: var(--color-text);
-    }
-    .phone {
-      width: 393px;
-      max-width: 100vw;
-      background: var(--color-bg);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+    body { font-family:var(--font); background:#f5f5f5; display:flex; justify-content:center; color:var(--color-text); }
+    .phone { width:393px; max-width:100vw; background:var(--color-bg); min-height:100vh; overflow-x:hidden; position:relative; }
 
-    /* === STATUS BAR === */
+    /* Status Bar */
     .status-bar { display:flex; align-items:center; justify-content:space-between; padding:14px 16px 8px; background:white; }
     .status-bar .time { font-weight:600; font-size:17px; letter-spacing:-0.68px; }
     .status-bar .icons { display:flex; gap:5px; align-items:center; }
     .status-bar .icons svg { height:12px; }
 
-    /* === NAVBAR === */
+    /* Navbar */
     .navbar { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:white; position:sticky; top:0; z-index:100; border-bottom:1px solid var(--color-border); }
     .navbar .logo { height:32px; }
     .nav-icons { display:flex; align-items:center; gap:16px; }
@@ -60,7 +42,7 @@
     .avatar-wrap img { width:24px; height:24px; border-radius:50%; object-fit:cover; }
     .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#ff3b30; border:1.5px solid white; border-radius:50%; }
 
-    /* === HERO === */
+    /* Hero */
     .hero { position:relative; width:100%; height:375px; overflow:hidden; }
     .hero img.hero-bg { width:100%; height:100%; object-fit:cover; }
     .hero .social-tools { position:absolute; top:16px; right:16px; display:flex; flex-direction:column; gap:16px; }
@@ -70,7 +52,7 @@
     .hero .dots span { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.5); }
     .hero .dots span.active { background:white; }
 
-    /* === TITLE SECTION === */
+    /* Title */
     .title-section { padding:16px; }
     .tag-selling { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; background:#fff3e0; border-radius:4px; color:#e65100; font-size:12px; font-weight:600; margin-bottom:12px; }
     .tag-selling svg { width:14px; height:14px; }
@@ -83,7 +65,7 @@
     .title-section h1 { font-size:20px; font-weight:600; line-height:28px; margin-bottom:4px; }
     .divider { height:1px; background:var(--color-border); margin:0 16px; }
 
-    /* === DESCRIPTION === */
+    /* Description */
     .description { padding:20px 16px; font-size:15px; line-height:22px; }
     .description p { margin-bottom:12px; }
     .description .subtitle { font-weight:600; font-size:16px; margin-bottom:8px; margin-top:16px; }
@@ -91,31 +73,28 @@
     .description ul li { margin-bottom:4px; }
     .description a { color:var(--color-primary); text-decoration:underline; }
 
-    /* === SECTION HEADER === */
+    /* Section Header */
     .section-header { display:flex; align-items:center; gap:8px; padding:16px; border-bottom:1px solid var(--color-border); }
     .section-header svg { width:24px; height:24px; flex-shrink:0; color:var(--color-text); }
     .section-header h2 { font-size:20px; font-weight:600; line-height:24px; flex:1; }
 
-    /* === TICKET SELECTOR === */
+    /* Ticket Selector */
     .ticket-selector { padding:0 16px 16px; border-bottom:1px solid var(--color-border); }
 
-    /* No booking fees banner */
-    .no-fees-banner { display:flex; align-items:center; justify-content:center; gap:8px; background:#e8e0f7; border-radius:8px; padding:10px 16px; margin:16px 0; }
-    .no-fees-banner .info-icon { width:20px; height:20px; background:var(--color-accent); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:12px; font-weight:700; flex-shrink:0; }
-    .no-fees-banner span { font-size:14px; font-weight:500; color:var(--color-text); }
-
-    /* Ticket type pills */
-    .ticket-pills { display:flex; gap:12px; align-items:center; margin-bottom:20px; overflow-x:auto; scrollbar-width:none; }
-    .ticket-pills::-webkit-scrollbar { display:none; }
-    .ticket-pill { flex-shrink:0; padding:8px 16px; border:1.5px solid var(--color-border-light); border-radius:4px; font-size:14px; font-weight:500; color:var(--color-text); background:white; cursor:pointer; position:relative; white-space:nowrap; }
+    /* Pill level row */
+    .pill-level { display:flex; gap:12px; align-items:center; padding:16px 0; border-bottom:1px solid var(--color-border); overflow-x:auto; scrollbar-width:none; }
+    .pill-level::-webkit-scrollbar { display:none; }
+    .pill-level:last-of-type { border-bottom:none; }
+    .ticket-pill { flex-shrink:0; padding:8px 16px; border:1.5px solid var(--color-border-light); border-radius:4px; font-size:14px; font-weight:500; color:var(--color-text); background:white; cursor:pointer; position:relative; white-space:nowrap; text-align:center; }
     .ticket-pill.active { border-color:#1db1de; color:#1db1de; }
     .ticket-pill.active::after { content:''; position:absolute; top:-2px; right:-2px; width:16px; height:16px; background:#1db1de; border-radius:0 3px 0 6px; }
     .ticket-pill.active::before { content:'\2713'; position:absolute; top:-1px; right:0; font-size:9px; color:white; z-index:1; font-weight:700; }
+    .ticket-pill.disabled { color:var(--color-text-disable); border-color:#eee; }
     .pill-arrow { flex-shrink:0; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
     .pill-arrow svg { width:16px; height:16px; color:var(--color-text-subtle); }
 
-    /* Ticket rows */
-    .ticket-row { display:flex; align-items:center; padding:16px 0; border:1.5px solid var(--color-border-light); border-radius:8px; margin-bottom:12px; position:relative; overflow:hidden; }
+    /* Ticket row */
+    .ticket-row { display:flex; align-items:center; padding:16px 0; border:1.5px solid var(--color-border-light); border-radius:8px; margin-top:16px; position:relative; overflow:hidden; }
     .ticket-row.selected { border-color:#1db1de; background:#fafeff; }
     .ticket-row.selected::after { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 28px 28px 0; border-color:transparent #1db1de transparent transparent; }
     .ticket-row .ticket-content { flex:1; padding:0 12px 0 16px; }
@@ -138,7 +117,7 @@
     .cta-secondary { width:100%; height:48px; background:white; border:1.5px solid var(--color-border); border-radius:100px; color:var(--color-text); font-family:var(--font); font-weight:600; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
     .cta-secondary svg { width:18px; height:18px; }
 
-    /* === REVIEWS === */
+    /* Reviews */
     .reviews { padding:20px 16px; }
     .reviews h3 { font-size:18px; font-weight:600; margin-bottom:16px; }
     .rating-big { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
@@ -151,37 +130,19 @@
     .review-card .review-date { font-size:12px; color:var(--color-text-secondary); margin:2px 0 6px; }
     .review-card .review-text { font-size:14px; line-height:20px; }
 
-    /* === HELP === */
+    /* Help */
     .help-section { padding:16px; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; }
     .help-section span { font-size:15px; font-weight:500; }
     .help-section a { font-size:14px; font-weight:600; color:var(--color-primary); text-decoration:none; }
 
-    /* === ABOUT VENUE === */
-    .venue-section { padding:20px 16px; }
-    .venue-section .venue-img { width:100%; height:200px; border-radius:8px; object-fit:cover; margin-bottom:12px; }
-    .venue-section .venue-name-lg { font-size:16px; font-weight:600; margin-bottom:6px; }
-    .venue-section .venue-desc { font-size:14px; line-height:20px; color:var(--color-text-secondary); }
-
-    /* === LOCATION === */
+    /* Location */
     .location { padding:20px 16px; }
     .location .loc-name { font-weight:600; font-size:15px; margin-bottom:4px; }
     .location .loc-address { font-size:14px; color:var(--color-text-secondary); margin-bottom:12px; }
     .location .map-placeholder { width:100%; height:160px; background:#e8e8e8; border-radius:8px; overflow:hidden; }
     .location .map-placeholder img { width:100%; height:100%; object-fit:cover; }
 
-    /* === SIMILAR === */
-    .similar { padding:20px 0; }
-    .similar h3 { font-size:18px; font-weight:600; padding:0 16px; margin-bottom:16px; }
-    .sim-scroll { display:flex; gap:12px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
-    .sim-scroll::-webkit-scrollbar { display:none; }
-    .sim-card { flex-shrink:0; width:150px; text-decoration:none; color:inherit; }
-    .sim-card .sim-img { width:150px; height:100px; border-radius:8px; overflow:hidden; }
-    .sim-card .sim-img img { width:100%; height:100%; object-fit:cover; }
-    .sim-card .sim-title { margin-top:6px; font-size:12px; font-weight:500; line-height:16px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-    .sim-card .sim-meta { font-size:11px; color:var(--color-text-secondary); margin-top:2px; }
-    .sim-card .sim-badge { display:inline-block; font-size:9px; font-weight:600; color:white; background:var(--color-accent); padding:1px 4px; border-radius:2px; margin-top:4px; }
-
-    /* === FOOTER === */
+    /* Footer */
     .footer { background:black; color:white; padding:32px 16px 140px; }
     .footer-cols { display:flex; justify-content:space-between; margin-bottom:24px; }
     .footer-col h5 { font-size:14px; font-weight:600; margin-bottom:8px; }
@@ -190,8 +151,8 @@
     .footer .legal { border-top:1px solid var(--color-text-subtle); padding-top:16px; font-size:12px; opacity:0.7; }
     .footer .legal a { color:white; }
 
-    /* === STICKY CTA === */
-    .sticky-cta { position:fixed; bottom:0; width:393px; max-width:100vw; z-index:200; background:white; border-top:1px solid var(--color-border); padding:12px 16px; display:flex; flex-direction:column; gap:0; }
+    /* Sticky CTA */
+    .sticky-cta { position:fixed; bottom:0; width:393px; max-width:100vw; z-index:200; background:white; border-top:1px solid var(--color-border); padding:12px 16px; }
     .sticky-cta .cta-btn { width:100%; height:48px; background:var(--color-primary); border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; }
 
     @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
@@ -222,23 +183,21 @@
       </div>
     </nav>
 
-    <!-- Hero Gallery -->
+    <!-- Hero -->
     <div class="hero">
       <img class="hero-bg" src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80" alt="Polar Sound Occident Festival">
       <div class="social-tools">
         <button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
         <button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
       </div>
-      <div class="dots">
-        <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
+      <div class="dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
 
-    <!-- Title Section -->
+    <!-- Title -->
     <div class="title-section">
       <div class="tag-selling">
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2.3 5.1H16l-4.6 3.5 1.7 5.4L8 10.8 2.9 14l1.7-5.4L0 5.1h5.7z"/></svg>
-        Tickets Selling Fast
+        &iexcl;Tickets volando!
       </div>
       <div class="rating-row">
         <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
@@ -249,41 +208,40 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
         Estaci&oacute;n de Esqu&iacute; Baqueira Beret
       </div>
-      <h1>Abonos Polar Sound Occident Festival 2026</h1>
+      <h1>Polar Sound Occident 2026: Abonos y alojamientos</h1>
     </div>
 
     <div class="divider"></div>
 
     <!-- Description -->
     <div class="description">
-      <p>&#11088; <strong>Polar Sound Occident Festival</strong> After last year's sold-out edition, it's back on March 13&ndash;14, 2026, for a brand-new celebration! Enjoy live performances from <strong>Lori Meyers, Juan Mag&aacute;n, Leire Mart&iacute;nez, Besmaya</strong>, and many more to be confirmed.</p>
+      <p>&#11088; <strong>Polar Sound Occident Festival.</strong> Tras el Sold Out de la edici&oacute;n anterior, regresa el 13 y 14 de marzo de 2026 para celebrar su nueva edici&oacute;n.</p>
 
-      <p>&#128680; <strong>Passes now on sale!</strong> Lori Meyers, Juan Mag&aacute;n, Leire Mart&iacute;nez, Besmaya, and many more to be announced are waiting for you!</p>
-
-      <p>&#127976; If you want to purchase a Pass + accommodation to make your experience easier, <a href="#">click here</a></p>
-      <p>&#128656; You can buy your bus and shuttle tickets to Polar Sound <a href="#">here</a></p>
-      <p>&#128176; If you're not ready to buy add-ons yet, you'll be able to purchase them later separately <a href="#">here</a></p>
-
-      <p class="subtitle">Highlights</p>
+      <p class="subtitle">&#127908; Line up por d&iacute;as</p>
       <ul>
-        <li>&#9975;&#65039; Spectacular ski slopes in the morning</li>
-        <li>&#127925; The best apr&egrave;s-ski with live hits from top artists in the afternoon</li>
-        <li>&#127911; DJs after the concerts to end the night in style</li>
-        <li>&#9924; In one of the most amazing natural settings on the peninsula</li>
+        <li><strong>Viernes 13:</strong> Lori Meyers, Silo&eacute;, Fuzz by Dj Nano, Leire Mart&iacute;nez, Paula Mattheus, Ardiya, Pavlenha.</li>
+        <li><strong>S&aacute;bado 14:</strong> Juan Mag&aacute;n, Taburete, Marlon, Sexy Zebras, Hey Kid, Besmaya, Luigii Nieto, Caco Monteverde.</li>
       </ul>
 
-      <p class="subtitle">General Info</p>
-      <p>&#128197; Date: March 13th and 14th, 2026<br>
-      &#128336; Time: concerts start around 5:00 PM and end around 3:00 AM<br>
-      &#128205; Location: Baqueira Beret ski resort, Lleida<br>
-      &#128100; Age: 18+ (Minors aged 16+ may attend with <a href="#">signed authorization</a>)<br>
-      &#9855; Accessibility: suitable for people with reduced mobility<br>
-      &#10067; Check <a href="#">frequently asked questions</a> here</p>
+      <p>&#10071; <strong>Al reservar tu alojamiento estar&aacute;s comprando tambi&eacute;n tu acceso a los 2 d&iacute;as del festival.</strong></p>
 
-      <p class="subtitle">Description</p>
-      <p>Polar Sound Occident Festival has been surprising audiences every year since 2019, bringing together the hottest current artists for live performances, and it will be back again in 2026 to get you moving like never before with the best artists on the national music scene! A unique location on the peninsula, with the coolest ski slopes during the day and the hottest music in the afternoon and evening, create the perfect formula for enjoying one of the best festivals of the season.</p>
+      <p>&#127915; Alojamiento + Abono con acceso a los 2 d&iacute;as del festival. Podr&aacute;s elegir:</p>
+      <ul>
+        <li>Opciones de viaje de 1 a 6 personas</li>
+        <li>Alojamiento durante 2 noches (viernes y s&aacute;bado) o 3 noches (jueves a domingo)</li>
+        <li>Amplia variedad de apartamentos u hoteles</li>
+        <li>Tipo de apartamento o habitaci&oacute;n hotelera</li>
+      </ul>
 
-      <p style="font-size:12px;color:var(--color-text-secondary);margin-top:16px;"><em>*All customers will receive communications from the sponsors</em><br><br>Official sponsors: Occident, Barcel&oacute; Imperial, Coca-Cola, Benefit, Mahou San Miguel, Frit Ravich, Eolux, Varta, Bus for Fun, Deleito.</p>
+      <p class="subtitle">Qu&eacute; vas a disfrutar</p>
+      <ul>
+        <li>&#9975;&#65039; Espectaculares pistas de esqu&iacute; por la ma&ntilde;ana</li>
+        <li>&#127925; El mejor apr&egrave;s-ski con temazos en directo</li>
+        <li>&#127911; DJs tras los conciertos para cerrar la noche</li>
+        <li>&#9924; Uno de los enclaves naturales m&aacute;s alucinantes de la pen&iacute;nsula</li>
+      </ul>
+
+      <p style="font-size:12px;color:var(--color-text-secondary);margin-top:16px;"><em>*Todos los compradores recibir&aacute;n una comunicaci&oacute;n de las marcas patrocinadoras.</em></p>
     </div>
 
     <div class="divider"></div>
@@ -291,196 +249,111 @@
     <!-- Ticket Selector -->
     <div class="section-header" id="ticket-section">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <h2>Select date and session</h2>
+      <h2>Selecciona fecha y sesi&oacute;n</h2>
     </div>
 
     <div class="ticket-selector">
-      <!-- No booking fees -->
-      <div class="no-fees-banner">
-        <span class="info-icon">i</span>
-        <span>No booking fees</span>
+      <!-- Level 1: Travelers -->
+      <div class="pill-level" data-level="travelers">
+        <div class="ticket-pill active" data-value="2">Viaje 2 personas + Abono</div>
+        <div class="ticket-pill" data-value="3">Viaje 3 personas + Abono</div>
+        <div class="ticket-pill" data-value="4">Viaje 4 personas + Abono</div>
+        <div class="pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
       </div>
 
-      <!-- Type pills -->
-      <div class="ticket-pills">
-        <div class="ticket-pill active">Day Ticket</div>
-        <div class="ticket-pill">2 Day Pass</div>
-        <div class="pill-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
+      <!-- Level 2: Nights -->
+      <div class="pill-level" data-level="nights">
+        <div class="ticket-pill active" data-value="3">3 noches (12, 13 y 14 de marzo)</div>
+        <div class="ticket-pill" data-value="2">2 noches (13 y 14 de marzo)</div>
       </div>
 
-      <!-- Ticket rows -->
-      <div class="ticket-row selected">
+      <!-- Level 3: Type -->
+      <div class="pill-level" data-level="type">
+        <div class="ticket-pill active" data-value="hotel">Hotel</div>
+        <div class="ticket-pill" data-value="apartamento">Apartamento</div>
+        <div class="pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+
+      <!-- Level 4: Hotel name -->
+      <div class="pill-level" data-level="hotel">
+        <div class="pill-arrow" style="transform:rotate(180deg)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+        <div class="ticket-pill active" data-value="ac">AC</div>
+        <div class="ticket-pill" data-value="melia">Meli&aacute; De tredos</div>
+        <div class="pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+
+      <!-- Room row -->
+      <div class="ticket-row selected" id="room-row">
         <div class="ticket-content">
-          <div class="ticket-name">Friday - Tier 1</div>
-          <div class="ticket-price">&euro;45.00</div>
+          <div class="ticket-name">Habitaci&oacute;n Doble</div>
+          <div class="ticket-price" id="room-price">559,70 &euro;</div>
         </div>
         <div class="ticket-amount">
-          <button class="amt-btn minus">&minus;</button>
-          <span class="amt-count">1</span>
-          <button class="amt-btn plus">+</button>
+          <button class="amt-btn minus" id="room-minus">&minus;</button>
+          <span class="amt-count" id="room-count">2</span>
+          <button class="amt-btn plus" id="room-plus">+</button>
         </div>
       </div>
 
-      <div class="ticket-row">
-        <div class="ticket-content">
-          <div class="ticket-name">Saturday - Tier 2</div>
-          <div class="ticket-price">&euro;50.00</div>
-        </div>
-        <div class="ticket-amount">
-          <button class="amt-btn minus">&minus;</button>
-          <span class="amt-count">0</span>
-          <button class="amt-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="ticket-row">
-        <div class="ticket-content">
-          <div class="ticket-name">Friday - Tier 1 - Polar Pack: Day Ticket + 40 tokens (+10 free)</div>
-          <div class="ticket-price">&euro;85.00</div>
-        </div>
-        <div class="ticket-amount">
-          <button class="amt-btn minus">&minus;</button>
-          <span class="amt-count">0</span>
-          <button class="amt-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="ticket-row">
-        <div class="ticket-content">
-          <div class="ticket-name">Saturday - Tier 2 - Polar Pack: Day Ticket + 40 tokens (+10 free)</div>
-          <div class="ticket-price">&euro;90.00</div>
-        </div>
-        <div class="ticket-amount">
-          <button class="amt-btn minus">&minus;</button>
-          <span class="amt-count">0</span>
-          <button class="amt-btn plus">+</button>
-        </div>
-      </div>
-
-      <!-- Selling Fast banner -->
+      <!-- Selling fast -->
       <div class="selling-fast-banner">
-        &#128293; Tickets Selling Fast
+        &#128293; &iexcl;Tickets volando!
       </div>
 
-      <!-- CTA buttons -->
-      <button class="cta-primary" id="cta-get-it" onclick="window.location.href='polar-sound-accommodation.html'">&euro;45.00 &mdash; Get it</button>
+      <!-- CTA -->
+      <button class="cta-primary" id="cta-buy" onclick="window.location.href='checkout.html'">1.119,40 &euro; &mdash; Comprar ahora</button>
       <button class="cta-secondary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M7 6V4m10 2V4"/></svg>
-        Gift this experience
+        Regala esta experiencia
       </button>
     </div>
 
     <!-- Reviews -->
     <div class="reviews">
-      <h3>User reviews</h3>
+      <h3>Opiniones de usuarios</h3>
       <div class="rating-big">
         <span class="score">4.5</span>
         <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-        <span class="count">based on 462 reviews</span>
+        <span class="count">basado en 462 opiniones</span>
       </div>
       <div class="review-card">
         <div class="reviewer">Ignacio A.</div>
-        <div class="review-date">Mar 2025</div>
-        <div class="review-text">Fu&eacute; muy buena experiencia en general, muy c&oacute;modo tener todos los servicios que consumimos juntos en la app y todo muy bien organizado.</div>
+        <div class="review-date">mar 2025</div>
+        <div class="review-text">Fu&eacute; muy buena experiencia en general, muy c&oacute;modo tener todos los servicios que consumimos juntos en la app.</div>
       </div>
       <div class="review-card">
         <div class="reviewer">Valentina Q.</div>
-        <div class="review-date">Mar 2025</div>
+        <div class="review-date">mar 2025</div>
         <div class="review-text">Las mejores noches de mi vida!!!</div>
       </div>
       <div class="review-card">
         <div class="reviewer">Mario P.</div>
-        <div class="review-date">Mar 2025</div>
+        <div class="review-date">mar 2025</div>
         <div class="review-text">Muy buena, la organizaci&oacute;n estupenda, lo disfrutamos mucho.</div>
       </div>
       <div class="review-card">
         <div class="reviewer">Carmen P.</div>
-        <div class="review-date">Mar 2025</div>
+        <div class="review-date">mar 2025</div>
         <div class="review-text">Muy bien organizado y muy buena m&uacute;sica. Ha estado fenomenal.</div>
-      </div>
-      <div class="review-card">
-        <div class="reviewer">Ricardo P.</div>
-        <div class="review-date">Mar 2025</div>
-        <div class="review-text">Experiencia muy buena!!</div>
-      </div>
-      <div class="review-card">
-        <div class="reviewer">Paloma G.</div>
-        <div class="review-date">Mar 2025</div>
-        <div class="review-text">El proceso de compra sencillo y muy clara toda la informaci&oacute;n que ofrecen sobre el evento.</div>
-      </div>
-      <div class="review-card">
-        <div class="reviewer">Alba A.</div>
-        <div class="review-date">Mar 2025</div>
-        <div class="review-text">Fue incre&iacute;ble</div>
-      </div>
-      <div class="review-card">
-        <div class="reviewer">Sof&iacute;a M.</div>
-        <div class="review-date">Mar 2025</div>
-        <div class="review-text">Inolvidable</div>
       </div>
     </div>
 
     <!-- Help -->
     <div class="help-section">
-      <span>Need help?</span>
-      <a href="#">Contact Support here</a>
-    </div>
-
-    <!-- About the Venue -->
-    <div class="section-header">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
-      <h2>About the venue</h2>
-    </div>
-    <div class="venue-section">
-      <img class="venue-img" src="https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=800&q=80" alt="Baqueira Beret">
-      <div class="venue-name-lg">Estaci&oacute;n de Esqu&iacute; Baqueira Beret</div>
-      <div class="venue-desc">The Baqueira Beret - Sector Bonaigua Ski Resort, located in the privileged environment of the Catalan Pyrenees, is an authentic reference among the winter destinations in Spain. With its multiple slopes and stunning scenery, it offers one of the best skiing experiences in the country. <a href="#" style="color:var(--color-primary);">Read more</a></div>
+      <span>&iquest;Alguna duda?</span>
+      <a href="#">Cont&aacute;ctanos aqu&iacute;</a>
     </div>
 
     <!-- Getting There -->
     <div class="section-header">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      <h2>Getting there</h2>
+      <h2>&iquest;C&oacute;mo llegar?</h2>
     </div>
     <div class="location">
-      <div class="loc-name">Baqueira Beret - Sector Bonaigua</div>
+      <div class="loc-name">Estaci&oacute;n de Esqu&iacute; Baqueira Beret</div>
       <div class="loc-address">Baqueira Beret Parking Lot, 25598</div>
       <div class="map-placeholder">
-        <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80" alt="Map area Baqueira">
-      </div>
-    </div>
-
-    <!-- Similar Experiences -->
-    <div class="similar">
-      <h3>Similar experiences</h3>
-      <div class="sim-scroll">
-        <a href="queen.html" class="sim-card">
-          <div class="sim-img"><img src="https://www.figma.com/api/mcp/asset/ce91371a-0850-403b-a1ac-382ad4d6a985" alt="Candlelight Queen"></div>
-          <div class="sim-title">Candlelight: Tribute to Queen</div>
-          <div class="sim-meta">&#9733; 4.8 &middot; Desde &euro;20,00</div>
-        </a>
-        <a href="coldplay.html" class="sim-card">
-          <div class="sim-img"><img src="https://www.figma.com/api/mcp/asset/f8865e45-78be-4e4e-bc6a-4bc42045032c" alt="Candlelight Coldplay"></div>
-          <div class="sim-title">Candlelight: Tribute to Coldplay</div>
-          <div class="sim-meta">&#9733; 4.7 &middot; Desde &euro;23,50</div>
-        </a>
-        <div class="sim-card">
-          <div class="sim-img"><img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=400&q=80" alt="Jazz Room"></div>
-          <div class="sim-title">The Jazz Room: Tribute to Soul</div>
-          <div class="sim-meta">&#9733; 4.4 (59) &middot; From &euro;19,00</div>
-        </div>
-        <div class="sim-card">
-          <div class="sim-img"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&q=80" alt="Candlelight LOTR"></div>
-          <div class="sim-title">Candlelight: The Lord of the Rings</div>
-          <div class="sim-meta">&#9733; 4.8 (85) &middot; From &euro;19,00</div>
-        </div>
-        <div class="sim-card">
-          <div class="sim-img"><img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&q=80" alt="Mecano"></div>
-          <div class="sim-title">Candlelight: Mecano Tribute</div>
-          <div class="sim-meta">&#9733; 4.5 (128) &middot; From &euro;26,50</div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80" alt="Mapa Baqueira">
       </div>
     </div>
 
@@ -488,26 +361,16 @@
     <div class="footer">
       <div class="footer-cols">
         <div class="footer-col">
-          <h5>About Fever</h5>
-          <ul><li>Press</li><li>We are hiring!</li><li>Fellowships</li><li>Gift Cards</li><li>Help Center</li></ul>
+          <h5>Acerca de Fever</h5>
+          <ul><li>Prensa</li><li>&Uacute;nete al equipo</li><li>Becas</li><li>Tarjetas Regalo</li><li>Centro de asistencia</li></ul>
         </div>
         <div class="footer-col">
-          <h5>Partner with us</h5>
-          <ul><li>Fever Zone</li><li>List your event</li><li>Affiliate Program</li><li>Ambassadors</li></ul>
-        </div>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h5>Follow us</h5>
-          <ul><li>Instagram</li><li>TikTok</li><li>Twitter</li><li>YouTube</li><li>LinkedIn</li></ul>
-        </div>
-        <div class="footer-col">
-          <h5>For Business</h5>
-          <ul><li>Private events</li><li>Corporate benefits</li><li>Gift vouchers</li></ul>
+          <h5>Colabora</h5>
+          <ul><li>Gestiona tu evento</li><li>Publica tu evento</li><li>Afiliados</li><li>Embajadores</li></ul>
         </div>
       </div>
       <div class="legal">
-        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookies Management</a>
+        <a href="#">T&eacute;rminos de uso</a> | <a href="#">Pol&iacute;tica de privacidad</a> | <a href="#">Cookies</a>
         <div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div>
       </div>
     </div>
@@ -520,54 +383,39 @@
   </div>
 
   <script>
-    // Dynamic ticket pricing
-    const prices = [45.00, 50.00, 85.00, 90.00];
-    const rows = document.querySelectorAll('.ticket-row');
-    const ctaBtn = document.getElementById('cta-get-it');
+    const unitPrice = 559.70;
+    const countEl = document.getElementById('room-count');
+    const ctaBtn = document.getElementById('cta-buy');
 
-    function updateTotal() {
-      let total = 0;
-      rows.forEach((row, i) => {
-        const count = parseInt(row.querySelector('.amt-count').textContent);
-        total += count * prices[i];
-        row.classList.toggle('selected', count > 0);
-      });
-      if (total > 0) {
-        ctaBtn.textContent = '€' + total.toFixed(2) + ' — Get it';
-        ctaBtn.style.opacity = '1';
-        ctaBtn.style.pointerEvents = 'auto';
-      } else {
-        ctaBtn.textContent = '€0.00 — Get it';
-        ctaBtn.style.opacity = '0.5';
-        ctaBtn.style.pointerEvents = 'none';
-      }
+    function updatePrice() {
+      const count = parseInt(countEl.textContent);
+      const total = (count * unitPrice).toFixed(2).replace('.', ',');
+      ctaBtn.textContent = total + ' \u20AC \u2014 Comprar ahora';
+      document.getElementById('room-row').classList.toggle('selected', count > 0);
+      ctaBtn.style.opacity = count > 0 ? '1' : '0.5';
+      ctaBtn.style.pointerEvents = count > 0 ? 'auto' : 'none';
     }
 
-    rows.forEach((row, i) => {
-      const minus = row.querySelector('.amt-btn.minus');
-      const plus = row.querySelector('.amt-btn.plus');
-      const countEl = row.querySelector('.amt-count');
+    document.getElementById('room-plus').addEventListener('click', () => {
+      countEl.textContent = parseInt(countEl.textContent) + 1;
+      updatePrice();
+    });
+    document.getElementById('room-minus').addEventListener('click', () => {
+      const val = parseInt(countEl.textContent);
+      if (val > 0) { countEl.textContent = val - 1; updatePrice(); }
+    });
 
-      plus.addEventListener('click', () => {
-        countEl.textContent = parseInt(countEl.textContent) + 1;
-        updateTotal();
-      });
-      minus.addEventListener('click', () => {
-        const val = parseInt(countEl.textContent);
-        if (val > 0) countEl.textContent = val - 1;
-        updateTotal();
+    // Pill switching per level
+    document.querySelectorAll('.pill-level').forEach(level => {
+      level.querySelectorAll('.ticket-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          level.querySelectorAll('.ticket-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+        });
       });
     });
 
-    // Pill switching
-    document.querySelectorAll('.ticket-pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        document.querySelectorAll('.ticket-pill').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-      });
-    });
-
-    updateTotal();
+    updatePrice();
   </script>
 </body>
 </html>
