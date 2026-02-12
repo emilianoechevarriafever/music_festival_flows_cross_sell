@@ -19,7 +19,7 @@
       --font: 'Montserrat', sans-serif;
     }
     body { font-family:var(--font); background:#f5f5f5; display:flex; justify-content:center; color:var(--color-text); }
-    .phone { width:393px; max-width:100vw; background:var(--color-bg); min-height:100vh; overflow-x:hidden; position:relative; padding-bottom:40px; }
+    .phone { width:393px; max-width:100vw; background:var(--color-bg); min-height:100vh; overflow-x:hidden; position:relative; padding-bottom:120px; }
 
     /* Navbar */
     .checkout-nav { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background:white; border-bottom:1px solid var(--color-border); position:sticky; top:0; z-index:100; }
@@ -60,13 +60,12 @@
     .price-row .price-val { font-weight:500; }
     .price-row.total { border-top:1px solid var(--color-border); margin-top:8px; padding-top:12px; font-weight:700; font-size:16px; }
 
-    /* Pay Button */
-    .pay-btn { display:block; width:calc(100% - 32px); margin:16px auto; height:48px; background:var(--color-primary); border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; transition:background 0.2s; }
-    .pay-btn:hover { background:#006bb3; }
-
-    /* Powered by */
-    .powered-by { text-align:center; padding:12px 16px; font-size:12px; color:var(--color-text-secondary); }
-    .powered-by a { color:var(--color-text); font-weight:600; text-decoration:none; }
+    /* Sticky Pay Footer */
+    .sticky-pay { position:fixed; bottom:0; width:393px; max-width:100vw; z-index:200; background:white; border-top:1px solid var(--color-border); padding:12px 16px 8px; }
+    .sticky-pay .pay-btn { display:block; width:100%; height:48px; background:var(--color-primary); border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; transition:background 0.2s; }
+    .sticky-pay .pay-btn:hover { background:#006bb3; }
+    .sticky-pay .powered-by { text-align:center; padding:8px 0 4px; font-size:12px; color:var(--color-text-secondary); }
+    .sticky-pay .powered-by a { color:var(--color-text); font-weight:600; text-decoration:none; }
 
     /* Payment Method */
     .payment-section { padding:16px; }
@@ -121,7 +120,7 @@
     .legal-links a { display:block; font-size:13px; color:var(--color-primary); margin-bottom:6px; text-decoration:none; }
     .legal-links a svg { width:12px; height:12px; display:inline; margin-left:2px; vertical-align:middle; }
 
-    @media (max-width:393px) { .phone { width:100vw; } }
+    @media (max-width:393px) { .phone { width:100vw; } .sticky-pay { width:100vw; } }
   </style>
 </head>
 <body>
@@ -190,14 +189,6 @@
         <span class="price-label">Total</span>
         <span class="price-val" id="grand-total">&euro;0.00</span>
       </div>
-    </div>
-
-    <!-- Pay Button -->
-    <button class="pay-btn" onclick="alert('Purchase completed! (demo)')">Pay</button>
-
-    <!-- Powered by -->
-    <div class="powered-by">
-      <a href="#">feverup.com</a>
     </div>
 
     <!-- Payment Method -->
@@ -276,6 +267,12 @@
         <a href="#">Terms and conditions of use <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
         <a href="#">Privacy policy <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
       </div>
+    </div>
+
+    <!-- Sticky Pay Footer -->
+    <div class="sticky-pay">
+      <button class="pay-btn" onclick="alert('Purchase completed! (demo)')">Pay</button>
+      <div class="powered-by"><a href="https://feverup.com">feverup.com</a></div>
     </div>
 
   </div>
