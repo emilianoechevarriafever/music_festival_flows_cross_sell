@@ -598,22 +598,9 @@
           </div>
         </div>
       </div>
-      <div class="sheet-row" data-name="Skip" data-price="0">
-        <div class="sheet-row-content">
-          <div class="sheet-row-name">Skip</div>
-          <div class="sheet-row-price free">—</div>
-        </div>
-        <div class="sheet-row-right">
-          <div class="sheet-stepper">
-            <button type="button" class="amt-btn minus">&minus;</button>
-            <span class="amt-count">0</span>
-            <button type="button" class="amt-btn plus">+</button>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="sheet-footer">
-      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-acc-continue">Continue</button>
+      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-acc-continue">No accommodation</button>
     </div>
   </div>
 
@@ -652,22 +639,9 @@
           </div>
         </div>
       </div>
-      <div class="sheet-row" data-name="No transport" data-price="0">
-        <div class="sheet-row-content">
-          <div class="sheet-row-name">No transport</div>
-          <div class="sheet-row-price free">—</div>
-        </div>
-        <div class="sheet-row-right">
-          <div class="sheet-stepper">
-            <button type="button" class="amt-btn minus">&minus;</button>
-            <span class="amt-count">0</span>
-            <button type="button" class="amt-btn plus">+</button>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="sheet-footer">
-      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-transport-continue">Continue</button>
+      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-transport-continue">No transport</button>
     </div>
   </div>
 
@@ -812,6 +786,8 @@
     function openSheet(id) {
       document.getElementById('overlay-' + id).classList.add('open');
       document.getElementById(id).classList.add('open');
+      if (id === 'sheet-acc') updateSheetAccBtn();
+      if (id === 'sheet-transport') updateSheetTransportBtn();
     }
     function closeSheet(id) {
       document.getElementById('overlay-' + id).classList.remove('open');
@@ -823,7 +799,31 @@
     document.getElementById('sheet-acc-close').addEventListener('click', function() { closeSheet('sheet-acc'); });
     document.getElementById('sheet-transport-close').addEventListener('click', function() { closeSheet('sheet-transport'); });
 
-    function bindSheetSteppers(sheetId) {
+    function updateSheetAccBtn() {
+      let totalQty = 0;
+      let totalPrice = 0;
+      document.querySelectorAll('#sheet-acc .sheet-row').forEach(row => {
+        const qty = parseInt(row.querySelector('.amt-count').textContent) || 0;
+        const price = parseFloat(row.dataset.price) || 0;
+        totalQty += qty;
+        totalPrice += qty * price;
+      });
+      const btn = document.getElementById('sheet-acc-continue');
+      if (btn) btn.textContent = totalQty > 0 ? '\u20AC' + totalPrice.toFixed(2) + ' \u2014 Add it' : 'No accommodation';
+    }
+    function updateSheetTransportBtn() {
+      let totalQty = 0;
+      let totalPrice = 0;
+      document.querySelectorAll('#sheet-transport .sheet-row').forEach(row => {
+        const qty = parseInt(row.querySelector('.amt-count').textContent) || 0;
+        const price = parseFloat(row.dataset.price) || 0;
+        totalQty += qty;
+        totalPrice += qty * price;
+      });
+      const btn = document.getElementById('sheet-transport-continue');
+      if (btn) btn.textContent = totalQty > 0 ? '\u20AC' + totalPrice.toFixed(2) + ' \u2014 Add it' : 'No transport';
+    }
+    function bindSheetSteppers(sheetId, updateBtn) {
       const sheet = document.getElementById(sheetId);
       if (!sheet) return;
       sheet.querySelectorAll('.sheet-row').forEach(row => {
@@ -835,6 +835,7 @@
           e.stopPropagation();
           countEl.textContent = parseInt(countEl.textContent) + 1;
           row.classList.add('selected');
+          if (typeof updateBtn === 'function') updateBtn();
         });
         minus.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -842,12 +843,15 @@
           if (val > 0) {
             countEl.textContent = val - 1;
             row.classList.toggle('selected', parseInt(countEl.textContent) > 0);
+            if (typeof updateBtn === 'function') updateBtn();
           }
         });
       });
     }
-    bindSheetSteppers('sheet-acc');
-    bindSheetSteppers('sheet-transport');
+    bindSheetSteppers('sheet-acc', updateSheetAccBtn);
+    bindSheetSteppers('sheet-transport', updateSheetTransportBtn);
+    updateSheetAccBtn();
+    updateSheetTransportBtn();
 
     document.getElementById('sheet-acc-continue').addEventListener('click', function() {
       const acc = [];
