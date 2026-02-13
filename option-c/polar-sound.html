@@ -128,17 +128,17 @@
     .pill-arrow.visible { display:flex; }
     .pill-arrow svg { width:16px; height:16px; color:var(--color-text-subtle); }
 
-    /* Ticket rows — Figma: active (498-6345) / inactive (498-6367) */
-    .ticket-row { display:flex; align-items:stretch; min-height:88px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; border:1px solid var(--color-border-light); background:#fff; }
-    .ticket-row .ticket-content { flex:1; padding:14px 12px; display:flex; flex-direction:column; justify-content:center; gap:4px; border:none; border-radius:8px 0 0 8px; background:#fff; min-height:60px; }
-    .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:18px; color:var(--color-text); }
-    .ticket-row .ticket-more { font-size:12px; font-weight:600; color:var(--color-primary); text-decoration:underline; text-underline-offset:2px; padding:4px 0; cursor:pointer; }
-    .ticket-row .ticket-price { font-size:14px; font-weight:600; color:var(--color-text); }
-    .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:none; border-radius:0 8px 8px 0; background:#fff; position:relative; }
+    /* Ticket rows — Figma inactive 778-27370 (layout, colors, typography, spacing) */
+    .ticket-row { display:flex; align-items:stretch; min-height:88px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; border:1px solid #ccd2d8; background:#ffffff; }
+    .ticket-row .ticket-content { flex:1; padding:14px 12px; display:flex; flex-direction:column; justify-content:center; gap:4px; border:none; border-radius:8px 0 0 8px; background:#ffffff; min-height:60px; }
+    .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:20px; color:#031419; }
+    .ticket-row .ticket-more { font-size:12px; font-weight:600; line-height:18px; color:#0079ca; text-decoration:underline; text-underline-offset:2px; padding:4px 0; cursor:pointer; }
+    .ticket-row .ticket-price { font-size:14px; font-weight:600; line-height:20px; color:#031419; }
+    .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:none; border-radius:0 8px 8px 0; background:#ffffff; position:relative; }
     .ticket-row .stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
-    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s; background:#e0e0e0; color:#0079ca; }
-    .ticket-amount .amt-count { width:36px; text-align:center; font-size:16px; font-weight:600; color:var(--color-text); }
-    .ticket-row .amt-btn.plus { background:var(--color-primary-weak); color:#0079ca; }
+    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s, border-color 0.15s; background:#f2f3f3; border:1px solid #ccd2d8; color:#a7b2ba; }
+    .ticket-amount .amt-count { width:36px; text-align:center; font-size:16px; font-weight:600; line-height:20px; color:#031419; }
+    .ticket-row .amt-btn.plus { background:#e6f4ff; border:1px solid #b3d9f5; color:#0079ca; }
 
     /* Active (selected): Figma 1097-15545 — right bg #e6f4ff (primary-weak), buttons #F4F6F9 */
     .ticket-row.selected { border-color:#0079ca; }
@@ -148,11 +148,11 @@
     .ticket-row.selected .amt-btn { background:#F4F6F9; color:#0079ca; }
     .ticket-row.selected .amt-btn.plus { background:#F4F6F9; color:#0079ca; }
 
-    /* Ticket notch: vertical dashed line + semicircular cutouts (Figma perforation) */
+    /* Ticket notch: vertical dashed line + semicircular cutouts (Figma perforation) — inactive #ccd2d8 */
     .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:14px; display:flex; flex-direction:column; align-items:center; pointer-events:none; z-index:2; }
-    .ticket-notch::before { content:''; position:absolute; top:0; left:0; width:7px; height:10px; border-left:1px solid var(--color-border-light); border-bottom:1px solid var(--color-border-light); border-radius:0 0 0 8px; background:transparent; }
-    .ticket-notch::after { content:''; position:absolute; bottom:0; left:0; width:7px; height:10px; border-left:1px solid var(--color-border-light); border-top:1px solid var(--color-border-light); border-radius:8px 0 0 0; background:transparent; }
-    .ticket-notch .notch-line { position:absolute; top:14px; bottom:14px; left:6px; width:0; border-left:1px dashed var(--color-border-light); }
+    .ticket-notch::before { content:''; position:absolute; top:0; left:0; width:7px; height:10px; border-left:1px solid #ccd2d8; border-bottom:1px solid #ccd2d8; border-radius:0 0 0 8px; background:transparent; }
+    .ticket-notch::after { content:''; position:absolute; bottom:0; left:0; width:7px; height:10px; border-left:1px solid #ccd2d8; border-top:1px solid #ccd2d8; border-radius:8px 0 0 0; background:transparent; }
+    .ticket-notch .notch-line { position:absolute; top:14px; bottom:14px; left:6px; width:0; border-left:1px dashed #ccd2d8; }
     .ticket-row.selected .ticket-notch::before,
     .ticket-row.selected .ticket-notch::after { border-color:#0079ca; }
     .ticket-row.selected .notch-line { border-color:#0079ca; }
