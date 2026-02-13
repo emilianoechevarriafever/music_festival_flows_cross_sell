@@ -68,17 +68,12 @@
       display: flex;
       align-items: center;
     }
-    .navbar .logo-link img { height: 52px; width: auto; display: block; }
-    /* Logo Fever — Figma 6648-11868: extra bold, kerning apretado, lowercase, dark */
-    .navbar .logo-link .logo-text {
-      display: inline-block;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 28px;
-      line-height: 1.2;
-      color: #031419;
-      text-transform: lowercase;
-      letter-spacing: -0.06em;
+    /* Logo Fever: imagen oficial; altura por tamaño de las letras, no del blanco del asset */
+    .navbar .logo-link img {
+      height: 48px;
+      width: auto;
+      display: block;
+      object-fit: contain;
     }
     .nav-icons { display: flex; align-items: center; gap: 20px; }
     .nav-icons svg { width: 24px; height: 24px; color: #031419; stroke: currentColor; cursor: pointer; }
@@ -419,7 +414,7 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-      <a href="index.html" class="logo-link" aria-label="Fever"><span class="logo-text" aria-hidden="true">fever</span></a>
+      <a href="index.html" class="logo-link" aria-label="Fever"><img src="img/fever-logo.png" alt="Fever"></a>
       <div class="nav-icons">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
