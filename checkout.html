@@ -92,10 +92,10 @@
     .card-type-row svg { width:18px; height:18px; color:var(--color-text); }
     .card-type-row .label { font-size:14px; font-weight:500; flex:1; }
     .card-type-row .sub-label { font-size:12px; color:var(--color-text-secondary); }
-    /* Card logos (Figma ignt.comp.fields 26-192) */
-    .card-brands { display:flex; align-items:center; gap:6px; }
-    .card-brands .brand-logo { display:flex; align-items:center; justify-content:center; width:32px; height:22px; border:1px solid var(--color-border); border-radius:4px; padding:2px; box-sizing:border-box; }
-    .card-brands .brand-logo svg { width:100%; height:100%; object-fit:contain; }
+    /* Card logos (Figma ignt.comp.fields 26-192) - iconos gráficos, no texto */
+    .card-brands { display:flex; align-items:center; gap:8px; flex-wrap:nowrap; }
+    .card-brands .brand-logo { display:inline-flex; align-items:center; justify-content:center; width:40px; height:28px; border:1px solid var(--color-border); border-radius:4px; padding:3px; box-sizing:border-box; flex-shrink:0; }
+    .card-brands .brand-logo svg { width:100%; height:100%; object-fit:contain; display:block; }
 
     /* Form fields (Figma ignt.comp.fields 77-8972) */
     .form-group { margin-bottom:16px; }
