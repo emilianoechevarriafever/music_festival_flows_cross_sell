@@ -1,0 +1,137 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "Fever Design System",
+  "version": "1.0.0",
+  "sources": [
+    "Figma: Channel Filter (kbO5ndGZw55jpydY4o1Xdr)",
+    "Figma: Feed Web (9ykILr8gMmYmzODxLUS7DW)",
+    "Fever proto (fever-proto-craft-31 CSS)"
+  ],
+  "color": {
+    "foundations": {
+      "color-text-main": { "value": "#031419", "source": "figma" },
+      "color-action-text-primary": { "value": "#0079ca", "source": "figma" },
+      "color-action-border-primary": { "value": "#0079ca", "source": "figma" },
+      "color-action-background-primary": { "value": "#0079ca", "source": "figma" },
+      "color-background-primary-weak": { "value": "#e6f4ff", "source": "figma" },
+      "color-background-main": { "value": "#ffffff", "source": "figma" },
+      "color-background-main-contrast": { "value": "#06232c", "source": "figma" },
+      "color-border-main": { "value": "#ccd2d8", "source": "figma" },
+      "color-action-text-disable": { "value": "#a7b2ba", "source": "figma" },
+      "color-action-background-disable": { "value": "#f2f3f3", "source": "figma" },
+      "color-text-warning": { "value": "#9f5800", "source": "figma" }
+    },
+    "brand": {
+      "primary": { "value": "#0057FF", "source": "fever-proto", "description": "Fever brand blue" },
+      "primary-hover": { "value": "#4D7DFF", "source": "fever-proto" },
+      "primary-weak": { "value": "#E5F1FF", "source": "fever-proto", "description": "Selected backgrounds" }
+    },
+    "neutral": {
+      "900": { "value": "#0A1E42", "source": "fever-proto", "description": "Logo, headings" },
+      "700": { "value": "#37474F", "source": "fever-proto", "description": "Body text" },
+      "200": { "value": "#E6EAEE", "source": "fever-proto", "description": "Borders, dividers" },
+      "50": { "value": "#F5F7F9", "source": "fever-proto", "description": "Page background" },
+      "palette-50": { "value": "#fafbfb", "source": "figma" },
+      "white": { "value": "#ffffff", "source": "figma" },
+      "black": { "value": "#000000", "source": "figma" }
+    },
+    "semantic": {
+      "background-subtle": { "value": "#536b75", "source": "figma" },
+      "border-contrast": { "value": "#2C4751", "source": "figma" },
+      "warning-default": { "value": "#df7b00", "source": "figma" },
+      "warning-weak": { "value": "#fff4e6", "source": "figma" },
+      "success": { "value": "#06C167", "source": "fever-proto" },
+      "success-green": { "value": "#22AD5C", "source": "figma" },
+      "destructive": { "value": "#E3264C", "source": "fever-proto", "description": "Low availability" },
+      "accent-purple": { "value": "#5333FF", "source": "fever-proto", "description": "Best price indicators" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "body": { "value": "Red Hat Text", "source": "figma", "stack": "Red Hat Text, sans-serif" },
+      "ui": { "value": "Montserrat", "source": "figma", "stack": "Montserrat, sans-serif" }
+    },
+    "fontSize": {
+      "size-base": { "value": 16, "unit": "px", "source": "figma" },
+      "size-small": { "value": 14, "unit": "px", "source": "figma" },
+      "size-h6": { "value": 14, "unit": "px", "source": "figma" },
+      "size-caption": { "value": 12, "unit": "px", "source": "figma" }
+    },
+    "lineHeight": {
+      "leading-base": { "value": 22, "source": "figma" },
+      "leading-base-alt": { "value": 24, "source": "figma" },
+      "leading-small": { "value": 20, "source": "figma" },
+      "leading-h6": { "value": 20, "source": "figma" },
+      "leading-caption": { "value": 18, "source": "figma" },
+      "leading-caption-tight": { "value": 16, "source": "figma" }
+    },
+    "fontWeight": {
+      "regular": { "value": 400, "source": "figma" },
+      "bold": { "value": 650, "source": "figma" },
+      "semibold": { "value": 600, "source": "figma" }
+    },
+    "styles": {
+      "base-bold": { "family": "stack/body", "size": 16, "weight": 650, "lineHeight": 22, "source": "figma" },
+      "base-regular": { "family": "Montserrat", "size": 16, "weight": 400, "lineHeight": 24, "source": "figma" },
+      "small-regular": { "family": "stack/body", "size": 14, "weight": 400, "lineHeight": 20, "source": "figma" },
+      "h6": { "family": "stack/body", "size": 14, "weight": 650, "lineHeight": 20, "source": "figma" },
+      "caption-regular": { "family": "stack/body", "size": 12, "weight": 400, "lineHeight": 16, "source": "figma" },
+      "caption-bold-underline": { "family": "stack/body", "size": 12, "weight": 650, "lineHeight": 18, "source": "figma" }
+    }
+  },
+  "dimension": {
+    "borderRadius": {
+      "sm": { "value": 4, "unit": "px", "source": "figma" },
+      "md": { "value": 8, "unit": "px", "source": "figma" },
+      "lg": { "value": 12, "unit": "px", "source": "fever-proto" },
+      "radius": { "value": "0.75rem", "source": "fever-proto" }
+    },
+    "icon": {
+      "width-base": { "value": 20, "unit": "px", "source": "figma" },
+      "height-base": { "value": 20, "unit": "px", "source": "figma" },
+      "height-h4": { "value": 24, "unit": "px", "source": "figma" }
+    },
+    "component": {
+      "height-pill": { "value": 20, "unit": "px", "source": "figma" },
+      "min-width-touch": { "value": 48, "unit": "px", "source": "figma" }
+    },
+    "layout": {
+      "phone-width": { "value": 393, "unit": "px" }
+    }
+  },
+  "effect": {
+    "elevation-01": { "value": "0 1px 3px 0 rgba(0,0,0,0.08)", "source": "fever-proto" },
+    "elevation-02": { "value": "0 4px 12px 0 rgba(0,0,0,0.12)", "source": "fever-proto" },
+    "frosted-glass": { "value": "BACKGROUND_BLUR radius 40", "source": "figma" }
+  },
+  "motion": {
+    "ease-out-cubic": { "value": "cubic-bezier(0.2, 0.8, 0.2, 1)", "source": "fever-proto" },
+    "transition-smooth": { "value": "all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)", "source": "fever-proto" }
+  },
+  "cssVariables": {
+    "description": "Ready-to-use CSS custom property names for the site",
+    "color": {
+      "--color-primary": "#0057FF",
+      "--color-primary-weak": "#E5F1FF",
+      "--color-primary-hover": "#0046CC",
+      "--color-text-main": "#0A1E42",
+      "--color-text-subtle": "#37474F",
+      "--color-border": "#E6EAEE",
+      "--color-bg-neutral": "#F5F7F9",
+      "--color-accent": "#6f41d7",
+      "--color-accent-weak": "#f0ebfd",
+      "--color-danger": "#06C167",
+      "--color-warning": "#ff8c00",
+      "--color-success": "#06C167"
+    },
+    "typography": {
+      "--font-body": "Red Hat Text, sans-serif",
+      "--font-ui": "Montserrat, sans-serif"
+    },
+    "layout": {
+      "--radius": "0.75rem",
+      "--elevation-01": "0 1px 3px 0 rgba(0,0,0,0.08)",
+      "--elevation-02": "0 4px 12px 0 rgba(0,0,0,0.12)"
+    }
+  }
+}
