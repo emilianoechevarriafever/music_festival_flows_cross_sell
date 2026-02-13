@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polar Sound Occident 2026: Accommodation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    /* Fever Design System */
+    :root {
+      --color-primary: #0057FF;
+      --color-primary-weak: #E5F1FF;
+      --color-primary-light: #f2fbfd;
+      --color-text: #0A1E42;
+      --color-text-secondary: #37474F;
+      --color-text-subtle: #37474F;
+      --color-text-disable: #b0b8bf;
+      --color-border: #E6EAEE;
+      --color-border-light: #E6EAEE;
+      --color-accent: #6f41d7;
+      --color-bg: #ffffff;
+      --color-bg-disable: #f6f6f6;
+      --color-bg-neutral: #F5F7F9;
+      --font: 'Montserrat', sans-serif;
+    }
+    body { font-family:var(--font); background:var(--color-bg-neutral); display:flex; justify-content:center; color:var(--color-text); }
+    .phone { width:393px; max-width:100vw; background:var(--color-bg); min-height:100vh; overflow-x:hidden; position:relative; }
+
+    .status-bar { display:flex; align-items:center; justify-content:space-between; padding:6px 16px 4px; background:white; }
+    .status-bar .time { font-weight:600; font-size:17px; letter-spacing:-0.68px; }
+    .status-bar .icons { display:flex; gap:5px; align-items:center; }
+    .status-bar .icons svg { height:12px; }
+
+    .navbar { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#fff; position:sticky; top:0; z-index:100; border-top:1px solid #eee; border-bottom:1px solid #eee; }
+    .navbar .logo-link { text-decoration:none; display:flex; align-items:center; }
+    .navbar .logo-link img { height:48px; width:auto; display:block; object-fit:contain; }
+    .nav-icons { display:flex; align-items:center; gap:16px; }
+    .nav-icons svg { width:24px; height:24px; color:var(--color-text); cursor:pointer; }
+    .avatar-wrap { position:relative; }
+    .avatar-wrap img { width:24px; height:24px; border-radius:50%; object-fit:cover; }
+    .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#ff3b30; border:1.5px solid white; border-radius:50%; }
+
+    /* Hero with overlay */
+    .hero { position:relative; width:100%; height:375px; overflow:hidden; }
+    .hero img.hero-bg { width:100%; height:100%; object-fit:cover; }
+    .hero .overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,35,44,0.3) 0%, rgba(6,35,44,0.6) 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; }
+    .hero .overlay .brand-text { font-family:var(--font); font-size:36px; font-weight:800; color:white; letter-spacing:4px; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,0.5); }
+    .hero .overlay .brand-sub { font-family:var(--font); font-size:16px; font-weight:600; color:rgba(255,255,255,0.9); letter-spacing:2px; }
+    .hero .social-tools { position:absolute; top:16px; right:16px; display:flex; flex-direction:column; gap:16px; z-index:2; }
+    .hero .social-btn { width:44px; height:44px; background:white; border:none; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.15); cursor:pointer; }
+    .hero .social-btn svg { width:20px; height:20px; color:#333; }
+    .hero .dots { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); display:flex; gap:4px; z-index:2; }
+    .hero .dots span { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.5); }
+    .hero .dots span.active { background:white; }
+
+    .title-section { padding:16px; }
+        /* Tickets Selling Fast — Figma 37-20538 */
+    .tag-selling, .selling-fast-banner { display:inline-flex; align-items:center; min-height:20px; padding:4px 12px; background:#df7b00; border-radius:4px; font-family:var(--font); font-size:12px; font-weight:400; line-height:16px; color:#031419; }
+    .tag-selling { margin-bottom:12px; }
+    .title-section h1 { font-size:20px; font-weight:600; line-height:28px; margin-bottom:4px; }
+    .divider { height:1px; background:var(--color-border); margin:0 16px; }
+
+    .description { padding:20px 16px; font-size:15px; line-height:22px; }
+    .description p { margin-bottom:12px; }
+    .description .subtitle { font-weight:600; font-size:16px; margin-bottom:8px; margin-top:16px; }
+    .description ul { padding-left:20px; margin-bottom:12px; }
+    .description ul li { margin-bottom:4px; }
+    .description a { color:var(--color-primary); text-decoration:underline; }
+
+    .section-header { display:flex; align-items:center; gap:8px; padding:16px; border-bottom:1px solid var(--color-border); }
+    .section-header svg { width:24px; height:24px; flex-shrink:0; color:var(--color-text); }
+    .section-header h2 { font-size:20px; font-weight:600; line-height:24px; flex:1; }
+
+    .ticket-selector { padding:0 16px 16px; border-bottom:1px solid var(--color-border); }
+
+    /* Pill levels */
+    .pill-level { display:flex; gap:12px; align-items:center; justify-content:flex-start; padding:16px 0; border-bottom:1px solid var(--color-border); overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -webkit-overflow-scrolling:touch; touch-action:pan-x; }
+    .pill-level.centered { justify-content:center; }
+    .pill-level::-webkit-scrollbar { display:none; }
+    .ticket-pill { flex-shrink:0; padding:10px 18px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; font-weight:500; color:var(--color-text); background:white; cursor:pointer; white-space:nowrap; text-align:center; transition:all 0.15s; }
+    .ticket-pill.active { border-color:var(--color-primary); color:var(--color-primary); background:var(--color-primary-weak); }
+    .ticket-pill.disabled { color:var(--color-text-disable); border-color:#eee; pointer-events:none; }
+    .pill-arrow { flex-shrink:0; width:32px; height:32px; display:none; align-items:center; justify-content:center; cursor:pointer; }
+    .pill-arrow.visible { display:flex; }
+    .pill-arrow svg { width:16px; height:16px; color:var(--color-text-subtle); }
+
+    /* Ticket rows — coupon style */
+    #room-rows { margin-top:16px; }
+    .ticket-row { display:flex; align-items:stretch; min-height:96px; margin-bottom:16px; position:relative; border-radius:8px; }
+    .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; gap:8px; border:1.5px solid var(--color-border-light); border-right:none; border-radius:8px 0 0 8px; }
+    .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:18px; color:var(--color-text); }
+    .ticket-row .ticket-more { font-size:12px; font-weight:600; color:var(--color-primary); padding:4px 0; cursor:pointer; }
+    .ticket-row .ticket-price { font-size:14px; font-weight:600; color:var(--color-text); margin-top:auto; }
+    .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1.5px solid var(--color-border-light); border-left:none; border-radius:0 8px 8px 0; background:white; position:relative; }
+    .ticket-row .stepper { display:flex; align-items:center; background:white; border-radius:100px; padding:4px; }
+    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s; background:white; color:var(--color-text); border:1px solid var(--color-border-light); }
+    .ticket-amount .amt-count { width:40px; text-align:center; font-size:16px; font-weight:600; }
+
+    /* Selected state */
+    .ticket-row.selected .ticket-content { border-color:var(--color-primary); }
+    .ticket-row.selected .ticket-selector-right { border-color:var(--color-primary); background:var(--color-primary-weak); }
+    .ticket-row.selected .amt-btn { background:var(--color-primary-weak); color:var(--color-primary); }
+
+    /* Ticket notch divider */
+    .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:16px; display:flex; flex-direction:column; align-items:center; pointer-events:none; z-index:2; }
+    .ticket-notch::before { content:''; position:absolute; top:-4px; left:4px; width:4px; height:8px; border-left:1.5px solid var(--color-border-light); border-top-left-radius:8px; border-bottom-left-radius:8px; background:transparent; }
+    .ticket-notch::after { content:''; position:absolute; bottom:-4px; left:4px; width:4px; height:8px; border-left:1.5px solid var(--color-border-light); border-top-left-radius:8px; border-bottom-left-radius:8px; background:transparent; }
+    .ticket-notch .notch-line { position:absolute; top:12px; bottom:12px; width:0; border-left:1.5px dashed var(--color-border-light); }
+    .ticket-row.selected .ticket-notch::before,
+    .ticket-row.selected .ticket-notch::after { border-color:var(--color-primary); }
+    .ticket-row.selected .notch-line { border-color:var(--color-primary); }
+
+    /* Sold out */
+    .ticket-row.soldout { opacity:0.6; pointer-events:none; }
+    .ticket-row.soldout .ticket-selector-right { display:none; }
+    .ticket-row.soldout .ticket-notch { display:none; }
+    .ticket-row.soldout .ticket-content { border-radius:8px; border-right:1.5px solid var(--color-border-light); }
+    .ticket-row .soldout-tag { display:none; position:absolute; right:12px; top:50%; transform:translateY(-50%); background:var(--color-bg-disable); color:var(--color-text-disable); font-size:12px; font-weight:600; padding:6px 14px; border-radius:4px; }
+    .ticket-row.soldout .soldout-tag { display:block; }
+
+    .selling-fast-banner { margin:4px 0 20px; }
+    .cta-primary { width:100%; height:48px; background:var(--color-primary); border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; margin-bottom:12px; transition:background 0.2s; display:none; }
+    .cta-primary:hover { background:#0046CC; }
+    .cta-secondary { width:100%; height:48px; background:white; border:1.5px solid var(--color-border); border-radius:100px; color:var(--color-text); font-family:var(--font); font-weight:600; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .cta-secondary svg { width:18px; height:18px; }
+
+    .reviews { padding:20px 16px; }
+    .reviews h3 { font-size:18px; font-weight:600; margin-bottom:16px; }
+    .rating-big { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+    .rating-big .score { font-size:28px; font-weight:700; }
+    .rating-big .stars { color:#f5a623; font-size:16px; letter-spacing:2px; }
+    .rating-big .count { font-size:13px; color:var(--color-text-secondary); }
+    .review-card { border-bottom:1px dashed var(--color-border-light); padding:12px 0; }
+    .review-card:last-child { border-bottom:none; }
+    .review-card .reviewer { font-size:14px; font-weight:600; }
+    .review-card .review-date { font-size:12px; color:var(--color-text-secondary); margin:2px 0 6px; }
+    .review-card .review-text { font-size:14px; line-height:20px; }
+
+    .help-section { padding:16px; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; }
+    .help-section span { font-size:15px; font-weight:500; }
+    .help-section a { font-size:14px; font-weight:600; color:var(--color-primary); text-decoration:none; }
+
+    .location { padding:20px 16px; }
+    .location .loc-name { font-weight:600; font-size:15px; margin-bottom:4px; }
+    .location .loc-address { font-size:14px; color:var(--color-text-secondary); margin-bottom:12px; }
+    .location .map-placeholder { width:100%; height:160px; background:#e8e8e8; border-radius:8px; overflow:hidden; }
+    .location .map-placeholder img { width:100%; height:100%; object-fit:cover; }
+
+    .footer { background:black; color:white; padding:32px 16px 140px; }
+    .footer-cols { display:flex; justify-content:space-between; margin-bottom:24px; }
+    .footer-col h5 { font-size:14px; font-weight:600; margin-bottom:8px; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { font-size:13px; line-height:20px; margin-bottom:4px; opacity:0.8; }
+    .footer .legal { border-top:1px solid var(--color-text-subtle); padding-top:16px; font-size:12px; opacity:0.7; }
+    .footer .legal a { color:white; }
+
+    .sticky-cta { position:fixed; bottom:0; width:393px; max-width:100vw; z-index:200; background:white; border-top:1px solid var(--color-border); padding:12px 16px; }
+    .sticky-cta .cta-btn { width:100%; height:48px; background:var(--color-primary); border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; transition:opacity 0.2s; }
+
+    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
+  </style>
+</head>
+<body>
+  <div class="phone">
+
+    <nav class="navbar">
+      <a href="/option-b/home" class="logo-link"><img src="../img/fever-logo.png" alt="Fever"></a>
+      <div class="nav-icons">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <div class="avatar-wrap"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </div>
+    </nav>
+
+    <!-- Hero with hotel image + Polar Sound overlay -->
+    <div class="hero">
+      <img class="hero-bg" src="../img/baqueira-hotel.png" alt="Hotel Baqueira Beret">
+      <div class="overlay">
+        <div class="brand-text">POLAR SOUND</div>
+        <div class="brand-sub">&#10070; Occident</div>
+      </div>
+      <div class="social-tools">
+        <button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+        <button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
+      </div>
+      <div class="dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="title-section">
+      <div class="tag-selling">Tickets Selling Fast</div>
+      <h1>Polar Sound Occident 2026: Passes &amp; Accommodation</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="description">
+      <p>&#10071; <strong>By booking your accommodation you are also purchasing your 2-day festival pass.</strong></p>
+      <p>&#127915; Accommodation + Pass with 2-day access. Choose from travel options for 1 to 6 people, 2 or 3-night stays, and a wide variety of hotels and apartments.</p>
+      <p class="subtitle">&#127908; Daily line-up</p>
+      <ul>
+        <li><strong>Friday 13th:</strong> Lori Meyers, Silo&eacute;, Fuzz by Dj Nano, Leire Mart&iacute;nez, Paula Mattheus</li>
+        <li><strong>Saturday 14th:</strong> Juan Mag&aacute;n, Taburete, Marlon, Sexy Zebras, Hey Kid, Besmaya</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Ticket Selector -->
+    <div class="section-header" id="ticket-section">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <h2>Select date and session</h2>
+    </div>
+
+    <div class="ticket-selector">
+      <!-- Level 1: Travelers -->
+      <div class="pill-level" id="level-travelers">
+        <div class="ticket-pill active" data-value="2">Trip 2 people + Pass</div>
+        <div class="ticket-pill" data-value="3">Trip 3 people + Pass</div>
+        <div class="ticket-pill" data-value="4">Trip 4 people + Pass</div>
+        <div class="pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+
+      <!-- Level 2: Nights -->
+      <div class="pill-level" id="level-nights">
+        <div class="ticket-pill active" data-value="3">3 nights (Mar 12, 13 &amp; 14)</div>
+        <div class="ticket-pill" data-value="2">2 nights (Mar 13 &amp; 14)</div>
+      </div>
+
+      <!-- Level 3: Type -->
+      <div class="pill-level" id="level-type">
+        <div class="ticket-pill active" data-value="hotel">Hotel</div>
+        <div class="ticket-pill" data-value="apartamento">Apartment</div>
+        <div class="pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+      </div>
+
+      <!-- Level 4: Hotel/Apartment name -->
+      <div class="pill-level" id="level-name">
+        <div class="pill-arrow" style="transform:rotate(180deg)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Room rows (populated by JS) -->
+      <div id="room-rows"></div>
+
+      <!-- Selling fast -->
+      <div class="selling-fast-banner">Tickets Selling Fast</div>
+
+      <!-- Inline CTA (hidden, sticky handles it) -->
+      <button class="cta-primary" id="cta-inline"></button>
+    </div>
+
+    <!-- Reviews -->
+    <div class="reviews">
+      <h3>User reviews</h3>
+      <div class="rating-big">
+        <span class="score">4.5</span>
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+        <span class="count">based on 462 reviews</span>
+      </div>
+      <div class="review-card"><div class="reviewer">Ignacio A.</div><div class="review-date">Mar 2025</div><div class="review-text">Great experience, everything was very well organized.</div></div>
+      <div class="review-card"><div class="reviewer">Valentina Q.</div><div class="review-date">Mar 2025</div><div class="review-text">Best nights of my life!!!</div></div>
+      <div class="review-card"><div class="reviewer">Carmen P.</div><div class="review-date">Mar 2025</div><div class="review-text">Very well organized and great music.</div></div>
+    </div>
+
+    <div class="help-section">
+      <span>Need help?</span>
+      <a href="#">Contact Support here</a>
+    </div>
+
+    <div class="section-header">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <h2>Getting there</h2>
+    </div>
+    <div class="location">
+      <div class="loc-name">Baqueira Beret Ski Resort</div>
+      <div class="loc-address">Baqueira Beret Parking Lot, 25598</div>
+      <div class="map-placeholder"><img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80" alt="Map"></div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-cols">
+        <div class="footer-col"><h5>About Fever</h5><ul><li>Press</li><li>We are hiring!</li><li>Gift Cards</li><li>Help Center</li></ul></div>
+        <div class="footer-col"><h5>Partner with us</h5><ul><li>Fever Zone</li><li>List your event</li><li>Affiliate Program</li></ul></div>
+      </div>
+      <div class="legal"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookies</a><div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div></div>
+    </div>
+
+    <!-- Sticky CTA: "Select accommodations" → scroll; then "Skip" or "€X — Get it" -->
+    <div class="sticky-cta">
+      <button class="cta-btn" id="sticky-btn">Select accommodations</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('sticky-btn').textContent = 'Select accommodations';
+
+    // ========== DATA ==========
+    const DATA = {
+      "2": {
+        "3": {
+          "hotel": {
+            "AC": [
+              { name: "Double Room", price: 559.70 },
+            ],
+            "Meli\u00e1 De tredos": [
+              { name: "Double Room", price: 620.00 },
+              { name: "Junior Suite", price: 890.00 },
+            ]
+          },
+          "apartamento": {
+            "Apartamentos Naut Aran": [
+              { name: "Studio (2 pax)", price: 480.00 },
+            ],
+            "Garona": [
+              { name: "1-Bedroom Apartment", price: 520.00 },
+            ]
+          }
+        },
+        "2": {
+          "hotel": {
+            "AC": [
+              { name: "Double Room", price: 420.50 },
+            ],
+            "Meli\u00e1 De tredos": [
+              { name: "Double Room", price: 480.00 },
+            ]
+          },
+          "apartamento": {
+            "Apartamentos Naut Aran": [
+              { name: "Studio (2 pax)", price: 360.00 },
+            ]
+          }
+        }
+      },
+      "3": {
+        "3": {
+          "hotel": {
+            "Tuc Blanc": [
+              { name: "Double Room + 1 extra bed", price: 422.60 },
+              { name: "Double Room + 1 extra bed - Deal", price: 428.60, soldout: true },
+            ],
+            "Garona": [
+              { name: "Triple", price: 510.00 },
+            ]
+          },
+          "apartamento": {
+            "Apartamentos Naut Aran": [
+              { name: "1-Bedroom Apartment + extra bed", price: 540.00 },
+            ]
+          }
+        },
+        "2": {
+          "hotel": {
+            "Tuc Blanc": [
+              { name: "Double Room + 1 extra bed", price: 340.00 },
+            ],
+            "Garona": [
+              { name: "Triple", price: 390.00 },
+            ]
+          },
+          "apartamento": {
+            "Apartamentos Naut Aran": [
+              { name: "1-Bedroom Apartment + extra bed", price: 420.00 },
+            ]
+          }
+        }
+      },
+      "4": {
+        "3": {
+          "hotel": {
+            "AC": [
+              { name: "2x Double Room", price: 559.70 },
+            ],
+            "Meli\u00e1 De tredos": [
+              { name: "Family Suite", price: 980.00 },
+            ]
+          },
+          "apartamento": {
+            "Apartamentos Naut Aran": [
+              { name: "2-Bedroom Apartment", price: 680.00 },
+            ],
+            "Garona": [
+              { name: "2-Bedroom Apartment", price: 720.00 },
+            ]
+          }
+        },
+        "2": {
+          "hotel": {
+            "AC": [
+              { name: "2x Double Room", price: 420.50 },
+            ]
+          },
+          "apartamento": {
+            "Apartamentos Naut Aran": [
+              { name: "2-Bedroom Apartment", price: 520.00 },
+            ]
+          }
+        }
+      }
+    };
+
+    // ========== STATE ==========
+    let state = { travelers: "2", nights: "3", type: "hotel", name: null };
+    let roomCounts = {};
+
+    // ========== ELEMENTS ==========
+    const stickyBtn = document.getElementById('sticky-btn');
+    const ticketSection = document.getElementById('ticket-section');
+    const levelName = document.getElementById('level-name');
+    const roomRowsEl = document.getElementById('room-rows');
+    let stickyMode = 'tickets';
+    let hasSeenTickets = false; // once true, CTA stays as "Get it" permanently
+
+    // ========== STICKY CTA ==========
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          hasSeenTickets = true;
+          stickyMode = 'getit';
+          updateSticky();
+        } else if (!hasSeenTickets) {
+          stickyMode = 'tickets';
+          stickyBtn.textContent = 'Select accommodations';
+          stickyBtn.style.opacity = '1';
+        } else {
+          stickyMode = 'getit';
+          updateSticky();
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(ticketSection);
+
+    stickyBtn.addEventListener('click', () => {
+      if (stickyMode === 'tickets') {
+        ticketSection.scrollIntoView({ behavior:'smooth', block:'start' });
+      } else {
+        if (getTotal() > 0) {
+          saveAccommodationToCart();
+          window.location.href = 'cart.html';
+        } else {
+          // Skip: go to checkout without accommodation
+          localStorage.setItem('cart_accommodation', '[]');
+          window.location.href = 'cart.html';
+        }
+      }
+    });
+
+    function saveAccommodationToCart() {
+      const rooms = getCurrentRooms();
+      const cartAccommodation = [];
+      // Build context label
+      const travelLabel = document.querySelector('#level-travelers .ticket-pill.active')?.textContent || '';
+      const nightsLabel = document.querySelector('#level-nights .ticket-pill.active')?.textContent || '';
+      const hotelName = state.name || '';
+      rooms.forEach((room, i) => {
+        const qty = roomCounts[i] || 0;
+        if (qty > 0 && !room.soldout) {
+          cartAccommodation.push({
+            name: room.name + ' — ' + hotelName,
+            detail: travelLabel + ', ' + nightsLabel,
+            price: room.price,
+            qty: qty
+          });
+        }
+      });
+      localStorage.setItem('cart_accommodation', JSON.stringify(cartAccommodation));
+    }
+
+    function updateSticky() {
+      if (stickyMode !== 'getit') return;
+      const total = getTotal();
+      if (total > 0) {
+        stickyBtn.textContent = '\u20AC' + total.toFixed(2) + ' \u2014 Get it';
+        stickyBtn.style.opacity = '1';
+      } else {
+        stickyBtn.textContent = 'Skip';
+        stickyBtn.style.opacity = '1';
+      }
+    }
+
+    function formatPrice(n) {
+      return n.toFixed(2);
+    }
+
+    function getTotal() {
+      let total = 0;
+      const rooms = getCurrentRooms();
+      rooms.forEach((r, i) => {
+        if (!r.soldout) total += (roomCounts[i] || 0) * r.price;
+      });
+      return total;
+    }
+
+    // ========== DATA LOOKUP ==========
+    function getNames() {
+      const d = DATA[state.travelers]?.[state.nights]?.[state.type];
+      return d ? Object.keys(d) : [];
+    }
+
+    function getCurrentRooms() {
+      if (!state.name) return [];
+      return DATA[state.travelers]?.[state.nights]?.[state.type]?.[state.name] || [];
+    }
+
+    // ========== RENDER ==========
+    function renderNamePills() {
+      const names = getNames();
+      // Clear existing pills (keep arrows)
+      const arrows = levelName.querySelectorAll('.pill-arrow');
+      levelName.innerHTML = '';
+      if (arrows[0]) levelName.appendChild(arrows[0]);
+
+      if (names.length === 0) { state.name = null; renderRooms(); return; }
+      if (!names.includes(state.name)) state.name = names[0];
+
+      names.forEach(n => {
+        const pill = document.createElement('div');
+        pill.className = 'ticket-pill' + (n === state.name ? ' active' : '');
+        pill.textContent = n;
+        pill.addEventListener('click', () => {
+          state.name = n;
+          roomCounts = {};
+          renderNamePills();
+        });
+        levelName.appendChild(pill);
+      });
+
+      // Right arrow
+      const rightArrow = document.createElement('div');
+      rightArrow.className = 'pill-arrow';
+      rightArrow.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
+      levelName.appendChild(rightArrow);
+
+      renderRooms();
+      if (typeof updatePillsArrows === 'function') updatePillsArrows();
+    }
+
+    function renderRooms() {
+      roomRowsEl.innerHTML = '';
+      const rooms = getCurrentRooms();
+
+      rooms.forEach((room, i) => {
+        if (!(i in roomCounts)) roomCounts[i] = 0;
+
+        const row = document.createElement('div');
+        row.className = 'ticket-row' + (room.soldout ? ' soldout' : '') + (roomCounts[i] > 0 ? ' selected' : '');
+
+        row.innerHTML = `
+          <div class="ticket-content">
+            <div class="ticket-name">${room.name}</div>
+            <div class="ticket-more">More info</div>
+            <div class="ticket-price">\u20AC${formatPrice(room.price)}</div>
+          </div>
+          <span class="soldout-tag">Sold out</span>
+          <div class="ticket-notch"><span class="notch-line"></span></div>
+          <div class="ticket-selector-right">
+            <div class="stepper ticket-amount">
+              <button class="amt-btn minus">\u2212</button>
+              <span class="amt-count">${roomCounts[i]}</span>
+              <button class="amt-btn plus">+</button>
+            </div>
+          </div>
+        `;
+
+        if (!room.soldout) {
+          row.querySelector('.amt-btn.plus').addEventListener('click', () => {
+            roomCounts[i]++;
+            renderRooms();
+          });
+          row.querySelector('.amt-btn.minus').addEventListener('click', () => {
+            if (roomCounts[i] > 0) roomCounts[i]--;
+            renderRooms();
+          });
+        }
+
+        roomRowsEl.appendChild(row);
+      });
+
+      updateSticky();
+    }
+
+    // ========== PILL EVENTS ==========
+    function setupLevel(id, stateKey) {
+      const level = document.getElementById(id);
+      level.querySelectorAll('.ticket-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          level.querySelectorAll('.ticket-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          state[stateKey] = pill.dataset.value;
+          roomCounts = {};
+          state.name = null;
+          renderNamePills();
+        });
+      });
+    }
+
+    setupLevel('level-travelers', 'travelers');
+    setupLevel('level-nights', 'nights');
+    setupLevel('level-type', 'type');
+
+    // Center pills when they fit; show arrow when they overflow. Enable swipe when overflow.
+    function updatePillsArrows() {
+      document.querySelectorAll('.pill-level').forEach(level => {
+        const overflows = level.scrollWidth > level.clientWidth;
+        level.classList.toggle('centered', !overflows);
+        const arrow = level.querySelector('.pill-arrow');
+        if (arrow) arrow.classList.toggle('visible', overflows);
+      });
+    }
+
+    // Initial render
+    renderNamePills();
+    updatePillsArrows();
+    window.addEventListener('resize', updatePillsArrows);
+  </script>
+</body>
+</html>
