@@ -167,6 +167,8 @@
     .flow-stepper .step .dot { width:20px; height:20px; border-radius:50%; background:var(--color-border); color:var(--color-text-disable); display:flex; align-items:center; justify-content:center; font-weight:600; z-index:1; position:relative; font-size:11px; }
     .flow-stepper .step.done .dot { background:var(--color-primary); color:white; font-size:0; }
     .flow-stepper .step.done .dot::before { content:'✓'; font-size:11px; }
+    .flow-stepper .step.done.skipped .dot { background:var(--color-text-disable); }
+    .flow-stepper .step.done.skipped .dot::before { content:'\2013'; font-size:12px; }
     .flow-stepper .step.done .label { color:var(--color-text-secondary); }
     .flow-stepper .step.current .dot { background:var(--color-primary); color:white; border:2px solid var(--color-primary); }
     .flow-stepper .step.current .label { color:var(--color-primary); font-weight:600; }
@@ -191,7 +193,7 @@
     </nav>
 
     <div class="flow-stepper">
-      <a href="polar-sound.html#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
+      <a href="polar-sound.html#ticket-section" id="stepper-step1" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
       <div class="step current"><span class="dot">2</span><span class="label">Accommodation</span></div>
       <a href="../polar-sound-transportations.html?flow=option-b" class="step"><span class="dot">3</span><span class="label">Transport</span></a>
       <a href="cart.html" class="step"><span class="dot">4</span><span class="label">Cart</span></a>
@@ -641,6 +643,12 @@
       var el = document.getElementById('ticket-section');
       if (el) setTimeout(function() { el.scrollIntoView({ behavior: 'auto', block: 'start' }); }, 50);
     }
+    (function() {
+      var tickets = [];
+      try { tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]'); } catch (e) {}
+      var hasTickets = tickets.length > 0 && tickets.some(function(t) { return (t.qty || 0) > 0; });
+      if (!hasTickets) document.getElementById('stepper-step1') && document.getElementById('stepper-step1').classList.add('skipped');
+    })();
   </script>
 </body>
 </html>

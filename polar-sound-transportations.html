@@ -14,6 +14,7 @@
       --color-primary-weak: #E5F1FF;
       --color-text: #0A1E42;
       --color-text-secondary: #37474F;
+      --color-text-disable: #b0b8bf;
       --color-border: #E6EAEE;
       --color-border-light: #E6EAEE;
       --color-bg: #ffffff;
@@ -87,6 +88,8 @@
     .flow-stepper .step .dot { width:20px; height:20px; border-radius:50%; background:var(--color-border); color:var(--color-text-disable); display:flex; align-items:center; justify-content:center; font-weight:600; z-index:1; position:relative; font-size:11px; }
     .flow-stepper .step.done .dot { background:var(--color-primary); color:white; font-size:0; }
     .flow-stepper .step.done .dot::before { content:'✓'; font-size:11px; }
+    .flow-stepper .step.done.skipped .dot { background:var(--color-text-disable); }
+    .flow-stepper .step.done.skipped .dot::before { content:'\2013'; font-size:12px; }
     .flow-stepper .step.done .label { color:var(--color-text-secondary); }
     .flow-stepper .step.current .dot { background:var(--color-primary); color:white; border:2px solid var(--color-primary); }
     .flow-stepper .step.current .label { color:var(--color-primary); font-weight:600; }
@@ -191,6 +194,14 @@
     document.getElementById('step2').href = (isOptionB ? 'option-b/polar-sound-accommodation.html' : 'polar-sound-accommodation.html') + '#ticket-section';
     document.getElementById('step4').href = isOptionB ? 'option-b/cart.html' : 'checkout.html';
     if (isOptionB) document.getElementById('step4-label').textContent = 'Cart';
+    (function() {
+      var tickets = [], accommodation = [];
+      try { tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]'); accommodation = JSON.parse(localStorage.getItem('cart_accommodation') || '[]'); } catch (e) {}
+      var hasTickets = tickets.length > 0 && tickets.some(function(t) { return (t.qty || 0) > 0; });
+      var hasAccommodation = accommodation.length > 0 && accommodation.some(function(a) { return (a.qty || 0) > 0; });
+      if (!hasTickets) document.getElementById('step1').classList.add('skipped');
+      if (!hasAccommodation) document.getElementById('step2').classList.add('skipped');
+    })();
 
     function render() {
       transportRowsEl.innerHTML = '';
