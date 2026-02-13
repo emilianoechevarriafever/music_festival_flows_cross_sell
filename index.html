@@ -179,7 +179,7 @@
       font-family: var(--font);
       -webkit-text-stroke: 1px rgba(0,0,0,0.2);
     }
-    /* Top 10: solo título; número solo sobre la imagen, relleno blanco puro sin artefactos */
+    /* Top 10: solo título; número en dos capas (trazo atrás, relleno blanco encima) para cero artefactos */
     .section-top10 .event-card .card-meta,
     .section-top10 .event-card .card-price { display: none; }
     .section-top10 .event-card .card-title { margin-top: 4px; }
@@ -189,15 +189,32 @@
       left: 8px;
       font-size: 80px;
       font-weight: 900;
-      color: #fff;
-      -webkit-text-fill-color: #fff;
-      -webkit-text-stroke: 3px #000;
-      paint-order: stroke fill;
       line-height: 1;
       font-family: var(--font);
       letter-spacing: -0.02em;
       z-index: 1;
-      text-shadow: none;
+      pointer-events: none;
+    }
+    .section-top10 .event-card .card-img .rank .rank-stroke,
+    .section-top10 .event-card .card-img .rank .rank-fill {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: 1;
+      font-family: inherit;
+      letter-spacing: inherit;
+    }
+    .section-top10 .event-card .card-img .rank .rank-stroke {
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 3px #000;
+    }
+    .section-top10 .event-card .card-img .rank .rank-fill {
+      color: #fff;
+      -webkit-text-fill-color: #fff;
+      -webkit-text-stroke: 0 transparent;
     }
     .event-card .card-img .card-badge {
       position: absolute;
@@ -425,7 +442,7 @@
           <div class="card-img">
             <button type="button" class="card-like" aria-label="Añadir a favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <img src="img/polar-sound-hero.png" alt="Polar Sound Occident 2026">
-            <span class="rank">1</span>
+            <span class="rank"><span class="rank-stroke">1</span><span class="rank-fill">1</span></span>
           </div>
           <div class="card-title">Polar Sound Occident 2026: Tickets &amp; Accomodation</div>
           <div class="card-meta"><span class="rating">&#9733; 4.5</span> (462) &middot; 12 mar</div>
@@ -438,7 +455,7 @@
             <button type="button" class="card-like" aria-label="Añadir a favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <img src="https://www.figma.com/api/mcp/asset/ce91371a-0850-403b-a1ac-382ad4d6a985" alt="Candlelight: Tribute to Queen">
             <span class="card-badge">Fever Original</span>
-            <span class="rank">2</span>
+            <span class="rank"><span class="rank-stroke">2</span><span class="rank-fill">2</span></span>
           </div>
           <div class="card-title">Candlelight: Tribute to Queen</div>
           <div class="card-meta"><span class="rating">&#9733; 4.8</span> (876)</div>
@@ -450,7 +467,7 @@
           <div class="card-img">
             <button type="button" class="card-like" aria-label="Añadir a favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Brunch">
-            <span class="rank">3</span>
+            <span class="rank"><span class="rank-stroke">3</span><span class="rank-fill">3</span></span>
           </div>
           <div class="card-title">Brunch with views of Gran V&iacute;a</div>
           <div class="card-meta"><span class="rating">&#9733; 4.6</span> (2199)</div>
@@ -462,7 +479,7 @@
           <div class="card-img">
             <button type="button" class="card-like" aria-label="Añadir a favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&q=80" alt="Museo Banksy">
-            <span class="rank">4</span>
+            <span class="rank"><span class="rank-stroke">4</span><span class="rank-fill">4</span></span>
           </div>
           <div class="card-title">Museo Banksy Madrid</div>
           <div class="card-meta"><span class="rating">&#9733; 4.8</span> (5300)</div>
