@@ -136,17 +136,17 @@
     .ticket-row .ticket-price { font-size:14px; font-weight:600; color:var(--color-text); }
     .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:none; border-radius:0 8px 8px 0; background:#fff; position:relative; }
     .ticket-row .stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
-    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s; background:#e0e0e0; color:var(--color-primary); }
+    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s; background:#e0e0e0; color:#0079ca; }
     .ticket-amount .amt-count { width:36px; text-align:center; font-size:16px; font-weight:600; color:var(--color-text); }
-    .ticket-row .amt-btn.plus { background:var(--color-primary-weak); color:var(--color-primary); }
+    .ticket-row .amt-btn.plus { background:var(--color-primary-weak); color:#0079ca; }
 
     /* Active (selected): Figma 1097-15545 — right bg #e6f4ff (primary-weak), buttons #F4F6F9 */
     .ticket-row.selected { border-color:#0079ca; }
     .ticket-row.selected .ticket-selector-right { background:#e6f4ff; border-radius:0 8px 8px 0; }
     .ticket-row.selected .ticket-selector-right::before { content:''; position:absolute; left:-8px; top:0; bottom:0; width:8px; background:#e6f4ff; z-index:0; }
     .ticket-row.selected .stepper { background:transparent; }
-    .ticket-row.selected .amt-btn { background:#F4F6F9; color:var(--color-primary); }
-    .ticket-row.selected .amt-btn.plus { background:#F4F6F9; color:var(--color-primary); }
+    .ticket-row.selected .amt-btn { background:#F4F6F9; color:#0079ca; }
+    .ticket-row.selected .amt-btn.plus { background:#F4F6F9; color:#0079ca; }
 
     /* Ticket notch: vertical dashed line + semicircular cutouts (Figma perforation) */
     .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:14px; display:flex; flex-direction:column; align-items:center; pointer-events:none; z-index:2; }
