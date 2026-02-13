@@ -179,21 +179,24 @@
       font-family: var(--font);
       -webkit-text-stroke: 1px rgba(0,0,0,0.2);
     }
-    /* Top 10: solo título; número sobresaliendo (ref. Barcelona) */
+    /* Top 10: solo título; número sobresaliendo (Figma Donations 6648-11883) */
     .section-top10 .event-card .card-meta,
     .section-top10 .event-card .card-price { display: none; }
     .section-top10 .event-card .card-title { margin-top: 4px; }
     .section-top10 .event-card .rank {
-      bottom: 20px;
+      top: 225px;
       left: 8px;
-      font-size: 72px;
+      bottom: auto;
+      transform: translateY(-50%);
+      font-size: 80px;
       font-weight: 900;
-      color: white;
+      color: #fff;
       line-height: 1;
       font-family: var(--font);
-      -webkit-text-stroke: 3px #000;
+      -webkit-text-stroke: 4px #000;
       text-shadow: none;
       z-index: 2;
+      letter-spacing: -0.02em;
     }
     .section-top10 .event-card { position: relative; overflow: visible; }
     .section-top10 .event-card .card-img { overflow: hidden; }
