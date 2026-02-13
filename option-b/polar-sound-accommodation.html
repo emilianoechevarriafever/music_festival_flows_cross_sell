@@ -315,7 +315,7 @@
       <div class="legal"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookies</a><div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div></div>
     </div>
 
-    <!-- Sticky CTA: "Select accommodation" → scroll; then "Skip accommodation" or "€X — Get it" -->
+    <!-- Sticky CTA: "Select accommodation" → scroll; then "Skip accommodation" or "€X — Add it" -->
     <div class="sticky-cta">
       <button class="cta-btn" id="sticky-btn">Select accommodation</button>
     </div>
@@ -439,7 +439,7 @@
     const levelName = document.getElementById('level-name');
     const roomRowsEl = document.getElementById('room-rows');
     let stickyMode = 'tickets';
-    let hasSeenTickets = false; // once true, CTA stays as "Get it" permanently
+    let hasSeenTickets = false; // once true, CTA stays as "Add it" permanently
 
     // ========== STICKY CTA ==========
     const obs = new IntersectionObserver((entries) => {
@@ -499,7 +499,7 @@
       if (stickyMode !== 'getit') return;
       const total = getTotal();
       if (total > 0) {
-        stickyBtn.textContent = '\u20AC' + total.toFixed(2) + ' \u2014 Get it';
+        stickyBtn.textContent = '\u20AC' + total.toFixed(2) + ' \u2014 Add it';
         stickyBtn.style.opacity = '1';
       } else {
         stickyBtn.textContent = 'Skip accommodation';
