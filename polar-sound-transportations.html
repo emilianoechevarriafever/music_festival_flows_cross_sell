@@ -302,6 +302,8 @@
     });
 
     render();
+    // Always scroll to transport selector on load (including first visit)
+    setTimeout(function() { transportSection.scrollIntoView({ behavior: 'auto', block: 'start' }); }, 50);
   </script>
 </body>
 </html>

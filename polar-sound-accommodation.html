@@ -642,10 +642,11 @@
     updatePillsArrows();
     window.addEventListener('resize', updatePillsArrows);
 
-    if (window.location.hash === '#ticket-section') {
+    // Always scroll to ticket selector on load (including first visit)
+    (function() {
       var el = document.getElementById('ticket-section');
       if (el) setTimeout(function() { el.scrollIntoView({ behavior: 'auto', block: 'start' }); }, 50);
-    }
+    })();
     (function() {
       var tickets = [];
       try { tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]'); } catch (e) {}
