@@ -277,7 +277,7 @@
 
       <p>&#128680; <strong>Passes now on sale!</strong> Lori Meyers, Juan Mag&aacute;n, Leire Mart&iacute;nez, Besmaya, and many more to be announced are waiting for you!</p>
 
-      <p>&#127976; Want a Pass + accommodation? <a href="polar-sound-accommodation.html">Click here</a></p>
+      <p>&#127976; Want a Pass + accommodation? <a href="polar-sound-accommodation.html" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); }catch(e){}">Click here</a></p>
       <p>&#128656; Buy your bus and shuttle tickets to Polar Sound <a href="#">here</a></p>
       <p>&#128176; Not ready to buy add-ons yet? Purchase them later separately <a href="#">here</a></p>
 
@@ -396,7 +396,7 @@
       <div class="selling-fast-banner">Tickets Selling Fast</div>
 
       <!-- CTA buttons -->
-      <button class="cta-primary" id="cta-get-it" onclick="window.location.href='polar-sound-accommodation.html'">&euro;45.00 &mdash; Get it</button>
+      <button class="cta-primary" id="cta-get-it" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); }catch(e){} window.location.href='polar-sound-accommodation.html'">&euro;45.00 &mdash; Get it</button>
     </div>
 
     <!-- Reviews -->
@@ -547,7 +547,7 @@
   </div>
 
   <script>
-    // Show stepper on tickets page only when user is returning from a later step (accommodation/transport/checkout)
+    // Stepper: hidden on first visit to tickets; show only when user has advanced and then comes back
     (function() {
       try {
         if (sessionStorage.getItem('polar_flow_visited')) {
@@ -590,6 +590,7 @@
       } else {
         // Save ticket selections to localStorage before navigating
         saveTicketsToCart();
+        try { sessionStorage.setItem('polar_flow_visited', '1'); } catch (e) {}
         window.location.href = 'polar-sound-accommodation.html';
       }
     });
