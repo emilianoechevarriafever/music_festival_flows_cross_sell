@@ -63,13 +63,19 @@
       border-top: 1px solid #eee;
       border-bottom: 1px solid #eee;
     }
-    .navbar .logo-link { text-decoration: none; display: flex; align-items: center; }
-    .navbar .logo-link img { height: 52px; width: auto; }
-    .navbar .logo-text {
-      font-family: var(--font);
+    .navbar .logo-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .navbar .logo-link img { height: 52px; width: auto; display: block; }
+    /* Logo Fever — Figma 6648-11868: bold, sans-serif, lowercase, dark */
+    .navbar .logo-link .logo-text {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 26px;
-      line-height: 1;
+      line-height: 1.2;
       color: #031419;
       text-transform: lowercase;
       letter-spacing: -0.02em;
