@@ -92,11 +92,10 @@
     .card-type-row svg { width:18px; height:18px; color:var(--color-text); }
     .card-type-row .label { font-size:14px; font-weight:500; flex:1; }
     .card-type-row .sub-label { font-size:12px; color:var(--color-text-secondary); }
-    .card-brands { display:flex; gap:4px; }
-    .card-brands .brand { width:28px; height:18px; background:#f0f0f0; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#666; }
-    .card-brands .brand.visa { background:#1a1f71; color:white; }
-    .card-brands .brand.mc { background:#eb001b; color:white; }
-    .card-brands .brand.amex { background:#006fcf; color:white; }
+    /* Card logos (Figma ignt.comp.fields 26-192) */
+    .card-brands { display:flex; align-items:center; gap:6px; }
+    .card-brands .brand-logo { display:flex; align-items:center; justify-content:center; width:32px; height:22px; border:1px solid var(--color-border); border-radius:4px; padding:2px; box-sizing:border-box; }
+    .card-brands .brand-logo svg { width:100%; height:100%; object-fit:contain; }
 
     /* Form fields (Figma ignt.comp.fields 77-8972) */
     .form-group { margin-bottom:16px; }
@@ -245,11 +244,9 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
         <span class="label">New card</span>
         <div class="card-brands">
-          <span class="brand visa">VISA</span>
-          <span class="brand mc">MC</span>
-          <span class="brand amex">AMEX</span>
-          <span class="brand">JCB</span>
-          <span class="brand">DIN</span>
+          <span class="brand-logo" title="Visa"><svg viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="22" rx="3" fill="#1A1F71"/><text x="16" y="14.5" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700" font-size="9">VISA</text></svg></span>
+          <span class="brand-logo" title="Mastercard"><svg viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="8" r="6" fill="#EB001B"/><circle cx="15" cy="8" r="6" fill="#F79E1B"/><path d="M12 4.3a6 6 0 0 1 0 7.4 6 6 0 0 1 0-7.4z" fill="#FF5F00"/></svg></span>
+          <span class="brand-logo" title="American Express"><svg viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="16" rx="2" fill="#006FCF"/><path d="M8 5.5h2.5L9.5 8 10.5 10.5H8l-.8-1.5h1.2L8 5.5zm4.5 0h2.2l1.4 2 1.4-2h2.2v5h-1.5V7.2l-1.3 1.8h-1l-1.3-1.8v3.3h-1.5V5.5zm8.2 3.2c0 1-.8 1.6-2 1.6-.7 0-1.3-.2-1.7-.6v2.3h-1.5V5.5h1.4v.6c.4-.5 1-.7 1.7-.7 1.2 0 2 .6 2 1.6zm-1.6 0c0-.5-.4-.8-1-.8s-1 .3-1 .8.4.8 1 .8 1-.3 1-.8zM6 5.5v5h5v-1.2H7.5V5.5H6z" fill="white"/></svg></span>
         </div>
       </div>
 
