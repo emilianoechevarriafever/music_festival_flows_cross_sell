@@ -191,7 +191,7 @@
     </nav>
 
     <div class="flow-stepper">
-      <a href="polar-sound.html" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
+      <a href="polar-sound.html#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
       <div class="step current"><span class="dot">2</span><span class="label">Accommodation</span></div>
       <a href="../polar-sound-transportations.html?flow=option-b" class="step"><span class="dot">3</span><span class="label">Transport</span></a>
       <div class="step"><span class="dot">4</span><span class="label">Cart</span></div>
@@ -636,6 +636,11 @@
     renderNamePills();
     updatePillsArrows();
     window.addEventListener('resize', updatePillsArrows);
+
+    if (window.location.hash === '#ticket-section') {
+      var el = document.getElementById('ticket-section');
+      if (el) setTimeout(function() { el.scrollIntoView({ behavior: 'auto', block: 'start' }); }, 50);
+    }
   </script>
 </body>
 </html>

@@ -187,8 +187,8 @@
     let stickyMode = 'select';
     let hasSeenTransport = false;
 
-    document.getElementById('step1').href = isOptionB ? 'option-b/polar-sound.html' : 'polar-sound.html';
-    document.getElementById('step2').href = isOptionB ? 'option-b/polar-sound-accommodation.html' : 'polar-sound-accommodation.html';
+    document.getElementById('step1').href = (isOptionB ? 'option-b/polar-sound.html' : 'polar-sound.html') + '#ticket-section';
+    document.getElementById('step2').href = (isOptionB ? 'option-b/polar-sound-accommodation.html' : 'polar-sound-accommodation.html') + '#ticket-section';
     if (isOptionB) document.getElementById('step4-label').textContent = 'Cart';
 
     function render() {
