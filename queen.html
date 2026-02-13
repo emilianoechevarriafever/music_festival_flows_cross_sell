@@ -10,23 +10,28 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* Fever Design System tokens (fever-proto-craft-31); incomplete bits kept from Figma */
     :root {
-      --color-primary: #0079ca;
-      --color-text-main: #031419;
-      --color-text-subtle: #536b75;
-      --color-border: #ccd2d8;
+      --color-primary: #0057FF;
+      --color-primary-weak: #E5F1FF;
+      --color-text-main: #0A1E42;
+      --color-text-subtle: #37474F;
+      --color-border: #E6EAEE;
       --color-accent: #6f41d7;
       --color-accent-weak: #f0ebfd;
-      --color-bg-neutral: #f2f3f3;
-      --color-danger: #18824c;
+      --color-bg-neutral: #F5F7F9;
+      --color-danger: #06C167;
       --color-warning: #ff8c00;
+      --radius: 0.75rem;
+      --elevation-01: 0 1px 3px 0 rgba(0,0,0,0.08);
+      --elevation-02: 0 4px 12px 0 rgba(0,0,0,0.12);
       --font-body: 'Red Hat Text', sans-serif;
       --font-ui: 'Montserrat', sans-serif;
     }
 
     body {
       font-family: var(--font-body);
-      background: #f5f5f5;
+      background: var(--color-bg-neutral);
       display: flex;
       justify-content: center;
       color: var(--color-text-main);
@@ -518,7 +523,7 @@
       cursor: pointer;
     }
     .day-card.active {
-      background: #e6f4ff;
+      background: var(--color-primary-weak);
       border: 2px solid var(--color-primary);
     }
     .day-card .label-row {
@@ -614,10 +619,10 @@
       position: relative;
     }
     .ticket-card.active {
-      border-color: #0079ca;
+      border-color: var(--color-primary);
     }
     .ticket-card.active .ticket-card-left { background: white; }
-    .ticket-card.active .ticket-card-right { background: #e6f2ff; }
+    .ticket-card.active .ticket-card-right { background: var(--color-primary-weak); }
     .ticket-card-left {
       flex: 1;
       padding: 14px 12px 14px 16px;
@@ -668,7 +673,7 @@
       width: 0;
       border-left: 1px dashed #b0b0b0;
     }
-    .ticket-card.active .ticket-card-divider::before { border-left-color: #0079ca; }
+    .ticket-card.active .ticket-card-divider::before { border-left-color: var(--color-primary); }
     /* Inward-facing semicircle notches: circles split left/right to match sections, overlapping border */
     .ticket-card-divider .notch-top,
     .ticket-card-divider .notch-bottom {
@@ -684,7 +689,7 @@
     .ticket-card-divider .notch-bottom { bottom: -7px; }
     .ticket-card.active .ticket-card-divider .notch-top,
     .ticket-card.active .ticket-card-divider .notch-bottom {
-      background: linear-gradient(to right, white 50%, #e6f2ff 50%);
+      background: linear-gradient(to right, white 50%, var(--color-primary-weak) 50%);
     }
     .ticket-card-right {
       width: 100px;
@@ -702,11 +707,11 @@
       background: white;
       border-radius: 999px;
       padding: 4px 6px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      box-shadow: var(--elevation-01);
     }
     .ticket-card.active .ticket-qty {
       background: white;
-      box-shadow: 0 1px 2px rgba(0,121,202,0.15);
+      box-shadow: var(--elevation-01);
     }
     .ticket-qty-btn {
       width: 28px;
@@ -727,11 +732,11 @@
     }
     .ticket-qty-btn.plus {
       background: #d0e8ff;
-      color: #0079ca;
+      color: var(--color-primary);
     }
     .ticket-card.active .ticket-qty-btn.plus {
       background: #d0e8ff;
-      color: #0079ca;
+      color: var(--color-primary);
     }
     .ticket-qty-num {
       font-family: var(--font-ui);
