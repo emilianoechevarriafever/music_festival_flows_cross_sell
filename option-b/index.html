@@ -723,6 +723,7 @@
 
   </div>
   <script>
+    try { sessionStorage.removeItem('polar_flow_visited'); } catch (e) {}
     document.querySelectorAll('.card-like').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
