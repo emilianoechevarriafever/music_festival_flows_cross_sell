@@ -135,7 +135,7 @@
     .ticket-row .ticket-more { font-size:12px; font-weight:600; color:var(--color-primary); text-decoration:underline; text-underline-offset:2px; padding:4px 0; cursor:pointer; }
     .ticket-row .ticket-price { font-size:14px; font-weight:600; color:var(--color-text); }
     .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:none; border-radius:0 8px 8px 0; background:#fff; position:relative; }
-    .ticket-row .stepper { display:flex; align-items:center; background:#e8e8e8; border-radius:100px; padding:4px 6px; border:1px solid var(--color-border-light); }
+    .ticket-row .stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
     .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s; background:#e0e0e0; color:var(--color-primary); }
     .ticket-amount .amt-count { width:36px; text-align:center; font-size:16px; font-weight:600; color:var(--color-text); }
     .ticket-row .amt-btn.plus { background:var(--color-primary); color:white; }
@@ -143,7 +143,7 @@
     /* Active (selected): blue border, light blue stub, stepper light gray + blue border, buttons light gray with blue icon */
     .ticket-row.selected { border-color:var(--color-primary); }
     .ticket-row.selected .ticket-selector-right { background:var(--color-primary-weak); border-radius:0 8px 8px 0; }
-    .ticket-row.selected .stepper { background:#e8e8e8; border-color:var(--color-primary); }
+    .ticket-row.selected .stepper { background:transparent; }
     .ticket-row.selected .amt-btn { background:#e0e0e0; color:var(--color-primary); }
     .ticket-row.selected .amt-btn.plus { background:#e0e0e0; color:var(--color-primary); }
 
@@ -241,7 +241,7 @@
     .sheet .sheet-row .sheet-row-price { font-size:14px; font-weight:600; color:var(--color-text); }
     .sheet .sheet-row .sheet-row-price.free { font-weight:500; color:var(--color-text-secondary); }
     .sheet .sheet-row .sheet-row-right { width:100px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:8px; }
-    .sheet .sheet-row .sheet-stepper { display:flex; align-items:center; background:white; border-radius:100px; padding:4px 6px; border:1px solid var(--color-border-light); }
+    .sheet .sheet-row .sheet-stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
     .sheet .sheet-row .sheet-stepper .amt-btn { width:28px; height:28px; border-radius:50%; border:1px solid var(--color-border-light); background:white; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; font-weight:400; color:var(--color-text); }
     .sheet .sheet-row .sheet-stepper .amt-count { width:28px; text-align:center; font-size:14px; font-weight:600; }
     .sheet .sheet-row.selected { border-color:var(--color-primary); }
