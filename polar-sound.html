@@ -149,13 +149,13 @@
     .ticket-row.qty-zero .amt-count { color:var(--color-text-disable); }
     .ticket-row.qty-zero .amt-btn.plus { background:var(--color-primary-weak); color:var(--color-primary); }
 
-    /* Active (selected): blue border, light blue stub, stepper light gray + blue border, buttons light gray with blue icon */
+    /* Active (selected): Figma 37-20045 — container #EBF3FE, buttons #F4F6F9 */
     .ticket-row.selected { border-color:var(--color-primary); }
     .ticket-row.selected .ticket-content { border-color:transparent; }
-    .ticket-row.selected .ticket-selector-right { background:var(--color-primary-weak); border-radius:0 8px 8px 0; }
+    .ticket-row.selected .ticket-selector-right { background:#EBF3FE; border-radius:0 8px 8px 0; }
     .ticket-row.selected .stepper { background:transparent; }
-    .ticket-row.selected .amt-btn { background:#e0e0e0; color:var(--color-primary); border:none; }
-    .ticket-row.selected .amt-btn.plus { background:#e0e0e0; color:var(--color-primary); }
+    .ticket-row.selected .amt-btn { background:#F4F6F9; color:var(--color-primary); border:none; }
+    .ticket-row.selected .amt-btn.plus { background:#F4F6F9; color:var(--color-primary); }
 
     /* Ticket notch: vertical dashed line + semicircular cutouts (Figma perforation) */
     .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:14px; display:flex; flex-direction:column; align-items:center; pointer-events:none; z-index:2; }
