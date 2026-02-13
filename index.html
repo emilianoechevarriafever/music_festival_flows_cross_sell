@@ -179,7 +179,7 @@
       font-family: var(--font);
       -webkit-text-stroke: 1px rgba(0,0,0,0.2);
     }
-    /* Top 10: solo título; número solo sobre la imagen, relleno blanco y contorno por text-shadow */
+    /* Top 10: solo título; número solo sobre la imagen, relleno blanco puro sin artefactos */
     .section-top10 .event-card .card-meta,
     .section-top10 .event-card .card-price { display: none; }
     .section-top10 .event-card .card-title { margin-top: 4px; }
@@ -190,15 +190,14 @@
       font-size: 80px;
       font-weight: 900;
       color: #fff;
+      -webkit-text-fill-color: #fff;
+      -webkit-text-stroke: 3px #000;
+      paint-order: stroke fill;
       line-height: 1;
       font-family: var(--font);
       letter-spacing: -0.02em;
       z-index: 1;
-      text-shadow:
-        2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
-        2px 2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, -2px -2px 0 #000,
-        1px 0 0 #000, 0 1px 0 #000, -1px 0 0 #000, 0 -1px 0 #000,
-        1px 1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000;
+      text-shadow: none;
     }
     .event-card .card-img .card-badge {
       position: absolute;
