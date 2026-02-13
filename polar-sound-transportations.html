@@ -91,6 +91,7 @@
     .flow-stepper .step.current .dot { background:var(--color-primary); color:white; border:2px solid var(--color-primary); }
     .flow-stepper .step.current .label { color:var(--color-primary); font-weight:600; }
     .flow-stepper .step .label { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+    .flow-stepper a.step { text-decoration:none; color:inherit; }
 
     @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
   </style>
@@ -109,9 +110,9 @@
       </div>
     </nav>
 
-    <div class="flow-stepper">
-      <div class="step done"><span class="dot"></span><span class="label">Tickets</span></div>
-      <div class="step done"><span class="dot"></span><span class="label">Accommodation</span></div>
+    <div class="flow-stepper" id="flow-stepper">
+      <a href="#" id="step1" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
+      <a href="#" id="step2" class="step done"><span class="dot"></span><span class="label">Accommodation</span></a>
       <div class="step current"><span class="dot">3</span><span class="label">Transport</span></div>
       <div class="step"><span class="dot">4</span><span class="label">Checkout</span></div>
     </div>
@@ -156,7 +157,7 @@
     </div>
 
     <div class="sticky-cta">
-      <button class="cta-btn" id="sticky-btn">Continue</button>
+      <button class="cta-btn" id="sticky-btn">Select transport</button>
     </div>
   </div>
 
@@ -181,7 +182,13 @@
 
     const transportRowsEl = document.getElementById('transport-rows');
     const stickyBtn = document.getElementById('sticky-btn');
+    const transportSection = document.getElementById('transport-section');
     let counts = TRANSPORT_OPTIONS.map(() => 0);
+    let stickyMode = 'select';
+    let hasSeenTransport = false;
+
+    document.getElementById('step1').href = isOptionB ? 'option-b/polar-sound.html' : 'polar-sound.html';
+    document.getElementById('step2').href = isOptionB ? 'option-b/polar-sound-accommodation.html' : 'polar-sound-accommodation.html';
 
     function render() {
       transportRowsEl.innerHTML = '';
@@ -228,6 +235,10 @@
     }
 
     function updateSticky() {
+      if (stickyMode === 'select') {
+        stickyBtn.textContent = 'Select transport';
+        return;
+      }
       const total = getTotal();
       if (total > 0) {
         stickyBtn.textContent = '€' + total.toFixed(2) + ' — Continue';
@@ -235,6 +246,23 @@
         stickyBtn.textContent = 'Skip transport';
       }
     }
+
+    const transportObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          hasSeenTransport = true;
+          stickyMode = 'continue';
+          updateSticky();
+        } else if (!hasSeenTransport) {
+          stickyMode = 'select';
+          stickyBtn.textContent = 'Select transport';
+        } else {
+          stickyMode = 'continue';
+          updateSticky();
+        }
+      });
+    }, { threshold: 0.1 });
+    transportObs.observe(transportSection);
 
     function saveAndRedirect() {
       const cart = [];
@@ -251,7 +279,11 @@
     }
 
     stickyBtn.addEventListener('click', () => {
-      saveAndRedirect();
+      if (stickyMode === 'select') {
+        transportSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        saveAndRedirect();
+      }
     });
 
     render();

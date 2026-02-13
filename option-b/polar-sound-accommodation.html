@@ -171,6 +171,7 @@
     .flow-stepper .step.current .dot { background:var(--color-primary); color:white; border:2px solid var(--color-primary); }
     .flow-stepper .step.current .label { color:var(--color-primary); font-weight:600; }
     .flow-stepper .step .label { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+    .flow-stepper a.step { text-decoration:none; color:inherit; }
 
     @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
   </style>
@@ -190,9 +191,9 @@
     </nav>
 
     <div class="flow-stepper">
-      <div class="step done"><span class="dot"></span><span class="label">Tickets</span></div>
+      <a href="polar-sound.html" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
       <div class="step current"><span class="dot">2</span><span class="label">Accommodation</span></div>
-      <div class="step"><span class="dot">3</span><span class="label">Transport</span></div>
+      <a href="../polar-sound-transportations.html?flow=option-b" class="step"><span class="dot">3</span><span class="label">Transport</span></a>
       <div class="step"><span class="dot">4</span><span class="label">Checkout</span></div>
     </div>
 
@@ -309,14 +310,14 @@
       <div class="legal"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookies</a><div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div></div>
     </div>
 
-    <!-- Sticky CTA: "Select accommodations" → scroll; then "Skip" or "€X — Get it" -->
+    <!-- Sticky CTA: "Select accommodation" → scroll; then "Skip accommodation" or "€X — Get it" -->
     <div class="sticky-cta">
-      <button class="cta-btn" id="sticky-btn">Select accommodations</button>
+      <button class="cta-btn" id="sticky-btn">Select accommodation</button>
     </div>
   </div>
 
   <script>
-    document.getElementById('sticky-btn').textContent = 'Select accommodations';
+    document.getElementById('sticky-btn').textContent = 'Select accommodation';
 
     // ========== DATA ==========
     const DATA = {
@@ -444,7 +445,7 @@
           updateSticky();
         } else if (!hasSeenTickets) {
           stickyMode = 'tickets';
-          stickyBtn.textContent = 'Select accommodations';
+          stickyBtn.textContent = 'Select accommodation';
           stickyBtn.style.opacity = '1';
         } else {
           stickyMode = 'getit';
@@ -496,7 +497,7 @@
         stickyBtn.textContent = '\u20AC' + total.toFixed(2) + ' \u2014 Get it';
         stickyBtn.style.opacity = '1';
       } else {
-        stickyBtn.textContent = 'Skip';
+        stickyBtn.textContent = 'Skip accommodation';
         stickyBtn.style.opacity = '1';
       }
     }
