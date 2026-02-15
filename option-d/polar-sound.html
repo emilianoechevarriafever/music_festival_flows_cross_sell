@@ -157,10 +157,9 @@
     .ticket-row { --ticket-border: #ccd2d8; --selector-bg: #fff; }
     .ticket-row.selected { --ticket-border: #0079ca; --selector-bg: #e6f4ff; }
     .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:1px; pointer-events:none; z-index:2; }
-    /* Top semicircle: flat edge on dashed line, curve into selector (Figma 778-26899) */
-    .ticket-notch::before { content:''; position:absolute; left:100%; top:0; width:6px; height:12px; border-radius:0 12px 12px 0; background:#fff; border:1px solid var(--ticket-border); border-left:none; box-sizing:border-box; }
-    /* Bottom semicircle: same shape, curve into selector at bottom */
-    .ticket-notch::after { content:''; position:absolute; left:100%; bottom:0; width:6px; height:12px; border-radius:0 12px 12px 0; background:#fff; border:1px solid var(--ticket-border); border-left:none; box-sizing:border-box; }
+    /* Semicircle = half circle (not quarter). Curve concave into WHITE (left); flat edge on dashed line. */
+    .ticket-notch::before { content:''; position:absolute; right:100%; top:0; width:6px; height:12px; border-radius:6px 0 0 6px; background:#fff; border:1px solid var(--ticket-border); border-right:none; box-sizing:border-box; }
+    .ticket-notch::after { content:''; position:absolute; right:100%; bottom:0; width:6px; height:12px; border-radius:6px 0 0 6px; background:#fff; border:1px solid var(--ticket-border); border-right:none; box-sizing:border-box; }
     .ticket-notch .notch-line { position:absolute; top:12px; bottom:12px; left:0; width:0; margin-left:-1px; border-left:1px dashed #ccd2d8; }
     .ticket-row.selected .notch-line { border-color:#0079ca; }
 
