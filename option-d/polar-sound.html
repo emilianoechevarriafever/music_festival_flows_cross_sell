@@ -157,9 +157,10 @@
     .ticket-row { --ticket-border: #ccd2d8; --selector-bg: #fff; }
     .ticket-row.selected { --ticket-border: #0079ca; --selector-bg: #e6f4ff; }
     .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:1px; pointer-events:none; z-index:2; }
-    /* Semicircle = half circle (not quarter). Curve concave into WHITE (left); flat edge on dashed line. */
-    .ticket-notch::before { content:''; position:absolute; right:100%; top:0; width:6px; height:12px; border-radius:6px 0 0 6px; background:#fff; border:1px solid var(--ticket-border); border-right:none; box-sizing:border-box; }
-    .ticket-notch::after { content:''; position:absolute; right:100%; bottom:0; width:6px; height:12px; border-radius:6px 0 0 6px; background:#fff; border:1px solid var(--ticket-border); border-right:none; box-sizing:border-box; }
+    /* Semicircle = real 180° arc via SVG (CSS border-radius was rendering as quarter circle). */
+    .ticket-notch .notch-semicircle { position:absolute; right:100%; width:6px; height:12px; color:var(--ticket-border); fill:#fff; stroke:currentColor; stroke-width:1; }
+    .ticket-notch .notch-semicircle--top { top:0; }
+    .ticket-notch .notch-semicircle--bottom { bottom:0; }
     .ticket-notch .notch-line { position:absolute; top:12px; bottom:12px; left:0; width:0; margin-left:-1px; border-left:1px dashed #ccd2d8; }
     .ticket-row.selected .notch-line { border-color:#0079ca; }
 
@@ -361,7 +362,10 @@
           <div class="ticket-more">More info</div>
           <div class="ticket-price">&euro;45.00</div>
         </div>
-        <div class="ticket-notch"><span class="notch-line"></span></div>
+        <div class="ticket-notch">
+          <svg class="notch-semicircle notch-semicircle--top" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 1 6 0 L6 12 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 1 6 0 A6 6 0 0 1 6 12"/></svg>
+          <svg class="notch-semicircle notch-semicircle--bottom" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 0 6 12 L6 0 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 0 6 12 A6 6 0 0 0 6 0"/></svg>
+          <span class="notch-line"></span></div>
         <div class="ticket-selector-right">
           <div class="stepper ticket-amount">
             <button class="amt-btn minus">&minus;</button>
@@ -377,7 +381,10 @@
           <div class="ticket-more">More info</div>
           <div class="ticket-price">&euro;50.00</div>
         </div>
-        <div class="ticket-notch"><span class="notch-line"></span></div>
+        <div class="ticket-notch">
+          <svg class="notch-semicircle notch-semicircle--top" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 1 6 0 L6 12 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 1 6 0 A6 6 0 0 1 6 12"/></svg>
+          <svg class="notch-semicircle notch-semicircle--bottom" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 0 6 12 L6 0 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 0 6 12 A6 6 0 0 0 6 0"/></svg>
+          <span class="notch-line"></span></div>
         <div class="ticket-selector-right">
           <div class="stepper ticket-amount">
             <button class="amt-btn minus">&minus;</button>
@@ -393,7 +400,10 @@
           <div class="ticket-more">More info</div>
           <div class="ticket-price">&euro;85.00</div>
         </div>
-        <div class="ticket-notch"><span class="notch-line"></span></div>
+        <div class="ticket-notch">
+          <svg class="notch-semicircle notch-semicircle--top" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 1 6 0 L6 12 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 1 6 0 A6 6 0 0 1 6 12"/></svg>
+          <svg class="notch-semicircle notch-semicircle--bottom" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 0 6 12 L6 0 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 0 6 12 A6 6 0 0 0 6 0"/></svg>
+          <span class="notch-line"></span></div>
         <div class="ticket-selector-right">
           <div class="stepper ticket-amount">
             <button class="amt-btn minus">&minus;</button>
@@ -409,7 +419,10 @@
           <div class="ticket-more">More info</div>
           <div class="ticket-price">&euro;90.00</div>
         </div>
-        <div class="ticket-notch"><span class="notch-line"></span></div>
+        <div class="ticket-notch">
+          <svg class="notch-semicircle notch-semicircle--top" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 1 6 0 L6 12 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 1 6 0 A6 6 0 0 1 6 12"/></svg>
+          <svg class="notch-semicircle notch-semicircle--bottom" viewBox="0 0 6 12" preserveAspectRatio="xMinYMin slice" aria-hidden="true"><path fill="#fff" d="M0 6 A6 6 0 0 0 6 12 L6 0 Z"/><path fill="none" stroke="currentColor" stroke-width="1" d="M0 6 A6 6 0 0 0 6 12 A6 6 0 0 0 6 0"/></svg>
+          <span class="notch-line"></span></div>
         <div class="ticket-selector-right">
           <div class="stepper ticket-amount">
             <button class="amt-btn minus">&minus;</button>
