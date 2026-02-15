@@ -117,7 +117,7 @@
     .section-header h2 { font-size:20px; font-weight:600; line-height:24px; flex:1; }
 
     /* === TICKET SELECTOR === */
-    .ticket-selector { padding:0 16px 16px; border-bottom:1px solid var(--color-border); }
+    .ticket-selector { padding:0 16px 16px; border-bottom:1px solid var(--color-border); overflow:visible; }
 
     /* No booking fees banner */
     .no-fees-banner { display:flex; align-items:center; justify-content:center; gap:8px; background:#e8e0f7; border-radius:8px; padding:10px 16px; margin:16px 0; }
@@ -158,9 +158,9 @@
     .ticket-row.selected { --ticket-border: #0079ca; --selector-bg: #e6f4ff; }
     .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:1px; pointer-events:none; z-index:2; }
     .ticket-notch .notch-semicircle { position:absolute; left:100%; width:5px; height:10px; fill:var(--selector-bg); color:var(--ticket-border); stroke:currentColor; stroke-width:1; }
-    .ticket-notch .notch-semicircle--top { top:0; }
-    .ticket-notch .notch-semicircle--bottom { bottom:0; }
-    .ticket-notch .notch-line { position:absolute; top:10px; bottom:10px; left:0; width:0; margin-left:-1px; border-left:1px dashed #ccd2d8; }
+    .ticket-notch .notch-semicircle--top { top:6px; }
+    .ticket-notch .notch-semicircle--bottom { bottom:6px; }
+    .ticket-notch .notch-line { position:absolute; top:16px; bottom:16px; left:0; width:0; margin-left:-1px; border-left:1px dashed #ccd2d8; }
     .ticket-row.selected .notch-line { border-color:#0079ca; }
 
     /* Selling fast banner */
