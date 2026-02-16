@@ -83,7 +83,7 @@
     .payment-section { padding:16px; }
     .payment-section h3 { font-size:16px; font-weight:700; margin-bottom:16px; }
 
-    .card-type-row { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--color-border); margin-bottom:16px; }
+    .card-type-row { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--color-border); margin-bottom:16px; cursor:pointer; }
     .card-type-row .radio { width:18px; height:18px; border-radius:50%; border:2px solid #0079ca; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .card-type-row .radio.active { background:#0079ca; }
     .card-type-row .radio.active::after { content:''; width:6px; height:6px; background:white; border-radius:50%; }
@@ -123,12 +123,16 @@
     .security-note { display:flex; align-items:center; gap:8px; padding:8px 0; font-size:12px; color:var(--color-text-secondary); }
     .security-note svg { width:14px; height:14px; flex-shrink:0; }
 
-    .alt-payment { display:flex; align-items:center; gap:12px; padding:16px 0; border-bottom:1px solid var(--color-border); }
+    .alt-payment { display:flex; align-items:center; gap:12px; padding:16px 0; border-bottom:1px solid var(--color-border); cursor:pointer; }
     .alt-payment .radio-empty { width:18px; height:18px; border-radius:50%; border:2px solid var(--color-border); flex-shrink:0; }
+    .alt-payment .radio-empty.active { border-color:#0079ca; background:#0079ca; position:relative; }
+    .alt-payment .radio-empty.active::after { content:''; width:6px; height:6px; background:#fff; border-radius:50%; position:absolute; top:4px; left:4px; }
     .alt-payment .pay-logo { height:20px; }
     .alt-payment .pay-info { flex:1; }
     .alt-payment .pay-name { font-size:14px; font-weight:500; }
     .alt-payment .pay-sub { font-size:12px; color:var(--color-text-secondary); }
+    .card-type-row.selected,
+    .alt-payment.selected { background:#f7fbff; border-radius:8px; margin-left:-8px; margin-right:-8px; padding-left:8px; padding-right:8px; }
 
     .checkbox-area { padding:16px 0; }
     .checkbox-row { display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; }
@@ -315,6 +319,8 @@
     let cartTickets = [];
     let cartAccommodation = [];
     let cartTransportation = [];
+    let selectedPaymentMethod = 'card';
+    let currentGrandTotal = 0;
 
     function loadCart() {
       try {
@@ -392,6 +398,7 @@
       const taxRate = 0.10;
       const taxAmount = Math.round(subtotal * taxRate * 100) / 100;
       const grandTotal = subtotal + taxAmount;
+      currentGrandTotal = grandTotal;
 
       document.getElementById('subtotal-tickets').textContent = formatEur(ticketTotal);
       document.getElementById('subtotal-accommodation').textContent = formatEur(accommodationTotal);
@@ -401,9 +408,18 @@
       document.getElementById('row-accommodation').style.display = accommodationTotal === 0 ? 'none' : 'flex';
       document.getElementById('row-transportation').style.display = transportationTotal === 0 ? 'none' : 'flex';
 
+      updatePayButtonLabel();
+    }
+
+    function updatePayButtonLabel() {
       const payBtn = document.getElementById('pay-btn');
-      payBtn.textContent = 'Pay ' + formatEur(grandTotal);
-      payBtn.onclick = function() { alert('Purchase completed! (demo)'); };
+      if (!payBtn) return;
+      const label = selectedPaymentMethod === 'apple'
+        ? 'Apple Pay'
+        : selectedPaymentMethod === 'paypal'
+          ? 'PayPal'
+          : 'Pay';
+      payBtn.textContent = label + ' ' + formatEur(currentGrandTotal);
     }
 
     loadCart();
@@ -428,6 +444,76 @@
       cardInput.addEventListener('focus', toggleClear);
       clearBtn.addEventListener('click', function() { cardInput.value = ''; cardInput.focus(); clearBtn.classList.remove('visible'); });
     }
+
+    // Payment methods: clickable selection with realistic outcomes
+    const paymentSection = document.querySelector('.payment-section');
+    const cardRow = paymentSection && paymentSection.querySelector('.card-type-row');
+    const methodRows = paymentSection ? paymentSection.querySelectorAll('.alt-payment') : [];
+    const appleRow = methodRows[0];
+    const paypalRow = methodRows[1];
+    const cardFields = paymentSection ? paymentSection.querySelectorAll('.form-group, .form-row, .security-note') : [];
+
+    function refreshPaymentMethodUI() {
+      if (!cardRow || !appleRow || !paypalRow) return;
+      const cardRadio = cardRow.querySelector('.radio');
+      const appleRadio = appleRow.querySelector('.radio-empty');
+      const paypalRadio = paypalRow.querySelector('.radio-empty');
+
+      cardRow.classList.toggle('selected', selectedPaymentMethod === 'card');
+      appleRow.classList.toggle('selected', selectedPaymentMethod === 'apple');
+      paypalRow.classList.toggle('selected', selectedPaymentMethod === 'paypal');
+      if (cardRadio) cardRadio.classList.toggle('active', selectedPaymentMethod === 'card');
+      if (appleRadio) appleRadio.classList.toggle('active', selectedPaymentMethod === 'apple');
+      if (paypalRadio) paypalRadio.classList.toggle('active', selectedPaymentMethod === 'paypal');
+
+      cardFields.forEach(function(el) {
+        el.style.display = selectedPaymentMethod === 'card' ? '' : 'none';
+      });
+      updatePayButtonLabel();
+    }
+
+    if (cardRow) {
+      cardRow.addEventListener('click', function() {
+        selectedPaymentMethod = 'card';
+        refreshPaymentMethodUI();
+      });
+    }
+    if (appleRow) {
+      appleRow.addEventListener('click', function() {
+        selectedPaymentMethod = 'apple';
+        refreshPaymentMethodUI();
+      });
+    }
+    if (paypalRow) {
+      paypalRow.addEventListener('click', function() {
+        selectedPaymentMethod = 'paypal';
+        refreshPaymentMethodUI();
+      });
+    }
+
+    const payBtn = document.getElementById('pay-btn');
+    if (payBtn) {
+      payBtn.onclick = function() {
+        if (selectedPaymentMethod === 'card') {
+          const expiry = document.getElementById('card-expiry');
+          const cvc = document.getElementById('card-cvc');
+          const postal = document.getElementById('postal-code');
+          if (!cardInput.value.trim() || !expiry.value.trim() || !cvc.value.trim() || !postal.value.trim()) {
+            alert('Please complete your card details before continuing.');
+            return;
+          }
+          alert('Payment approved. Your card has been charged ' + formatEur(currentGrandTotal) + '.');
+          return;
+        }
+        if (selectedPaymentMethod === 'apple') {
+          alert('Opening Apple Pay to authorize ' + formatEur(currentGrandTotal) + '.');
+          return;
+        }
+        alert('Redirecting to PayPal to complete ' + formatEur(currentGrandTotal) + '.');
+      };
+    }
+
+    refreshPaymentMethodUI();
   </script>
 </body>
 </html>
