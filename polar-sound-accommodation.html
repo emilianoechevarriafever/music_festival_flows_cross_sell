@@ -483,9 +483,23 @@
     }, { threshold: 0.1 });
     obs.observe(ticketSection);
 
+    function getStickyTopOffset() {
+      var stickyHeader = document.querySelector('.sticky-header');
+      var stickyStepper = document.querySelector('.flow-stepper');
+      var offset = 0;
+      if (stickyHeader && getComputedStyle(stickyHeader).display !== 'none') offset += stickyHeader.offsetHeight;
+      if (stickyStepper && getComputedStyle(stickyStepper).display !== 'none') offset += stickyStepper.offsetHeight;
+      return offset;
+    }
+
+    function scrollToTicketSection(behavior) {
+      var y = ticketSection.getBoundingClientRect().top + window.pageYOffset - getStickyTopOffset();
+      window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'auto' });
+    }
+
     stickyBtn.addEventListener('click', () => {
       if (stickyMode === 'tickets') {
-        ticketSection.scrollIntoView({ behavior:'smooth', block:'start' });
+        scrollToTicketSection('smooth');
       } else {
         const nextUrl = isOptionF ? 'checkout.html?flow=option-f' : ('polar-sound-transportations.html' + flowSuffix);
         if (getTotal() > 0) {
@@ -689,14 +703,13 @@
     updatePillsArrows();
     window.addEventListener('resize', updatePillsArrows);
 
-    // Always scroll to ticket selector on load (including first visit).
+    // Always scroll to ticket selector on load (including first visit), accounting for sticky top UI.
     // Use two passes to make this robust on slower layout/image loads.
     function scrollAccommodationToSelector() {
-      var el = document.getElementById('ticket-section');
-      if (!el) return;
+      if (!ticketSection) return;
       requestAnimationFrame(function() {
-        el.scrollIntoView({ behavior: 'auto', block: 'start' });
-        setTimeout(function() { el.scrollIntoView({ behavior: 'auto', block: 'start' }); }, 120);
+        scrollToTicketSection('auto');
+        setTimeout(function() { scrollToTicketSection('auto'); }, 120);
       });
     }
     scrollAccommodationToSelector();

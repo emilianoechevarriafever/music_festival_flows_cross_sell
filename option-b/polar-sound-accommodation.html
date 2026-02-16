@@ -460,9 +460,23 @@
     }, { threshold: 0.1 });
     obs.observe(ticketSection);
 
+    function getStickyTopOffset() {
+      var stickyHeader = document.querySelector('.sticky-header');
+      var stickyStepper = document.querySelector('.flow-stepper');
+      var offset = 0;
+      if (stickyHeader && getComputedStyle(stickyHeader).display !== 'none') offset += stickyHeader.offsetHeight;
+      if (stickyStepper && getComputedStyle(stickyStepper).display !== 'none') offset += stickyStepper.offsetHeight;
+      return offset;
+    }
+
+    function scrollToTicketSection(behavior) {
+      var y = ticketSection.getBoundingClientRect().top + window.pageYOffset - getStickyTopOffset();
+      window.scrollTo({ top: Math.max(0, y), behavior: behavior || 'auto' });
+    }
+
     stickyBtn.addEventListener('click', () => {
       if (stickyMode === 'tickets') {
-        ticketSection.scrollIntoView({ behavior:'smooth', block:'start' });
+        scrollToTicketSection('smooth');
       } else {
         if (getTotal() > 0) {
           saveAccommodationToCart();
@@ -660,10 +674,13 @@
     updatePillsArrows();
     window.addEventListener('resize', updatePillsArrows);
 
-    // Always scroll to ticket selector on load (including first visit)
+    // Always scroll to ticket selector on load (including first visit), accounting for sticky top UI.
     (function() {
-      var el = document.getElementById('ticket-section');
-      if (el) setTimeout(function() { el.scrollIntoView({ behavior: 'auto', block: 'start' }); }, 50);
+      if (!ticketSection) return;
+      setTimeout(function() {
+        scrollToTicketSection('auto');
+        setTimeout(function() { scrollToTicketSection('auto'); }, 120);
+      }, 50);
     })();
     (function() {
       var tickets = [];
