@@ -214,10 +214,10 @@
       </div>
       <div class="price-row">
         <span class="price-label">Fees</span>
-        <span class="price-val">&euro;0.00</span>
+        <span class="price-val" id="fees-val">&euro;0.00</span>
       </div>
       <div class="price-row">
-        <span class="price-label">Tax</span>
+        <span class="price-label">Tax (IVA)</span>
         <span class="price-val" id="tax-val">&euro;0.00</span>
       </div>
       <div class="price-row total">
@@ -395,14 +395,15 @@
 
       const { ticketTotal, accommodationTotal, transportationTotal } = getSubtotals();
       const subtotal = ticketTotal + accommodationTotal + transportationTotal;
-      const taxRate = 0.10;
-      const taxAmount = Math.round(subtotal * taxRate * 100) / 100;
-      const grandTotal = subtotal + taxAmount;
+      const feesAmount = Math.round(subtotal * 0.08 * 100) / 100;
+      const taxAmount = Math.round(subtotal * 0.10 * 100) / 100;
+      const grandTotal = subtotal + feesAmount + taxAmount;
       currentGrandTotal = grandTotal;
 
       document.getElementById('subtotal-tickets').textContent = formatEur(ticketTotal);
       document.getElementById('subtotal-accommodation').textContent = formatEur(accommodationTotal);
       document.getElementById('subtotal-transportation').textContent = formatEur(transportationTotal);
+      document.getElementById('fees-val').textContent = formatEur(feesAmount);
       document.getElementById('tax-val').textContent = formatEur(taxAmount);
       document.getElementById('grand-total').textContent = formatEur(grandTotal);
       document.getElementById('row-accommodation').style.display = accommodationTotal === 0 ? 'none' : 'flex';
