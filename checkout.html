@@ -378,6 +378,8 @@
       if (params.get('flow') === 'option-e') {
         var logoLink = document.getElementById('checkout-logo-link');
         if (logoLink) logoLink.href = '/option-e/';
+        var checkoutStepper = document.querySelector('.flow-stepper');
+        if (checkoutStepper) checkoutStepper.style.display = 'none';
         var step1 = document.getElementById('stepper-step1');
         var step2 = document.getElementById('stepper-step2');
         var step3 = document.getElementById('stepper-step3');

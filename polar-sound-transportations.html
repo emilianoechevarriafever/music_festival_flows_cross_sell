@@ -205,6 +205,8 @@
       document.getElementById('hero-img').src = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80';
     } else if (isOptionE) {
       document.getElementById('nav-logo').href = '/option-e/';
+      var transportStepper = document.getElementById('flow-stepper');
+      if (transportStepper) transportStepper.style.display = 'none';
     } else {
       document.getElementById('nav-logo').href = '/home';
     }
