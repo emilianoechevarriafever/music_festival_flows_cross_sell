@@ -631,6 +631,61 @@
   </div>
 
   <script>
+    (function initHeroGallery() {
+      var hero = document.querySelector('.hero');
+      if (!hero) return;
+
+      var heroImage = hero.querySelector('.hero-bg');
+      var indicatorBars = hero.querySelectorAll('.slide-indicators .bar');
+      if (!heroImage || !indicatorBars.length) return;
+
+      var titleNode = document.querySelector('h1');
+      var seedBase = (titleNode && titleNode.textContent ? titleNode.textContent : 'polar-sound')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '') || 'polar-sound';
+
+      var galleryImages = [heroImage.getAttribute('src')];
+      for (var i = 1; i < indicatorBars.length; i += 1) {
+        galleryImages.push('https://picsum.photos/seed/' + seedBase + '-' + (i + 1) + '/900/700');
+      }
+
+      var currentIndex = 0;
+      var autoplayTimer = null;
+
+      function renderHeroImage() {
+        heroImage.src = galleryImages[currentIndex];
+        indicatorBars.forEach(function (bar, index) {
+          bar.classList.toggle('active', index === currentIndex);
+        });
+      }
+
+      function goTo(index) {
+        currentIndex = (index + galleryImages.length) % galleryImages.length;
+        renderHeroImage();
+      }
+
+      function nextImage() { goTo(currentIndex + 1); }
+      function prevImage() { goTo(currentIndex - 1); }
+
+      function startAutoplay() {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(nextImage, 4000);
+      }
+
+      hero.addEventListener('click', function (event) {
+        if (event.target.closest('.side-buttons') || event.target.closest('.gallery-btn')) return;
+        var rect = hero.getBoundingClientRect();
+        var clickedRight = (event.clientX - rect.left) >= rect.width / 2;
+        if (clickedRight) nextImage();
+        else prevImage();
+        startAutoplay();
+      });
+
+      renderHeroImage();
+      startAutoplay();
+    })();
+
     const params = new URLSearchParams(window.location.search);
     let flow = params.get('flow');
     let storedFlow = null;
