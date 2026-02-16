@@ -112,6 +112,22 @@
       margin-bottom: 16px;
     }
     .section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 8px; }
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      background: none;
+      color: #d63031;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .logout-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .logout-btn:hover { opacity: 0.8; }
     .section h2 { margin: 0 0 8px; font-size: 36px; font-size: 32px; font-size: 34px; font-size: 32px; font-size: 16px; line-height: 24px; font-weight: 700; }
     .mail-row {
       display: flex;
@@ -219,6 +235,13 @@
           <h2>Fever Club</h2>
           <div class="club-pill"><span class="star">&#9733;</span>300 points</div>
           <a class="inline-link" href="#">Get rewards in the app <span>&#x2197;</span></a>
+        </div>
+
+        <div class="section">
+          <button type="button" class="logout-btn" onclick="window.location.href='home.html'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Log out
+          </button>
         </div>
       </div>
     </section>
