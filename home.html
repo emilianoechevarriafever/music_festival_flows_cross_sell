@@ -219,6 +219,17 @@
       gap: 8px;
     }
     .hero-city svg { width: 16px; height: 16px; }
+    .hero-city-trigger {
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: inherit;
+    }
     .hero-subtitle {
       font-size: 14px;
       color: rgba(255,255,255,0.85);
@@ -716,7 +727,9 @@
       <div class="hero-content">
         <div class="hero-city">
           Madrid
-          <svg viewBox="0 0 16 16" fill="white"><path d="M4 6l4 4 4-4"/></svg>
+          <button type="button" class="hero-city-trigger js-location-hero-btn" aria-label="Open city selector">
+            <svg viewBox="0 0 16 16" fill="white"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
         </div>
         <div class="hero-subtitle">Things to do: events, experiences and more</div>
         <div class="search-bar">
@@ -1057,6 +1070,7 @@
 
     (function() {
       var locationBtn = document.querySelector('.js-location-btn');
+      var heroLocationBtn = document.querySelector('.js-location-hero-btn');
       var citySheetOverlay = document.getElementById('city-sheet-overlay');
       var citySheetClose = document.querySelector('.js-city-sheet-close');
       if (!locationBtn || !citySheetOverlay) return;
@@ -1074,6 +1088,7 @@
       }
 
       locationBtn.addEventListener('click', openCitySheet);
+      if (heroLocationBtn) heroLocationBtn.addEventListener('click', openCitySheet);
       if (citySheetClose) citySheetClose.addEventListener('click', closeCitySheet);
       citySheetOverlay.addEventListener('click', function(event) {
         if (event.target === citySheetOverlay) closeCitySheet();
