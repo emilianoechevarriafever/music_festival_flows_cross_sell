@@ -322,18 +322,27 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const isOptionF = params.get('flow') === 'option-f';
-    const flowSuffix = isOptionF ? '?flow=option-f' : '';
-
-    if (isOptionF) {
-      const logoLink = document.getElementById('nav-logo-link');
-      if (logoLink) logoLink.href = '/option-f/';
-      const step1 = document.getElementById('stepper-step1');
-      const step3 = document.getElementById('stepper-step3');
-      const step4 = document.getElementById('stepper-step4');
-      if (step1) step1.href = 'polar-sound.html?flow=option-f#ticket-section';
-      if (step3) step3.href = 'polar-sound-transportations.html?flow=option-f';
-      if (step4) step4.href = 'checkout.html?flow=option-f';
+    let flow = params.get('flow');
+    let storedFlow = null;
+    try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
+    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f')) flow = storedFlow;
+    const isOptionE = flow === 'option-e';
+    const isOptionF = flow === 'option-f';
+    const isOptionalFlow = isOptionE || isOptionF;
+    if (isOptionalFlow) {
+      try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
+    }
+    if (isOptionalFlow) {
+      var accommodationLogoLink = document.getElementById('nav-logo-link');
+      if (accommodationLogoLink) accommodationLogoLink.href = '/' + flow + '/';
+      var accommodationStepper = document.querySelector('.flow-stepper');
+      if (accommodationStepper) accommodationStepper.style.display = 'none';
+      var step1 = document.getElementById('stepper-step1');
+      var step3 = document.getElementById('stepper-step3');
+      var step4 = document.getElementById('stepper-step4');
+      if (step1) step1.href = 'polar-sound.html?flow=' + flow + '#ticket-section';
+      if (step3) step3.href = 'polar-sound-transportations.html?flow=' + flow;
+      if (step4) step4.href = 'checkout.html?flow=' + flow;
     }
 
     document.getElementById('sticky-btn').textContent = 'Select accommodations';

@@ -631,50 +631,42 @@
   </div>
 
   <script>
-    // Stepper: hidden on first visit to tickets; show only when user has advanced and then comes back
-    (function() {
-      var flowFromUrl = new URLSearchParams(window.location.search).get('flow');
-      if (!flowFromUrl) {
-        try {
-          if (sessionStorage.getItem('polar_flow_mode') === 'option-f') flowFromUrl = 'option-f';
-        } catch (e) {}
-      }
-      if (flowFromUrl === 'option-f') return;
-      try {
-        if (sessionStorage.getItem('polar_flow_visited')) {
-          var el = document.getElementById('tickets-flow-stepper');
-          if (el) { el.classList.remove('stepper-hidden'); el.setAttribute('aria-hidden', 'false'); }
-        }
-      } catch (e) {}
-    })();
-    const flowParams = new URLSearchParams(window.location.search);
-    let flow = flowParams.get('flow');
-    if (!flow) {
-      try {
-        if (sessionStorage.getItem('polar_flow_mode') === 'option-f') flow = 'option-f';
-      } catch (e) {}
-    }
+    const params = new URLSearchParams(window.location.search);
+    let flow = params.get('flow');
+    let storedFlow = null;
+    try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
+    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f')) flow = storedFlow;
+    const isOptionE = flow === 'option-e';
     const isOptionF = flow === 'option-f';
+    const isOptionalFlow = isOptionE || isOptionF;
     const flowSuffix = isOptionF ? '?flow=option-f' : '';
-    if (isOptionF) {
-      try { sessionStorage.setItem('polar_flow_mode', 'option-f'); } catch (e) {}
-    }
 
-    if (isOptionF) {
+    if (isOptionalFlow) {
+      try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
       const logoLink = document.querySelector('.navbar .logo-link');
-      if (logoLink) logoLink.href = '/option-f/';
+      if (logoLink) logoLink.href = '/' + flow + '/';
+      const step2 = document.getElementById('stepper-step2');
+      const step3 = document.getElementById('stepper-step3');
+      const step4 = document.getElementById('stepper-step4');
+      if (step2) step2.href = 'polar-sound-accommodation.html?flow=' + flow + '#ticket-section';
+      if (step3) step3.href = 'polar-sound-transportations.html?flow=' + flow;
+      if (step4) step4.href = 'checkout.html?flow=' + flow;
       const ticketsStepper = document.getElementById('tickets-flow-stepper');
       if (ticketsStepper) {
         ticketsStepper.classList.add('stepper-hidden');
         ticketsStepper.setAttribute('aria-hidden', 'true');
       }
-      const step2 = document.getElementById('stepper-step2');
-      const step3 = document.getElementById('stepper-step3');
-      const step4 = document.getElementById('stepper-step4');
-      if (step2) step2.href = 'polar-sound-accommodation.html?flow=option-f#ticket-section';
-      if (step3) step3.href = 'polar-sound-transportations.html?flow=option-f';
-      if (step4) step4.href = 'checkout.html?flow=option-f';
     }
+
+    // Stepper: hidden on first visit to tickets; show only when user has advanced and then comes back
+    (function() {
+      try {
+        if (!isOptionalFlow && sessionStorage.getItem('polar_flow_visited')) {
+          var el = document.getElementById('tickets-flow-stepper');
+          if (el) { el.classList.remove('stepper-hidden'); el.setAttribute('aria-hidden', 'false'); }
+        }
+      } catch (e) {}
+    })();
 
     // === SINGLE CTA BEHAVIOR ===
     const stickyBtn = document.getElementById('sticky-btn');

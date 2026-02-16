@@ -60,8 +60,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ccd2d8;
     }
     .navbar .logo-link {
       text-decoration: none;
@@ -70,16 +69,125 @@
     }
     /* Logo Fever: imagen oficial; altura por tamaño de las letras, no del blanco del asset */
     .navbar .logo-link img {
-      height: 48px;
+      height: 38px;
       width: auto;
       display: block;
       object-fit: contain;
     }
     .nav-icons { display: flex; align-items: center; gap: 16px; }
     .nav-icons svg { width: 24px; height: 24px; color: #031419; stroke: currentColor; cursor: pointer; }
+    .nav-icon-btn {
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .nav-icon-btn svg { width: 24px; height: 24px; color: #031419; stroke: currentColor; }
+    .burger-toggle .icon-close { display: none; }
+    .phone.is-menu-open .burger-toggle .icon-menu { display: none; }
+    .phone.is-menu-open .burger-toggle .icon-close { display: block; }
     .avatar-wrap { position: relative; display: flex; align-items: center; }
     .avatar-wrap img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
     .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#ff3b30; border:1.5px solid white; border-radius:50%; }
+
+    .burger-menu-panel {
+      display: none;
+      background: #fafbfb;
+      min-height: calc(100vh - 63px);
+    }
+    .phone.is-menu-open .burger-menu-panel { display: block; }
+    .phone.is-menu-open .hero,
+    .phone.is-menu-open .section,
+    .phone.is-menu-open .cities-section,
+    .phone.is-menu-open .app-banner,
+    .phone.is-menu-open .selling-point,
+    .phone.is-menu-open .seo-text,
+    .phone.is-menu-open .footer { display: none; }
+
+    .burger-location-lang {
+      height: 40px;
+      border-top: 1px solid #ccd2d8;
+      border-bottom: 1px solid #ccd2d8;
+      background: #fff;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .burger-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #031419;
+      font-size: 16px;
+    }
+    .burger-location span {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+      color: #031419;
+    }
+    .burger-divider {
+      width: 1px;
+      align-self: stretch;
+      background: #ccd2d8;
+      margin: 0 16px;
+    }
+    .burger-lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 16px;
+      line-height: 24px;
+      color: #031419;
+      font-weight: 400;
+    }
+    .burger-lang svg,
+    .burger-location svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      stroke-width: 1.7;
+    }
+    .burger-menu-content {
+      padding: 16px 15px 24px;
+    }
+    .burger-menu-content h2 {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      color: #031419;
+      margin-bottom: 16px;
+    }
+    .burger-category-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .burger-category-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      min-height: 64px;
+    }
+    .burger-category-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .burger-category-item span {
+      font-size: 14px;
+      line-height: 20px;
+      color: #031419;
+      font-weight: 400;
+    }
 
     /* Hero */
     .hero {
@@ -406,6 +514,147 @@
     /* SEO text */
     .seo-text { padding: 16px; font-size: 13px; line-height: 20px; color: var(--color-text-subtle); }
 
+    /* City selector bottom sheet (location icon) */
+    .city-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 35, 44, 0.88);
+      display: flex;
+      align-items: flex-end;
+      z-index: 1200;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+    .city-sheet-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .city-sheet {
+      width: 100%;
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -6px 6px rgba(0, 70, 121, 0.2);
+      padding: 16px;
+      max-height: calc(100vh - 56px);
+      overflow-y: auto;
+      transform: translateY(16px);
+      transition: transform 0.2s ease;
+    }
+    .city-sheet-overlay.is-open .city-sheet {
+      transform: translateY(0);
+    }
+    .city-sheet-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      margin-bottom: 16px;
+    }
+    .city-sheet-title {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      color: #031419;
+    }
+    .city-sheet-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: none;
+      color: #031419;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .city-sheet-divider {
+      height: 1px;
+      background: #ccd2d8;
+      margin-bottom: 16px;
+    }
+    .city-sheet-search {
+      height: 40px;
+      border: 1px solid #ccd2d8;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      color: #536b75;
+      margin-bottom: 24px;
+    }
+    .city-sheet-search svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .city-sheet-search span {
+      font-size: 14px;
+      line-height: 20px;
+      color: #536b75;
+    }
+    .city-sheet-section-title {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      color: #031419;
+      margin-bottom: 8px;
+    }
+    .city-sheet-list {
+      list-style: none;
+      margin: 0 0 24px;
+      padding: 0;
+      border-top: 1px solid #ccd2d8;
+    }
+    .city-sheet-item {
+      width: 100%;
+      min-height: 56px;
+      border: none;
+      border-bottom: 1px solid #ccd2d8;
+      background: #fff;
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      cursor: pointer;
+    }
+    .city-sheet-item-text {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+    }
+    .city-sheet-city {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      color: #031419;
+    }
+    .city-sheet-country {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: #536b75;
+    }
+    .city-sheet-pin {
+      width: 18px;
+      height: 18px;
+      color: #536b75;
+      flex-shrink: 0;
+    }
+
     @media (max-width: 393px) { .phone { width: 100vw; } }
   </style>
 </head>
@@ -417,14 +666,48 @@
       <a href="/home" class="logo-link" aria-label="Fever"><img src="img/fever-logo.png" alt="Fever"></a>
       <div class="nav-icons">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <button type="button" class="nav-icon-btn js-location-btn" aria-label="Select your city">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </button>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <div class="avatar-wrap">
           <img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile">
         </div>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <button type="button" class="nav-icon-btn burger-toggle js-burger-toggle" aria-label="Open menu" aria-expanded="false">
+          <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
     </nav>
+
+    <div class="burger-menu-panel" id="burger-menu-panel" aria-hidden="true">
+      <div class="burger-location-lang">
+        <div class="burger-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span>Madrid</span>
+        </div>
+        <div style="display:flex;align-items:center;">
+          <div class="burger-divider"></div>
+          <div class="burger-lang">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3 3 15 0 18"/><path d="M12 3c-3 3-3 15 0 18"/></svg>
+            EN
+          </div>
+        </div>
+      </div>
+      <div class="burger-menu-content">
+        <h2>Categories</h2>
+        <ul class="burger-category-list">
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/7b2e86ce-a78f-442f-bc16-6f71eee07d8c" alt="Fever Originals"><span>Fever Originals</span></li>
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/e0941f08-df38-4cbe-b647-618fbd7bb268" alt="Food and Drinks"><span>Food &amp; Drinks</span></li>
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/dbb1e8a5-7c01-4b7a-987a-2590c36feeb9" alt="Activities and Games"><span>Activities &amp; Games</span></li>
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/cbc97314-1c48-4c17-9f37-84055a16732d" alt="Candlelight Concerts"><span>Candlelight Concerts</span></li>
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/33f691c3-6a6f-42c6-9127-65416cad28e7" alt="Culture, Arts and Fashion"><span>Culture, Arts &amp; Fashion</span></li>
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/1c263bd4-0f90-4ba5-949f-a7e796abd028" alt="Classical Concerts"><span>Classical Concerts</span></li>
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/9e34fb03-3db7-423a-9134-cba99707bdf3" alt="Brunches"><span>Brunches</span></li>
+          <li class="burger-category-item"><img class="burger-category-thumb" src="https://www.figma.com/api/mcp/asset/3c441b0e-0482-47cb-83ef-fdd1c4bd68b5" alt="Family"><span>Family</span></li>
+        </ul>
+      </div>
+    </div>
 
     <!-- Hero -->
     <div class="hero">
@@ -721,11 +1004,94 @@
       </div>
     </div>
 
+    <div class="city-sheet-overlay" id="city-sheet-overlay" aria-hidden="true">
+      <div class="city-sheet" role="dialog" aria-modal="true" aria-labelledby="city-sheet-title">
+        <div class="city-sheet-header">
+          <h2 class="city-sheet-title" id="city-sheet-title">Select your city</h2>
+          <button type="button" class="city-sheet-close js-city-sheet-close" aria-label="Close city selector">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="city-sheet-divider"></div>
+        <div class="city-sheet-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
+          <span>Search by city</span>
+        </div>
+
+        <h3 class="city-sheet-section-title">Nearby cities</h3>
+        <ul class="city-sheet-list">
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Madrid,</span><span class="city-sheet-country">Espana</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Barcelona,</span><span class="city-sheet-country">Espana</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Valencia,</span><span class="city-sheet-country">Espana</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Bilbao,</span><span class="city-sheet-country">Espana</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Sevilla,</span><span class="city-sheet-country">Espana</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+        </ul>
+
+        <h3 class="city-sheet-section-title">Suggested cities</h3>
+        <ul class="city-sheet-list">
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">London,</span><span class="city-sheet-country">United Kingdom</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Sao Paulo,</span><span class="city-sheet-country">Brazil</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Los Angeles,</span><span class="city-sheet-country">CA, United States</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">New York,</span><span class="city-sheet-country">NY, United States</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+          <li><button type="button" class="city-sheet-item"><span class="city-sheet-item-text"><span class="city-sheet-city">Paris,</span><span class="city-sheet-country">France</span></span><svg class="city-sheet-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></button></li>
+        </ul>
+      </div>
+    </div>
+
   </div>
   <script>
     (function() {
+      var phone = document.querySelector('.phone');
+      var burgerToggle = document.querySelector('.js-burger-toggle');
+      var burgerPanel = document.getElementById('burger-menu-panel');
+      if (phone && burgerToggle && burgerPanel) {
+        burgerToggle.addEventListener('click', function() {
+          var isOpen = phone.classList.toggle('is-menu-open');
+          burgerToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          burgerToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+          burgerPanel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        });
+      }
+    })();
+
+    (function() {
+      var locationBtn = document.querySelector('.js-location-btn');
+      var citySheetOverlay = document.getElementById('city-sheet-overlay');
+      var citySheetClose = document.querySelector('.js-city-sheet-close');
+      if (!locationBtn || !citySheetOverlay) return;
+
+      function openCitySheet() {
+        citySheetOverlay.classList.add('is-open');
+        citySheetOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeCitySheet() {
+        citySheetOverlay.classList.remove('is-open');
+        citySheetOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      locationBtn.addEventListener('click', openCitySheet);
+      if (citySheetClose) citySheetClose.addEventListener('click', closeCitySheet);
+      citySheetOverlay.addEventListener('click', function(event) {
+        if (event.target === citySheetOverlay) closeCitySheet();
+      });
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && citySheetOverlay.classList.contains('is-open')) {
+          closeCitySheet();
+        }
+      });
+    })();
+
+    (function() {
       var params = new URLSearchParams(window.location.search);
       var flow = params.get('flow');
+      var storedFlow = null;
+      try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
+      if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f')) {
+        flow = storedFlow;
+      }
       if (flow === 'option-e' || flow === 'option-f') {
         var polarLink = document.getElementById('polar-sound-link');
         if (polarLink) polarLink.href = 'polar-sound.html?flow=' + flow;
