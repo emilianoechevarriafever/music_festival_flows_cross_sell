@@ -275,13 +275,6 @@
         <div class="ticket-pill" data-value="2">2 nights (Mar 13 &amp; 14)</div>
       </div>
 
-      <!-- Level 3: Type -->
-      <div class="pill-level" id="level-type">
-        <div class="ticket-pill active" data-value="hotel">Hotel</div>
-        <div class="ticket-pill" data-value="apartamento">Apartment</div>
-        <div class="pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
-      </div>
-
       <!-- Level 4: Hotel/Apartment name -->
       <div class="pill-level" id="level-name">
         <div class="pill-arrow" style="transform:rotate(180deg)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
@@ -651,7 +644,6 @@
 
     setupLevel('level-travelers', 'travelers');
     setupLevel('level-nights', 'nights');
-    setupLevel('level-type', 'type');
 
     // Center pills when they fit; show arrow when they overflow. Enable swipe when overflow.
     function updatePillsArrows() {
