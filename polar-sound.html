@@ -695,13 +695,6 @@
     stickyBtn.addEventListener('click', () => {
       const total = getTotal();
       if (stickyMode === 'tickets') {
-        // In option-f, allow progressing even if the observer didn't flip mode yet.
-        if (isOptionF && total > 0) {
-          saveTicketsToCart();
-          try { sessionStorage.setItem('polar_flow_visited', '1'); } catch (e) {}
-          openAddonsHub();
-          return;
-        }
         ticketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         if (total > 0) {
           stickyMode = 'getit';
