@@ -12,6 +12,7 @@
     /* Fever Design System + ignt.comp.fields (Figma 77-8972) */
     :root {
       --color-primary: #0057FF;
+      --color-primary-weak: #E5F1FF;
       --color-text: #0A1E42;
       --color-text-secondary: #37474F;
       --color-border: #E6EAEE;
@@ -28,7 +29,7 @@
       --color-input-bg-disabled: #F2F3F3;
       --color-input-text-disabled: #A7B2BA;
       --color-input-error-text: #EB0052;
-      --color-input-focus-ring: 0 0 0 4px rgba(0, 87, 255, 0.32);
+      --color-input-focus-ring: 0 0 0 4px var(--color-primary-weak);
     }
     body { font-family:var(--font); background:var(--color-bg-neutral); display:flex; justify-content:center; color:var(--color-text); overflow-x:hidden; }
     .phone { width:393px; max-width:100vw; background:var(--color-bg); min-height:100vh; position:relative; padding-bottom:120px; }
