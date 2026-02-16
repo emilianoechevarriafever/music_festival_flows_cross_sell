@@ -659,7 +659,7 @@
     // Stepper: hidden on first visit to tickets; show only when user has advanced and then comes back
     (function() {
       try {
-        if (!isOptionE && sessionStorage.getItem('polar_flow_visited')) {
+        if (!isOptionalFlow && sessionStorage.getItem('polar_flow_visited')) {
           var el = document.getElementById('tickets-flow-stepper');
           if (el) { el.classList.remove('stepper-hidden'); el.setAttribute('aria-hidden', 'false'); }
         }
