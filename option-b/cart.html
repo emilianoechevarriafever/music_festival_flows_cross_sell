@@ -214,7 +214,7 @@
       cartTransportation.forEach((item, i) => transportContainer.appendChild(renderItem(item, i, 'transportation')));
       if (cartTickets.length === 0) ticketContainer.innerHTML = '<p style="font-size:14px; color:var(--color-text-secondary);">No passes in cart.</p>';
       if (cartAccommodation.length === 0) accomContainer.innerHTML = '<p style="font-size:14px; color:var(--color-text-secondary);">No accommodation in cart.</p>';
-      if (cartTransportation.length === 0) transportContainer.innerHTML = '<p style="font-size:14px; color:var(--color-text-secondary);">No transport in cart.</p>';
+      if (cartTransportation.length === 0) transportContainer.innerHTML = '<p style="font-size:14px; color:var(--color-text-secondary);">No transportation in cart.</p>';
       document.getElementById('cart-grand-total').textContent = '€' + getTotal().toFixed(2);
     }
 

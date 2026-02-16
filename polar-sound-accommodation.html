@@ -364,18 +364,21 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const isOptionE = params.get('flow') === 'option-e';
-    if (isOptionE) {
+    const flow = params.get('flow');
+    const isOptionE = flow === 'option-e';
+    const isOptionF = flow === 'option-f';
+    const isOptionalFlow = isOptionE || isOptionF;
+    if (isOptionalFlow) {
       var accommodationLogoLink = document.getElementById('accommodation-logo-link');
-      if (accommodationLogoLink) accommodationLogoLink.href = '/option-e/';
+      if (accommodationLogoLink) accommodationLogoLink.href = '/' + flow + '/';
       var accommodationStepper = document.querySelector('.flow-stepper');
       if (accommodationStepper) accommodationStepper.style.display = 'none';
       var step1 = document.getElementById('stepper-step1');
       var step3 = document.getElementById('stepper-step3');
       var step4 = document.getElementById('stepper-step4');
-      if (step1) step1.href = 'polar-sound.html?flow=option-e#ticket-section';
-      if (step3) step3.href = 'polar-sound-transportations.html?flow=option-e';
-      if (step4) step4.href = 'checkout.html?flow=option-e';
+      if (step1) step1.href = 'polar-sound.html?flow=' + flow + '#ticket-section';
+      if (step3) step3.href = 'polar-sound-transportations.html?flow=' + flow;
+      if (step4) step4.href = isOptionF ? 'cart.html?flow=option-f' : 'checkout.html?flow=option-e';
     }
 
     document.getElementById('sticky-btn').textContent = 'Select accommodations';
@@ -526,7 +529,7 @@
           localStorage.setItem('cart_accommodation', '[]');
         }
 
-        if (isOptionE) {
+        if (isOptionalFlow) {
           openAccommodationDecisionSheet();
         } else {
           window.location.href = 'polar-sound-transportations.html';
@@ -746,7 +749,7 @@
       if (sheet) sheet.classList.remove('open');
     }
 
-    if (isOptionE) {
+    if (isOptionalFlow) {
       var accOverlay = document.getElementById('accommodation-decision-overlay');
       var accNo = document.getElementById('accommodation-decision-no');
       var accYes = document.getElementById('accommodation-decision-yes');
@@ -754,13 +757,13 @@
       if (accNo) {
         accNo.addEventListener('click', function() {
           closeAccommodationDecisionSheet();
-          window.location.href = 'checkout.html?flow=option-e';
+          window.location.href = isOptionF ? 'cart.html?flow=option-f' : 'checkout.html?flow=option-e';
         });
       }
       if (accYes) {
         accYes.addEventListener('click', function() {
           closeAccommodationDecisionSheet();
-          window.location.href = 'polar-sound-transportations.html?flow=option-e';
+          window.location.href = 'polar-sound-transportations.html?flow=' + flow;
         });
       }
     }

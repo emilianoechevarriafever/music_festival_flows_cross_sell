@@ -725,7 +725,7 @@
       </div>
     </div>
     <div class="sheet-footer">
-      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-transport-continue">No transport</button>
+      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-transport-continue">Continue</button>
     </div>
   </div>
 
@@ -936,7 +936,7 @@
         totalPrice += qty * price;
       });
       const btn = document.getElementById('sheet-transport-continue');
-      if (btn) btn.textContent = totalQty > 0 ? '\u20AC' + totalPrice.toFixed(2) + ' \u2014 Add it' : 'No transport';
+      if (btn) btn.textContent = totalQty > 0 ? '\u20AC' + totalPrice.toFixed(2) + ' \u2014 Add it' : 'Continue';
     }
     function bindSheetSteppers(sheetId, updateBtn) {
       const sheet = document.getElementById(sheetId);

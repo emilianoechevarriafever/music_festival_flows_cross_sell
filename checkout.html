@@ -379,17 +379,18 @@
   <script>
     (function() {
       var params = new URLSearchParams(window.location.search);
-      if (params.get('flow') === 'option-e') {
+      var flow = params.get('flow');
+      if (flow === 'option-e' || flow === 'option-f') {
         var logoLink = document.getElementById('checkout-logo-link');
-        if (logoLink) logoLink.href = '/option-e/';
+        if (logoLink) logoLink.href = '/' + flow + '/';
         var checkoutStepper = document.querySelector('.flow-stepper');
         if (checkoutStepper) checkoutStepper.style.display = 'none';
         var step1 = document.getElementById('stepper-step1');
         var step2 = document.getElementById('stepper-step2');
         var step3 = document.getElementById('stepper-step3');
-        if (step1) step1.href = 'polar-sound.html?flow=option-e#ticket-section';
-        if (step2) step2.href = 'polar-sound-accommodation.html?flow=option-e#ticket-section';
-        if (step3) step3.href = 'polar-sound-transportations.html?flow=option-e';
+        if (step1) step1.href = 'polar-sound.html?flow=' + flow + '#ticket-section';
+        if (step2) step2.href = 'polar-sound-accommodation.html?flow=' + flow + '#ticket-section';
+        if (step3) step3.href = 'polar-sound-transportations.html?flow=' + flow;
       }
     })();
 

@@ -183,15 +183,18 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const isOptionB = params.get('flow') === 'option-b';
-    const isOptionE = params.get('flow') === 'option-e';
+    const flow = params.get('flow');
+    const isOptionB = flow === 'option-b';
+    const isOptionE = flow === 'option-e';
+    const isOptionF = flow === 'option-f';
+    const isOptionalFlow = isOptionE || isOptionF;
 
     if (isOptionB) {
       document.getElementById('nav-logo').href = 'option-b/index.html';
       document.getElementById('nav-logo-img').src = '../img/fever-logo.png';
       document.getElementById('hero-img').src = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80';
-    } else if (isOptionE) {
-      document.getElementById('nav-logo').href = '/option-e/';
+    } else if (isOptionalFlow) {
+      document.getElementById('nav-logo').href = '/' + flow + '/';
       var transportStepper = document.getElementById('flow-stepper');
       if (transportStepper) transportStepper.style.display = 'none';
     } else {
@@ -201,8 +204,7 @@
     const TRANSPORT_OPTIONS = [
       { name: 'Bus Barcelona – Baqueira (round trip)', detail: 'Departure Fri 12 Mar, return Sun 14 Mar', price: 49.00 },
       { name: 'Shuttle Madrid – Baqueira (round trip)', detail: 'Departure Fri 12 Mar, return Sun 14 Mar', price: 69.00 },
-      { name: 'Shuttle Vielha – Baqueira (round trip)', detail: 'Local shuttle, multiple times', price: 19.00 },
-      { name: 'No transport', detail: 'I\'ll get there on my own', price: 0 }
+      { name: 'Shuttle Vielha – Baqueira (round trip)', detail: 'Local shuttle, multiple times', price: 19.00 }
     ];
 
     const transportRowsEl = document.getElementById('transport-rows');
@@ -217,11 +219,11 @@
       document.getElementById('step2').href = 'option-b/polar-sound-accommodation.html#ticket-section';
       document.getElementById('step4').href = 'option-b/cart.html';
       document.getElementById('step4-label').textContent = 'Cart';
-    } else if (isOptionE) {
-      document.getElementById('step1').href = 'polar-sound.html?flow=option-e#ticket-section';
-      document.getElementById('step2').href = 'polar-sound-accommodation.html?flow=option-e#ticket-section';
-      document.getElementById('step4').href = 'checkout.html?flow=option-e';
-      document.getElementById('step4-label').textContent = 'Checkout';
+    } else if (isOptionalFlow) {
+      document.getElementById('step1').href = 'polar-sound.html?flow=' + flow + '#ticket-section';
+      document.getElementById('step2').href = 'polar-sound-accommodation.html?flow=' + flow + '#ticket-section';
+      document.getElementById('step4').href = isOptionF ? 'cart.html?flow=option-f' : 'checkout.html?flow=option-e';
+      document.getElementById('step4-label').textContent = isOptionF ? 'Cart' : 'Checkout';
     } else {
       document.getElementById('step1').href = 'polar-sound.html#ticket-section';
       document.getElementById('step2').href = 'polar-sound-accommodation.html#ticket-section';
@@ -262,11 +264,8 @@
           btn.addEventListener('click', function() {
             const i = parseInt(this.dataset.i, 10);
             const delta = parseInt(this.dataset.delta, 10);
-            const max = opt.price === 0 ? 1 : 20;
+            const max = 20;
             counts[i] = Math.max(0, Math.min(max, counts[i] + delta));
-            if (opt.price === 0 && counts[i] > 0) {
-              counts = counts.map((_, j) => j === i ? 1 : 0);
-            }
             render();
             updateSticky();
           });
@@ -298,7 +297,7 @@
       if (total > 0) {
         stickyBtn.textContent = '€' + total.toFixed(2) + ' — Add it';
       } else {
-        stickyBtn.textContent = 'Skip transport';
+        stickyBtn.textContent = 'Continue';
       }
     }
 
@@ -330,6 +329,8 @@
         window.location.href = 'option-b/cart.html';
       } else if (isOptionE) {
         window.location.href = 'checkout.html?flow=option-e';
+      } else if (isOptionF) {
+        window.location.href = 'cart.html?flow=option-f';
       } else {
         window.location.href = 'checkout.html';
       }
