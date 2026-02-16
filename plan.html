@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fever - Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --color-primary: #0079ca;
+      --color-primary-weak: #E6F4FF;
+      --color-primary-light: #f2fbfd;
+      --color-text: #031419;
+      --color-text-secondary: #536b75;
+      --color-text-subtle: #536b75;
+      --color-text-disable: #ccc;
+      --color-border: #E6EAEE;
+      --color-border-light: #E6EAEE;
+      --color-accent: #6f41d7;
+      --color-danger: #E3264C;
+      --color-success: #06C167;
+      --color-bg: #ffffff;
+      --color-bg-dark: #031419;
+      --color-bg-neutral: #F5F7F9;
+      --elevation-01: 0 1px 3px 0 rgba(0,0,0,0.08);
+      --font: 'Montserrat', sans-serif;
+    }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    body { font-family:var(--font); background:var(--color-bg-neutral); display:flex; justify-content:center; color:var(--color-text); overflow-x:hidden; }
+    .phone { width:393px; max-width:100vw; background:var(--color-bg); min-height:100vh; position:relative; }
+
+    .status-bar { display:flex; align-items:center; justify-content:space-between; padding:6px 16px 4px; background:white; }
+    .status-bar .time { font-weight:600; font-size:17px; letter-spacing:-0.68px; }
+    .status-bar .icons { display:flex; gap:5px; align-items:center; }
+    .status-bar .icons svg { height:12px; }
+
+    .sticky-header { position:sticky; top:0; z-index:100; background:#fff; }
+    .navbar { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:#fff; border-bottom:1px solid #e6eaee; }
+    .navbar .logo-link { text-decoration:none; display:flex; align-items:center; }
+    .navbar .logo-link img { height:38px; width:auto; display:block; object-fit:contain; }
+    .nav-icons { display:flex; align-items:center; gap:16px; }
+    .nav-icons svg { width:24px; height:24px; color:var(--color-text); cursor:pointer; }
+    .avatar-wrap { position:relative; }
+    .avatar-wrap img { width:24px; height:24px; border-radius:50%; object-fit:cover; }
+    .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }
+
+    .hero { position:relative; width:100%; height:390px; overflow:hidden; }
+    .hero img.hero-bg { width:100%; height:100%; object-fit:cover; }
+    .hero .side-buttons { position:absolute; top:16px; right:16px; display:flex; flex-direction:column; gap:12px; }
+    .hero .side-btn { width:40px; height:40px; background:white; border:1px solid rgba(0,0,0,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 4px rgba(0,0,0,0.12); cursor:pointer; border:none; }
+    .hero .side-btn svg { width:20px; height:20px; color:var(--color-text); }
+    .hero .shadow-overlay { position:absolute; bottom:0; left:0; right:0; height:135px; background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.32) 96%); display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end; padding:0 16px 16px; gap:16px; }
+    .hero .gallery-btn { display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.9); border:none; border-radius:4px; padding:6px 12px; font-family:var(--font); font-weight:600; font-size:14px; cursor:pointer; color:var(--color-text); }
+    .hero .gallery-btn svg { width:16px; height:16px; }
+    .hero .slide-indicators { display:flex; gap:4px; width:100%; }
+    .hero .slide-indicators .bar { flex:1; min-width:0; height:3px; border-radius:100px; background:rgba(255,255,255,0.5); }
+    .hero .slide-indicators .bar.active { background:white; }
+    .hero .rounded-top { position:absolute; bottom:0; left:0; right:0; height:8px; background:white; border-radius:8px 8px 0 0; }
+
+    .title-section { padding:16px; }
+    .tag-selling { display:inline-flex; align-items:center; min-height:20px; padding:4px 12px; background:#df7b00; border-radius:4px; font-size:12px; font-weight:400; line-height:16px; color:#031419; margin-bottom:12px; }
+    .tag-badge { display:inline-flex; align-items:center; min-height:20px; padding:4px 12px; border-radius:4px; font-size:12px; font-weight:600; line-height:16px; margin-bottom:12px; }
+    .tag-badge.purple { background:#f0ebfd; color:#6f41d7; }
+    .tag-badge.green { background:#e6f9ee; color:#06a155; }
+    .tag-badge.blue { background:#e6f4ff; color:#0079ca; }
+    .title-section h1 { font-size:20px; font-weight:600; line-height:28px; margin-bottom:4px; }
+    .title-section .subtitle { font-size:14px; color:var(--color-text-secondary); line-height:20px; margin-top:4px; }
+    .divider { height:1px; background:var(--color-border); margin:0 16px; }
+
+    .description { padding:20px 16px; font-size:15px; line-height:22px; }
+    .description p { margin-bottom:12px; }
+    .description .subtitle { font-weight:600; font-size:16px; margin-bottom:8px; margin-top:16px; }
+    .description ul { padding-left:20px; margin-bottom:12px; }
+    .description ul li { margin-bottom:4px; }
+
+    .section-header { display:flex; align-items:center; gap:8px; padding:16px; border-bottom:1px solid var(--color-border); }
+    .section-header svg { width:24px; height:24px; flex-shrink:0; color:var(--color-text); }
+    .section-header h2 { font-size:20px; font-weight:600; line-height:24px; flex:1; }
+
+    .ticket-selector { padding:0 16px 16px; border-bottom:1px solid var(--color-border); }
+    .no-fees-banner { display:flex; align-items:center; justify-content:center; gap:8px; background:#f0ebfd; border-radius:8px; padding:16px; margin:16px 0; }
+    .no-fees-banner span { font-size:14px; font-weight:400; line-height:20px; color:var(--color-text); }
+
+    .ticket-pills { display:flex; gap:12px; align-items:center; justify-content:center; margin-bottom:20px; overflow-x:auto; scrollbar-width:none; }
+    .ticket-pills::-webkit-scrollbar { display:none; }
+    .ticket-pill { flex-shrink:0; padding:10px 18px; border:1px solid #ccd2d8; border-radius:8px; font-size:14px; font-weight:500; color:var(--color-text); background:white; cursor:pointer; white-space:nowrap; text-align:center; transition:all 0.15s; }
+    .ticket-pill.active { border-color:#0079ca; color:#0079ca; background:var(--color-primary-weak); }
+
+    .ticket-row { --ticket-border:#ccd2d8; display:flex; align-items:stretch; min-height:92px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; background:transparent; }
+    .ticket-row::after { content:''; position:absolute; right:136px; top:8px; bottom:8px; width:1px; background-image:repeating-linear-gradient(to bottom, var(--ticket-border) 0 2px, transparent 2px 4px); transform:translateX(50%); pointer-events:none; z-index:2; }
+    .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; justify-content:flex-start; gap:4px; border:1px solid var(--ticket-border); border-right:none; border-radius:8px 0 0 8px; background:#fff; min-height:92px; }
+    .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:18px; color:#031419; }
+    .ticket-row .ticket-price { font-size:14px; font-weight:600; line-height:18px; color:#031419; margin-top:auto; }
+    .ticket-row .ticket-info-toggle { font-size:12px; font-weight:600; line-height:16px; color:#0079ca; cursor:pointer; background:none; border:none; font-family:var(--font); text-align:left; align-self:flex-start; padding:2px 0; }
+    .ticket-row .ticket-info-detail { display:none; margin-top:8px; padding-top:6px; border-top:1px solid #ccd2d8; font-size:13px; line-height:20px; color:#031419; }
+    .ticket-row.ticket-info-expanded .ticket-info-detail { display:block; }
+    .ticket-row .ticket-selector-right { width:136px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1px solid var(--ticket-border); border-left:none; border-radius:0 8px 8px 0; background:#fff; position:relative; }
+    .ticket-amount { display:flex; align-items:center; gap:4px; }
+    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s; background:#f2f3f3; border:none; color:#a7b2ba; }
+    .ticket-amount .amt-count { width:36px; text-align:center; font-size:16px; font-weight:600; line-height:20px; color:#031419; }
+    .ticket-row .amt-btn.plus { background:#e6f4ff; color:#0079ca; }
+    .ticket-row.qty-zero .amt-btn.minus { background:#f2f3f3; color:#a7b2ba; cursor:default; }
+    .ticket-row.qty-zero .amt-count { color:#a7b2ba; }
+    .ticket-row.selected { --ticket-border:#0079ca; }
+    .ticket-row.selected .ticket-selector-right { background:#e6f4ff; }
+    .ticket-row.selected .amt-btn { background:#e6f4ff; color:#0079ca; }
+    .ticket-row .ticket-notch { position:absolute; right:136px; top:0; bottom:0; width:16px; pointer-events:none; z-index:3; transform:translateX(50%); }
+    .ticket-row .ticket-notch::before, .ticket-row .ticket-notch::after { content:''; position:absolute; left:0; width:16px; height:8px; background:var(--color-bg); }
+    .ticket-row .ticket-notch::before { top:0; border:1px solid var(--ticket-border); border-top:none; border-radius:0 0 8px 8px; }
+    .ticket-row .ticket-notch::after { bottom:0; border:1px solid var(--ticket-border); border-bottom:none; border-radius:8px 8px 0 0; }
+
+    .cta-primary { width:100%; height:48px; background:#0079ca; border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; margin-bottom:12px; transition:background 0.2s; }
+    .cta-primary:hover { background:#0066b3; }
+
+    .reviews { padding:20px 16px; }
+    .reviews h3 { font-size:18px; font-weight:600; margin-bottom:16px; }
+    .rating-big { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+    .rating-big .score { font-size:28px; font-weight:700; }
+    .rating-big .stars { color:#f5a623; font-size:16px; letter-spacing:2px; }
+    .rating-big .count { font-size:13px; color:var(--color-text-secondary); }
+    .review-card { border-bottom:1px dashed var(--color-border-light); padding:12px 0; }
+    .review-card:last-child { border-bottom:none; }
+    .review-card .reviewer { font-size:14px; font-weight:600; }
+    .review-card .review-date { font-size:12px; color:var(--color-text-secondary); margin:2px 0 6px; }
+    .review-card .review-text { font-size:14px; line-height:20px; }
+
+    .help-section { padding:16px; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; }
+    .help-section span { font-size:15px; font-weight:500; }
+    .help-section a { font-size:14px; font-weight:600; color:var(--color-primary); text-decoration:none; }
+
+    .venue-section { padding:20px 16px; }
+    .venue-section .venue-img { width:100%; height:200px; border-radius:8px; object-fit:cover; margin-bottom:12px; }
+    .venue-section .venue-name-lg { font-size:16px; font-weight:600; margin-bottom:6px; }
+    .venue-section .venue-desc { font-size:14px; line-height:20px; color:var(--color-text-secondary); }
+
+    .location { padding:20px 16px; }
+    .location .loc-name { font-weight:600; font-size:15px; margin-bottom:4px; }
+    .location .loc-address { font-size:14px; color:var(--color-text-secondary); margin-bottom:12px; }
+    .location .map-placeholder { width:100%; height:160px; background:#e8e8e8; border-radius:8px; overflow:hidden; }
+    .location .map-placeholder img { width:100%; height:100%; object-fit:cover; }
+
+    .similar { padding:20px 0; }
+    .similar h3 { font-size:18px; font-weight:600; padding:0 16px; margin-bottom:16px; }
+    .sim-scroll { display:flex; gap:12px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+    .sim-scroll::-webkit-scrollbar { display:none; }
+    .sim-card { flex-shrink:0; width:150px; text-decoration:none; color:inherit; }
+    .sim-card .sim-img { width:150px; height:100px; border-radius:8px; overflow:hidden; }
+    .sim-card .sim-img img { width:100%; height:100%; object-fit:cover; }
+    .sim-card .sim-title { margin-top:6px; font-size:12px; font-weight:500; line-height:16px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .sim-card .sim-meta { font-size:11px; color:var(--color-text-secondary); margin-top:2px; }
+
+    .footer { background:#031419; color:white; padding:32px 16px 80px; }
+    .footer-cols { display:flex; justify-content:space-between; margin-bottom:24px; }
+    .footer-col h5 { font-size:14px; font-weight:600; margin-bottom:8px; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { font-size:13px; line-height:20px; margin-bottom:4px; color:rgba(255,255,255,0.75); cursor:pointer; transition:color 0.15s; }
+    .footer .legal { border-top:1px solid rgba(255,255,255,0.15); padding-top:16px; font-size:12px; color:rgba(255,255,255,0.5); }
+    .footer .legal a { color:white; }
+
+    .sticky-cta { position:fixed; bottom:0; width:393px; max-width:100vw; z-index:200; background:white; border-top:1px solid var(--color-border); padding:12px 16px; display:flex; flex-direction:column; }
+    .sticky-cta .url-pill { text-align:center; font-size:12px; color:#031419; margin-bottom:6px; padding:4px 0; }
+    .sticky-cta .cta-btn { width:100%; height:48px; background:#0079ca; border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; transition:background 0.2s; }
+    .sticky-cta .cta-btn:hover { background:#0066b3; }
+    .sticky-cta .cta-btn:disabled { background:#ccd2d8; cursor:default; }
+
+    .selling-fast-banner { display:flex; align-items:center; gap:10px; margin:16px 0 20px; padding:12px 16px; background:#f5e6dc; border-radius:8px; font-size:14px; font-weight:500; line-height:20px; color:#536b75; }
+    .selling-fast-banner .selling-fast-icon { width:20px; height:20px; flex-shrink:0; color:#9F5800; }
+
+    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <header class="sticky-header">
+    <nav class="navbar">
+      <a href="home.html" class="logo-link"><img src="img/fever-logo.png" alt="Fever"></a>
+      <div class="nav-icons">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
+        <a href="favorites.html" aria-label="Favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <a class="avatar-wrap" href="profile.html" aria-label="Profile"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </div>
+    </nav>
+    </header>
+
+    <div class="hero">
+      <img class="hero-bg" id="hero-img" src="" alt="">
+      <div class="side-buttons">
+        <button type="button" class="side-btn" aria-label="Like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+        <button type="button" class="side-btn" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
+      </div>
+      <div class="shadow-overlay">
+        <button type="button" class="gallery-btn"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="10" y="1" width="5" height="5" rx="1"/><rect x="1" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/></svg>Gallery</button>
+        <div class="slide-indicators">
+          <div class="bar active"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+      </div>
+      <div class="rounded-top"></div>
+    </div>
+
+    <div class="title-section">
+      <div id="plan-badge"></div>
+      <h1 id="plan-title"></h1>
+      <div class="subtitle" id="plan-subtitle"></div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="description" id="plan-description"></div>
+    <div class="divider"></div>
+
+    <div class="section-header" id="ticket-section">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <h2>Select date and session</h2>
+    </div>
+
+    <div class="ticket-selector">
+      <div class="no-fees-banner">
+        <span>&#9432; No booking fees</span>
+      </div>
+      <div class="ticket-pills" id="ticket-pills-row"></div>
+      <div id="ticket-panels"></div>
+      <button class="cta-primary" id="buy-btn" disabled>Select tickets to continue</button>
+    </div>
+
+    <div class="reviews" id="reviews-section"></div>
+
+    <div class="help-section">
+      <span>Need help?</span>
+      <a href="#">Contact us</a>
+    </div>
+
+    <div class="venue-section" id="venue-section"></div>
+
+    <div class="location" id="location-section"></div>
+
+    <div class="similar">
+      <h3>You might also like</h3>
+      <div class="sim-scroll" id="similar-scroll"></div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-cols">
+        <div class="footer-col"><h5>About Fever</h5><ul><li>Press</li><li>Careers</li><li>Gift Card</li></ul></div>
+        <div class="footer-col"><h5>Work with us</h5><ul><li>Manage your event</li><li>List your event</li></ul></div>
+      </div>
+      <div class="legal">
+        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a>
+        <div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div>
+      </div>
+    </div>
+
+    <div class="sticky-cta" id="sticky-cta" style="display:none;">
+      <div class="url-pill" id="sticky-total"></div>
+      <button class="cta-btn" id="sticky-buy-btn">Continue to checkout</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var PLANS = {
+      'brunch-gran-via': {
+        title: 'Brunch with views of Gran V\u00eda',
+        subtitle: 'Matinal Madrid \u00b7 Rooftop Brunch',
+        badge: '<div class="tag-badge green">Bestseller</div>',
+        hero: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
+        date: 'Multiple dates available',
+        venue: { name: 'Azotea del C\u00edrculo', desc: 'An iconic rooftop terrace atop the C\u00edrculo de Bellas Artes, offering 360\u00b0 panoramic views of the Madrid skyline.', img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80' },
+        location: { name: 'C\u00edrculo de Bellas Artes', address: 'C. de Alcal\u00e1 42, 28014 Madrid' },
+        description: '<p>\ud83c\udf73 <strong>Brunch with views of Gran V\u00eda</strong> is Madrid\'s most sought-after weekend experience. Enjoy a curated three-course brunch menu featuring freshly baked pastries, seasonal fruit platters, eggs Benedict, avocado toast, and unlimited mimosas \u2014 all while taking in breathtaking rooftop views of the Gran V\u00eda.</p><p class="subtitle">Highlights</p><ul><li>\ud83c\udf7d\ufe0f Three-course brunch menu with live cooking station</li><li>\ud83e\udd42 Unlimited mimosas and fresh juices</li><li>\ud83c\udfb6 Live acoustic music by local artists</li><li>\ud83c\udf05 Panoramic views of Gran V\u00eda and the Madrid skyline</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Available every Saturday and Sunday<br>\u23f0 Two seatings: 11:00 AM and 1:00 PM<br>\ud83d\udccd Location: Azotea del C\u00edrculo de Bellas Artes<br>\ud83d\udc64 All ages welcome</p>',
+        rating: 4.6, reviewCount: 2199,
+        reviews: [
+          { name: 'Laura M.', date: 'January 2026', text: 'Absolutely stunning views and the food was incredible. The mimosas were flowing and the vibe was perfect for a Saturday morning.' },
+          { name: 'James K.', date: 'December 2025', text: 'Best brunch in Madrid, hands down. The eggs Benedict were perfectly poached and the rooftop setting is unbeatable.' }
+        ],
+        ticketTypes: [
+          { id: 'standard', label: 'Standard', tickets: [
+            { name: 'Standard Brunch \u2013 11:00 AM', price: 38.50 },
+            { name: 'Standard Brunch \u2013 1:00 PM', price: 38.50 },
+            { name: 'Kids Brunch (under 12)', price: 19.00 }
+          ]},
+          { id: 'premium', label: 'Premium', tickets: [
+            { name: 'Premium Brunch \u2013 11:00 AM (front row terrace)', price: 55.00 },
+            { name: 'Premium Brunch \u2013 1:00 PM (front row terrace)', price: 55.00 }
+          ]}
+        ]
+      },
+      'museo-banksy': {
+        title: 'The World of Banksy: The Immersive Experience',
+        subtitle: 'IFEMA Madrid \u00b7 Art Exhibition',
+        badge: '<div class="tag-selling">Tickets Selling Fast</div>',
+        hero: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80',
+        date: 'Open daily \u2013 multiple sessions',
+        venue: { name: 'IFEMA Madrid', desc: 'Spain\'s largest exhibition venue, hosting world-class art shows and immersive experiences in state-of-the-art halls.', img: 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=600&q=80' },
+        location: { name: 'IFEMA Madrid', address: 'Av. del Partenon 5, 28042 Madrid' },
+        description: '<p>\ud83c\udfa8 <strong>The World of Banksy</strong> brings over 120 works by the legendary street artist to life in this spectacular immersive experience. Walk through full-scale reproductions of his most iconic murals and discover the stories behind the art that shook the world.</p><p class="subtitle">Highlights</p><ul><li>\ud83d\uddbc\ufe0f Over 120 life-size reproductions of Banksy\'s most famous works</li><li>\ud83c\udfac Immersive audiovisual rooms with projections and sound</li><li>\ud83d\udcf8 Instagram-worthy photo opportunities throughout</li><li>\ud83c\udf9f\ufe0f Audio guide included in all tickets</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Open daily, 10:00 AM \u2013 9:00 PM<br>\u23f0 Last entry at 7:30 PM<br>\ud83d\udccd Location: IFEMA Madrid, Pavilion 2<br>\ud83d\udc64 All ages welcome</p>',
+        rating: 4.8, reviewCount: 5300,
+        reviews: [
+          { name: 'Sofia R.', date: 'February 2026', text: 'Mind-blowing experience! The immersive rooms made you feel like you were inside a Banksy piece. Worth every euro.' },
+          { name: 'Miguel A.', date: 'January 2026', text: 'Took the whole family and everyone loved it. The kids especially enjoyed the interactive sections.' }
+        ],
+        ticketTypes: [
+          { id: 'general', label: 'General', tickets: [
+            { name: 'Adult', price: 14.00 },
+            { name: 'Student / Senior (65+)', price: 11.00 },
+            { name: 'Child (4-12)', price: 8.00 }
+          ]},
+          { id: 'vip', label: 'VIP', tickets: [
+            { name: 'VIP \u2013 Skip the line + exclusive area', price: 22.00 },
+            { name: 'VIP Family Pack (2 adults + 2 kids)', price: 52.00 }
+          ]}
+        ]
+      },
+      'candlelight-vivaldi': {
+        title: 'Candlelight: Vivaldi\u2019s Four Seasons',
+        subtitle: 'Real Basílica de San Francisco el Grande \u00b7 Classical Concert',
+        badge: '<div class="tag-badge purple">Fever Original</div>',
+        hero: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&q=80',
+        date: 'Multiple dates \u2013 Thu, Fri, Sat',
+        venue: { name: 'Real Bas\u00edlica de San Francisco el Grande', desc: 'One of Madrid\'s most beautiful neoclassical churches, featuring a massive dome and extraordinary acoustics perfect for classical music.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80' },
+        location: { name: 'Real Bas\u00edlica de San Francisco el Grande', address: 'C. de San Buenaventura 1, 28005 Madrid' },
+        description: '<p>\ud83d\udd6f\ufe0f <strong>Candlelight: Vivaldi\u2019s Four Seasons</strong> transforms a stunning historic venue into a magical candlelit setting for one of the most beloved classical compositions of all time.</p><p class="subtitle">Program</p><ul><li>Spring (Allegro, Largo, Allegro)</li><li>Summer (Allegro non molto, Adagio, Presto)</li><li>Autumn (Allegro, Adagio molto, Allegro)</li><li>Winter (Allegro non molto, Largo, Allegro)</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Multiple dates: Thursday to Saturday<br>\u23f0 Doors open 30 min before the show<br>\u231b Duration: approximately 65 minutes<br>\ud83d\udccd Location: Real Bas\u00edlica de San Francisco el Grande<br>\ud83d\udc64 Ages 8+</p>',
+        rating: 4.7, reviewCount: 191,
+        reviews: [
+          { name: 'Elena V.', date: 'January 2026', text: 'Absolutely magical. The candlelight setting with the stunning church architecture made Vivaldi come alive in a way I\u2019ve never experienced.' },
+          { name: 'Tom B.', date: 'December 2025', text: 'Beautiful performance. The acoustics in the basilica are phenomenal. A must-do in Madrid.' }
+        ],
+        ticketTypes: [
+          { id: 'zone-b', label: 'Zone B', tickets: [
+            { name: 'Zone B \u2013 6:30 PM', price: 16.00 },
+            { name: 'Zone B \u2013 9:00 PM', price: 16.00 }
+          ]},
+          { id: 'zone-a', label: 'Zone A', tickets: [
+            { name: 'Zone A (front) \u2013 6:30 PM', price: 25.00 },
+            { name: 'Zone A (front) \u2013 9:00 PM', price: 25.00 }
+          ]}
+        ]
+      },
+      'jazz-room': {
+        title: 'The Jazz Room: A Journey to the Heart of New Orleans',
+        subtitle: 'Teatro Calder\u00f3n \u00b7 Live Music Experience',
+        badge: '<div class="tag-badge purple">Fever Original</div>',
+        hero: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=800&q=80',
+        date: 'Every Friday & Saturday',
+        venue: { name: 'Teatro Calder\u00f3n', desc: 'A legendary Madrid theater dating back to 1917, known for its ornate art-deco interior and world-class acoustics.', img: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&q=80' },
+        location: { name: 'Teatro Calder\u00f3n', address: 'C. de Atocha 18, 28012 Madrid' },
+        description: '<p>\ud83c\udfb7 <strong>The Jazz Room</strong> takes you on a captivating musical journey through the streets of New Orleans. From smoky jazz clubs to lively Bourbon Street parades, this immersive live show features a 7-piece jazz ensemble performing classics from Louis Armstrong, Ella Fitzgerald, Miles Davis and more.</p><p class="subtitle">Highlights</p><ul><li>\ud83c\udfba Live 7-piece jazz ensemble</li><li>\ud83c\udf78 Optional cocktail pairing curated by mixologists</li><li>\ud83d\udc83 Dance floor section available</li><li>\ud83c\udf1f Immersive New Orleans-themed set design</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Every Friday and Saturday<br>\u23f0 Doors: 8:00 PM \u2014 Show: 8:30 PM<br>\u231b Duration: 90 minutes<br>\ud83d\udccd Location: Teatro Calder\u00f3n<br>\ud83d\udc64 Ages 18+</p>',
+        rating: 4.7, reviewCount: 405,
+        reviews: [
+          { name: 'Patricia L.', date: 'February 2026', text: 'What an incredible night! The musicians were insanely talented and the atmosphere was electric. Felt like we were transported to New Orleans.' },
+          { name: 'David M.', date: 'January 2026', text: 'The cocktail pairing was a great addition. Everything about this experience was top-notch.' }
+        ],
+        ticketTypes: [
+          { id: 'standard', label: 'Standard', tickets: [
+            { name: 'Standard \u2013 Fri 8:30 PM', price: 25.00 },
+            { name: 'Standard \u2013 Sat 8:30 PM', price: 25.00 }
+          ]},
+          { id: 'cocktail', label: 'With Cocktails', tickets: [
+            { name: 'Standard + 2 Cocktails \u2013 Fri', price: 42.00 },
+            { name: 'Standard + 2 Cocktails \u2013 Sat', price: 42.00 }
+          ]}
+        ]
+      },
+      'we-will-rock-you': {
+        title: 'We Will Rock You \u2013 The Musical by Queen',
+        subtitle: 'Teatro Rialto \u00b7 Musical Theater',
+        badge: '<div class="tag-badge blue">Limited Run</div>',
+        hero: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+        date: 'March \u2013 May 2026',
+        venue: { name: 'Teatro Rialto', desc: 'A modern Madrid theater known for hosting world-class musicals and broadway productions.', img: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=600&q=80' },
+        location: { name: 'Teatro Rialto', address: 'Gran V\u00eda 54, 28013 Madrid' },
+        description: '<p>\ud83c\udfb8 <strong>We Will Rock You</strong> is the smash-hit musical featuring over 24 of Queen\u2019s greatest hits including Bohemian Rhapsody, We Are the Champions, Somebody to Love, and of course, We Will Rock You.</p><p class="subtitle">Highlights</p><ul><li>\ud83c\udfb5 24+ Queen songs performed live</li><li>\ud83c\udfad Spectacular staging and costumes</li><li>\ud83d\udd25 Over 16 million people have seen the show worldwide</li><li>\u231b Running time: 2 hours 30 minutes (incl. intermission)</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 March \u2013 May 2026<br>\u23f0 Shows: Wed\u2013Fri 8:00 PM, Sat 5:00 PM & 9:00 PM, Sun 6:00 PM<br>\ud83d\udccd Location: Teatro Rialto, Gran V\u00eda<br>\ud83d\udc64 Ages 6+</p>',
+        rating: 4.6, reviewCount: 257,
+        reviews: [
+          { name: 'Carlos P.', date: 'January 2026', text: 'Absolutely incredible show! The cast was phenomenal and by the end the entire audience was on their feet singing along.' },
+          { name: 'Anna S.', date: 'December 2025', text: 'Took my teenage daughters and they loved it as much as I did. Great family entertainment!' }
+        ],
+        ticketTypes: [
+          { id: 'patio', label: 'Patio', tickets: [
+            { name: 'Patio \u2013 Wed/Thu/Fri 8 PM', price: 25.00 },
+            { name: 'Patio \u2013 Sat 5 PM', price: 29.00 },
+            { name: 'Patio \u2013 Sat 9 PM', price: 32.00 }
+          ]},
+          { id: 'preferente', label: 'Preferente', tickets: [
+            { name: 'Preferente \u2013 Wed/Thu/Fri 8 PM', price: 39.00 },
+            { name: 'Preferente \u2013 Sat 5 PM', price: 45.00 },
+            { name: 'Preferente \u2013 Sat 9 PM', price: 49.00 }
+          ]}
+        ]
+      },
+      'teatro-flamenco': {
+        title: 'Teatro Flamenco Madrid: Emociones Show',
+        subtitle: 'Teatro Flamenco Madrid \u00b7 Live Flamenco',
+        badge: '<div class="tag-badge green">Bestseller</div>',
+        hero: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80',
+        date: 'Daily shows',
+        venue: { name: 'Teatro Flamenco Madrid', desc: 'The only theater in Spain dedicated exclusively to flamenco, offering an intimate and authentic experience.', img: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80' },
+        location: { name: 'Teatro Flamenco Madrid', address: 'C. del Pez 10, 28004 Madrid' },
+        description: '<p>\ud83d\udc83 <strong>Emociones</strong> is the signature show at Teatro Flamenco Madrid. Feel the raw passion, rhythm, and soul of flamenco through electrifying footwork, haunting guitar, and powerful vocals.</p><p class="subtitle">Highlights</p><ul><li>\ud83c\udfb6 Live guitar, singing, and percussion</li><li>\ud83d\udd25 World-class dancers from Andaluc\u00eda</li><li>\ud83c\udf77 Optional drink pairing available</li><li>\ud83c\udf1f Intimate 120-seat theater</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Daily shows<br>\u23f0 Showtimes: 5:30 PM, 7:00 PM, 8:30 PM<br>\u231b Duration: 60 minutes<br>\ud83d\udccd Location: Teatro Flamenco Madrid<br>\ud83d\udc64 All ages</p>',
+        rating: 4.8, reviewCount: 671,
+        reviews: [
+          { name: 'Rachel W.', date: 'February 2026', text: 'Mesmerizing! The dancers\u2019 footwork was impossibly fast and the guitarist was phenomenal. Such an intimate venue.' },
+          { name: 'Marco T.', date: 'January 2026', text: 'Best flamenco show I\u2019ve ever seen. The emotion in every movement was palpable. Don\u2019t miss this!' }
+        ],
+        ticketTypes: [
+          { id: 'general', label: 'General', tickets: [
+            { name: 'General \u2013 5:30 PM', price: 29.00 },
+            { name: 'General \u2013 7:00 PM', price: 29.00 },
+            { name: 'General \u2013 8:30 PM', price: 29.00 }
+          ]},
+          { id: 'drink', label: 'With Drink', tickets: [
+            { name: 'General + Drink \u2013 5:30 PM', price: 36.00 },
+            { name: 'General + Drink \u2013 7:00 PM', price: 36.00 },
+            { name: 'General + Drink \u2013 8:30 PM', price: 36.00 }
+          ]}
+        ]
+      },
+      'f1-grand-prix': {
+        title: 'FORMULA 1\u00ae Spanish Grand Prix 2026',
+        subtitle: 'Circuit de Barcelona-Catalunya \u00b7 Motorsport',
+        badge: '<div class="tag-selling">Tickets Selling Fast</div>',
+        hero: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80',
+        date: '11 \u2013 13 September 2026',
+        venue: { name: 'Circuit de Barcelona-Catalunya', desc: 'One of the most iconic Formula 1 circuits in the world, located just outside Barcelona. The track features high-speed straights and technical corners.', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80' },
+        location: { name: 'Circuit de Barcelona-Catalunya', address: 'Cam\u00ed Mas Moreneta, 08160 Montmel\u00f3, Barcelona' },
+        description: '<p>\ud83c\udfc1 <strong>FORMULA 1\u00ae Spanish Grand Prix 2026</strong> \u2013 Experience the thrill of F1 live! Watch the world\u2019s fastest drivers battle it out on one of the most iconic circuits in motorsport history.</p><p class="subtitle">Highlights</p><ul><li>\ud83c\udfc6 Full 3-day access (Practice, Qualifying, Race)</li><li>\ud83c\udfa4 Entertainment zone with live music and fan experiences</li><li>\ud83c\udf54 Premium food and beverage options</li><li>\ud83c\udfce\ufe0f Pit lane walk on Thursday (select tickets)</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 September 11\u201313, 2026<br>\u23f0 Gates open 8:00 AM daily<br>\ud83d\udccd Location: Circuit de Barcelona-Catalunya, Montmel\u00f3<br>\ud83d\udc64 All ages (under 6 free)</p>',
+        rating: 4.5, reviewCount: 1840,
+        reviews: [
+          { name: 'Robert H.', date: 'September 2025', text: 'Incredible experience! The sound and speed of F1 cars is something you have to experience in person. General admission was great value.' },
+          { name: 'Isabel F.', date: 'September 2025', text: 'We splurged on grandstand tickets and it was worth every penny. The atmosphere was electric!' }
+        ],
+        ticketTypes: [
+          { id: 'general', label: 'General Admission', tickets: [
+            { name: 'General Admission \u2013 3-Day Pass', price: 345.00 },
+            { name: 'General Admission \u2013 Sunday Only (Race)', price: 175.00 }
+          ]},
+          { id: 'grandstand', label: 'Grandstand', tickets: [
+            { name: 'Grandstand Main Straight \u2013 3-Day', price: 595.00 },
+            { name: 'Grandstand Turn 5 \u2013 3-Day', price: 445.00 },
+            { name: 'Grandstand Turn 5 \u2013 Sunday Only', price: 255.00 }
+          ]}
+        ]
+      },
+      'candlelight-zimmer': {
+        title: 'Candlelight: Tribute to Hans Zimmer',
+        subtitle: 'Palacio de Cibeles \u00b7 Film Music Concert',
+        badge: '<div class="tag-badge purple">Fever Original</div>',
+        hero: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80',
+        date: 'Multiple dates \u2013 Thu, Fri, Sat',
+        venue: { name: 'Palacio de Cibeles', desc: 'The stunning former post office building turned cultural center in the heart of Madrid, with soaring ceilings and beautiful architecture.', img: 'https://images.unsplash.com/photo-1520095972714-909e91b038e5?w=600&q=80' },
+        location: { name: 'Palacio de Cibeles', address: 'Pl. de Cibeles 1, 28014 Madrid' },
+        description: '<p>\ud83c\udfac <strong>Candlelight: Tribute to Hans Zimmer</strong> \u2013 Experience the magic of cinema\u2019s greatest film scores in a breathtaking candlelit setting. A string quartet performs iconic soundtracks from Inception, Interstellar, The Dark Knight, Gladiator, and more.</p><p class="subtitle">Program</p><ul><li>Interstellar \u2013 First Step / Cornfield Chase</li><li>Inception \u2013 Time</li><li>The Dark Knight \u2013 Like a Dog Chasing Cars</li><li>Gladiator \u2013 Now We Are Free</li><li>The Lion King \u2013 This Land</li><li>Pirates of the Caribbean \u2013 He\u2019s a Pirate</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Multiple dates: Thursday to Saturday<br>\u23f0 Doors open 30 min before the show<br>\u231b Duration: approximately 60 minutes<br>\ud83d\udccd Location: Palacio de Cibeles</p>',
+        rating: 4.7, reviewCount: 790,
+        reviews: [
+          { name: 'Andrea P.', date: 'February 2026', text: 'Hearing \u201cTime\u201d from Inception surrounded by hundreds of candles in that gorgeous palace was a spiritual experience. Absolutely unforgettable.' },
+          { name: 'Chris B.', date: 'January 2026', text: 'The string quartet was incredibly talented. The Interstellar pieces gave me chills. Highly recommend!' }
+        ],
+        ticketTypes: [
+          { id: 'zone-b', label: 'Zone B', tickets: [
+            { name: 'Zone B \u2013 7:00 PM', price: 20.00 },
+            { name: 'Zone B \u2013 9:30 PM', price: 20.00 }
+          ]},
+          { id: 'zone-a', label: 'Zone A', tickets: [
+            { name: 'Zone A (front) \u2013 7:00 PM', price: 32.00 },
+            { name: 'Zone A (front) \u2013 9:30 PM', price: 32.00 }
+          ]}
+        ]
+      },
+      'whitney-houston': {
+        title: 'An Evening with Whitney: The Hologram Tour',
+        subtitle: 'WiZink Center \u00b7 Hologram Concert',
+        badge: '<div class="tag-badge blue">New Experience</div>',
+        hero: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+        date: 'April 18 \u2013 20, 2026',
+        venue: { name: 'WiZink Center', desc: 'Madrid\u2019s premier indoor arena with capacity for 17,000, hosting the biggest concerts and events in Spain.', img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80' },
+        location: { name: 'WiZink Center', address: 'Av. de Felipe II, s/n, 28009 Madrid' },
+        description: '<p>\ud83c\udfa4 <strong>An Evening with Whitney</strong> brings the legendary voice of Whitney Houston back to the stage through stunning hologram technology. Accompanied by a live band, dancers, and backup singers, this spectacular show features Whitney\u2019s biggest hits.</p><p class="subtitle">Setlist Highlights</p><ul><li>I Will Always Love You</li><li>I Wanna Dance with Somebody</li><li>Greatest Love of All</li><li>How Will I Know</li><li>I Have Nothing</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 April 18\u201320, 2026<br>\u23f0 Doors: 7:30 PM \u2014 Show: 8:30 PM<br>\u231b Duration: 90 minutes<br>\ud83d\udccd Location: WiZink Center<br>\ud83d\udc64 All ages</p>',
+        rating: 4.3, reviewCount: 69,
+        reviews: [
+          { name: 'Maria G.', date: 'March 2025', text: 'The hologram technology is incredible. It really felt like Whitney was there on stage. Emotional and powerful show.' },
+          { name: 'John D.', date: 'March 2025', text: 'Great production value. The live band was excellent and the hologram was very convincing.' }
+        ],
+        ticketTypes: [
+          { id: 'pista', label: 'Pista (Floor)', tickets: [
+            { name: 'Pista \u2013 Fri Apr 18', price: 18.00 },
+            { name: 'Pista \u2013 Sat Apr 19', price: 22.00 },
+            { name: 'Pista \u2013 Sun Apr 20', price: 18.00 }
+          ]},
+          { id: 'grada', label: 'Grada (Seated)', tickets: [
+            { name: 'Grada \u2013 Fri Apr 18', price: 28.00 },
+            { name: 'Grada \u2013 Sat Apr 19', price: 32.00 },
+            { name: 'Grada \u2013 Sun Apr 20', price: 28.00 }
+          ]}
+        ]
+      },
+      'chaos-lab': {
+        title: 'Chaos Lab: The Immersive Escape Room',
+        subtitle: 'Malasa\u00f1a \u00b7 Escape Room',
+        badge: '<div class="tag-badge green">Top Rated</div>',
+        hero: 'https://images.unsplash.com/photo-1580974852861-c381510bc98a?w=800&q=80',
+        date: 'Open daily',
+        venue: { name: 'Chaos Lab Madrid', desc: 'A cutting-edge escape room venue in the heart of Malasa\u00f1a, featuring high-tech puzzles and cinematic set design.', img: 'https://images.unsplash.com/photo-1569017388730-020b5f80a004?w=600&q=80' },
+        location: { name: 'Chaos Lab Madrid', address: 'C. del Esp\u00edritu Santo 14, 28004 Madrid' },
+        description: '<p>\ud83e\udde9 <strong>Chaos Lab</strong> is Madrid\u2019s most advanced escape room experience. You and your team have 60 minutes to solve puzzles, crack codes, and escape from a rogue scientist\u2019s laboratory before the experiment goes critical.</p><p class="subtitle">Highlights</p><ul><li>\ud83d\udd2c High-tech puzzles with electronic and mechanical elements</li><li>\ud83c\udfac Cinematic set design with special effects</li><li>\ud83d\udc65 Teams of 2\u20136 players</li><li>\ud83c\udfc6 Leaderboard with fastest escape times</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Open daily, 10:00 AM \u2013 10:00 PM<br>\u231b Duration: 60 minutes<br>\ud83d\udccd Location: Malasa\u00f1a, central Madrid<br>\ud83d\udc64 Ages 12+ (under 16 with adult)</p>',
+        rating: 4.6, reviewCount: 542,
+        reviews: [
+          { name: 'Pablo N.', date: 'February 2026', text: 'Best escape room we\u2019ve ever done! The puzzles were challenging but fair, and the production quality was off the charts.' },
+          { name: 'Lisa K.', date: 'January 2026', text: 'Such a fun experience with friends. The special effects and set design made it feel like a movie.' }
+        ],
+        ticketTypes: [
+          { id: 'team', label: 'Per Person', tickets: [
+            { name: 'Per person (2-player team)', price: 24.00 },
+            { name: 'Per person (3-4 player team)', price: 20.00 },
+            { name: 'Per person (5-6 player team)', price: 18.00 }
+          ]}
+        ]
+      },
+      'machu-picchu': {
+        title: 'Machu Picchu: Journey to the Lost City',
+        subtitle: 'IDEAL Centre d\u2019Arts Digitals \u00b7 Immersive Experience',
+        badge: '<div class="tag-selling">Tickets Selling Fast</div>',
+        hero: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&q=80',
+        date: 'Open daily',
+        venue: { name: 'IDEAL Centre d\u2019Arts Digitals', desc: 'A former cinema transformed into a state-of-the-art digital arts center, featuring immersive 360\u00b0 projections.', img: 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=600&q=80' },
+        location: { name: 'IDEAL Centre', address: 'C. del Dr. Trueta 196, 28045 Madrid' },
+        description: '<p>\ud83c\udfdb\ufe0f <strong>Machu Picchu: Journey to the Lost City</strong> is a breathtaking immersive experience that transports you to the heart of the Inca Empire. Through stunning 360\u00b0 projections, virtual reality, and sensory elements, discover the mysteries of one of the world\u2019s most iconic archaeological sites.</p><p class="subtitle">Highlights</p><ul><li>\ud83c\udf0e 360\u00b0 immersive projection rooms</li><li>\ud83e\udd7d Optional VR experience with Oculus headsets</li><li>\ud83c\udfb6 Original soundtrack and ambient sound design</li><li>\ud83d\udcda Educational content curated by archaeologists</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Open daily, 10:00 AM \u2013 8:00 PM<br>\u231b Duration: approximately 50 minutes<br>\ud83d\udccd Location: IDEAL Centre<br>\ud83d\udc64 All ages</p>',
+        rating: 4.3, reviewCount: 2830,
+        reviews: [
+          { name: 'Fernando J.', date: 'January 2026', text: 'Truly immersive! The 360\u00b0 projections made you feel like you were actually standing in Machu Picchu. The VR add-on is a must.' },
+          { name: 'Sarah H.', date: 'December 2025', text: 'Educational and visually stunning. Great for the whole family.' }
+        ],
+        ticketTypes: [
+          { id: 'standard', label: 'Standard', tickets: [
+            { name: 'Adult', price: 18.00 },
+            { name: 'Child (4-12)', price: 12.00 },
+            { name: 'Senior (65+)', price: 14.00 }
+          ]},
+          { id: 'vr', label: 'With VR', tickets: [
+            { name: 'Adult + VR Experience', price: 26.00 },
+            { name: 'Child (4-12) + VR', price: 20.00 }
+          ]}
+        ]
+      },
+      'parque-warner': {
+        title: 'Parque Warner Madrid: Day Pass',
+        subtitle: 'San Mart\u00edn de la Vega \u00b7 Theme Park',
+        badge: '<div class="tag-badge green">Bestseller</div>',
+        hero: 'https://images.unsplash.com/photo-1570481662006-a3a1374699e8?w=800&q=80',
+        date: 'Season open Mar \u2013 Nov',
+        venue: { name: 'Parque Warner Madrid', desc: 'One of Spain\u2019s top theme parks featuring thrilling roller coasters, family rides, live shows, and themed areas inspired by DC Comics, Looney Tunes, and Hollywood.', img: 'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?w=600&q=80' },
+        location: { name: 'Parque Warner Madrid', address: 'Camino de la Warner, s/n, 28330 San Mart\u00edn de la Vega' },
+        description: '<p>\ud83c\udfa2 <strong>Parque Warner Madrid</strong> \u2013 Get ready for a day of non-stop thrills! From heart-pounding roller coasters to family-friendly rides and live entertainment, Parque Warner has something for everyone.</p><p class="subtitle">Highlights</p><ul><li>\ud83e\ude82 Over 40 rides and attractions</li><li>\ud83e\uddb8 DC Super Heroes World, Looney Tunes area, Hollywood Boulevard</li><li>\ud83c\udfad Daily live shows and character meet-and-greets</li><li>\ud83c\udf54 Multiple dining options across the park</li></ul><p class="subtitle">General Info</p><p>\ud83d\udcc5 Season: March \u2013 November 2026<br>\u23f0 Opening hours vary by season (check website)<br>\ud83d\udccd Location: San Mart\u00edn de la Vega, 30 min from Madrid<br>\ud83d\udc64 All ages (under 100cm free)</p>',
+        rating: 4.7, reviewCount: 1263,
+        reviews: [
+          { name: 'Lucia R.', date: 'October 2025', text: 'Amazing park! The Batman roller coaster was insane. Kids loved the Looney Tunes area. We\u2019ll definitely be back.' },
+          { name: 'Peter M.', date: 'September 2025', text: 'Great value for money. The express pass is worth it if you go on a busy day.' }
+        ],
+        ticketTypes: [
+          { id: 'standard', label: 'Standard', tickets: [
+            { name: 'Adult Day Pass', price: 32.89 },
+            { name: 'Child Day Pass (under 140cm)', price: 27.50 },
+            { name: 'Senior Day Pass (60+)', price: 27.50 }
+          ]},
+          { id: 'express', label: 'Express', tickets: [
+            { name: 'Adult Day Pass + Express', price: 52.00 },
+            { name: 'Child Day Pass + Express', price: 45.00 }
+          ]}
+        ]
+      }
+    };
+
+    var slug = new URLSearchParams(window.location.search).get('plan');
+    var plan = PLANS[slug];
+    if (!plan) { window.location.replace('home.html'); return; }
+
+    document.title = plan.title + ' | Fever';
+    document.getElementById('hero-img').src = plan.hero;
+    document.getElementById('hero-img').alt = plan.title;
+    document.getElementById('plan-badge').innerHTML = plan.badge;
+    document.getElementById('plan-title').textContent = plan.title;
+    document.getElementById('plan-subtitle').textContent = plan.subtitle;
+    document.getElementById('plan-description').innerHTML = plan.description;
+
+    var starsHtml = '';
+    for (var i = 0; i < 5; i++) starsHtml += i < Math.floor(plan.rating) ? '\u2605' : '\u2606';
+    var reviewsEl = document.getElementById('reviews-section');
+    var reviewsHtml = '<h3>Reviews</h3><div class="rating-big"><span class="score">' + plan.rating.toFixed(1) + '</span><span class="stars">' + starsHtml + '</span><span class="count">(' + plan.reviewCount.toLocaleString() + ' reviews)</span></div>';
+    plan.reviews.forEach(function(r) {
+      reviewsHtml += '<div class="review-card"><div class="reviewer">' + r.name + '</div><div class="review-date">' + r.date + '</div><div class="review-text">' + r.text + '</div></div>';
+    });
+    reviewsEl.innerHTML = reviewsHtml;
+
+    var venueEl = document.getElementById('venue-section');
+    venueEl.innerHTML = '<img class="venue-img" src="' + plan.venue.img + '" alt="' + plan.venue.name + '"><div class="venue-name-lg">' + plan.venue.name + '</div><div class="venue-desc">' + plan.venue.desc + '</div>';
+
+    var locEl = document.getElementById('location-section');
+    locEl.innerHTML = '<div class="loc-name">' + plan.location.name + '</div><div class="loc-address">' + plan.location.address + '</div><div class="map-placeholder"><img src="https://maps.googleapis.com/maps/api/staticmap?center=' + encodeURIComponent(plan.location.address) + '&zoom=15&size=400x200&scale=2" alt="Map" onerror="this.parentElement.style.background=\'#e8ecf0\'"></div>';
+
+    var pillsRow = document.getElementById('ticket-pills-row');
+    var panelsEl = document.getElementById('ticket-panels');
+    plan.ticketTypes.forEach(function(type, ti) {
+      var pill = document.createElement('div');
+      pill.className = 'ticket-pill' + (ti === 0 ? ' active' : '');
+      pill.setAttribute('data-panel', type.id);
+      pill.textContent = type.label;
+      pillsRow.appendChild(pill);
+
+      var panel = document.createElement('div');
+      panel.className = 'ticket-panel';
+      panel.id = 'panel-' + type.id;
+      panel.setAttribute('data-panel', type.id);
+      if (ti > 0) panel.style.display = 'none';
+
+      type.tickets.forEach(function(t) {
+        panel.innerHTML += '<div class="ticket-row qty-zero" data-price="' + t.price + '"><div class="ticket-content"><div class="ticket-name">' + t.name + '</div><div class="ticket-price">\u20ac' + t.price.toFixed(2) + '</div></div><div class="ticket-notch"></div><div class="ticket-selector-right"><div class="ticket-amount"><button class="amt-btn minus">\u2212</button><span class="amt-count">0</span><button class="amt-btn plus">+</button></div></div></div>';
+      });
+      panelsEl.appendChild(panel);
+    });
+
+    pillsRow.addEventListener('click', function(e) {
+      var pill = e.target.closest('.ticket-pill');
+      if (!pill) return;
+      pillsRow.querySelectorAll('.ticket-pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      panelsEl.querySelectorAll('.ticket-panel').forEach(function(p) { p.style.display = p.getAttribute('data-panel') === pill.getAttribute('data-panel') ? '' : 'none'; });
+    });
+
+    var buyBtn = document.getElementById('buy-btn');
+    var stickyCta = document.getElementById('sticky-cta');
+    var stickyTotal = document.getElementById('sticky-total');
+    var stickyBuyBtn = document.getElementById('sticky-buy-btn');
+
+    function updateTotal() {
+      var total = 0;
+      var items = [];
+      panelsEl.querySelectorAll('.ticket-row').forEach(function(row) {
+        var count = parseInt(row.querySelector('.amt-count').textContent, 10);
+        if (count > 0) {
+          var price = parseFloat(row.getAttribute('data-price'));
+          total += price * count;
+          items.push({ name: row.querySelector('.ticket-name').textContent, qty: count, price: price });
+        }
+      });
+      if (total > 0) {
+        buyBtn.disabled = false;
+        buyBtn.textContent = 'Continue \u2013 \u20ac' + total.toFixed(2);
+        stickyCta.style.display = '';
+        stickyTotal.textContent = total.toFixed(2) + '\u20ac \u00b7 ' + items.reduce(function(s, i) { return s + i.qty; }, 0) + ' ticket(s)';
+      } else {
+        buyBtn.disabled = true;
+        buyBtn.textContent = 'Select tickets to continue';
+        stickyCta.style.display = 'none';
+      }
+      return { total: total, items: items };
+    }
+
+    panelsEl.addEventListener('click', function(e) {
+      var btn = e.target.closest('.amt-btn');
+      if (!btn) return;
+      var row = btn.closest('.ticket-row');
+      var countEl = row.querySelector('.amt-count');
+      var count = parseInt(countEl.textContent, 10);
+      if (btn.classList.contains('plus')) count = Math.min(count + 1, 10);
+      else if (btn.classList.contains('minus')) count = Math.max(count - 1, 0);
+      countEl.textContent = count;
+      row.classList.toggle('qty-zero', count === 0);
+      row.classList.toggle('selected', count > 0);
+      updateTotal();
+    });
+
+    function goToCheckout() {
+      var data = updateTotal();
+      if (data.total <= 0) return;
+      try {
+        localStorage.setItem('plan_checkout', JSON.stringify({
+          slug: slug,
+          title: plan.title,
+          venue: plan.location.name,
+          date: plan.date,
+          hero: plan.hero,
+          items: data.items,
+          total: data.total
+        }));
+      } catch (e) {}
+      window.location.href = 'plan-checkout.html?plan=' + slug;
+    }
+    buyBtn.addEventListener('click', goToCheckout);
+    stickyBuyBtn.addEventListener('click', goToCheckout);
+
+    var similarSlugs = Object.keys(PLANS).filter(function(s) { return s !== slug; });
+    similarSlugs.sort(function() { return 0.5 - Math.random(); });
+    var simScroll = document.getElementById('similar-scroll');
+    similarSlugs.slice(0, 4).forEach(function(s) {
+      var p = PLANS[s];
+      simScroll.innerHTML += '<a class="sim-card" href="plan.html?plan=' + s + '"><div class="sim-img"><img src="' + p.hero + '" alt="' + p.title + '"></div><div class="sim-title">' + p.title + '</div><div class="sim-meta">\u2605 ' + p.rating.toFixed(1) + ' (' + p.reviewCount + ')</div></a>';
+    });
+  })();
+  </script>
+</body>
+</html>
