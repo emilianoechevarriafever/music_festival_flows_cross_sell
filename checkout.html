@@ -101,7 +101,7 @@
     .flow-stepper a.step { text-decoration:none; color:inherit; cursor:pointer; }
 
     /* Payment Method */
-    .payment-section { padding:16px; }
+    .payment-section { padding:16px; scroll-margin-top: 88px; }
     .payment-section h3 { font-size:16px; font-weight:700; margin-bottom:16px; }
 
     /* Card type row */
@@ -576,6 +576,21 @@
     };
 
     refreshPaymentMethodUI();
+
+    // If user comes from cart, open checkout already focused on payment method.
+    (function() {
+      try {
+        var scrollTarget = sessionStorage.getItem('checkout_scroll_target');
+        if (scrollTarget === 'payment' && paymentSection) {
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              paymentSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+            });
+          });
+          sessionStorage.removeItem('checkout_scroll_target');
+        }
+      } catch (e) {}
+    })();
 
     // Card number clear button (Figma ignt.comp.fields)
     const cardInput = document.getElementById('card-number');
