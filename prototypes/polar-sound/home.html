@@ -270,8 +270,11 @@
       overflow-x: auto;
       padding: 0 16px;
       scrollbar-width: none;
+      scroll-snap-type: x proximity;
+      scroll-padding-left: 16px;
     }
     .card-scroll::-webkit-scrollbar { display: none; }
+    .card-scroll > * { scroll-snap-align: start; }
     .card-scroll .card-img {
       width: 150px;
       aspect-ratio: 2/3;
