@@ -97,8 +97,9 @@
 
     /* Ticket rows — coupon style */
     #room-rows { margin-top:16px; }
-    .ticket-row { display:flex; align-items:stretch; min-height:96px; margin-bottom:16px; position:relative; border-radius:8px; }
-    .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; gap:8px; border:1.5px solid var(--color-border-light); border-right:none; border-radius:8px 0 0 8px; }
+    .ticket-row { --ticket-border:#ccd2d8; display:flex; align-items:stretch; min-height:96px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; background:transparent; }
+    .ticket-row::after { content:''; position:absolute; right:136px; top:8px; bottom:8px; width:1px; background-image:repeating-linear-gradient(to bottom, var(--ticket-border) 0 2px, transparent 2px 4px); background-repeat:no-repeat; background-size:1px 100%; transform:translateX(50%); pointer-events:none; z-index:2; }
+    .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; justify-content:space-between; gap:8px; border:1px solid var(--ticket-border); border-right:none; border-radius:8px 0 0 8px; background:#fff; min-height:96px; }
     .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:18px; color:var(--color-text); }
     .ticket-row .ticket-more,
     .ticket-row .ticket-info-toggle { font-size:12px; font-weight:600; line-height:18px; color:#0079ca; text-decoration:underline; text-underline-offset:2px; padding:4px 0; cursor:pointer; background:none; border:none; font-family:var(--font); text-align:left; align-self:flex-start; }
@@ -108,30 +109,30 @@
     .ticket-row .ticket-info-detail ul { margin:0; padding-left:18px; list-style:disc; }
     .ticket-row .ticket-info-detail li { margin-bottom:2px; }
     .ticket-row .ticket-price { font-size:14px; font-weight:600; color:var(--color-text); margin-top:auto; }
-    .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1.5px solid var(--color-border-light); border-left:none; border-radius:0 8px 8px 0; background:white; position:relative; }
-    .ticket-row .stepper { display:flex; align-items:center; background:white; border-radius:100px; padding:4px; }
-    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s; background:white; color:var(--color-text); border:1px solid var(--color-border-light); }
+    .ticket-row .ticket-selector-right { width:136px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1px solid var(--ticket-border); border-left:none; border-radius:0 8px 8px 0; background:#fff; position:relative; }
+    .ticket-row .stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
+    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s; background:#f2f3f3; color:#a7b2ba; }
     .ticket-amount .amt-count { width:40px; text-align:center; font-size:16px; font-weight:600; }
 
     /* Selected state */
-    .ticket-row.selected .ticket-content { border-color:#0079ca; }
-    .ticket-row.selected .ticket-selector-right { border-color:#0079ca; background:var(--color-primary-weak); }
+    .ticket-row.selected { --ticket-border:#0079ca; }
+    .ticket-row.selected .ticket-selector-right { background:var(--color-primary-weak); }
+    .ticket-row.selected .stepper { background:#fff; border-radius:100px; padding:4px 6px; }
     .ticket-row.selected .amt-btn { background:var(--color-primary-weak); color:#0079ca; }
 
     /* Ticket notch divider */
-    .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:16px; display:flex; flex-direction:column; align-items:center; pointer-events:none; z-index:2; }
-    .ticket-notch::before { content:''; position:absolute; top:-4px; left:4px; width:4px; height:8px; border-left:1.5px solid var(--color-border-light); border-top-left-radius:8px; border-bottom-left-radius:8px; background:transparent; }
-    .ticket-notch::after { content:''; position:absolute; bottom:-4px; left:4px; width:4px; height:8px; border-left:1.5px solid var(--color-border-light); border-top-left-radius:8px; border-bottom-left-radius:8px; background:transparent; }
-    .ticket-notch .notch-line { position:absolute; top:12px; bottom:12px; width:0; border-left:1.5px dashed var(--color-border-light); }
-    .ticket-row.selected .ticket-notch::before,
-    .ticket-row.selected .ticket-notch::after { border-color:#0079ca; }
-    .ticket-row.selected .notch-line { border-color:#0079ca; }
+    .ticket-row .ticket-notch { position:absolute; right:136px; top:0; bottom:0; width:16px; pointer-events:none; z-index:3; transform: translateX(50%); }
+    .ticket-row .ticket-notch::before,
+    .ticket-row .ticket-notch::after { content:''; position:absolute; left:0; width:16px; height:8px; background:var(--color-bg); box-sizing:border-box; }
+    .ticket-row .ticket-notch::before { top:0; border:1px solid var(--ticket-border); border-top:none; border-radius:0 0 8px 8px; }
+    .ticket-row .ticket-notch::after { bottom:0; border:1px solid var(--ticket-border); border-bottom:none; border-radius:8px 8px 0 0; }
 
     /* Sold out */
     .ticket-row.soldout { opacity:0.6; pointer-events:none; }
+    .ticket-row.soldout::after { display:none; }
     .ticket-row.soldout .ticket-selector-right { display:none; }
     .ticket-row.soldout .ticket-notch { display:none; }
-    .ticket-row.soldout .ticket-content { border-radius:8px; border-right:1.5px solid var(--color-border-light); }
+    .ticket-row.soldout .ticket-content { border-radius:8px; border-right:1px solid var(--ticket-border); }
     .ticket-row .soldout-tag { display:none; position:absolute; right:12px; top:50%; transform:translateY(-50%); background:var(--color-bg-disable); color:var(--color-text-disable); font-size:12px; font-weight:600; padding:6px 14px; border-radius:4px; }
     .ticket-row.soldout .soldout-tag { display:block; }
 

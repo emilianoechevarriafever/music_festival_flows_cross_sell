@@ -63,8 +63,9 @@
 
     .transport-options { padding:0 16px 16px; border-bottom:1px solid var(--color-border); }
     #transport-rows { margin-top:12px; }
-    .ticket-row { display:flex; align-items:stretch; min-height:88px; margin-bottom:16px; position:relative; border-radius:8px; }
-    .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; gap:6px; border:1.5px solid var(--color-border-light); border-right:none; border-radius:8px 0 0 8px; }
+    .ticket-row { --ticket-border:#ccd2d8; display:flex; align-items:stretch; min-height:96px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; background:transparent; }
+    .ticket-row::after { content:''; position:absolute; right:136px; top:8px; bottom:8px; width:1px; background-image:repeating-linear-gradient(to bottom, var(--ticket-border) 0 2px, transparent 2px 4px); background-repeat:no-repeat; background-size:1px 100%; transform:translateX(50%); pointer-events:none; z-index:2; }
+    .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; gap:6px; border:1px solid var(--ticket-border); border-right:none; border-radius:8px 0 0 8px; background:#fff; min-height:96px; }
     .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:18px; color:var(--color-text); }
     .ticket-row .ticket-detail { font-size:12px; color:var(--color-text-secondary); }
     .ticket-row .ticket-price { font-size:14px; font-weight:600; color:var(--color-text); margin-top:auto; }
@@ -73,19 +74,19 @@
     .ticket-row .ticket-info-detail { display:none; margin-top:8px; padding-top:6px; border-top:1px solid #ccd2d8; font-size:13px; line-height:20px; color:var(--color-text); }
     .ticket-row.ticket-info-expanded .ticket-info-detail { display:block; }
     .ticket-row.ticket-info-expanded .ticket-content { justify-content:flex-start; }
-    .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1.5px solid var(--color-border-light); border-left:none; border-radius:0 8px 8px 0; background:white; position:relative; }
-    .ticket-row .stepper { display:flex; align-items:center; background:white; border-radius:100px; padding:4px; }
-    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; background:white; color:var(--color-text); border:1px solid var(--color-border-light); }
+    .ticket-row .ticket-selector-right { width:136px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1px solid var(--ticket-border); border-left:none; border-radius:0 8px 8px 0; background:#fff; position:relative; }
+    .ticket-row .stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
+    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; background:#f2f3f3; color:#a7b2ba; }
     .ticket-amount .amt-count { width:40px; text-align:center; font-size:16px; font-weight:600; }
-    .ticket-row.selected .ticket-content { border-color:#0079ca; }
-    .ticket-row.selected .ticket-selector-right { border-color:#0079ca; background:var(--color-primary-weak); }
+    .ticket-row.selected { --ticket-border:#0079ca; }
+    .ticket-row.selected .ticket-selector-right { background:var(--color-primary-weak); }
+    .ticket-row.selected .stepper { background:#fff; border-radius:100px; padding:4px 6px; }
     .ticket-row.selected .amt-btn { background:var(--color-primary-weak); color:#0079ca; }
-    .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:16px; display:flex; flex-direction:column; align-items:center; pointer-events:none; z-index:2; }
-    .ticket-notch::before { content:''; position:absolute; top:-4px; left:4px; width:4px; height:8px; border-left:1.5px solid var(--color-border-light); border-top-left-radius:8px; border-bottom-left-radius:8px; background:transparent; }
-    .ticket-notch::after { content:''; position:absolute; bottom:-4px; left:4px; width:4px; height:8px; border-left:1.5px solid var(--color-border-light); border-top-left-radius:8px; border-bottom-left-radius:8px; background:transparent; }
-    .ticket-notch .notch-line { position:absolute; top:12px; bottom:12px; width:0; border-left:1.5px dashed var(--color-border-light); }
-    .ticket-row.selected .ticket-notch::before, .ticket-row.selected .ticket-notch::after { border-color:#0079ca; }
-    .ticket-row.selected .notch-line { border-color:#0079ca; }
+    .ticket-row .ticket-notch { position:absolute; right:136px; top:0; bottom:0; width:16px; pointer-events:none; z-index:3; transform: translateX(50%); }
+    .ticket-row .ticket-notch::before,
+    .ticket-row .ticket-notch::after { content:''; position:absolute; left:0; width:16px; height:8px; background:var(--color-bg); box-sizing:border-box; }
+    .ticket-row .ticket-notch::before { top:0; border:1px solid var(--ticket-border); border-top:none; border-radius:0 0 8px 8px; }
+    .ticket-row .ticket-notch::after { bottom:0; border:1px solid var(--ticket-border); border-bottom:none; border-radius:8px 8px 0 0; }
 
     .help-section { padding:16px; border-top:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; }
     .help-section span { font-size:15px; font-weight:500; }

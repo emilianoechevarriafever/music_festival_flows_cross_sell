@@ -133,34 +133,72 @@
     .pill-arrow.visible { display:flex; }
     .pill-arrow svg { width:16px; height:16px; color:var(--color-text-subtle); }
 
-    /* Ticket rows — Figma inactive 778-27370 (layout, colors, typography, spacing) */
-    .ticket-row { display:flex; align-items:stretch; min-height:88px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; border:1px solid #ccd2d8; background:#ffffff; }
-    .ticket-row .ticket-content { flex:1; padding:14px 12px; display:flex; flex-direction:column; justify-content:center; gap:4px; border:none; border-radius:8px 0 0 8px; background:#ffffff; min-height:60px; }
+    /* Ticket rows — Figma 778-26883/778-26897 (ticket silhouette with center perforation) */
+    .ticket-row { --ticket-border:#ccd2d8; display:flex; align-items:stretch; min-height:96px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; background:transparent; }
+    .ticket-row::after {
+      content:'';
+      position:absolute;
+      right:136px;
+      top:8px;
+      bottom:8px;
+      width:1px;
+      background-image:repeating-linear-gradient(to bottom, var(--ticket-border) 0 2px, transparent 2px 4px);
+      background-repeat:no-repeat;
+      background-size:1px 100%;
+      transform:translateX(50%);
+      pointer-events:none;
+      z-index:2;
+    }
+    .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; justify-content:space-between; gap:4px; border:1px solid var(--ticket-border); border-right:none; border-radius:8px 0 0 8px; background:#ffffff; min-height:96px; }
     .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:20px; color:#031419; }
     .ticket-row .ticket-more { font-size:12px; font-weight:600; line-height:18px; color:#0079ca; text-decoration:underline; text-underline-offset:2px; padding:4px 0; cursor:pointer; text-align:left; align-self:flex-start; }
     .ticket-row .ticket-price { font-size:14px; font-weight:600; line-height:20px; color:#031419; }
-    .ticket-row .ticket-selector-right { width:120px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:none; border-radius:0 8px 8px 0; background:#ffffff; position:relative; }
+    .ticket-row .ticket-selector-right { width:136px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1px solid var(--ticket-border); border-left:none; border-radius:0 8px 8px 0; background:#ffffff; position:relative; }
     .ticket-row .stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
-    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s, border-color 0.15s; background:#f2f3f3; border:1px solid #ccd2d8; color:#a7b2ba; }
+    .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s, border-color 0.15s; background:#f2f3f3; border:none; color:#a7b2ba; }
     .ticket-amount .amt-count { width:36px; text-align:center; font-size:16px; font-weight:600; line-height:20px; color:#031419; }
-    .ticket-row .amt-btn.plus { background:#e6f4ff; border:1px solid #b3d9f5; color:#0079ca; }
+    .ticket-row .amt-btn.plus { background:#e6f4ff; border:none; color:#0079ca; }
 
-    /* Active (selected): Figma 1097-15545 — right bg #e6f4ff (primary-weak), buttons #F4F6F9 */
-    .ticket-row.selected { border-color:#0079ca; }
+    /* Active (selected): right panel gets primary-weak fill */
+    .ticket-row.selected { --ticket-border:#0079ca; }
     .ticket-row.selected .ticket-selector-right { background:#e6f4ff; border-radius:0 8px 8px 0; }
-    .ticket-row.selected .ticket-selector-right::before { content:''; position:absolute; left:-8px; top:0; bottom:0; width:8px; background:#e6f4ff; z-index:0; }
     .ticket-row.selected .stepper { background:#fff; border-radius:100px; padding:4px 6px; }
-    .ticket-row.selected .amt-btn { background:#F4F6F9; color:#0079ca; }
-    .ticket-row.selected .amt-btn.plus { background:#F4F6F9; color:#0079ca; }
+    .ticket-row.selected .amt-btn { background:#e6f4ff; border:none; color:#0079ca; }
+    .ticket-row.selected .amt-btn.plus { background:#e6f4ff; border:none; color:#0079ca; }
 
-    /* Ticket notch: vertical dashed line + semicircular cutouts (Figma perforation) — inactive #ccd2d8 */
-    .ticket-row .ticket-notch { position:absolute; right:120px; top:0; bottom:0; width:14px; display:flex; flex-direction:column; align-items:center; pointer-events:none; z-index:2; }
-    .ticket-notch::before { content:''; position:absolute; top:0; left:0; width:7px; height:10px; border-left:1px solid #ccd2d8; border-bottom:1px solid #ccd2d8; border-radius:0 0 0 8px; background:transparent; }
-    .ticket-notch::after { content:''; position:absolute; bottom:0; left:0; width:7px; height:10px; border-left:1px solid #ccd2d8; border-top:1px solid #ccd2d8; border-radius:8px 0 0 0; background:transparent; }
-    .ticket-notch .notch-line { position:absolute; top:14px; bottom:14px; left:6px; width:0; border-left:1px dashed #ccd2d8; }
-    .ticket-row.selected .ticket-notch::before,
-    .ticket-row.selected .ticket-notch::after { border-color:#0079ca; }
-    .ticket-row.selected .notch-line { border-color:#0079ca; }
+    /* Ticket perforation with top/bottom circular notches */
+    .ticket-row .ticket-notch {
+      position:absolute;
+      right:136px;
+      top:0;
+      bottom:0;
+      width:16px;
+      pointer-events:none;
+      z-index:3;
+      transform: translateX(50%);
+    }
+    .ticket-row .ticket-notch::before,
+    .ticket-row .ticket-notch::after {
+      content:'';
+      position:absolute;
+      left:0;
+      width:16px;
+      height:8px;
+      background:var(--color-bg);
+      box-sizing:border-box;
+    }
+    .ticket-row .ticket-notch::before {
+      top:0;
+      border:1px solid var(--ticket-border);
+      border-top:none;
+      border-radius:0 0 8px 8px;
+    }
+    .ticket-row .ticket-notch::after {
+      bottom:0;
+      border:1px solid var(--ticket-border);
+      border-bottom:none;
+      border-radius:8px 8px 0 0;
+    }
 
     /* Selling fast banner */
 
