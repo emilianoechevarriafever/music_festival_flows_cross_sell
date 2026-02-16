@@ -500,10 +500,8 @@
 
     function getStickyTopOffset() {
       var stickyHeader = document.querySelector('.sticky-header');
-      var stickyStepper = document.querySelector('.flow-stepper');
       var offset = 0;
       if (stickyHeader && getComputedStyle(stickyHeader).display !== 'none') offset += stickyHeader.offsetHeight;
-      if (stickyStepper && getComputedStyle(stickyStepper).display !== 'none') offset += stickyStepper.offsetHeight;
       return offset;
     }
 
