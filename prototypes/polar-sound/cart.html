@@ -190,9 +190,32 @@
       const lessBtn = div.querySelector('.qty-wrap button:first-child');
       const moreBtn = div.querySelector('.qty-wrap button:last-child');
       const removeBtn = div.querySelector('.btn-remove');
+      function removeCurrentItem() {
+        if (type === 'tickets') cartTickets.splice(index, 1);
+        else if (type === 'accommodation') cartAccommodation.splice(index, 1);
+        else cartTransportation.splice(index, 1);
+        saveCart();
+        render();
+      }
+      function syncLessButtonState() {
+        const arr = type === 'tickets' ? cartTickets : type === 'accommodation' ? cartAccommodation : cartTransportation;
+        const qty = Math.max(1, (arr[index] && arr[index].qty) || 1);
+        if (qty <= 1) {
+          lessBtn.textContent = '🗑';
+          lessBtn.setAttribute('aria-label', 'Remove item');
+        } else {
+          lessBtn.textContent = '−';
+          lessBtn.setAttribute('aria-label', 'Less');
+        }
+      }
       function updateQty(delta) {
         const arr = type === 'tickets' ? cartTickets : type === 'accommodation' ? cartAccommodation : cartTransportation;
-        arr[index].qty = Math.max(1, (arr[index].qty || 1) + delta);
+        const currentQty = Math.max(1, (arr[index] && arr[index].qty) || 1);
+        if (delta < 0 && currentQty <= 1) {
+          removeCurrentItem();
+          return;
+        }
+        arr[index].qty = Math.max(1, currentQty + delta);
         saveCart();
         render();
       }
@@ -207,13 +230,8 @@
           render();
         }
       });
-      removeBtn.addEventListener('click', () => {
-        if (type === 'tickets') cartTickets.splice(index, 1);
-        else if (type === 'accommodation') cartAccommodation.splice(index, 1);
-        else cartTransportation.splice(index, 1);
-        saveCart();
-        render();
-      });
+      removeBtn.addEventListener('click', removeCurrentItem);
+      syncLessButtonState();
       return div;
     }
 
