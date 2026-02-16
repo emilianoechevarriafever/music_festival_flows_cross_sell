@@ -73,6 +73,10 @@
       box-shadow: 0 2px 8px var(--color-action-primary-weak);
     }
     .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       text-align: center;
       color: #536B75;
       font-size: 14px;
@@ -95,7 +99,7 @@
         <a id="with-cart-link" href="/">With cart</a>
       </div>
     </div>
-    <a class="back-link" href="/">Back to Step 1</a>
+    <a class="back-link" href="/"><span aria-hidden="true">&larr;</span><span>Back</span></a>
   </div>
 
   <script>
