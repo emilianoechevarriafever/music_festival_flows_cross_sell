@@ -45,18 +45,7 @@
       border-radius: 14px;
       padding: 16px;
     }
-    .flow-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #0A1E42;
-      margin-bottom: 12px;
-    }
-    .buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .buttons a {
+    .flow-link {
       display: block;
       padding: 16px 20px;
       background: #fff;
@@ -72,12 +61,17 @@
       width: 100%;
       font-family: 'Montserrat', sans-serif;
     }
-    .buttons a:hover {
+    .flow-link:hover {
       border-color: var(--color-action-primary);
       box-shadow: 0 2px 8px var(--color-action-primary-weak);
     }
-    @media (max-width: 420px) {
-      .buttons { grid-template-columns: 1fr; }
+    .step {
+      font-size: 13px;
+      font-weight: 700;
+      color: #536B75;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
   </style>
 </head>
@@ -85,27 +79,16 @@
   <h1>Music Festival Cross Selling Flows</h1>
   <div class="container">
     <div class="flow-card">
-      <div class="flow-title">Mandatory PV sequence</div>
-      <div class="buttons">
-        <a href="/home">Without cart</a>
-        <a href="/option-b/home">With cart</a>
-      </div>
+      <div class="step">Step 1</div>
+      <a class="flow-link" href="/choose-cart.html?flow=mandatory">Mandatory PV sequence</a>
     </div>
 
     <div class="flow-card">
-      <div class="flow-title">Add-ons via bottom sheets</div>
-      <div class="buttons">
-        <a href="/option-c/">Without cart</a>
-        <a href="/option-d/">With cart</a>
-      </div>
+      <a class="flow-link" href="/choose-cart.html?flow=addons">Add-ons via bottom sheets</a>
     </div>
 
     <div class="flow-card">
-      <div class="flow-title">Optional PV sequence</div>
-      <div class="buttons">
-        <a href="/option-e/">Without cart</a>
-        <a href="/option-f/">With cart</a>
-      </div>
+      <a class="flow-link" href="/choose-cart.html?flow=optional">Optional PV sequence</a>
     </div>
   </div>
   <script>try { sessionStorage.removeItem('polar_flow_visited'); } catch (e) {}</script>
