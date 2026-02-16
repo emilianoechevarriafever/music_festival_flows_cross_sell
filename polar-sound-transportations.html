@@ -197,11 +197,14 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const isOptionB = params.get('flow') === 'option-b';
+    const isOptionE = params.get('flow') === 'option-e';
 
     if (isOptionB) {
       document.getElementById('nav-logo').href = 'option-b/index.html';
       document.getElementById('nav-logo-img').src = '../img/fever-logo.png';
       document.getElementById('hero-img').src = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80';
+    } else if (isOptionE) {
+      document.getElementById('nav-logo').href = '/option-e/';
     } else {
       document.getElementById('nav-logo').href = '/home';
     }
@@ -220,10 +223,22 @@
     let stickyMode = 'select';
     let hasSeenTransport = false;
 
-    document.getElementById('step1').href = (isOptionB ? 'option-b/polar-sound.html' : 'polar-sound.html') + '#ticket-section';
-    document.getElementById('step2').href = (isOptionB ? 'option-b/polar-sound-accommodation.html' : 'polar-sound-accommodation.html') + '#ticket-section';
-    document.getElementById('step4').href = isOptionB ? 'option-b/cart.html' : 'checkout.html';
-    if (isOptionB) document.getElementById('step4-label').textContent = 'Cart';
+    if (isOptionB) {
+      document.getElementById('step1').href = 'option-b/polar-sound.html#ticket-section';
+      document.getElementById('step2').href = 'option-b/polar-sound-accommodation.html#ticket-section';
+      document.getElementById('step4').href = 'option-b/cart.html';
+      document.getElementById('step4-label').textContent = 'Cart';
+    } else if (isOptionE) {
+      document.getElementById('step1').href = 'polar-sound.html?flow=option-e#ticket-section';
+      document.getElementById('step2').href = 'polar-sound-accommodation.html?flow=option-e#ticket-section';
+      document.getElementById('step4').href = 'checkout.html?flow=option-e';
+      document.getElementById('step4-label').textContent = 'Checkout';
+    } else {
+      document.getElementById('step1').href = 'polar-sound.html#ticket-section';
+      document.getElementById('step2').href = 'polar-sound-accommodation.html#ticket-section';
+      document.getElementById('step4').href = 'checkout.html';
+      document.getElementById('step4-label').textContent = 'Checkout';
+    }
     (function() {
       var tickets = [], accommodation = [];
       try { tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]'); accommodation = JSON.parse(localStorage.getItem('cart_accommodation') || '[]'); } catch (e) {}
@@ -324,6 +339,8 @@
       localStorage.setItem('cart_transportation', JSON.stringify(cart));
       if (isOptionB) {
         window.location.href = 'option-b/cart.html';
+      } else if (isOptionE) {
+        window.location.href = 'checkout.html?flow=option-e';
       } else {
         window.location.href = 'checkout.html';
       }

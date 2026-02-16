@@ -3,6 +3,7 @@
     { "source": "/home", "destination": "/home.html" },
     { "source": "/option-b/home", "destination": "/option-b/index.html" },
     { "source": "/option-c", "destination": "/option-c/index.html" },
+    { "source": "/option-e", "destination": "/option-e/index.html" },
     { "source": "/polar-sound-transportations", "destination": "/polar-sound-transportations.html" }
   ]
 }

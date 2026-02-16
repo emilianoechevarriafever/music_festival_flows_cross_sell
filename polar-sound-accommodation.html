@@ -190,7 +190,20 @@
     .flow-stepper .step .label { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
     .flow-stepper a.step { text-decoration:none; color:inherit; cursor:pointer; }
 
-    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
+    /* Continue shopping decision sheet (option-e) */
+    .decision-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:400; opacity:0; visibility:hidden; transition:opacity 0.2s; }
+    .decision-overlay.open { opacity:1; visibility:visible; }
+    .decision-sheet { position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(100%); width:393px; max-width:100vw; background:#fff; border-radius:16px 16px 0 0; z-index:401; padding:16px; transition:transform 0.25s ease; }
+    .decision-sheet.open { transform:translateX(-50%) translateY(0); }
+    .decision-sheet .handle { width:36px; height:4px; border-radius:4px; background:#ddd; margin:0 auto 12px; }
+    .decision-sheet h3 { font-size:18px; font-weight:700; margin-bottom:8px; text-align:center; }
+    .decision-sheet p { font-size:14px; color:var(--color-text-secondary); text-align:center; margin-bottom:16px; }
+    .decision-sheet .actions { display:flex; gap:10px; }
+    .decision-sheet .actions button { flex:1; height:44px; border-radius:100px; border:none; font-family:var(--font); font-weight:600; font-size:14px; cursor:pointer; }
+    .decision-sheet .actions .btn-no { background:#f2f3f3; color:var(--color-text); }
+    .decision-sheet .actions .btn-yes { background:#0079ca; color:#fff; }
+
+    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } .decision-sheet { width:100vw; } }
   </style>
 </head>
 <body>
@@ -198,7 +211,7 @@
 
     <header class="sticky-header">
     <nav class="navbar">
-      <a href="/home" class="logo-link"><img src="img/fever-logo.png" alt="Fever"></a>
+      <a href="/home" class="logo-link" id="accommodation-logo-link"><img src="img/fever-logo.png" alt="Fever"></a>
       <div class="nav-icons">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
@@ -210,8 +223,8 @@
     <div class="flow-stepper">
       <a href="polar-sound.html#ticket-section" id="stepper-step1" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
       <div class="step current"><span class="dot">2</span><span class="label">Accommodation</span></div>
-      <a href="polar-sound-transportations.html" class="step"><span class="dot">3</span><span class="label">Transport</span></a>
-      <a href="checkout.html" class="step"><span class="dot">4</span><span class="label">Checkout</span></a>
+      <a href="polar-sound-transportations.html" class="step" id="stepper-step3"><span class="dot">3</span><span class="label">Transport</span></a>
+      <a href="checkout.html" class="step" id="stepper-step4"><span class="dot">4</span><span class="label">Checkout</span></a>
     </div>
     </header>
 
@@ -339,8 +352,31 @@
       <button class="cta-btn" id="sticky-btn">Select accommodation</button>
     </div>
   </div>
+  <div class="decision-overlay" id="accommodation-decision-overlay"></div>
+  <div class="decision-sheet" id="accommodation-decision-sheet">
+    <div class="handle"></div>
+    <h3>Do you want to keep buying?</h3>
+    <p>If you continue, you'll see transport options. If not, we'll take you to checkout.</p>
+    <div class="actions">
+      <button type="button" class="btn-no" id="accommodation-decision-no">No</button>
+      <button type="button" class="btn-yes" id="accommodation-decision-yes">Yes</button>
+    </div>
+  </div>
 
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const isOptionE = params.get('flow') === 'option-e';
+    if (isOptionE) {
+      var accommodationLogoLink = document.getElementById('accommodation-logo-link');
+      if (accommodationLogoLink) accommodationLogoLink.href = '/option-e/';
+      var step1 = document.getElementById('stepper-step1');
+      var step3 = document.getElementById('stepper-step3');
+      var step4 = document.getElementById('stepper-step4');
+      if (step1) step1.href = 'polar-sound.html?flow=option-e#ticket-section';
+      if (step3) step3.href = 'polar-sound-transportations.html?flow=option-e';
+      if (step4) step4.href = 'checkout.html?flow=option-e';
+    }
+
     document.getElementById('sticky-btn').textContent = 'Select accommodations';
 
     // ========== DATA ==========
@@ -485,9 +521,13 @@
       } else {
         if (getTotal() > 0) {
           saveAccommodationToCart();
-          window.location.href = 'polar-sound-transportations.html';
         } else {
           localStorage.setItem('cart_accommodation', '[]');
+        }
+
+        if (isOptionE) {
+          openAccommodationDecisionSheet();
+        } else {
           window.location.href = 'polar-sound-transportations.html';
         }
       }
@@ -691,6 +731,38 @@
       var hasTickets = tickets.length > 0 && tickets.some(function(t) { return (t.qty || 0) > 0; });
       if (!hasTickets) document.getElementById('stepper-step1') && document.getElementById('stepper-step1').classList.add('skipped');
     })();
+
+    function openAccommodationDecisionSheet() {
+      var overlay = document.getElementById('accommodation-decision-overlay');
+      var sheet = document.getElementById('accommodation-decision-sheet');
+      if (overlay) overlay.classList.add('open');
+      if (sheet) sheet.classList.add('open');
+    }
+    function closeAccommodationDecisionSheet() {
+      var overlay = document.getElementById('accommodation-decision-overlay');
+      var sheet = document.getElementById('accommodation-decision-sheet');
+      if (overlay) overlay.classList.remove('open');
+      if (sheet) sheet.classList.remove('open');
+    }
+
+    if (isOptionE) {
+      var accOverlay = document.getElementById('accommodation-decision-overlay');
+      var accNo = document.getElementById('accommodation-decision-no');
+      var accYes = document.getElementById('accommodation-decision-yes');
+      if (accOverlay) accOverlay.addEventListener('click', closeAccommodationDecisionSheet);
+      if (accNo) {
+        accNo.addEventListener('click', function() {
+          closeAccommodationDecisionSheet();
+          window.location.href = 'checkout.html?flow=option-e';
+        });
+      }
+      if (accYes) {
+        accYes.addEventListener('click', function() {
+          closeAccommodationDecisionSheet();
+          window.location.href = 'polar-sound-transportations.html?flow=option-e';
+        });
+      }
+    }
   </script>
 </body>
 </html>
