@@ -289,6 +289,7 @@
     .flow-stepper .step.current .label { color:#0079ca; font-weight:600; }
     .flow-stepper .step .label { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
     .flow-stepper a.step { text-decoration:none; color:inherit; cursor:pointer; }
+    .flow-stepper a.step.disabled { pointer-events:none; cursor:default; opacity:0.45; }
     .flow-stepper.stepper-hidden { display:none !important; }
 
     @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
@@ -312,7 +313,7 @@
       <div class="step current"><span class="dot">1</span><span class="label">Tickets</span></div>
       <a href="polar-sound-accommodation.html#ticket-section" class="step"><span class="dot">2</span><span class="label">Accommodation</span></a>
       <a href="../polar-sound-transportations.html?flow=option-b" class="step"><span class="dot">3</span><span class="label">Transport</span></a>
-      <a href="cart.html" class="step"><span class="dot">4</span><span class="label">Cart</span></a>
+      <a href="cart.html" class="step" id="stepper-step4"><span class="dot">4</span><span class="label">Cart</span></a>
     </div>
     </header>
 
@@ -616,6 +617,38 @@
         }
       } catch (e) {}
     })();
+
+    function hasAnyCartItems() {
+      var tickets = [], accommodation = [], transportation = [];
+      try {
+        tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]');
+        accommodation = JSON.parse(localStorage.getItem('cart_accommodation') || '[]');
+        transportation = JSON.parse(localStorage.getItem('cart_transportation') || '[]');
+      } catch (e) {}
+      function hasItems(arr) {
+        return Array.isArray(arr) && arr.some(function(item) { return item && (item.qty || 0) > 0; });
+      }
+      return hasItems(tickets) || hasItems(accommodation) || hasItems(transportation);
+    }
+
+    function setCartStepClickable() {
+      var cartStep = document.getElementById('stepper-step4');
+      if (!cartStep) return;
+      var enabledHref = cartStep.getAttribute('data-enabled-href') || cartStep.getAttribute('href') || 'cart.html';
+      cartStep.setAttribute('data-enabled-href', enabledHref);
+      if (hasAnyCartItems()) {
+        cartStep.setAttribute('href', enabledHref);
+        cartStep.classList.remove('disabled');
+        cartStep.removeAttribute('aria-disabled');
+        cartStep.removeAttribute('tabindex');
+      } else {
+        cartStep.removeAttribute('href');
+        cartStep.classList.add('disabled');
+        cartStep.setAttribute('aria-disabled', 'true');
+        cartStep.setAttribute('tabindex', '-1');
+      }
+    }
+    setCartStepClickable();
 
     // === SINGLE CTA BEHAVIOR ===
     const stickyBtn = document.getElementById('sticky-btn');
