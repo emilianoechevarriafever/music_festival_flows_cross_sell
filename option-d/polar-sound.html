@@ -156,15 +156,16 @@
     .ticket-row .ticket-notch {
       position:absolute;
       right:136px;
-      top:8px;
-      bottom:8px;
+      top:0;
+      bottom:0;
       width:16px;
       pointer-events:none;
       z-index:3;
       background-image: repeating-linear-gradient(to bottom, var(--ticket-border) 0 2px, transparent 2px 4px);
       background-position:center;
       background-repeat:no-repeat;
-      background-size:1px 100%;
+      background-size:1px calc(100% - 16px);
+      background-position:center 8px;
       transform: translateX(50%);
     }
     .ticket-row .ticket-notch::before,
@@ -173,19 +174,21 @@
       position:absolute;
       left:0;
       width:16px;
-      height:16px;
+      height:8px;
       background:transparent;
-      border:1px solid var(--ticket-border);
-      border-radius:50%;
       box-sizing:border-box;
     }
     .ticket-row .ticket-notch::before {
-      top:-8px;
-      clip-path: inset(50% 0 0 0);
+      top:0;
+      border:1px solid var(--ticket-border);
+      border-top:none;
+      border-radius:0 0 8px 8px;
     }
     .ticket-row .ticket-notch::after {
-      bottom:-8px;
-      clip-path: inset(0 0 50% 0);
+      bottom:0;
+      border:1px solid var(--ticket-border);
+      border-bottom:none;
+      border-radius:8px 8px 0 0;
     }
 
     /* Selling fast banner */
