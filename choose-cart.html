@@ -96,11 +96,11 @@
     <div class="flow-card">
       <div class="flow-title" id="flow-title">Choose flow</div>
       <div class="buttons">
-        <a id="without-cart-link" href="/">Without cart</a>
-        <a id="with-cart-link" href="/">With cart</a>
+        <a id="without-cart-link" href="index.html">Without cart</a>
+        <a id="with-cart-link" href="index.html">With cart</a>
       </div>
     </div>
-    <a class="back-link" href="/"><span aria-hidden="true">&larr;</span><span>Back</span></a>
+    <a class="back-link" href="index.html"><span aria-hidden="true">&larr;</span><span>Back</span></a>
   </div>
 
   <script>
@@ -111,23 +111,23 @@
       var config = {
         mandatory: {
           title: 'Mandatory PV sequence',
-          without: '/home',
-          with: '/option-b/home'
+          without: 'home.html',
+          with: 'option-b/index.html'
         },
         addons: {
           title: 'Add-ons via bottom sheets',
-          without: '/option-c/',
-          with: '/option-d/'
+          without: 'option-c/',
+          with: 'option-d/'
         },
         optional: {
           title: 'Optional PV sequence',
-          without: '/option-e/',
-          with: '/option-f/'
+          without: 'option-e/',
+          with: 'option-f/'
         }
       };
 
       if (!flow || !config[flow]) {
-        window.location.replace('/');
+        window.location.replace('index.html');
         return;
       }
 
