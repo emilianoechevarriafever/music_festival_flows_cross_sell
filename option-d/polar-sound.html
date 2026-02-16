@@ -142,7 +142,9 @@
       top:8px;
       bottom:8px;
       width:1px;
-      border-left:1px dotted var(--ticket-border);
+      background-image:repeating-linear-gradient(to bottom, var(--ticket-border) 0 2px, transparent 2px 4px);
+      background-repeat:no-repeat;
+      background-size:1px 100%;
       transform:translateX(50%);
       pointer-events:none;
       z-index:2;
