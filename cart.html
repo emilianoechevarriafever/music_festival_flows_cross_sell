@@ -177,10 +177,11 @@
       div.className = 'cart-item';
       div.dataset.type = type;
       div.dataset.index = index;
-      const price = (parseFloat(String(item.price).replace(/[^\d.,]/g, '').replace(',', '.')) || 0) * (item.qty || 1);
+      const qty = item.qty != null ? item.qty : 1;
+      const price = (parseFloat(String(item.price).replace(/[^\d.,]/g, '').replace(',', '.')) || 0) * qty;
       div.innerHTML = '<div class="item-info"><div class="item-name">' + (item.name || 'Item') + '</div>' +
         (item.detail ? '<div class="item-detail">' + item.detail + '</div>' : '') +
-        '<div class="item-row"><div class="qty-wrap"><button type="button" aria-label="Less">−</button><input type="number" min="1" value="' + (item.qty || 1) + '" aria-label="Quantity"><button type="button" aria-label="More">+</button></div></div></div>' +
+        '<div class="item-row"><div class="qty-wrap"><button type="button" aria-label="Less">−</button><input type="number" min="0" value="' + qty + '" aria-label="Quantity"><button type="button" aria-label="More">+</button></div></div></div>' +
         '<div class="item-price">€' + price.toFixed(2) + '</div>' +
         '<button type="button" class="btn-remove" aria-label="Remove item">' +
           '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
@@ -200,8 +201,8 @@
       }
       function syncLessButtonState() {
         const arr = type === 'tickets' ? cartTickets : type === 'accommodation' ? cartAccommodation : cartTransportation;
-        const qty = Math.max(1, (arr[index] && arr[index].qty) || 1);
-        if (qty <= 1) {
+        const qty = Math.max(0, (arr[index] && arr[index].qty != null ? arr[index].qty : 1));
+        if (qty <= 0) {
           lessBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>';
           lessBtn.setAttribute('aria-label', 'Remove item');
         } else {
@@ -211,12 +212,12 @@
       }
       function updateQty(delta) {
         const arr = type === 'tickets' ? cartTickets : type === 'accommodation' ? cartAccommodation : cartTransportation;
-        const currentQty = Math.max(1, (arr[index] && arr[index].qty) || 1);
-        if (delta < 0 && currentQty <= 1) {
+        const currentQty = Math.max(0, (arr[index] && arr[index].qty != null ? arr[index].qty : 1));
+        if (delta < 0 && currentQty <= 0) {
           removeCurrentItem();
           return;
         }
-        arr[index].qty = Math.max(1, currentQty + delta);
+        arr[index].qty = Math.max(0, currentQty + delta);
         saveCart();
         render();
       }
@@ -224,7 +225,7 @@
       moreBtn.addEventListener('click', () => updateQty(1));
       qtyInput.addEventListener('change', function() {
         const v = parseInt(this.value, 10);
-        if (!isNaN(v) && v >= 1) {
+        if (!isNaN(v) && v >= 0) {
           const arr = type === 'tickets' ? cartTickets : type === 'accommodation' ? cartAccommodation : cartTransportation;
           arr[index].qty = v;
           saveCart();
