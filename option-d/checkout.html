@@ -409,8 +409,15 @@
     loadCart();
     render();
 
-    // Scroll viewport to payment methods on load
-    document.getElementById('payment-section').scrollIntoView({ behavior: 'auto', block: 'start' });
+    // Option D: only autoscroll when coming from cart
+    try {
+      var shouldScrollToPayment = sessionStorage.getItem('checkout_scroll_target') === 'payment';
+      if (shouldScrollToPayment) {
+        var paymentEl = document.getElementById('payment-section') || document.getElementById('payment-method');
+        if (paymentEl) paymentEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+        sessionStorage.removeItem('checkout_scroll_target');
+      }
+    } catch (e) {}
 
     // Card number clear button
     const cardInput = document.getElementById('card-number');

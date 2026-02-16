@@ -222,6 +222,7 @@
     render();
 
     document.getElementById('btn-checkout').addEventListener('click', function() {
+      try { sessionStorage.setItem('checkout_scroll_target', 'payment'); } catch (e) {}
       window.location.href = 'checkout.html';
     });
   </script>

@@ -460,9 +460,15 @@
       clearBtn.addEventListener('click', function() { cardInput.value = ''; cardInput.focus(); clearBtn.classList.remove('visible'); });
     }
 
-    // Option B: desde cart, viewport directo en Payment method (detalle de compra arriba)
-    var paymentEl = document.getElementById('payment-method');
-    if (paymentEl) paymentEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+    // Option B: only autoscroll when coming from cart
+    try {
+      var shouldScrollToPayment = sessionStorage.getItem('checkout_scroll_target') === 'payment';
+      if (shouldScrollToPayment) {
+        var paymentEl = document.getElementById('payment-method') || document.getElementById('payment-section');
+        if (paymentEl) paymentEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+        sessionStorage.removeItem('checkout_scroll_target');
+      }
+    } catch (e) {}
   </script>
 </body>
 </html>
