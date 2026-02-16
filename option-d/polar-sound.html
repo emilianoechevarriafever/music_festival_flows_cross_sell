@@ -135,6 +135,18 @@
 
     /* Ticket rows — Figma 778-26883/778-26897 (ticket silhouette with center perforation) */
     .ticket-row { --ticket-border:#ccd2d8; display:flex; align-items:stretch; min-height:96px; margin-bottom:16px; position:relative; border-radius:8px; overflow:visible; background:transparent; }
+    .ticket-row::after {
+      content:'';
+      position:absolute;
+      right:136px;
+      top:8px;
+      bottom:8px;
+      width:1px;
+      border-left:1px dotted var(--ticket-border);
+      transform:translateX(50%);
+      pointer-events:none;
+      z-index:2;
+    }
     .ticket-row .ticket-content { flex:1; padding:12px; display:flex; flex-direction:column; justify-content:space-between; gap:4px; border:1px solid var(--ticket-border); border-right:none; border-radius:8px 0 0 8px; background:#ffffff; min-height:96px; }
     .ticket-row .ticket-name { font-size:14px; font-weight:600; line-height:20px; color:#031419; }
     .ticket-row .ticket-more { font-size:12px; font-weight:600; line-height:18px; color:#0079ca; text-decoration:underline; text-underline-offset:2px; padding:4px 0; cursor:pointer; text-align:left; align-self:flex-start; }
@@ -161,11 +173,6 @@
       width:16px;
       pointer-events:none;
       z-index:3;
-      background-image: repeating-linear-gradient(to bottom, var(--ticket-border) 0 2px, transparent 2px 4px);
-      background-position:center;
-      background-repeat:no-repeat;
-      background-size:1px calc(100% - 16px);
-      background-position:center 8px;
       transform: translateX(50%);
     }
     .ticket-row .ticket-notch::before,
