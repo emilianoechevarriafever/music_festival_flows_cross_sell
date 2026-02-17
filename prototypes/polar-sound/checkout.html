@@ -420,7 +420,7 @@
       if (flow === 'option-e' || flow === 'option-f') {
         try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
         var logoLink = document.getElementById('checkout-logo-link');
-        if (logoLink) logoLink.href = '/' + flow + '/';
+        if (logoLink) logoLink.href = flow + '/';
         var checkoutStepper = document.querySelector('.flow-stepper');
         if (checkoutStepper) checkoutStepper.style.display = 'none';
         var step1 = document.getElementById('stepper-step1');
