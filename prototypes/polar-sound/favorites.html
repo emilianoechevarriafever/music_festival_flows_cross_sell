@@ -164,7 +164,7 @@
       <h1>Favorites</h1>
     </div>
 
-    <section id="favorites-empty-state" hidden>
+    <section id="favorites-empty-logged-out" hidden>
       <div class="empty-banner">
         <div class="empty-illustration">
           <img class="empty-character" src="../../img/favorites-character.svg" alt="">
@@ -179,6 +179,21 @@
       </div>
     </section>
 
+    <section id="favorites-empty-logged-in" hidden>
+      <div class="empty-banner">
+        <div class="empty-illustration">
+          <img class="empty-character" src="../../img/favorites-character.svg" alt="">
+          <img class="empty-heart" src="../../img/favorites-heart.svg" alt="">
+        </div>
+        <p class="empty-message">Products you add to favorites will be saved here.</p>
+      </div>
+      <div class="empty-info">
+        <h2>You haven't added any favorites yet</h2>
+        <p class="empty-copy">Browse experiences and tap the heart icon to save them for easy access later.</p>
+        <a class="continue-btn" href="home.html">Discover</a>
+      </div>
+    </section>
+
     <main class="content">
       <section id="favorites-list" class="cards-grid"></section>
     </main>
@@ -188,9 +203,13 @@
   <script>
     (function() {
       var FAVORITES_KEY = 'polar_liked_plans';
+      var LOGGED_IN_KEY = 'fever_logged_in';
       var listNode = document.getElementById('favorites-list');
-      var emptyStateNode = document.getElementById('favorites-empty-state');
-      if (!listNode || !emptyStateNode) return;
+      var emptyLoggedOut = document.getElementById('favorites-empty-logged-out');
+      var emptyLoggedIn = document.getElementById('favorites-empty-logged-in');
+      if (!listNode) return;
+
+      function isLoggedIn() { return localStorage.getItem(LOGGED_IN_KEY) !== 'false'; }
 
       function readFavorites() {
         try {
@@ -225,13 +244,16 @@
         });
 
         if (!favorites.length) {
-          emptyStateNode.hidden = false;
+          var loggedIn = isLoggedIn();
+          if (emptyLoggedOut) emptyLoggedOut.hidden = loggedIn;
+          if (emptyLoggedIn) emptyLoggedIn.hidden = !loggedIn;
           listNode.hidden = true;
           listNode.innerHTML = '';
           return;
         }
 
-        emptyStateNode.hidden = true;
+        if (emptyLoggedOut) emptyLoggedOut.hidden = true;
+        if (emptyLoggedIn) emptyLoggedIn.hidden = true;
         listNode.hidden = false;
         listNode.innerHTML = favorites.map(function(item) {
           var safeTitle = escapeHtml(item.title || 'Plan');
