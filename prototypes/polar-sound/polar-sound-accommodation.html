@@ -943,13 +943,14 @@
       if (btnYes) {
         btnYes.addEventListener('click', function() {
           try { sessionStorage.setItem('option_h_came_from', 'accommodation'); } catch(e) {}
-          window.location.href = 'polar-sound-transportations.html?flow=option-h';
+          window.location.href = 'polar-sound-transportations.html?flow=' + flow;
         });
       }
       if (btnNo) {
         btnNo.addEventListener('click', function() {
           try { localStorage.setItem('cart_transportation', '[]'); } catch(e) {}
-          window.location.href = 'cart.html?flow=option-h';
+          var noDest = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
+          window.location.href = noDest;
         });
       }
     })();

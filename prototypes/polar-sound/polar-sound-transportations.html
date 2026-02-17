@@ -371,13 +371,15 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h')) flow = storedFlow;
+    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h' || storedFlow === 'option-i')) flow = storedFlow;
     const isOptionB = flow === 'option-b';
     const isOptionE = flow === 'option-e';
     const isOptionF = flow === 'option-f';
     const isOptionG = flow === 'option-g';
     const isOptionH = flow === 'option-h';
-    const isHubFlow = isOptionF || isOptionG || isOptionH;
+    const isOptionI = flow === 'option-i';
+    const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
+    const isCrossSellFlow = isOptionH || isOptionI;
     if (isOptionG || isOptionB) {
       var cartLink = document.getElementById('nav-cart-link');
       if (cartLink) {
@@ -390,10 +392,32 @@
       try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
     }
     if (isHubFlow) {
-      document.getElementById('flow-stepper').classList.add('stepper-hidden');
+      if (!isCrossSellFlow) {
+        document.getElementById('flow-stepper').classList.add('stepper-hidden');
+      }
       var generalInfoBlock = document.getElementById('general-info-block');
       if (generalInfoBlock) generalInfoBlock.style.display = 'none';
     }
+
+    // Option H/I: rebuild stepper dynamically based on user's path
+    if (isCrossSellFlow) {
+      var hCameFrom = '';
+      try { hCameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
+      var stepperEl = document.getElementById('flow-stepper');
+      if (stepperEl) {
+        var lastLabel = isOptionI ? 'Cart' : 'Checkout';
+        var lastHref = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
+        var html = '<a href="polar-sound.html?flow=' + flow + '#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>';
+        if (hCameFrom === 'accommodation') {
+          html += '<a href="polar-sound-accommodation.html?flow=' + flow + '" class="step done"><span class="dot"></span><span class="label">Accommodation</span></a>';
+        }
+        html += '<div class="step current"><span class="dot"></span><span class="label">Transport</span></div>';
+        html += '<div class="step"><span class="dot"></span><span class="label">' + lastLabel + '</span></div>';
+        stepperEl.innerHTML = html;
+        stepperEl.classList.remove('stepper-hidden');
+      }
+    }
+
     if (isOptionB) {
       document.getElementById('nav-logo').href = 'option-b/index.html';
       document.getElementById('nav-logo-img').src = '../img/fever-logo.png';
@@ -424,14 +448,22 @@
     } else if (isHubFlow) {
       document.getElementById('step1').href = 'polar-sound.html?flow=' + flow + '#ticket-section';
       document.getElementById('step2').href = 'polar-sound-accommodation.html?flow=' + flow + '#ticket-section';
-      if (isOptionG) {
-        document.getElementById('step4').href = 'cart.html?flow=option-g';
+      if (isOptionG || isOptionI) {
+        document.getElementById('step4').href = 'cart.html?flow=' + flow;
         document.getElementById('step4-label').textContent = 'Cart';
       } else {
-        document.getElementById('step4').href = 'checkout.html?flow=option-f';
+        document.getElementById('step4').href = (isOptionH ? 'checkout.html?flow=option-h' : 'checkout.html?flow=option-f');
         document.getElementById('step4-label').textContent = 'Checkout';
       }
-      try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
+      if (isCrossSellFlow) {
+        var initCameFrom = '';
+        try { initCameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
+        if (initCameFrom !== 'accommodation') {
+          try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
+        }
+      } else {
+        try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
+      }
     } else {
       document.getElementById('step1').href = 'polar-sound.html#ticket-section';
       document.getElementById('step2').href = 'polar-sound-accommodation.html#ticket-section';
