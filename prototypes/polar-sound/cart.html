@@ -147,16 +147,18 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f')) flow = storedFlow;
+    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g')) flow = storedFlow;
     const isOptionF = flow === 'option-f';
+    const isOptionG = flow === 'option-g';
+    const isHubFlow = isOptionF || isOptionG;
 
-    if (isOptionF) {
-      try { sessionStorage.setItem('polar_flow_mode', 'option-f'); } catch (e) {}
+    if (isHubFlow) {
+      try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
     }
 
-    if (isOptionF) {
+    if (isHubFlow) {
       var cartLogoLink = document.getElementById('cart-logo-link');
-      if (cartLogoLink) cartLogoLink.href = 'option-f/';
+      if (cartLogoLink) cartLogoLink.href = flow + '/';
     }
 
     let cartTickets = [];
@@ -310,7 +312,7 @@
         return;
       }
       try { sessionStorage.setItem('checkout_scroll_target', 'payment'); } catch (e) {}
-      window.location.href = isOptionF ? 'checkout.html?flow=option-f' : 'checkout.html';
+      window.location.href = isHubFlow ? ('checkout.html?flow=' + flow) : 'checkout.html';
     });
   </script>
 </body>

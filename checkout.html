@@ -381,10 +381,10 @@
       if (!flow) {
         try {
           var storedFlow = sessionStorage.getItem('polar_flow_mode');
-          if (storedFlow === 'option-e' || storedFlow === 'option-f') flow = storedFlow;
+          if (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g') flow = storedFlow;
         } catch (e) {}
       }
-      if (flow === 'option-e' || flow === 'option-f') {
+      if (flow === 'option-e' || flow === 'option-f' || flow === 'option-g') {
         try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
         try { /* no-op: stepper removed */ } catch (e) {}
       }

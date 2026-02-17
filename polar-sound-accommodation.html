@@ -339,10 +339,12 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f')) flow = storedFlow;
+    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g')) flow = storedFlow;
     const isOptionE = flow === 'option-e';
     const isOptionF = flow === 'option-f';
-    const isOptionalFlow = isOptionE || isOptionF;
+    const isOptionG = flow === 'option-g';
+    const isHubFlow = isOptionF || isOptionG;
+    const isOptionalFlow = isOptionE || isHubFlow;
     if (isOptionalFlow) {
       try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
     }
@@ -512,16 +514,23 @@
       if (stickyMode === 'tickets') {
         scrollToTicketSection('smooth');
       } else {
-        const nextUrl = isOptionF ? 'checkout.html?flow=option-f' : ('polar-sound-transportations.html' + flowSuffix);
+        var nextUrl;
+        if (isOptionG) {
+          nextUrl = 'cart.html?flow=option-g';
+        } else if (isOptionF) {
+          nextUrl = 'checkout.html?flow=option-f';
+        } else {
+          nextUrl = 'polar-sound-transportations.html' + (flow ? '?flow=' + flow : '');
+        }
         if (getTotal() > 0) {
           saveAccommodationToCart();
-          if (isOptionF) {
+          if (isHubFlow) {
             try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
           }
           window.location.href = nextUrl;
         } else {
           localStorage.setItem('cart_accommodation', '[]');
-          if (isOptionF) {
+          if (isHubFlow) {
             try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
           }
           window.location.href = nextUrl;
