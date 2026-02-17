@@ -13,235 +13,235 @@
       --text: #031419;
       --muted: #536b75;
       --bg: #f3f4f7;
-      --line: #ccd2d8;
+      --line: #e4e7eb;
       --link: #0079ca;
-      --sheet: #f5f5f5;
     }
-    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); }
+    html { -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); }
+
     .phone {
-      width: 100%;
-      max-width: 430px;
-      min-height: 100vh;
-      margin: 0 auto;
-      background: #0f2530;
-      position: relative;
-      overflow: hidden;
+      width: 100%; max-width: 430px; min-height: 100vh;
+      margin: 0 auto; background: #0f2530;
+      position: relative; overflow: hidden;
     }
+
+    /* Dark hero behind navbar */
     .hero-bg {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(3, 20, 25, 0.72), rgba(3, 20, 25, 0.72)),
+        linear-gradient(rgba(3,20,25,0.72), rgba(3,20,25,0.72)),
         url("https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/66cd0d5a-1945-11f0-b4e1-16541c266220.jpg");
-      background-size: cover;
-      background-position: center;
+      background-size: cover; background-position: center;
     }
+
+    /* Navbar */
     .navbar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: relative; z-index: 3;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 10px 16px;
-      background: rgba(255, 255, 255, 0.94);
-      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.94);
+      border-bottom: 1px solid #ccd2d8;
     }
     .logo-link img { height: 38px; width: auto; display: block; }
     .nav-icons { display: flex; align-items: center; gap: 16px; }
     .nav-icons svg { width: 24px; height: 24px; color: #031419; stroke: currentColor; }
-    .avatar-wrap { position: relative; display: inline-flex; align-items: center; }
+    .nav-icon-btn { border: none; background: none; padding: 0; cursor: pointer; display: inline-flex; align-items: center; color: inherit; }
+    .avatar-wrap { position: relative; display: inline-flex; align-items: center; text-decoration: none; }
     .avatar-wrap img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; display: block; }
     .avatar-wrap::after {
-      content: '';
-      position: absolute;
-      top: -1px;
-      right: -1px;
-      width: 8px;
-      height: 8px;
-      background: #22ad5c;
-      border: 1.5px solid #fff;
-      border-radius: 50%;
+      content: ''; position: absolute; top: -1px; right: -1px;
+      width: 8px; height: 8px; background: #22ad5c;
+      border: 1.5px solid #fff; border-radius: 50%;
     }
+
+    /* Profile sheet — overlays below navbar */
     .sheet {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 4;
-      background: var(--sheet);
+      position: relative; z-index: 4;
+      background: #fff;
       border-radius: 16px 16px 0 0;
+      min-height: calc(100vh - 58px);
       border: 1px solid #d4d7dc;
-      overflow: hidden;
+      border-bottom: none;
     }
-    .sheet-top {
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
+    /* Sheet header */
+    .sheet-header {
+      height: 56px;
+      display: flex; align-items: center; justify-content: center;
       position: relative;
       border-bottom: 1px solid var(--line);
-      background: #fafafb;
     }
-    .sheet-top h1 { margin: 0; font-size: 16px; line-height: 24px; font-weight: 700; }
+    .sheet-header h1 { font-size: 16px; font-weight: 700; line-height: 24px; }
     .sheet-close {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      background: none;
-      color: #031419;
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 28px;
-      line-height: 1;
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      border: none; background: none; cursor: pointer;
+      width: 28px; height: 28px; display: inline-flex;
+      align-items: center; justify-content: center;
+      color: var(--text); text-decoration: none;
     }
-    .sheet-content { padding: 16px; background: #f5f5f5; }
-    .section {
-      padding: 0 0 16px;
-      border-bottom: 1px solid var(--line);
+    .sheet-close svg { width: 20px; height: 20px; }
+
+    /* Sheet body */
+    .sheet-body { padding: 20px 16px 40px; }
+
+    /* Sections */
+    .section { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .section-title {
+      font-size: 16px; font-weight: 700; line-height: 24px;
+      margin-bottom: 12px;
+    }
+
+    /* Account email row */
+    .account-email {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; line-height: 20px; color: var(--text);
       margin-bottom: 16px;
     }
-    .section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 8px; }
-    .logout-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px 0;
-      border: none;
-      background: none;
-      color: #d63031;
-      font-family: var(--font);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
+    .account-email .google-icon { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* Menu rows (Profile, Favorites) */
+    .menu-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; cursor: pointer; text-decoration: none; color: var(--text);
     }
-    .logout-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-    .logout-btn:hover { opacity: 0.8; }
-    .section h2 { margin: 0 0 8px; font-size: 16px; line-height: 24px; font-weight: 700; }
-    .mail-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 20px;
+    .menu-row span { font-size: 14px; font-weight: 500; line-height: 20px; }
+    .menu-row .chevron { width: 18px; height: 18px; color: #a0adb5; flex-shrink: 0; }
+
+    /* External link */
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--link); font-size: 14px; font-weight: 600;
+      line-height: 20px; text-decoration: underline;
+      text-underline-offset: 2px;
     }
-    .mail-row .left { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
-    .mail-dot { width: 8px; height: 8px; background: #ff6b6b; border-radius: 50%; flex: 0 0 auto; }
-    .mail-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .links a {
-      display: block;
-      color: var(--link);
-      font-size: 14px;
-      line-height: 20px;
-      font-weight: 600;
-      margin-top: 4px;
-      text-decoration: underline;
+    .ext-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Fever Club */
+    .club-header {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 12px;
     }
-    .inline-link {
-      color: var(--link);
-      font-size: 14px;
-      line-height: 20px;
-      font-weight: 600;
-      text-decoration: underline;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .club-header .section-title { margin-bottom: 0; }
+    .club-header .info-icon {
+      width: 18px; height: 18px; color: #a0adb5; cursor: pointer;
     }
+
     .club-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      background: #e7eaef;
-      color: #6a7684;
-      padding: 5px 10px;
-      font-size: 14px;
-      line-height: 20px;
-      margin-bottom: 8px;
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 999px; background: #f0f1f3;
+      padding: 6px 14px 6px 6px;
+      font-size: 14px; font-weight: 600; line-height: 20px;
+      color: var(--text); margin-bottom: 10px;
     }
-    .club-pill .star {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .club-pill .star-badge {
+      width: 26px; height: 26px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
       background: #dd8400;
-      color: #fff;
-      font-size: 12px;
-      line-height: 1;
     }
+    .club-pill .star-badge svg { width: 14px; height: 14px; }
+
+    /* Logout row */
+    .logout-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0;
+      border: none; background: none; width: 100%;
+      font-family: var(--font); font-size: 14px; font-weight: 500;
+      line-height: 20px; color: var(--text); cursor: pointer;
+    }
+    .logout-row svg { width: 20px; height: 20px; color: var(--text); flex-shrink: 0; }
+    .logout-row:hover { opacity: 0.7; }
   </style>
 </head>
 <body>
   <div class="phone">
     <div class="hero-bg"></div>
 
+    <!-- Navbar -->
     <nav class="navbar">
       <a class="logo-link" href="home.html">
         <img src="../../img/fever-logo.png" alt="Fever">
       </a>
       <div class="nav-icons">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        <a class="avatar-wrap" href="profile.html" aria-label="Open profile">
+        <a href="favorites.html" style="display:inline-flex;color:inherit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
+        <a class="avatar-wrap" href="javascript:void(0)" aria-label="Profile">
           <img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile">
         </a>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </div>
     </nav>
 
+    <!-- Profile Sheet -->
     <section class="sheet">
-      <div class="sheet-top">
-        <h1>My profile</h1>
-        <a class="sheet-close" href="home.html" aria-label="Close profile sheet">&times;</a>
+      <div class="sheet-header">
+        <h1>Profile</h1>
+        <a class="sheet-close" href="home.html" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </a>
       </div>
-      <div class="sheet-content">
+
+      <div class="sheet-body">
+        <!-- My account -->
         <div class="section">
-          <h2>My account</h2>
-          <div class="mail-row">
-            <div class="left">
-              <span class="mail-dot"></span>
-              <span class="mail-text">leonardo@titanic.com</span>
-            </div>
-            <span>&#x2197;</span>
+          <h2 class="section-title">My account</h2>
+          <div class="account-email">
+            <!-- Google icon -->
+            <svg class="google-icon" viewBox="0 0 20 20" fill="none">
+              <path d="M18.17 10.2c0-.57-.05-1.12-.15-1.64H10v3.1h4.58a3.92 3.92 0 01-1.7 2.57v2.14h2.75c1.61-1.48 2.54-3.66 2.54-6.17z" fill="#4285F4"/>
+              <path d="M10 18.5c2.3 0 4.23-.76 5.63-2.07l-2.75-2.14c-.76.51-1.74.81-2.88.81-2.21 0-4.09-1.5-4.76-3.51H2.4v2.21A8.5 8.5 0 0010 18.5z" fill="#34A853"/>
+              <path d="M5.24 11.59a5.1 5.1 0 010-3.26V6.12H2.4a8.5 8.5 0 000 7.68l2.84-2.21z" fill="#FBBC05"/>
+              <path d="M10 4.82a4.6 4.6 0 013.27 1.28l2.45-2.45A8.2 8.2 0 0010 1.5a8.5 8.5 0 00-7.6 4.62l2.84 2.21C5.91 6.32 7.79 4.82 10 4.82z" fill="#EA4335"/>
+            </svg>
+            emiliano.echevarria@feverup.com
           </div>
-          <div class="links">
-            <a href="javascript:void(0)">Profile</a>
-            <a href="javascript:void(0)">Change email</a>
+
+          <a class="menu-row" href="javascript:void(0)">
+            <span>Profile</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </a>
+          <a class="menu-row" href="favorites.html">
+            <span>Favorites</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </a>
+        </div>
+
+        <!-- My Tickets -->
+        <div class="section">
+          <h2 class="section-title">My tickets</h2>
+          <a class="ext-link" href="javascript:void(0)">
+            See my tickets in the app
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 1.5h7.5V9"/><path d="M12.5 1.5L1.5 12.5"/></svg>
+          </a>
+        </div>
+
+        <!-- Fever Club -->
+        <div class="section">
+          <div class="club-header">
+            <h2 class="section-title">Fever Club</h2>
+            <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
           </div>
+          <div class="club-pill">
+            <span class="star-badge">
+              <svg viewBox="0 0 14 14" fill="white"><path d="M7 0l2.16 4.38L14 5.1l-3.5 3.41.83 4.82L7 11.07l-4.33 2.27.83-4.82L0 5.1l4.84-.72L7 0z"/></svg>
+            </span>
+            625 points
+          </div>
+          <br>
+          <a class="ext-link" href="javascript:void(0)">
+            Get rewards in the app
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 1.5h7.5V9"/><path d="M12.5 1.5L1.5 12.5"/></svg>
+          </a>
         </div>
 
+        <!-- Logout -->
         <div class="section">
-          <h2>My Tickets</h2>
-          <a class="inline-link" href="javascript:void(0)">See my tickets in the app <span>&#x2197;</span></a>
-        </div>
-
-        <div class="section">
-          <h2>Fever Club</h2>
-          <div class="club-pill"><span class="star">&#9733;</span>300 points</div>
-          <a class="inline-link" href="javascript:void(0)">Get rewards in the app <span>&#x2197;</span></a>
-        </div>
-
-        <div class="section">
-          <button type="button" class="logout-btn" onclick="window.location.href='home.html'">
+          <button type="button" class="logout-row" onclick="window.location.href='home.html'">
+            <span>Logout</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Log out
           </button>
         </div>
       </div>
