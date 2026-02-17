@@ -1074,7 +1074,7 @@
       var planTitle=titleNode?titleNode.textContent.trim():document.title;
       var planImage=heroImg?heroImg.src:'';
       var planHref=window.location.href.split('?')[0].split('#')[0];
-      var slug=planTitle.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'plan';
+      var slug='polar-sound';
       var planId='plan-view::'+slug;
       var fav=readFav();
       if(fav[planId]){likeBtn.classList.add('liked');likeBtn.setAttribute('aria-label','Remove from favorites');}

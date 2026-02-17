@@ -580,7 +580,7 @@
       <div class="loc-name">Baqueira Beret - Sector Bonaigua</div>
       <div class="loc-address">Baqueira Beret Parking Lot, 25598</div>
       <div class="map-placeholder">
-        <img src="https://applications-media.feverup.com/image/upload/f_auto/fever2/place/maps/69078__40.403930093922796_-3.7062277865082227.png" alt="Map area Baqueira">
+        <img src="img/map-baqueira.png" alt="Map area Baqueira – Estación de Esquí Baqueira Beret">
       </div>
     </div>
 
@@ -1038,7 +1038,7 @@
       var planTitle=titleNode?titleNode.textContent.trim():document.title;
       var planImage=heroImg?heroImg.src:'';
       var planHref=window.location.href.split('?')[0].split('#')[0];
-      var slug=planTitle.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'plan';
+      var slug='polar-sound';
       var planId='plan-view::'+slug;
       var fav=readFav();
       if(fav[planId]){likeBtn.classList.add('liked');likeBtn.setAttribute('aria-label','Remove from favorites');}
