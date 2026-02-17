@@ -424,20 +424,27 @@
       if (generalInfoBlock) generalInfoBlock.style.display = 'none';
     }
 
-    // Option H/I: rebuild stepper dynamically based on user's path
+    // Option H/I: rebuild stepper dynamically based on user's path (always 4 steps)
     if (isCrossSellFlow) {
       var hCameFrom = '';
       try { hCameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
       var stepperEl = document.getElementById('flow-stepper');
       if (stepperEl) {
         var lastLabel = isOptionI ? 'Cart' : 'Checkout';
-        var lastHref = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
-        var html = '<a href="polar-sound.html?flow=' + flow + '#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>';
+        var html = '';
         if (hCameFrom === 'accommodation') {
+          // Came from Accommodation cross-sell: Tickets ✓ → Accommodation ✓ → Transport ● → Checkout/Cart
+          html += '<a href="polar-sound.html?flow=' + flow + '#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>';
           html += '<a href="polar-sound-accommodation.html?flow=' + flow + '" class="step done"><span class="dot"></span><span class="label">Accommodation</span></a>';
+          html += '<div class="step current"><span class="dot"></span><span class="label">Transport</span></div>';
+          html += '<div class="step"><span class="dot"></span><span class="label">' + lastLabel + '</span></div>';
+        } else {
+          // Came from hub: Tickets ✓ → Transport ● → Accommodation (future) → Checkout/Cart
+          html += '<a href="polar-sound.html?flow=' + flow + '#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>';
+          html += '<div class="step current"><span class="dot"></span><span class="label">Transport</span></div>';
+          html += '<div class="step"><span class="dot"></span><span class="label">Accommodation</span></div>';
+          html += '<div class="step"><span class="dot"></span><span class="label">' + lastLabel + '</span></div>';
         }
-        html += '<div class="step current"><span class="dot"></span><span class="label">Transport</span></div>';
-        html += '<div class="step"><span class="dot"></span><span class="label">' + lastLabel + '</span></div>';
         stepperEl.innerHTML = html;
         stepperEl.classList.remove('stepper-hidden');
       }
