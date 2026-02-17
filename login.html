@@ -69,16 +69,13 @@
 
     /* Illustration area */
     .illustration-wrap {
-      display:flex; align-items:center; justify-content:center;
-      padding:12px 12px 0; width:100%;
+      display:flex; align-items:flex-end; justify-content:center;
+      width:100%; padding:12px 12px 0;
+      border-bottom:1px solid var(--color-border);
+      margin-bottom:16px;
     }
     .illustration-wrap img {
-      height:80px; width:auto; display:block;
-    }
-    .illustration-divider {
-      width:100%; max-width:328px;
-      height:1px; background:var(--color-border);
-      margin:0 auto 16px;
+      height:88px; width:auto; display:block;
     }
 
     /* Title */
@@ -155,9 +152,8 @@
     <div class="login-content">
       <!-- Character illustration -->
       <div class="illustration-wrap">
-        <img src="https://www.figma.com/api/mcp/asset/2b30f41d-2527-4bbb-809d-071dc947f0e5" alt="">
+        <img src="img/big-shoes-torso.svg" alt="">
       </div>
-      <div class="illustration-divider"></div>
 
       <h1 class="login-title">Log in or sign up to continue</h1>
 
