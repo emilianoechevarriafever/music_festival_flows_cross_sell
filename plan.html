@@ -795,7 +795,7 @@
     venueEl.innerHTML = '<img class="venue-img" src="' + plan.venue.img + '" alt="' + plan.venue.name + '"><div class="venue-name-lg">' + plan.venue.name + '</div><div class="venue-desc">' + plan.venue.desc + '</div>';
 
     var locEl = document.getElementById('location-section');
-    locEl.innerHTML = '<div class="loc-name">' + plan.location.name + '</div><div class="loc-address">' + plan.location.address + '</div><div class="map-placeholder"><img src="https://maps.googleapis.com/maps/api/staticmap?center=' + encodeURIComponent(plan.location.address) + '&zoom=15&size=400x200&scale=2" alt="Map" onerror="this.parentElement.style.background=\'#e8ecf0\'"></div>';
+    locEl.innerHTML = '<div class="loc-name">' + plan.location.name + '</div><div class="loc-address">' + plan.location.address + '</div><div class="map-placeholder"><img src="img/map-madrid.png" alt="Map – ' + plan.location.name + '"></div>';
 
     var pillsRow = document.getElementById('ticket-pills-row');
     var panelsEl = document.getElementById('ticket-panels');

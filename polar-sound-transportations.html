@@ -217,6 +217,7 @@
     </div>
 
     <!-- General Info -->
+    <div id="general-info-block">
     <div class="section-header">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
       <h2>General info</h2>
@@ -242,6 +243,7 @@
       <p>No problem! You can skip this step and arrange your own transport to Baqueira Beret. The festival parking lot is located at the Baqueira Beret - Sector Bonaigua resort (coordinates: 42.6946&deg;N, 0.9541&deg;E). Free parking is available on a first-come, first-served basis.</p>
     </div>
     <div class="divider"></div>
+    </div>
 
     <!-- About the Venue -->
     <div class="section-header">
@@ -297,6 +299,8 @@
     }
     if (isOptionF) {
       document.getElementById('flow-stepper').classList.add('stepper-hidden');
+      var generalInfoBlock = document.getElementById('general-info-block');
+      if (generalInfoBlock) generalInfoBlock.style.display = 'none';
     }
     if (isOptionB) {
       document.getElementById('nav-logo').href = 'option-b/index.html';

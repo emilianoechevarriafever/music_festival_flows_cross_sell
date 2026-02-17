@@ -313,7 +313,7 @@
     <div class="location">
       <div class="loc-name">Baqueira Beret Ski Resort</div>
       <div class="loc-address">Baqueira Beret Parking Lot, 25598</div>
-      <div class="map-placeholder"><img src="../googlemaps-baqueira-mock.png" alt="Google Maps screenshot - Parking Norte reference point"></div>
+      <div class="map-placeholder"><img src="../../../img/map-baqueira.png" alt="Map area Baqueira – Estación de Esquí Baqueira Beret"></div>
     </div>
 
     <div class="footer">
@@ -797,6 +797,18 @@
 
     // Initial render
     renderNamePills();
+
+    // Pre-select first available room if nothing is selected
+    (function preselectFirstRoom() {
+      var hasSelection = Object.keys(roomCounts).some(function(k) { return roomCounts[k] > 0; });
+      if (hasSelection) return;
+      var rooms = getCurrentRooms();
+      for (var i = 0; i < rooms.length; i++) {
+        if (!rooms[i].soldout) { roomCounts[i] = 1; break; }
+      }
+      renderRooms();
+    })();
+
     updatePillsArrows();
     window.addEventListener('resize', updatePillsArrows);
 
