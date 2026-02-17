@@ -903,34 +903,20 @@
       document.body.style.overflow = '';
     }
 
-    // Swipe-to-dismiss for decision sheet
+    // Swipe-to-dismiss for decision sheet (touch + mouse)
     (function() {
       var sheetEl = document.getElementById('addons-hub-sheet');
       if (!sheetEl) return;
       var startY = 0, currentY = 0, isDragging = false;
-      sheetEl.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-        currentY = startY;
-        isDragging = true;
-        sheetEl.style.transition = 'none';
-      }, { passive: true });
-      sheetEl.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
-        currentY = e.touches[0].clientY;
-        var dy = currentY - startY;
-        if (dy < 0) dy = 0;
-        if (dy > 0) {
-          e.preventDefault();
-          sheetEl.style.transform = 'translateX(-50%) translateY(' + dy + 'px)';
-        }
-      }, { passive: false });
-      sheetEl.addEventListener('touchend', function() {
-        if (!isDragging) return;
-        isDragging = false;
-        sheetEl.style.transition = '';
-        sheetEl.style.transform = '';
-        if (currentY - startY > 80) closeAddonsHub();
-      });
+      function dragStart(y) { startY = y; currentY = y; isDragging = true; sheetEl.style.transition = 'none'; }
+      function dragMove(y, e) { if (!isDragging) return; currentY = y; var dy = currentY - startY; if (dy < 0) dy = 0; if (dy > 0) { if (e) e.preventDefault(); sheetEl.style.transform = 'translateX(-50%) translateY(' + dy + 'px)'; } }
+      function dragEnd() { if (!isDragging) return; isDragging = false; sheetEl.style.transition = ''; sheetEl.style.transform = ''; if (currentY - startY > 80) closeAddonsHub(); }
+      sheetEl.addEventListener('touchstart', function(e) { dragStart(e.touches[0].clientY); }, { passive: true });
+      sheetEl.addEventListener('touchmove', function(e) { dragMove(e.touches[0].clientY, e); }, { passive: false });
+      sheetEl.addEventListener('touchend', dragEnd);
+      sheetEl.addEventListener('mousedown', function(e) { e.preventDefault(); dragStart(e.clientY); });
+      document.addEventListener('mousemove', function(e) { if (isDragging) dragMove(e.clientY, e); });
+      document.addEventListener('mouseup', dragEnd);
     })();
 
     (function bindAddonsHub() {
