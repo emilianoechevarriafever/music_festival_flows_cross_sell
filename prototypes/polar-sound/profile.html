@@ -275,7 +275,7 @@
       var closeBtn = document.getElementById('sheetCloseBtn');
 
       function isLoggedIn() {
-        return localStorage.getItem(LOGGED_IN_KEY) !== 'false';
+        return localStorage.getItem(LOGGED_IN_KEY) === 'true';
       }
 
       function setLoggedIn(val) {

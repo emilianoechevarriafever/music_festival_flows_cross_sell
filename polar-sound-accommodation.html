@@ -363,12 +363,12 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h' || storedFlow === 'option-i')) flow = storedFlow;
-    const isOptionE = flow === 'option-e';
-    const isOptionF = flow === 'option-f';
-    const isOptionG = flow === 'option-g';
-    const isOptionH = flow === 'option-h';
-    const isOptionI = flow === 'option-i';
+    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
+    const isOptionE = flow === 'c1';
+    const isOptionF = flow === 'c2';
+    const isOptionG = flow === 'd2';
+    const isOptionH = flow === 'e1';
+    const isOptionI = flow === 'e2';
     const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
     const isCrossSellFlow = isOptionH || isOptionI;
     const isOptionalFlow = isOptionE || isHubFlow;
@@ -378,7 +378,7 @@
     if (isOptionalFlow) {
       var accommodationLogoLink = document.getElementById('nav-logo-link');
       if (accommodationLogoLink) accommodationLogoLink.href = flow + '/';
-      // Hide stepper for all optional flows EXCEPT option-h/i (cross-sell shows dynamic stepper)
+      // Hide stepper for all optional flows EXCEPT e1/i (cross-sell shows dynamic stepper)
       if (!isCrossSellFlow) {
         var accommodationStepper = document.querySelector('.flow-stepper');
         if (accommodationStepper) accommodationStepper.style.display = 'none';
@@ -588,13 +588,13 @@
 
         var nextUrl;
         if (isOptionI) {
-          nextUrl = 'cart.html?flow=option-i';
+          nextUrl = 'cart.html?flow=e2';
         } else if (isOptionG) {
-          nextUrl = 'cart.html?flow=option-g';
+          nextUrl = 'cart.html?flow=d2';
         } else if (isOptionH) {
-          nextUrl = 'checkout.html?flow=option-h';
+          nextUrl = 'checkout.html?flow=e1';
         } else if (isOptionF) {
-          nextUrl = 'checkout.html?flow=option-f';
+          nextUrl = 'checkout.html?flow=c2';
         } else {
           nextUrl = 'polar-sound-transportations.html' + (flow ? '?flow=' + flow : '');
         }
@@ -906,7 +906,7 @@
       if (btnNo) {
         btnNo.addEventListener('click', function() {
           try { localStorage.setItem('cart_transportation', '[]'); } catch(e) {}
-          var noDest = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
+          var noDest = isOptionI ? 'cart.html?flow=e2' : 'checkout.html?flow=e1';
           window.location.href = noDest;
         });
       }

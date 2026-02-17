@@ -55,15 +55,13 @@
     .status-bar .icons { display:flex; gap:5px; align-items:center; }
     .status-bar .icons svg { height:12px; }
 
-    .sticky-header { position:sticky; top:0; z-index:100; background:#fff; }
     /* === NAVBAR === */
+    .sticky-header { position:sticky; top:0; z-index:100; background:#fff; }
     .navbar { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:#fff; border-top:none; border-bottom:1px solid #e6eaee; }
     .navbar .logo-link { text-decoration:none; display:flex; align-items:center; }
     .navbar .logo-link img { height:38px; width:auto; display:block; object-fit:contain; }
     .nav-icons { display:flex; align-items:center; gap:16px; }
     .nav-icons svg { width:24px; height:24px; color:var(--color-text); cursor:pointer; }
-    .nav-icon-btn { margin:0; padding:0; border:none; background:none; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; text-decoration:none; color:inherit; }
-    .nav-icon-btn svg { width:24px; height:24px; color:var(--color-text); }
     .avatar-wrap { position:relative; display:flex; align-items:center; }
     .avatar-wrap img { width:24px; height:24px; border-radius:50%; object-fit:cover; }
     .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }
@@ -308,20 +306,6 @@
     .flow-stepper a.step.disabled { pointer-events:none; cursor:default; opacity:0.45; }
     .flow-stepper.stepper-hidden { display:none !important; }
 
-    /* Option F: one-step add-on hub */
-    .decision-overlay { position:fixed; inset:0; background:rgba(3,20,25,0.35); opacity:0; pointer-events:none; transition:opacity 0.2s ease; z-index:350; }
-    .decision-overlay.open { opacity:1; pointer-events:auto; }
-    .decision-sheet { position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(100%); width:393px; max-width:100vw; background:#fff; border-radius:16px 16px 0 0; z-index:351; padding:16px; transition:transform 0.25s ease; box-shadow:0 -4px 20px rgba(0,0,0,0.12); }
-    .decision-sheet.open { transform:translateX(-50%) translateY(0); }
-    .decision-sheet .handle { width:36px; height:4px; border-radius:4px; background:#d7dde2; margin:0 auto 14px; }
-    .decision-sheet h3 { font-size:18px; font-weight:700; text-align:center; margin-bottom:8px; }
-    .decision-sheet p { font-size:14px; line-height:20px; color:var(--color-text-secondary); text-align:center; margin-bottom:14px; }
-    .decision-sheet .hub-actions { display:flex; flex-direction:column; gap:10px; }
-    .decision-sheet .hub-btn { width:100%; min-height:44px; border-radius:100px; border:1px solid #ccd2d8; background:#fff; color:var(--color-text); font-family:var(--font); font-size:14px; font-weight:600; cursor:pointer; padding:10px 16px; }
-    .decision-sheet .hub-btn.primary { background:#0079ca; border-color:#0079ca; color:#fff; }
-    .decision-sheet .hub-btn.secondary { background:#fff; border-color:#ccd2d8; color:var(--color-text); display:inline-flex; align-items:center; justify-content:center; gap:8px; }
-    .decision-sheet .hub-btn.secondary svg { width:20px; height:20px; flex-shrink:0; stroke:currentColor; fill:none; stroke-width:2; }
-
     @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
   </style>
 </head>
@@ -330,27 +314,27 @@
 
     <header class="sticky-header">
     <nav class="navbar">
-      <a href="home.html" class="logo-link"><img src="img/fever-logo.png" alt="Fever"></a>
+      <a href="index.html" class="logo-link"><img src="../img/fever-logo.png" alt="Fever"></a>
       <div class="nav-icons">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
-        <a class="nav-icon-btn" href="favorites.html" aria-label="Favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
-        <a class="nav-icon-btn" href="home.html" aria-label="Location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></a>
-        <a class="avatar-wrap" href="profile.html" aria-label="Profile"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></a>
-        <a class="nav-icon-btn" href="home.html" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></a>
+        <a class="nav-icon-btn" href="../favorites.html" aria-label="Favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
+        <a class="nav-icon-btn" href="index.html" aria-label="Location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></a>
+        <a class="avatar-wrap" href="../profile.html" aria-label="Profile"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></a>
+        <a class="nav-icon-btn" href="index.html" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></a>
       </div>
     </nav>
     <div id="tickets-flow-stepper" class="flow-stepper stepper-hidden" aria-hidden="true">
       <div class="step current"><span class="dot">1</span><span class="label">Tickets</span></div>
-      <a href="polar-sound-accommodation.html#ticket-section" class="step" id="stepper-step2"><span class="dot">2</span><span class="label">Accommodation</span></a>
-      <a href="polar-sound-transportations.html" class="step" id="stepper-step3"><span class="dot">3</span><span class="label">Transport</span></a>
-      <a href="checkout.html" class="step" id="stepper-step4"><span class="dot">4</span><span class="label">Checkout</span></a>
+      <a href="polar-sound-accommodation.html#ticket-section" class="step"><span class="dot">2</span><span class="label">Accommodation</span></a>
+      <a href="../polar-sound-transportations.html?flow=a2" class="step"><span class="dot">3</span><span class="label">Transport</span></a>
+      <a href="cart.html" class="step" id="stepper-step4"><span class="dot">4</span><span class="label">Cart</span></a>
     </div>
     </header>
 
     <!-- Hero Gallery Carousel -->
     <div class="hero" id="heroCarousel">
       <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide"><img src="img/polar-sound-hero.png" alt="Polar Sound Festival"></div>
+        <div class="carousel-slide"><img src="../img/polar-sound-hero.png" alt="Polar Sound Festival"></div>
         <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/cabc0d3c-8346-11f0-8816-4a47ae28a019.jpg" alt="Polar Sound stage"></div>
         <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/cac66c14-8346-11f0-8816-4a47ae28a019.jpg" alt="Baqueira Beret venue"></div>
         <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/cad1ab4c-8346-11f0-8816-4a47ae28a019.jpg" alt="Concert atmosphere"></div>
@@ -580,7 +564,7 @@
       <div class="loc-name">Baqueira Beret - Sector Bonaigua</div>
       <div class="loc-address">Baqueira Beret Parking Lot, 25598</div>
       <div class="map-placeholder">
-        <img src="img/map-baqueira.png" alt="Map area Baqueira – Estación de Esquí Baqueira Beret">
+        <img src="../img/map-baqueira.png" alt="Map area Baqueira – Estación de Esquí Baqueira Beret">
       </div>
     </div>
 
@@ -609,7 +593,7 @@
           <div class="sim-meta">&#9733; 4.8 (85) &middot; From &euro;19,00</div>
         </div>
         <div class="sim-card">
-          <div class="sim-img"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/7318fc16-008e-11ef-b977-124ef9dd9312.png" alt="Mecano"></div>
+          <div class="sim-img"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/a9430c14-6280-11f0-8664-ae8f95c7ce7e.jpg" alt="Mecano"></div>
           <div class="sim-title">Candlelight: Mecano Tribute</div>
           <div class="sim-meta">&#9733; 4.5 (128) &middot; From &euro;26,50</div>
         </div>
@@ -649,62 +633,51 @@
       <button class="cta-btn" id="sticky-btn">Tickets</button>
     </div>
 
-    <div class="decision-overlay" id="addons-hub-overlay"></div>
-    <div class="decision-sheet" id="addons-hub-sheet">
-      <div class="handle"></div>
-      <h3>Anything else?</h3>
-      <div class="hub-actions">
-        <button type="button" class="hub-btn secondary" id="addons-hub-accommodation"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg> Add accommodation</button>
-        <button type="button" class="hub-btn secondary" id="addons-hub-transport"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Add transportation</button>
-        <button type="button" class="hub-btn primary" id="addons-hub-none">Skip</button>
-      </div>
-    </div>
-
   </div>
 
-  <script src="js/burger-menu.js"></script>
+  <script src="../js/burger-menu.js"></script>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    let flow = params.get('flow');
-    let storedFlow = null;
-    try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
-    const isOptionE = flow === 'c1';
-    const isOptionF = flow === 'c2';
-    const isOptionG = flow === 'd2';
-    const isOptionH = flow === 'e1';
-    const isOptionI = flow === 'e2';
-    const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
-    const isCrossSellFlow = isOptionH || isOptionI;
-    const isOptionalFlow = isOptionE || isHubFlow;
-    const flowSuffix = isHubFlow ? '?flow=' + flow : '';
-
-    if (isOptionalFlow) {
-      try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
-      const logoLink = document.querySelector('.navbar .logo-link');
-      if (logoLink) logoLink.href = flow + '/';
-      const step2 = document.getElementById('stepper-step2');
-      const step3 = document.getElementById('stepper-step3');
-      const step4 = document.getElementById('stepper-step4');
-      if (step2) step2.href = 'polar-sound-accommodation.html?flow=' + flow + '#ticket-section';
-      if (step3) step3.href = 'polar-sound-transportations.html?flow=' + flow;
-      if (step4) step4.href = 'checkout.html?flow=' + flow;
-      const ticketsStepper = document.getElementById('tickets-flow-stepper');
-      if (ticketsStepper) {
-        ticketsStepper.classList.add('stepper-hidden');
-        ticketsStepper.setAttribute('aria-hidden', 'true');
-      }
-    }
-
     // Stepper: hidden on first visit to tickets; show only when user has advanced and then comes back
     (function() {
       try {
-        if (!isOptionalFlow && sessionStorage.getItem('polar_flow_visited')) {
+        if (sessionStorage.getItem('polar_flow_visited')) {
           var el = document.getElementById('tickets-flow-stepper');
           if (el) { el.classList.remove('stepper-hidden'); el.setAttribute('aria-hidden', 'false'); }
         }
       } catch (e) {}
     })();
+
+    function hasAnyCartItems() {
+      var tickets = [], accommodation = [], transportation = [];
+      try {
+        tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]');
+        accommodation = JSON.parse(localStorage.getItem('cart_accommodation') || '[]');
+        transportation = JSON.parse(localStorage.getItem('cart_transportation') || '[]');
+      } catch (e) {}
+      function hasItems(arr) {
+        return Array.isArray(arr) && arr.some(function(item) { return item && (item.qty || 0) > 0; });
+      }
+      return hasItems(tickets) || hasItems(accommodation) || hasItems(transportation);
+    }
+
+    function setCartStepClickable() {
+      var cartStep = document.getElementById('stepper-step4');
+      if (!cartStep) return;
+      var enabledHref = cartStep.getAttribute('data-enabled-href') || cartStep.getAttribute('href') || 'cart.html';
+      cartStep.setAttribute('data-enabled-href', enabledHref);
+      if (hasAnyCartItems()) {
+        cartStep.setAttribute('href', enabledHref);
+        cartStep.classList.remove('disabled');
+        cartStep.removeAttribute('aria-disabled');
+        cartStep.removeAttribute('tabindex');
+      } else {
+        cartStep.removeAttribute('href');
+        cartStep.classList.add('disabled');
+        cartStep.setAttribute('aria-disabled', 'true');
+        cartStep.setAttribute('tabindex', '-1');
+      }
+    }
+    setCartStepClickable();
 
     // === SINGLE CTA BEHAVIOR ===
     const stickyBtn = document.getElementById('sticky-btn');
@@ -734,22 +707,13 @@
     observer.observe(ticketSection);
 
     stickyBtn.addEventListener('click', () => {
-      const total = getTotal();
       if (stickyMode === 'tickets') {
         ticketSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (total > 0) {
-          stickyMode = 'getit';
-          updateStickyBtn();
-        }
       } else {
         // Save ticket selections to localStorage before navigating
         saveTicketsToCart();
         try { sessionStorage.setItem('polar_flow_visited', '1'); } catch (e) {}
-        if (isHubFlow) {
-          openAddonsHub();
-        } else {
-          window.location.href = 'polar-sound-accommodation.html' + flowSuffix;
-        }
+        window.location.href = 'polar-sound-accommodation.html';
       }
     });
 
@@ -825,8 +789,7 @@
     function bindSteppers(panel) {
       if (!panel) return;
       const rows = panel.querySelectorAll('.ticket-row');
-      const prices = panel.id === 'panel-2day' ? prices2Day : pricesDay;
-      rows.forEach((row, i) => {
+      rows.forEach((row) => {
         const minus = row.querySelector('.amt-btn.minus');
         const plus = row.querySelector('.amt-btn.plus');
         const countEl = row.querySelector('.amt-count');
@@ -893,71 +856,6 @@
     }
     updatePillsArrow();
     window.addEventListener('resize', updatePillsArrow);
-
-    function openAddonsHub() {
-      const overlay = document.getElementById('addons-hub-overlay');
-      const sheet = document.getElementById('addons-hub-sheet');
-      if (overlay) overlay.classList.add('open');
-      if (sheet) sheet.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeAddonsHub() {
-      const overlay = document.getElementById('addons-hub-overlay');
-      const sheet = document.getElementById('addons-hub-sheet');
-      if (sheet) sheet.style.transform = '';
-      if (overlay) overlay.classList.remove('open');
-      if (sheet) sheet.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    // Swipe-to-dismiss for decision sheet (touch + mouse)
-    (function() {
-      var sheetEl = document.getElementById('addons-hub-sheet');
-      if (!sheetEl) return;
-      var startY = 0, currentY = 0, isDragging = false;
-      function dragStart(y) { startY = y; currentY = y; isDragging = true; sheetEl.style.transition = 'none'; }
-      function dragMove(y, e) { if (!isDragging) return; currentY = y; var dy = currentY - startY; if (dy < 0) dy = 0; if (dy > 0) { if (e) e.preventDefault(); sheetEl.style.transform = 'translateX(-50%) translateY(' + dy + 'px)'; } }
-      function dragEnd() { if (!isDragging) return; isDragging = false; sheetEl.style.transition = ''; sheetEl.style.transform = ''; if (currentY - startY > 80) closeAddonsHub(); }
-      sheetEl.addEventListener('touchstart', function(e) { dragStart(e.touches[0].clientY); }, { passive: true });
-      sheetEl.addEventListener('touchmove', function(e) { dragMove(e.touches[0].clientY, e); }, { passive: false });
-      sheetEl.addEventListener('touchend', dragEnd);
-      sheetEl.addEventListener('mousedown', function(e) { e.preventDefault(); dragStart(e.clientY); });
-      document.addEventListener('mousemove', function(e) { if (isDragging) dragMove(e.clientY, e); });
-      document.addEventListener('mouseup', dragEnd);
-    })();
-
-    (function bindAddonsHub() {
-      const overlay = document.getElementById('addons-hub-overlay');
-      const btnAccommodation = document.getElementById('addons-hub-accommodation');
-      const btnTransport = document.getElementById('addons-hub-transport');
-      const btnNone = document.getElementById('addons-hub-none');
-      if (overlay) overlay.addEventListener('click', closeAddonsHub);
-      if (btnAccommodation) {
-        btnAccommodation.addEventListener('click', function() {
-          try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
-          if (isCrossSellFlow) { try { sessionStorage.setItem('option_h_came_from', 'hub'); } catch(e) {} }
-          window.location.href = 'polar-sound-accommodation.html?flow=' + flow;
-        });
-      }
-      if (btnTransport) {
-        btnTransport.addEventListener('click', function() {
-          try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
-          if (isCrossSellFlow) { try { sessionStorage.setItem('option_h_came_from', 'hub'); } catch(e) {} }
-          window.location.href = 'polar-sound-transportations.html?flow=' + flow;
-        });
-      }
-      if (btnNone) {
-        btnNone.addEventListener('click', function() {
-          try {
-            localStorage.setItem('cart_accommodation', '[]');
-            localStorage.setItem('cart_transportation', '[]');
-          } catch (e) {}
-          var skipDest = (isOptionG || isOptionI) ? 'cart.html?flow=' + flow : (isOptionH ? 'checkout.html?flow=e1' : 'checkout.html?flow=c2');
-          window.location.href = skipDest;
-        });
-      }
-    })();
 
     if (window.location.hash === '#ticket-section') {
       var el = document.getElementById('ticket-section');

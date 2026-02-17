@@ -393,13 +393,13 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h' || storedFlow === 'option-i')) flow = storedFlow;
-    const isOptionB = flow === 'option-b';
-    const isOptionE = flow === 'option-e';
-    const isOptionF = flow === 'option-f';
-    const isOptionG = flow === 'option-g';
-    const isOptionH = flow === 'option-h';
-    const isOptionI = flow === 'option-i';
+    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
+    const isOptionB = flow === 'a2';
+    const isOptionE = flow === 'c1';
+    const isOptionF = flow === 'c2';
+    const isOptionG = flow === 'd2';
+    const isOptionH = flow === 'e1';
+    const isOptionI = flow === 'e2';
     const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
     const isCrossSellFlow = isOptionH || isOptionI;
     const isOptionalFlow = isOptionE || isHubFlow;
@@ -441,7 +441,7 @@
     }
 
     if (isOptionB) {
-      document.getElementById('nav-logo').href = 'option-b/index.html';
+      document.getElementById('nav-logo').href = 'a2/index.html';
       document.getElementById('nav-logo-img').src = '../img/fever-logo.png';
     } else if (isHubFlow) {
       document.getElementById('nav-logo').href = flow + '/';
@@ -463,9 +463,9 @@
     let hasSeenTransport = false;
 
     if (isOptionB) {
-      document.getElementById('step1').href = 'option-b/polar-sound.html#ticket-section';
-      document.getElementById('step2').href = 'option-b/polar-sound-accommodation.html#ticket-section';
-      document.getElementById('step4').href = 'option-b/cart.html';
+      document.getElementById('step1').href = 'a2/polar-sound.html#ticket-section';
+      document.getElementById('step2').href = 'a2/polar-sound-accommodation.html#ticket-section';
+      document.getElementById('step4').href = 'a2/cart.html';
       document.getElementById('step4-label').textContent = 'Cart';
     } else if (isHubFlow) {
       document.getElementById('step1').href = 'polar-sound.html?flow=' + flow + '#ticket-section';
@@ -474,7 +474,7 @@
         document.getElementById('step4').href = 'cart.html?flow=' + flow;
         document.getElementById('step4-label').textContent = 'Cart';
       } else {
-        document.getElementById('step4').href = (isOptionH ? 'checkout.html?flow=option-h' : 'checkout.html?flow=option-f');
+        document.getElementById('step4').href = (isOptionH ? 'checkout.html?flow=e1' : 'checkout.html?flow=c2');
         document.getElementById('step4-label').textContent = 'Checkout';
       }
       if (isCrossSellFlow) {
@@ -635,21 +635,21 @@
       }
 
       if (isOptionB) {
-        window.location.href = 'option-b/cart.html';
+        window.location.href = 'a2/cart.html';
       } else if (isCrossSellFlow) {
         var cameFromForClear = '';
         try { cameFromForClear = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
         if (cameFromForClear !== 'accommodation') {
           try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
         }
-        var dest = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
+        var dest = isOptionI ? 'cart.html?flow=e2' : 'checkout.html?flow=e1';
         window.location.href = dest;
       } else if (isOptionG) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
-        window.location.href = 'cart.html?flow=option-g';
+        window.location.href = 'cart.html?flow=d2';
       } else if (isOptionF) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
-        window.location.href = 'checkout.html?flow=option-f';
+        window.location.href = 'checkout.html?flow=c2';
       } else {
         window.location.href = 'checkout.html';
       }
@@ -733,7 +733,7 @@
       if (btnNo) {
         btnNo.addEventListener('click', function() {
           try { localStorage.setItem('cart_accommodation', '[]'); } catch(e) {}
-          var noDest = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
+          var noDest = isOptionI ? 'cart.html?flow=e2' : 'checkout.html?flow=e1';
           window.location.href = noDest;
         });
       }

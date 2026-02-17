@@ -736,12 +736,12 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h' || storedFlow === 'option-i')) flow = storedFlow;
-    const isOptionE = flow === 'option-e';
-    const isOptionF = flow === 'option-f';
-    const isOptionG = flow === 'option-g';
-    const isOptionH = flow === 'option-h';
-    const isOptionI = flow === 'option-i';
+    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
+    const isOptionE = flow === 'c1';
+    const isOptionF = flow === 'c2';
+    const isOptionG = flow === 'd2';
+    const isOptionH = flow === 'e1';
+    const isOptionI = flow === 'e2';
     const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
     const isCrossSellFlow = isOptionH || isOptionI;
     const isOptionalFlow = isOptionE || isHubFlow;
@@ -1021,7 +1021,7 @@
             localStorage.setItem('cart_accommodation', '[]');
             localStorage.setItem('cart_transportation', '[]');
           } catch (e) {}
-          var skipDest = (isOptionG || isOptionI) ? 'cart.html?flow=' + flow : (isOptionH ? 'checkout.html?flow=option-h' : 'checkout.html?flow=option-f');
+          var skipDest = (isOptionG || isOptionI) ? 'cart.html?flow=' + flow : (isOptionH ? 'checkout.html?flow=e1' : 'checkout.html?flow=c2');
           window.location.href = skipDest;
         });
       }

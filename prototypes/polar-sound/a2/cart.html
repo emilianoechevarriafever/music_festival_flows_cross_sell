@@ -90,20 +90,20 @@
   <div class="phone">
     <header class="sticky-header">
     <nav class="navbar">
-      <a href="home.html" class="logo-link" id="cart-logo-link"><img src="img/fever-logo.png" alt="Fever"></a>
+      <a href="index.html" class="logo-link"><img src="../img/fever-logo.png" alt="Fever"></a>
       <div class="nav-icons">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
-        <a class="nav-icon-btn" href="favorites.html" aria-label="Favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
-        <a class="nav-icon-btn" href="home.html" aria-label="Location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></a>
-        <a class="avatar-wrap" href="profile.html" aria-label="Profile"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></a>
-        <a class="nav-icon-btn" href="home.html" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></a>
+        <a class="nav-icon-btn" href="../favorites.html" aria-label="Favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
+        <a class="nav-icon-btn" href="index.html" aria-label="Location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></a>
+        <a class="avatar-wrap" href="../profile.html" aria-label="Profile"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></a>
+        <a class="nav-icon-btn" href="index.html" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></a>
       </div>
     </nav>
     </header>
 
     <div class="event-summary">
       <div class="event-thumb">
-        <img src="img/polar-sound-hero.png" alt="Polar Sound Festival">
+        <img src="../img/polar-sound-hero.png" alt="Polar Sound Festival">
       </div>
       <div class="event-info">
         <div class="event-name">Occident - Polar Sound 2026</div>
@@ -141,27 +141,8 @@
     </div>
   </div>
 
-  <script src="../../js/burger-menu.js"></script>
+  <script src="../../../js/burger-menu.js"></script>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    let flow = params.get('flow');
-    let storedFlow = null;
-    try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
-    const isOptionF = flow === 'c2';
-    const isOptionG = flow === 'd2';
-    const isOptionH = flow === 'e1';
-    const isOptionI = flow === 'e2';
-    const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
-
-    if (isHubFlow) {
-      try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
-    }
-    if (isHubFlow) {
-      var cartLogoLink = document.getElementById('cart-logo-link');
-      if (cartLogoLink) cartLogoLink.href = flow + '/';
-    }
-
     let cartTickets = [];
     let cartAccommodation = [];
     let cartTransportation = [];
@@ -273,15 +254,6 @@
       return hasItems(cartTickets) || hasItems(cartAccommodation) || hasItems(cartTransportation);
     }
 
-    function getSectionTargets() {
-      var flowSuffix = flow ? ('?flow=' + encodeURIComponent(flow)) : '';
-      return {
-        tickets: 'polar-sound.html' + flowSuffix + '#ticket-section',
-        accommodation: 'polar-sound-accommodation.html' + flowSuffix,
-        transportation: 'polar-sound-transportations.html' + flowSuffix
-      };
-    }
-
     function renderEmptyState(message, ctaText, href) {
       return '<div class="empty-state-row"><a class="empty-state-link" href="' + href + '">' + ctaText + '</a></div>';
     }
@@ -296,10 +268,9 @@
       cartTickets.forEach((item, i) => ticketContainer.appendChild(renderItem(item, i, 'tickets')));
       cartAccommodation.forEach((item, i) => accomContainer.appendChild(renderItem(item, i, 'accommodation')));
       cartTransportation.forEach((item, i) => transportContainer.appendChild(renderItem(item, i, 'transportation')));
-      var targets = getSectionTargets();
-      if (cartTickets.length === 0) ticketContainer.innerHTML = renderEmptyState('', 'Add', targets.tickets);
-      if (cartAccommodation.length === 0) accomContainer.innerHTML = renderEmptyState('', 'Add', targets.accommodation);
-      if (cartTransportation.length === 0) transportContainer.innerHTML = renderEmptyState('', 'Add', targets.transportation);
+      if (cartTickets.length === 0) ticketContainer.innerHTML = renderEmptyState('', 'Add', 'polar-sound.html#ticket-section');
+      if (cartAccommodation.length === 0) accomContainer.innerHTML = renderEmptyState('', 'Add', 'polar-sound-accommodation.html');
+      if (cartTransportation.length === 0) transportContainer.innerHTML = renderEmptyState('', 'Add', '../polar-sound-transportations.html?flow=a2');
       document.getElementById('cart-grand-total').textContent = '€' + getTotal().toFixed(2);
     }
 
@@ -308,12 +279,11 @@
 
     document.getElementById('btn-checkout').addEventListener('click', function() {
       if (!hasAnyCartItems()) {
-        var ticketPlanUrl = flow ? ('polar-sound.html?flow=' + encodeURIComponent(flow) + '#ticket-section') : 'polar-sound.html#ticket-section';
-        window.location.href = ticketPlanUrl;
+        window.location.href = 'polar-sound.html#ticket-section';
         return;
       }
       try { sessionStorage.setItem('checkout_scroll_target', 'payment'); } catch (e) {}
-      window.location.href = isHubFlow ? ('checkout.html?flow=' + flow) : 'checkout.html';
+      window.location.href = 'checkout.html';
     });
   </script>
 </body>

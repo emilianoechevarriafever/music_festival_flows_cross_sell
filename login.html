@@ -222,7 +222,7 @@
       var params = new URLSearchParams(window.location.search);
       var returnTo = params.get('returnTo') || params.get('return') || document.referrer || 'home.html';
 
-      function isLoggedIn() { return localStorage.getItem(LOGGED_IN_KEY) !== 'false'; }
+      function isLoggedIn() { return localStorage.getItem(LOGGED_IN_KEY) === 'true'; }
 
       function updateAvatar() {
         if (!avatarBtn) return;

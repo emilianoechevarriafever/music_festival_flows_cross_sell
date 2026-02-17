@@ -1472,10 +1472,10 @@
       var flow = params.get('flow');
       var storedFlow = null;
       try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-      if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h' || storedFlow === 'option-i')) {
+      if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) {
         flow = storedFlow;
       }
-      if (flow === 'option-e' || flow === 'option-f' || flow === 'option-g' || flow === 'option-h' || flow === 'option-i') {
+      if (flow === 'c1' || flow === 'c2' || flow === 'd2' || flow === 'e1' || flow === 'e2') {
         var polarLink = document.getElementById('polar-sound-link');
         if (polarLink) polarLink.href = 'polar-sound.html?flow=' + flow;
         try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
@@ -1595,7 +1595,7 @@
       var LOGGED_IN_KEY = 'fever_logged_in';
       var avatarBtn = document.getElementById('avatarBtn');
       if (!avatarBtn) return;
-      function isLoggedIn() { return localStorage.getItem(LOGGED_IN_KEY) !== 'false'; }
+      function isLoggedIn() { return localStorage.getItem(LOGGED_IN_KEY) === 'true'; }
       function updateAvatar() {
         if (isLoggedIn()) {
           avatarBtn.classList.add('logged-in');

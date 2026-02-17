@@ -47,7 +47,7 @@
     .avatar-wrap img { width:24px; height:24px; border-radius:50%; object-fit:cover; }
     .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }
 
-    /* Hero with overlay */
+    /* Hero Gallery (Figma Channel Filter 778-26710) + overlay */
     .hero { position:relative; width:100%; height:390px; overflow:hidden; }
     .hero img.hero-bg { width:100%; height:100%; object-fit:cover; }
     .hero .overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,35,44,0.3) 0%, rgba(6,35,44,0.6) 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; pointer-events:none; }
@@ -203,20 +203,7 @@
     .flow-stepper a.step.disabled { pointer-events:none; cursor:default; opacity:0.45; }
     .flow-stepper.stepper-hidden { display:none !important; }
 
-    /* Cross-sell bottom sheet (Option H) */
-    .crosssell-overlay { position:fixed; inset:0; background:rgba(3,20,25,0.35); opacity:0; pointer-events:none; transition:opacity 0.2s ease; z-index:350; }
-    .crosssell-overlay.open { opacity:1; pointer-events:auto; }
-    .crosssell-sheet { position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(100%); width:393px; max-width:100vw; background:#fff; border-radius:16px 16px 0 0; z-index:351; padding:16px; transition:transform 0.25s ease; box-shadow:0 -4px 20px rgba(0,0,0,0.12); }
-    .crosssell-sheet.open { transform:translateX(-50%) translateY(0); }
-    .crosssell-sheet .handle { width:36px; height:4px; border-radius:4px; background:#d7dde2; margin:0 auto 14px; }
-    .crosssell-sheet h3 { font-size:18px; font-weight:700; text-align:center; margin-bottom:14px; }
-    .crosssell-sheet .hub-actions { display:flex; flex-direction:column; gap:10px; }
-    .crosssell-sheet .hub-btn { width:100%; min-height:44px; border-radius:100px; border:1px solid #ccd2d8; background:#fff; color:var(--color-text); font-family:var(--font); font-size:14px; font-weight:600; cursor:pointer; padding:10px 16px; }
-    .crosssell-sheet .hub-btn.primary { background:#0079ca; border-color:#0079ca; color:#fff; }
-    .crosssell-sheet .hub-btn.secondary { background:#fff; border-color:#ccd2d8; color:var(--color-text); display:inline-flex; align-items:center; justify-content:center; gap:8px; }
-    .crosssell-sheet .hub-btn.secondary svg { width:20px; height:20px; flex-shrink:0; stroke:currentColor; fill:none; stroke-width:2; }
-
-    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } .crosssell-sheet { width:100vw; } }
+    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } }
   </style>
 </head>
 <body>
@@ -224,26 +211,27 @@
 
     <header class="sticky-header">
     <nav class="navbar">
-      <a href="home.html" class="logo-link" id="nav-logo-link"><img src="img/fever-logo.png" alt="Fever"></a>
+      <a href="index.html" class="logo-link"><img src="../img/fever-logo.png" alt="Fever"></a>
       <div class="nav-icons">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg>
-        <a class="nav-icon-btn" href="favorites.html" aria-label="Favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
-        <a class="nav-icon-btn" href="home.html" aria-label="Location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></a>
-        <a class="avatar-wrap" href="profile.html" aria-label="Profile"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></a>
-        <a class="nav-icon-btn" href="home.html" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></a>
+        <a class="nav-icon-btn" href="../favorites.html" aria-label="Favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></a>
+        <a class="nav-icon-btn" href="index.html" aria-label="Location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></a>
+        <a class="avatar-wrap" href="../profile.html" aria-label="Profile"><img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile"></a>
+        <a class="nav-icon-btn" href="index.html" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></a>
       </div>
     </nav>
+
     <div class="flow-stepper">
       <a href="polar-sound.html#ticket-section" id="stepper-step1" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>
       <div class="step current"><span class="dot">2</span><span class="label">Accommodation</span></div>
-      <a href="polar-sound-transportations.html" class="step" id="stepper-step3"><span class="dot">3</span><span class="label">Transport</span></a>
-      <a href="checkout.html" class="step" id="stepper-step4"><span class="dot">4</span><span class="label">Checkout</span></a>
+      <a href="../polar-sound-transportations.html?flow=a2" class="step"><span class="dot">3</span><span class="label">Transport</span></a>
+      <a href="cart.html" class="step" id="stepper-step4"><span class="dot">4</span><span class="label">Cart</span></a>
     </div>
     </header>
 
     <!-- Hero Gallery (Figma Channel Filter) -->
     <div class="hero">
-      <img class="hero-bg" src="img/baqueira-hotel.png" alt="Hotel Baqueira Beret">
+      <img class="hero-bg" src="../img/baqueira-hotel.png" alt="Hotel Baqueira Beret">
       <div class="overlay">
         <div class="brand-text">POLAR SOUND</div>
         <div class="brand-sub">&#10070;</div>
@@ -317,6 +305,7 @@
       <button class="cta-primary" id="cta-inline"></button>
     </div>
 
+
     <div class="section-header">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       <h2>Getting there</h2>
@@ -324,7 +313,7 @@
     <div class="location">
       <div class="loc-name">Baqueira Beret Ski Resort</div>
       <div class="loc-address">Baqueira Beret Parking Lot, 25598</div>
-      <div class="map-placeholder"><img src="../../img/map-baqueira.png" alt="Map area Baqueira – Estación de Esquí Baqueira Beret"></div>
+      <div class="map-placeholder"><img src="../../../img/map-baqueira.png" alt="Map area Baqueira – Estación de Esquí Baqueira Beret"></div>
     </div>
 
     <div class="footer">
@@ -335,24 +324,13 @@
       <div class="legal"><a href="javascript:void(0)">Terms of Use</a> | <a href="javascript:void(0)">Privacy Policy</a> | <a href="javascript:void(0)">Cookies</a><div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div></div>
     </div>
 
-    <!-- Sticky CTA: "Select accommodations" → scroll; then "Skip" or "€X — Add it" -->
+    <!-- Sticky CTA: "Select accommodation" → scroll; then "Skip accommodation" or "€X — Add it" -->
     <div class="sticky-cta">
       <button class="cta-btn" id="sticky-btn">Select accommodation</button>
     </div>
-
-    <!-- Cross-sell bottom sheet (Option H): offer transportation after accommodation -->
-    <div class="crosssell-overlay" id="crosssell-overlay"></div>
-    <div class="crosssell-sheet" id="crosssell-sheet">
-      <div class="handle"></div>
-      <h3>Add transportation?</h3>
-      <div class="hub-actions">
-        <button type="button" class="hub-btn secondary" id="crosssell-yes"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> See options</button>
-        <button type="button" class="hub-btn primary" id="crosssell-no">Skip</button>
-      </div>
-    </div>
   </div>
 
-  <script src="../../js/burger-menu.js"></script>
+  <script src="../../../js/burger-menu.js"></script>
   <script>
     (function initHeroGallery() {
       var hero = document.querySelector('.hero');
@@ -434,64 +412,39 @@
       startAutoplay();
     })();
 
-    const params = new URLSearchParams(window.location.search);
-    let flow = params.get('flow');
-    let storedFlow = null;
-    try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
-    const isOptionE = flow === 'c1';
-    const isOptionF = flow === 'c2';
-    const isOptionG = flow === 'd2';
-    const isOptionH = flow === 'e1';
-    const isOptionI = flow === 'e2';
-    const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
-    const isCrossSellFlow = isOptionH || isOptionI;
-    const isOptionalFlow = isOptionE || isHubFlow;
-    if (isOptionalFlow) {
-      try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
-    }
-    if (isOptionalFlow) {
-      var accommodationLogoLink = document.getElementById('nav-logo-link');
-      if (accommodationLogoLink) accommodationLogoLink.href = flow + '/';
-      if (!isCrossSellFlow) {
-        var accommodationStepper = document.querySelector('.flow-stepper');
-        if (accommodationStepper) accommodationStepper.style.display = 'none';
+    document.getElementById('sticky-btn').textContent = 'Select accommodation';
+
+    function hasAnyCartItems() {
+      var tickets = [], accommodation = [], transportation = [];
+      try {
+        tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]');
+        accommodation = JSON.parse(localStorage.getItem('cart_accommodation') || '[]');
+        transportation = JSON.parse(localStorage.getItem('cart_transportation') || '[]');
+      } catch (e) {}
+      function hasItems(arr) {
+        return Array.isArray(arr) && arr.some(function(item) { return item && (item.qty || 0) > 0; });
       }
-      var step1 = document.getElementById('stepper-step1');
-      var step3 = document.getElementById('stepper-step3');
-      var step4 = document.getElementById('stepper-step4');
-      if (step1) step1.href = 'polar-sound.html?flow=' + flow + '#ticket-section';
-      if (step3) step3.href = 'polar-sound-transportations.html?flow=' + flow;
-      if (step4) step4.href = 'checkout.html?flow=' + flow;
+      return hasItems(tickets) || hasItems(accommodation) || hasItems(transportation);
     }
 
-    // Option H/I: rebuild stepper dynamically based on user's path (always 4 steps)
-    if (isCrossSellFlow) {
-      var hCameFrom = '';
-      try { hCameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
-      var stepperEl = document.querySelector('.flow-stepper');
-      if (stepperEl) {
-        var lastLabel = isOptionI ? 'Cart' : 'Checkout';
-        var html = '';
-        if (hCameFrom === 'transportation') {
-          // Came from Transport cross-sell: Tickets ✓ → Transport ✓ → Accommodation ● → Checkout/Cart
-          html += '<a href="polar-sound.html?flow=' + flow + '#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>';
-          html += '<a href="polar-sound-transportations.html?flow=' + flow + '" class="step done"><span class="dot"></span><span class="label">Transport</span></a>';
-          html += '<div class="step current"><span class="dot"></span><span class="label">Accommodation</span></div>';
-          html += '<div class="step"><span class="dot"></span><span class="label">' + lastLabel + '</span></div>';
-        } else {
-          // Came from hub: Tickets ✓ → Accommodation ● → Transport (future) → Checkout/Cart
-          html += '<a href="polar-sound.html?flow=' + flow + '#ticket-section" class="step done"><span class="dot"></span><span class="label">Tickets</span></a>';
-          html += '<div class="step current"><span class="dot"></span><span class="label">Accommodation</span></div>';
-          html += '<div class="step"><span class="dot"></span><span class="label">Transport</span></div>';
-          html += '<div class="step"><span class="dot"></span><span class="label">' + lastLabel + '</span></div>';
-        }
-        stepperEl.innerHTML = html;
-        stepperEl.style.display = '';
+    function setCartStepClickable() {
+      var cartStep = document.getElementById('stepper-step4');
+      if (!cartStep) return;
+      var enabledHref = cartStep.getAttribute('data-enabled-href') || cartStep.getAttribute('href') || 'cart.html';
+      cartStep.setAttribute('data-enabled-href', enabledHref);
+      if (hasAnyCartItems()) {
+        cartStep.setAttribute('href', enabledHref);
+        cartStep.classList.remove('disabled');
+        cartStep.removeAttribute('aria-disabled');
+        cartStep.removeAttribute('tabindex');
+      } else {
+        cartStep.removeAttribute('href');
+        cartStep.classList.add('disabled');
+        cartStep.setAttribute('aria-disabled', 'true');
+        cartStep.setAttribute('tabindex', '-1');
       }
     }
-
-    document.getElementById('sticky-btn').textContent = 'Select accommodations';
+    setCartStepClickable();
 
     // ========== DATA ==========
     const DATA = {
@@ -646,45 +599,11 @@
       } else {
         if (getTotal() > 0) {
           saveAccommodationToCart();
+          window.location.href = '../polar-sound-transportations.html?flow=a2';
         } else {
           localStorage.setItem('cart_accommodation', '[]');
+          window.location.href = '../polar-sound-transportations.html?flow=a2';
         }
-
-        // Option H/I: show cross-sell bottom sheet if user came from hub (not from transportation)
-        if (isCrossSellFlow) {
-          var cameFrom = '';
-          try { cameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
-          if (cameFrom !== 'transportation') {
-            openCrossSellSheet();
-            return;
-          }
-        }
-
-        var nextUrl;
-        if (isOptionI) {
-          nextUrl = 'cart.html?flow=e2';
-        } else if (isOptionG) {
-          nextUrl = 'cart.html?flow=d2';
-        } else if (isOptionH) {
-          nextUrl = 'checkout.html?flow=e1';
-        } else if (isOptionF) {
-          nextUrl = 'checkout.html?flow=c2';
-        } else {
-          nextUrl = 'polar-sound-transportations.html' + (flow ? '?flow=' + flow : '');
-        }
-        if (isHubFlow) {
-          // For e1/i, only clear transportation if user came from hub (not from transportation cross-sell)
-          if (isCrossSellFlow) {
-            var cameFromForClear = '';
-            try { cameFromForClear = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
-            if (cameFromForClear !== 'transportation') {
-              try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
-            }
-          } else {
-            try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
-          }
-        }
-        window.location.href = nextUrl;
       }
     });
 
@@ -856,6 +775,7 @@
 
     setupLevel('level-travelers', 'travelers');
     setupLevel('level-nights', 'nights');
+
     // Center pills when they fit; show arrow when they overflow. Enable swipe when overflow.
     function updatePillsArrows() {
       document.querySelectorAll('.pill-level').forEach(level => {
@@ -924,75 +844,22 @@
 
     // Scroll to ticket selector on load without animation (no visible autoscroll from hero).
     // Temporarily override CSS scroll-behavior:smooth so the jump is instant.
-    function scrollAccommodationToSelector() {
+    (function() {
       if (!ticketSection) return;
       document.documentElement.style.scrollBehavior = 'auto';
-      requestAnimationFrame(function() {
+      setTimeout(function() {
         scrollToTicketSection('auto');
         setTimeout(function() {
           scrollToTicketSection('auto');
           document.documentElement.style.scrollBehavior = '';
         }, 120);
-      });
-    }
-    scrollAccommodationToSelector();
-    window.addEventListener('pageshow', scrollAccommodationToSelector);
+      }, 50);
+    })();
     (function() {
       var tickets = [];
       try { tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]'); } catch (e) {}
       var hasTickets = tickets.length > 0 && tickets.some(function(t) { return (t.qty || 0) > 0; });
       if (!hasTickets) document.getElementById('stepper-step1') && document.getElementById('stepper-step1').classList.add('skipped');
-    })();
-
-    // === Cross-sell bottom sheet (Option H) ===
-    function openCrossSellSheet() {
-      var overlay = document.getElementById('crosssell-overlay');
-      var sheet = document.getElementById('crosssell-sheet');
-      if (overlay) overlay.classList.add('open');
-      if (sheet) sheet.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeCrossSellSheet() {
-      var overlay = document.getElementById('crosssell-overlay');
-      var sheet = document.getElementById('crosssell-sheet');
-      if (sheet) sheet.style.transform = '';
-      if (overlay) overlay.classList.remove('open');
-      if (sheet) sheet.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    (function bindCrossSell() {
-      var overlay = document.getElementById('crosssell-overlay');
-      var btnYes = document.getElementById('crosssell-yes');
-      var btnNo = document.getElementById('crosssell-no');
-      if (overlay) overlay.addEventListener('click', closeCrossSellSheet);
-      if (btnYes) {
-        btnYes.addEventListener('click', function() {
-          try { sessionStorage.setItem('option_h_came_from', 'accommodation'); } catch(e) {}
-          window.location.href = 'polar-sound-transportations.html?flow=' + flow;
-        });
-      }
-      if (btnNo) {
-        btnNo.addEventListener('click', function() {
-          try { localStorage.setItem('cart_transportation', '[]'); } catch(e) {}
-          var noDest = isOptionI ? 'cart.html?flow=e2' : 'checkout.html?flow=e1';
-          window.location.href = noDest;
-        });
-      }
-    })();
-    // Swipe-to-dismiss for cross-sell sheet
-    (function() {
-      var sheetEl = document.getElementById('crosssell-sheet');
-      if (!sheetEl) return;
-      var startY = 0, currentY = 0, isDragging = false;
-      function dragStart(y) { startY = y; currentY = y; isDragging = true; sheetEl.style.transition = 'none'; }
-      function dragMove(y, e) { if (!isDragging) return; currentY = y; var dy = currentY - startY; if (dy < 0) dy = 0; if (dy > 0) { if (e) e.preventDefault(); sheetEl.style.transform = 'translateX(-50%) translateY(' + dy + 'px)'; } }
-      function dragEnd() { if (!isDragging) return; isDragging = false; sheetEl.style.transition = ''; sheetEl.style.transform = ''; if (currentY - startY > 80) closeCrossSellSheet(); }
-      sheetEl.addEventListener('touchstart', function(e) { dragStart(e.touches[0].clientY); }, { passive: true });
-      sheetEl.addEventListener('touchmove', function(e) { dragMove(e.touches[0].clientY, e); }, { passive: false });
-      sheetEl.addEventListener('touchend', dragEnd);
-      sheetEl.addEventListener('mousedown', function(e) { e.preventDefault(); dragStart(e.clientY); });
-      document.addEventListener('mousemove', function(e) { if (isDragging) dragMove(e.clientY, e); });
-      document.addEventListener('mouseup', dragEnd);
     })();
   </script>
   <script>
