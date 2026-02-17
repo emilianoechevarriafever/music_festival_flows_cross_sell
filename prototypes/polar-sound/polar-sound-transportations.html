@@ -393,10 +393,10 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
+    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd1' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
     const isOptionB = flow === 'a2';
     const isOptionE = flow === 'c1';
-    const isOptionF = flow === 'c2';
+    const isOptionF = flow === 'c2' || flow === 'd1';
     const isOptionG = flow === 'd2';
     const isOptionH = flow === 'e1';
     const isOptionI = flow === 'e2';
@@ -474,7 +474,7 @@
         document.getElementById('step4').href = 'cart.html?flow=' + flow;
         document.getElementById('step4-label').textContent = 'Cart';
       } else {
-        document.getElementById('step4').href = (isOptionH ? 'checkout.html?flow=e1' : 'checkout.html?flow=c2');
+        document.getElementById('step4').href = 'checkout.html?flow=' + flow;
         document.getElementById('step4-label').textContent = 'Checkout';
       }
       if (isCrossSellFlow) {
@@ -649,7 +649,7 @@
         window.location.href = 'cart.html?flow=d2';
       } else if (isOptionF) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
-        window.location.href = 'checkout.html?flow=c2';
+        window.location.href = 'checkout.html?flow=' + flow;
       } else {
         window.location.href = 'checkout.html';
       }

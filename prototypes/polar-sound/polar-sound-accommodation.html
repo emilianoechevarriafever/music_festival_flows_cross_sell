@@ -438,9 +438,9 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
+    if (!flow && (storedFlow === 'c1' || storedFlow === 'c2' || storedFlow === 'd1' || storedFlow === 'd2' || storedFlow === 'e1' || storedFlow === 'e2')) flow = storedFlow;
     const isOptionE = flow === 'c1';
-    const isOptionF = flow === 'c2';
+    const isOptionF = flow === 'c2' || flow === 'd1';
     const isOptionG = flow === 'd2';
     const isOptionH = flow === 'e1';
     const isOptionI = flow === 'e2';
@@ -668,7 +668,7 @@
         } else if (isOptionH) {
           nextUrl = 'checkout.html?flow=e1';
         } else if (isOptionF) {
-          nextUrl = 'checkout.html?flow=c2';
+          nextUrl = 'checkout.html?flow=' + flow;
         } else {
           nextUrl = 'polar-sound-transportations.html' + (flow ? '?flow=' + flow : '');
         }
