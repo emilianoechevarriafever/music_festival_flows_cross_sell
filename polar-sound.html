@@ -871,38 +871,8 @@
       updateTotal();
     }
 
-    // Restore ticket selections from cart (if user navigates back)
-    (function restoreTicketsFromCart() {
-      try {
-        var saved = JSON.parse(localStorage.getItem('cart_tickets') || '[]');
-        if (!Array.isArray(saved) || saved.length === 0) { updateTotal(); return; }
-        var is2day = saved.some(function(t) { return t.name && t.name.indexOf('2 Day Pass') !== -1; });
-        var namesDay = ['Friday - Tier 1', 'Saturday - Tier 2', 'Friday - Polar Pack (Day + 40 tokens)', 'Saturday - Polar Pack (Day + 40 tokens)'];
-        var names2Day = ['General - Tier 5 (2 Day Pass)', 'Polar Pack: General + 60 tokens - Tier 5 (2 Day Pass)'];
-        var names = is2day ? names2Day : namesDay;
-        // Activate the correct panel pill
-        var targetPanel = is2day ? '2day' : 'day';
-        document.querySelectorAll('.ticket-pill').forEach(function(p) {
-          p.classList.toggle('active', p.getAttribute('data-panel') === targetPanel);
-        });
-        document.getElementById('panel-day').style.display = targetPanel === 'day' ? 'block' : 'none';
-        document.getElementById('panel-2day').style.display = targetPanel === '2day' ? 'block' : 'none';
-        // Build a qty map keyed by name
-        var qtyMap = {};
-        saved.forEach(function(t) { if (t.name && t.qty) qtyMap[t.name] = t.qty; });
-        // Set quantities on the active panel rows
-        var panel = document.getElementById('panel-' + targetPanel);
-        if (!panel) { updateTotal(); return; }
-        var rows = panel.querySelectorAll('.ticket-row');
-        rows.forEach(function(row, i) {
-          var el = row.querySelector('.amt-count');
-          if (el) el.textContent = qtyMap[names[i]] || 0;
-        });
-        updateTotal();
-        stickyMode = 'getit';
-        updateStickyBtn();
-      } catch (e) { updateTotal(); }
-    })();
+    // Always pre-select the first ticket in the active panel on page load
+    preselectCheapest();
 
     // Show pills arrow only when there is overflow to the right
     function updatePillsArrow() {
