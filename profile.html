@@ -78,6 +78,7 @@
       transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .sheet.open { transform: translateX(-50%) translateY(0); }
+    .sheet-handle { width:36px; height:4px; background:#d7dde2; border-radius:4px; margin:8px auto 0; flex-shrink:0; }
 
     /* Sheet header */
     .sheet-header {
@@ -194,6 +195,7 @@
 
     <!-- Profile Sheet (fixed overlay at bottom) -->
     <section class="sheet">
+      <div class="sheet-handle"></div>
       <div class="sheet-header">
         <h1>Profile</h1>
         <button type="button" class="sheet-close" id="sheetCloseBtn" aria-label="Close">
