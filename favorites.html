@@ -17,6 +17,7 @@
       --border: #e4e7eb;
       --accent: #0079ca;
     }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: var(--font); background: #f3f4f7; color: var(--text); }
@@ -108,11 +109,15 @@
     .plan-card .card-img-wrap {
       position: relative; width: 100%; aspect-ratio: 1/1;
       border-radius: 12px; overflow: hidden; margin-bottom: 8px;
-      background: #e8ebf0;
+      background: linear-gradient(90deg, #e8ecf0 25%, #f4f6f8 50%, #e8ecf0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite ease-in-out;
     }
     .plan-card .card-img-wrap img {
       width: 100%; height: 100%; object-fit: cover; display: block;
+      opacity: 0; transition: opacity 0.3s ease;
     }
+    .plan-card .card-img-wrap img.loaded { opacity: 1; }
     .plan-card .remove-btn {
       position: absolute; top: 8px; right: 8px; z-index: 2;
       border: none; background: none; padding: 0; margin: 0;
@@ -395,6 +400,15 @@
         }
       }
       updateAvatar();
+    })();
+  </script>
+  <script>
+    (function() {
+      document.querySelectorAll('.card-img-wrap img').forEach(function(img) {
+        if (img.complete && img.naturalWidth) { img.classList.add('loaded'); return; }
+        img.addEventListener('load', function() { img.classList.add('loaded'); });
+        img.addEventListener('error', function() { img.classList.add('loaded'); });
+      });
     })();
   </script>
 </body>

@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     :root {
       --color-primary: #0079ca;
       --color-primary-weak: #E6F4FF;
@@ -145,13 +146,18 @@
       border-radius: 12px;
       overflow: hidden;
       position: relative;
-      background: #e8ecf0;
+      background: linear-gradient(90deg, #e8ecf0 25%, #f4f6f8 50%, #e8ecf0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite ease-in-out;
     }
     .cat-card .cat-card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
+    .cat-card .cat-card-img img.loaded { opacity: 1; }
     .cat-card .cat-card-badge {
       position: absolute;
       top: 8px;
@@ -576,6 +582,15 @@
           }
           writeFavorites(favorites);
         });
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      document.querySelectorAll('.cat-card-img img').forEach(function(img) {
+        if (img.complete && img.naturalWidth) { img.classList.add('loaded'); return; }
+        img.addEventListener('load', function() { img.classList.add('loaded'); });
+        img.addEventListener('error', function() { img.classList.add('loaded'); });
       });
     })();
   </script>
