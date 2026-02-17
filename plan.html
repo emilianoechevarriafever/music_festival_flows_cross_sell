@@ -99,14 +99,17 @@
     .ticket-row.ticket-info-expanded .ticket-info-detail { display:block; }
     .ticket-row .ticket-selector-right { width:136px; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:12px; border:1px solid var(--ticket-border); border-left:none; border-radius:0 8px 8px 0; background:#fff; position:relative; }
     .ticket-amount { display:flex; align-items:center; gap:4px; }
+    .ticket-row .stepper { display:flex; align-items:center; gap:4px; padding:0; background:transparent; border:none; }
     .ticket-amount .amt-btn { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; font-weight:400; transition:background 0.15s, color 0.15s; background:#f2f3f3; border:none; color:#a7b2ba; }
     .ticket-amount .amt-count { width:36px; text-align:center; font-size:16px; font-weight:600; line-height:20px; color:#031419; }
     .ticket-row .amt-btn.plus { background:#e6f4ff; color:#0079ca; }
     .ticket-row.qty-zero .amt-btn.minus { background:#f2f3f3; color:#a7b2ba; cursor:default; }
     .ticket-row.qty-zero .amt-count { color:#a7b2ba; }
     .ticket-row.selected { --ticket-border:#0079ca; }
-    .ticket-row.selected .ticket-selector-right { background:#e6f4ff; }
-    .ticket-row.selected .amt-btn { background:#e6f4ff; color:#0079ca; }
+    .ticket-row.selected .ticket-selector-right { background:#e6f4ff; border-radius:0 8px 8px 0; }
+    .ticket-row.selected .stepper { background:#fff; border-radius:100px; padding:4px 6px; }
+    .ticket-row.selected .amt-btn { background:#e6f4ff; border:none; color:#0079ca; }
+    .ticket-row.selected .amt-btn.plus { background:#e6f4ff; border:none; color:#0079ca; }
     .ticket-row .ticket-notch { position:absolute; right:136px; top:0; bottom:0; width:16px; pointer-events:none; z-index:3; transform:translateX(50%); }
     .ticket-row .ticket-notch::before, .ticket-row .ticket-notch::after { content:''; position:absolute; left:0; width:16px; height:8px; background:var(--color-bg); }
     .ticket-row .ticket-notch::before { top:0; border:1px solid var(--ticket-border); border-top:none; border-radius:0 0 8px 8px; }
@@ -706,7 +709,7 @@
       if (ti > 0) panel.style.display = 'none';
 
       type.tickets.forEach(function(t) {
-        panel.innerHTML += '<div class="ticket-row qty-zero" data-price="' + t.price + '"><div class="ticket-content"><div class="ticket-name">' + t.name + '</div><div class="ticket-price">\u20ac' + t.price.toFixed(2) + '</div></div><div class="ticket-notch"></div><div class="ticket-selector-right"><div class="ticket-amount"><button class="amt-btn minus">\u2212</button><span class="amt-count">0</span><button class="amt-btn plus">+</button></div></div></div>';
+        panel.innerHTML += '<div class="ticket-row qty-zero" data-price="' + t.price + '"><div class="ticket-content"><div class="ticket-name">' + t.name + '</div><div class="ticket-price">\u20ac' + t.price.toFixed(2) + '</div></div><div class="ticket-notch"></div><div class="ticket-selector-right"><div class="stepper ticket-amount"><button class="amt-btn minus">\u2212</button><span class="amt-count">0</span><button class="amt-btn plus">+</button></div></div></div>';
       });
       panelsEl.appendChild(panel);
     });
