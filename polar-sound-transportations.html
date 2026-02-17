@@ -195,6 +195,7 @@
     </div>
   </div>
 
+  <script src="js/burger-menu.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     let flow = params.get('flow');
@@ -207,6 +208,9 @@
     const isOptionalFlow = isOptionE || isOptionF;
     if (isOptionalFlow) {
       try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
+    }
+    if (isOptionF) {
+      document.getElementById('flow-stepper').classList.add('stepper-hidden');
     }
     if (isOptionB) {
       document.getElementById('nav-logo').href = 'option-b/index.html';
