@@ -1032,20 +1032,21 @@
       });
 
       // Touch swipe support
+      var heroEl = document.getElementById('heroCarousel');
       var touchStartX = 0, touchStartY = 0, isSwiping = false;
-      track.addEventListener('touchstart', function(e) {
+      heroEl.addEventListener('touchstart', function(e) {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
         isSwiping = true;
         stop();
       }, { passive: true });
-      track.addEventListener('touchmove', function(e) {
+      heroEl.addEventListener('touchmove', function(e) {
         if (!isSwiping) return;
         var dx = e.touches[0].clientX - touchStartX;
         var dy = e.touches[0].clientY - touchStartY;
         if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
       }, { passive: false });
-      track.addEventListener('touchend', function(e) {
+      heroEl.addEventListener('touchend', function(e) {
         if (!isSwiping) return;
         isSwiping = false;
         var dx = e.changedTouches[0].clientX - touchStartX;
