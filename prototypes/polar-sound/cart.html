@@ -148,11 +148,12 @@
     let flow = params.get('flow');
     let storedFlow = null;
     try { storedFlow = sessionStorage.getItem('polar_flow_mode'); } catch (e) {}
-    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h')) flow = storedFlow;
+    if (!flow && (storedFlow === 'option-e' || storedFlow === 'option-f' || storedFlow === 'option-g' || storedFlow === 'option-h' || storedFlow === 'option-i')) flow = storedFlow;
     const isOptionF = flow === 'option-f';
     const isOptionG = flow === 'option-g';
     const isOptionH = flow === 'option-h';
-    const isHubFlow = isOptionF || isOptionG || isOptionH;
+    const isOptionI = flow === 'option-i';
+    const isHubFlow = isOptionF || isOptionG || isOptionH || isOptionI;
 
     if (isHubFlow) {
       try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}

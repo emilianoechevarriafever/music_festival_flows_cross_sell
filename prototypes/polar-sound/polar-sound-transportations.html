@@ -602,8 +602,8 @@
       });
       localStorage.setItem('cart_transportation', JSON.stringify(cart));
 
-      // Option H: show cross-sell bottom sheet if user came from hub (not from accommodation)
-      if (isOptionH) {
+      // Option H/I: show cross-sell bottom sheet if user came from hub (not from accommodation)
+      if (isCrossSellFlow) {
         var cameFrom = '';
         try { cameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
         if (cameFrom !== 'accommodation') {
@@ -614,14 +614,14 @@
 
       if (isOptionB) {
         window.location.href = 'option-b/cart.html';
-      } else if (isOptionH) {
-        // For option-h, only clear accommodation if user came from hub (not from accommodation cross-sell)
+      } else if (isCrossSellFlow) {
         var cameFromForClear = '';
         try { cameFromForClear = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
         if (cameFromForClear !== 'accommodation') {
           try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
         }
-        window.location.href = 'cart.html?flow=option-h';
+        var dest = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
+        window.location.href = dest;
       } else if (isOptionG) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
         window.location.href = 'cart.html?flow=option-g';
@@ -705,13 +705,14 @@
       if (btnYes) {
         btnYes.addEventListener('click', function() {
           try { sessionStorage.setItem('option_h_came_from', 'transportation'); } catch(e) {}
-          window.location.href = 'polar-sound-accommodation.html?flow=option-h';
+          window.location.href = 'polar-sound-accommodation.html?flow=' + flow;
         });
       }
       if (btnNo) {
         btnNo.addEventListener('click', function() {
           try { localStorage.setItem('cart_accommodation', '[]'); } catch(e) {}
-          window.location.href = 'cart.html?flow=option-h';
+          var noDest = isOptionI ? 'cart.html?flow=option-i' : 'checkout.html?flow=option-h';
+          window.location.href = noDest;
         });
       }
     })();

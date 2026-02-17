@@ -237,6 +237,14 @@
     <main class="content">
       <section id="favorites-list" class="cards-grid"></section>
     </main>
+
+    <div class="snackbar" id="fav-snackbar">
+      <img class="snackbar-thumb" id="snackbar-thumb" src="" alt="">
+      <span class="snackbar-text">Removed from favorites</span>
+      <button class="snackbar-dismiss" id="snackbar-dismiss" type="button" aria-label="Dismiss">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 
   <script src="js/burger-menu.js"></script>
@@ -316,17 +324,54 @@
         }).join('');
       }
 
+      var snackbar = document.getElementById('fav-snackbar');
+      var snackbarThumb = document.getElementById('snackbar-thumb');
+      var snackbarDismiss = document.getElementById('snackbar-dismiss');
+      var snackbarTimer = null;
+
+      function showSnackbar(imageSrc) {
+        clearTimeout(snackbarTimer);
+        snackbar.classList.remove('is-visible');
+        snackbarThumb.src = imageSrc || '';
+        snackbarThumb.style.display = imageSrc ? '' : 'none';
+        void snackbar.offsetWidth;
+        snackbar.classList.add('is-visible');
+        snackbarTimer = setTimeout(function() {
+          snackbar.classList.remove('is-visible');
+        }, 5000);
+      }
+
+      function hideSnackbar() {
+        clearTimeout(snackbarTimer);
+        snackbar.classList.remove('is-visible');
+      }
+
+      if (snackbarDismiss) {
+        snackbarDismiss.addEventListener('click', hideSnackbar);
+      }
+
       listNode.addEventListener('click', function(event) {
         var button = event.target.closest('.js-remove-like');
         if (!button) return;
         event.preventDefault();
         event.stopPropagation();
+
+        if (button.classList.contains('is-unliked')) return;
+
         var id = button.getAttribute('data-id');
         if (!id) return;
+
+        var card = button.closest('.plan-card');
+        var cardImg = card ? card.querySelector('.card-img-wrap img') : null;
+        var thumbSrc = cardImg ? cardImg.src : '';
+
+        button.classList.add('is-unliked');
+
         var favorites = readFavorites();
         delete favorites[id];
         writeFavorites(favorites);
-        render();
+
+        showSnackbar(thumbSrc);
       });
 
       render();

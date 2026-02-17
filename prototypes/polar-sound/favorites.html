@@ -118,7 +118,8 @@
       border: none; background: none; padding: 0; margin: 0;
       line-height: 0; cursor: pointer;
     }
-    .plan-card .remove-btn svg { width: 24px; height: 24px; fill: #e74c3c; stroke: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2)); }
+    .plan-card .remove-btn svg { width: 24px; height: 24px; fill: #e74c3c; stroke: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2)); transition: fill 0.25s, stroke 0.25s; }
+    .plan-card .remove-btn.is-unliked svg { fill: none; stroke: #fff; stroke-width: 1.8; }
     .plan-badge {
       position: absolute; bottom: 8px; left: 8px; z-index: 2;
       display: inline-block; padding: 4px 10px;
@@ -135,6 +136,60 @@
     .plan-title { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.35; }
     .plan-meta { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
     .plan-price { margin: 4px 0 0; font-size: 13px; font-weight: 700; color: var(--text); }
+
+    /* Snackbar – "Removed from favorites" */
+    .snackbar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      z-index: 9999;
+      width: 361px;
+      max-width: calc(100vw - 32px);
+      background: #fff;
+      border: 1px solid #ccd2d8;
+      border-radius: 8px;
+      box-shadow: 0 12px 12px rgba(0,0,0,0.05);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.35s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+    }
+    .snackbar.is-visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .snackbar-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .snackbar-text {
+      flex: 1;
+      font-family: var(--font);
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--muted);
+    }
+    .snackbar-dismiss {
+      flex-shrink: 0;
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+    }
+    .snackbar-dismiss svg { width: 16px; height: 16px; }
 
     [hidden] { display: none !important; }
   </style>
@@ -182,6 +237,14 @@
     <main class="content">
       <section id="favorites-list" class="cards-grid"></section>
     </main>
+
+    <div class="snackbar" id="fav-snackbar">
+      <img class="snackbar-thumb" id="snackbar-thumb" src="" alt="">
+      <span class="snackbar-text">Removed from favorites</span>
+      <button class="snackbar-dismiss" id="snackbar-dismiss" type="button" aria-label="Dismiss">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 
   <script src="../../js/burger-menu.js"></script>
@@ -261,17 +324,54 @@
         }).join('');
       }
 
+      var snackbar = document.getElementById('fav-snackbar');
+      var snackbarThumb = document.getElementById('snackbar-thumb');
+      var snackbarDismiss = document.getElementById('snackbar-dismiss');
+      var snackbarTimer = null;
+
+      function showSnackbar(imageSrc) {
+        clearTimeout(snackbarTimer);
+        snackbar.classList.remove('is-visible');
+        snackbarThumb.src = imageSrc || '';
+        snackbarThumb.style.display = imageSrc ? '' : 'none';
+        void snackbar.offsetWidth;
+        snackbar.classList.add('is-visible');
+        snackbarTimer = setTimeout(function() {
+          snackbar.classList.remove('is-visible');
+        }, 5000);
+      }
+
+      function hideSnackbar() {
+        clearTimeout(snackbarTimer);
+        snackbar.classList.remove('is-visible');
+      }
+
+      if (snackbarDismiss) {
+        snackbarDismiss.addEventListener('click', hideSnackbar);
+      }
+
       listNode.addEventListener('click', function(event) {
         var button = event.target.closest('.js-remove-like');
         if (!button) return;
         event.preventDefault();
         event.stopPropagation();
+
+        if (button.classList.contains('is-unliked')) return;
+
         var id = button.getAttribute('data-id');
         if (!id) return;
+
+        var card = button.closest('.plan-card');
+        var cardImg = card ? card.querySelector('.card-img-wrap img') : null;
+        var thumbSrc = cardImg ? cardImg.src : '';
+
+        button.classList.add('is-unliked');
+
         var favorites = readFavorites();
         delete favorites[id];
         writeFavorites(favorites);
-        render();
+
+        showSnackbar(thumbSrc);
       });
 
       render();
