@@ -872,6 +872,14 @@
     }
     scrollAccommodationToSelector();
     window.addEventListener('pageshow', scrollAccommodationToSelector);
+
+    // Flow a1 (default): show "Skip hotel" CTA immediately (no hotel preselected)
+    if (!flow) {
+      hasSeenTickets = true;
+      stickyMode = 'getit';
+      updateSticky();
+    }
+
     (function() {
       var tickets = [];
       try { tickets = JSON.parse(localStorage.getItem('cart_tickets') || '[]'); } catch (e) {}
