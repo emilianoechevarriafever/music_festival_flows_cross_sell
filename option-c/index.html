@@ -80,7 +80,10 @@
     .nav-icons svg { width: 24px; height: 24px; color: #031419; stroke: currentColor; cursor: pointer; }
     .avatar-wrap { position: relative; display: flex; align-items: center; }
     .avatar-wrap img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
-    .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }
+    .avatar-wrap .avatar-placeholder { display:none; }
+    .avatar-wrap.logged-in::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }
+    .avatar-wrap.logged-out img { display:none; }
+    .avatar-wrap.logged-out .avatar-placeholder { display:flex; }
 
     /* Hero */
     .hero {
