@@ -1104,6 +1104,14 @@
       updateTotal();
     }
 
+    // Auto-preselect first ticket when arriving from outside Polar Sound flow
+    (function() {
+      var ref = document.referrer || '';
+      if (ref.indexOf('polar-sound') === -1) {
+        preselectCheapest();
+      }
+    })();
+
     // Show pills arrow only when there is overflow to the right
     function updatePillsArrow() {
       const row = document.getElementById('ticket-pills-row');
