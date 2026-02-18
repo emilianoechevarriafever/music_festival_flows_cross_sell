@@ -790,12 +790,12 @@
         if (!room.soldout) {
           row.querySelector('.amt-btn.plus').addEventListener('click', () => {
             roomCounts[i]++;
-            saveAccommodationToCart();
+            saveAccommodationSelection();
             renderRooms();
           });
           row.querySelector('.amt-btn.minus').addEventListener('click', () => {
             if (roomCounts[i] > 0) roomCounts[i]--;
-            saveAccommodationToCart();
+            saveAccommodationSelection();
             renderRooms();
           });
         }
