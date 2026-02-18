@@ -985,6 +985,7 @@
       var looping = false;
 
       var clone = slides[0].cloneNode(true);
+      clone.classList.add('clone-slide');
       track.appendChild(clone);
 
       function updateBars() {
