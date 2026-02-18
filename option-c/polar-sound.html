@@ -329,7 +329,20 @@
     .sheet .sheet-row.selected .sheet-stepper { background:#fff; border-radius:100px; padding:4px 6px; }
     .sheet .sheet-row.selected .sheet-stepper .amt-btn { background:#e6f4ff; color:#0079ca; border:none; }
 
-    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } .sheet { width:100vw; } }
+    /* === DECISION SHEET ("Anything else?" hub) === */
+    .decision-overlay { position:fixed; inset:0; background:rgba(3,20,25,0.35); opacity:0; pointer-events:none; transition:opacity 0.2s ease; z-index:350; }
+    .decision-overlay.open { opacity:1; pointer-events:auto; }
+    .decision-sheet { position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(100%); width:393px; max-width:100vw; background:#fff; border-radius:16px 16px 0 0; z-index:351; padding:16px; transition:transform 0.3s ease; box-shadow:0 -4px 20px rgba(0,0,0,0.12); }
+    .decision-sheet.open { transform:translateX(-50%) translateY(0); }
+    .decision-sheet .handle { width:36px; height:4px; border-radius:4px; background:#d7dde2; margin:0 auto 14px; }
+    .decision-sheet h3 { font-size:18px; font-weight:700; text-align:center; margin-bottom:14px; }
+    .decision-sheet .hub-actions { display:flex; flex-direction:column; gap:10px; }
+    .decision-sheet .hub-btn { width:100%; min-height:44px; border-radius:100px; border:1px solid #ccd2d8; background:#fff; color:var(--color-text); font-family:var(--font); font-size:14px; font-weight:600; cursor:pointer; padding:10px 16px; }
+    .decision-sheet .hub-btn.primary { background:#0079ca; border-color:#0079ca; color:#fff; }
+    .decision-sheet .hub-btn.secondary { background:#fff; border-color:#ccd2d8; color:var(--color-text); display:inline-flex; align-items:center; justify-content:center; gap:8px; }
+    .decision-sheet .hub-btn.secondary svg { width:20px; height:20px; flex-shrink:0; stroke:currentColor; fill:none; stroke-width:2; }
+
+    @media (max-width:393px) { .phone { width:100vw; } .sticky-cta { width:100vw; } .sheet { width:100vw; } .decision-sheet { width:100vw; } }
     /* Tap feedback */
     .nav-icon-btn:active { opacity:0.6; }
     .ticket-pill:active { transform:scale(0.96); }
@@ -574,7 +587,7 @@
       </div>
 
       <!-- CTA buttons -->
-      <button class="cta-primary" id="cta-get-it" onclick="window.location.href=(window.flowHref||function(u){return u})('add-ons.html')">&euro;45.00 &mdash; Get it</button>
+      <button class="cta-primary" id="cta-get-it">&euro;45.00 &mdash; Get it</button>
     </div>
 
     <!-- User Reviews -->
@@ -740,6 +753,18 @@
     <div class="fs-gallery-thumbs" id="fsGalleryThumbs"></div>
   </div>
 
+  <!-- Decision sheet: "Anything else?" hub -->
+  <div class="decision-overlay" id="addons-hub-overlay"></div>
+  <div class="decision-sheet" id="addons-hub-sheet">
+    <div class="handle"></div>
+    <h3>Anything else?</h3>
+    <div class="hub-actions">
+      <button type="button" class="hub-btn secondary" id="addons-hub-accommodation"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg> Add hotel</button>
+      <button type="button" class="hub-btn secondary" id="addons-hub-transport"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Add transportation</button>
+      <button type="button" class="hub-btn primary" id="addons-hub-checkout">Go to checkout</button>
+    </div>
+  </div>
+
   <!-- Bottom sheet 1: Hotel (ticket selector only) -->
   <div class="sheet-overlay" id="overlay-sheet-acc"></div>
   <div class="sheet" id="sheet-acc">
@@ -865,7 +890,7 @@
         scrollToTicketSection('smooth');
       } else {
         saveTicketsToCart();
-        openSheet('sheet-acc');
+        openAddonsHub();
       }
     });
 
@@ -1108,7 +1133,7 @@
       });
       localStorage.setItem('cart_accommodation', JSON.stringify(acc));
       closeSheet('sheet-acc');
-      openSheet('sheet-transport');
+      openAddonsHub();
     });
 
     document.getElementById('sheet-transport-continue').addEventListener('click', function() {
@@ -1122,6 +1147,62 @@
       localStorage.setItem('cart_transportation', JSON.stringify(tr));
       window.location.href = (window.flowHref||function(u){return u})('checkout.html');
     });
+
+    // === DECISION SHEET ("Anything else?" hub) ===
+    function openAddonsHub() {
+      const overlay = document.getElementById('addons-hub-overlay');
+      const sheet = document.getElementById('addons-hub-sheet');
+      if (overlay) overlay.classList.add('open');
+      if (sheet) sheet.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAddonsHub() {
+      const overlay = document.getElementById('addons-hub-overlay');
+      const sheet = document.getElementById('addons-hub-sheet');
+      if (sheet) sheet.style.transform = '';
+      if (overlay) overlay.classList.remove('open');
+      if (sheet) sheet.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    (function() {
+      var sheetEl = document.getElementById('addons-hub-sheet');
+      if (!sheetEl) return;
+      var startY = 0, currentY = 0, isDragging = false;
+      function dragStart(y) { startY = y; currentY = y; isDragging = true; sheetEl.style.transition = 'none'; }
+      function dragMove(y, e) { if (!isDragging) return; currentY = y; var dy = currentY - startY; if (dy < 0) dy = 0; if (dy > 0) { if (e) e.preventDefault(); sheetEl.style.transform = 'translateX(-50%) translateY(' + dy + 'px)'; } }
+      function dragEnd() { if (!isDragging) return; isDragging = false; sheetEl.style.transition = ''; sheetEl.style.transform = ''; if (currentY - startY > 80) closeAddonsHub(); }
+      sheetEl.addEventListener('touchstart', function(e) { dragStart(e.touches[0].clientY); }, { passive: true });
+      sheetEl.addEventListener('touchmove', function(e) { dragMove(e.touches[0].clientY, e); }, { passive: false });
+      sheetEl.addEventListener('touchend', dragEnd);
+      sheetEl.addEventListener('mousedown', function(e) { e.preventDefault(); dragStart(e.clientY); });
+      document.addEventListener('mousemove', function(e) { if (isDragging) dragMove(e.clientY, e); });
+      document.addEventListener('mouseup', dragEnd);
+    })();
+
+    (function bindAddonsHub() {
+      const overlay = document.getElementById('addons-hub-overlay');
+      const btnAcc = document.getElementById('addons-hub-accommodation');
+      const btnTransport = document.getElementById('addons-hub-transport');
+      const btnCheckout = document.getElementById('addons-hub-checkout');
+      if (overlay) overlay.addEventListener('click', closeAddonsHub);
+      if (btnAcc) btnAcc.addEventListener('click', function() {
+        closeAddonsHub();
+        openSheet('sheet-acc');
+      });
+      if (btnTransport) btnTransport.addEventListener('click', function() {
+        closeAddonsHub();
+        openSheet('sheet-transport');
+      });
+      if (btnCheckout) btnCheckout.addEventListener('click', function() {
+        try {
+          localStorage.setItem('cart_accommodation', '[]');
+          localStorage.setItem('cart_transportation', '[]');
+        } catch (e) {}
+        window.location.href = (window.flowHref||function(u){return u})('checkout.html');
+      });
+    })();
 
     /* ── Hero Gallery Carousel ── */
     (function initCarousel() {
