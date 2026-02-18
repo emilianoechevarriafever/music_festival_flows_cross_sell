@@ -776,7 +776,7 @@
       </div>
     </div>
     <div class="sheet-footer">
-      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-acc-continue">No accommodation</button>
+      <button type="button" class="sheet-btn sheet-btn-primary" id="sheet-acc-continue">No hotel</button>
     </div>
   </div>
 
@@ -1053,7 +1053,7 @@
         totalPrice += qty * price;
       });
       const btn = document.getElementById('sheet-acc-continue');
-      if (btn) btn.textContent = totalQty > 0 ? '\u20AC' + totalPrice.toFixed(2) + ' \u2014 Add it' : 'No accommodation';
+      if (btn) btn.textContent = totalQty > 0 ? '\u20AC' + totalPrice.toFixed(2) + ' \u2014 Add it' : 'No hotel';
     }
     function updateSheetTransportBtn() {
       let totalQty = 0;
