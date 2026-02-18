@@ -128,6 +128,8 @@
     .ticket-row .ticket-notch::before, .ticket-row .ticket-notch::after { content:''; position:absolute; left:0; width:16px; height:8px; background:var(--color-bg); }
     .ticket-row .ticket-notch::before { top:0; border:1px solid var(--ticket-border); border-top:none; border-radius:0 0 8px 8px; }
     .ticket-row .ticket-notch::after { bottom:0; border:1px solid var(--ticket-border); border-bottom:none; border-radius:8px 8px 0 0; }
+    .ticket-row.selected .ticket-notch::before,
+    .ticket-row.selected .ticket-notch::after { border-color: transparent; }
 
     .cta-primary { width:100%; height:48px; background:#0079ca; border:none; border-radius:100px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; margin-bottom:12px; transition:background 0.2s; }
     .cta-primary:hover { background:#0066b3; }
