@@ -70,12 +70,18 @@
   height: 24px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
-}
-.avatar-wrap .avatar-placeholder {
   display: none;
 }
-.avatar-wrap.logged-in::after {
+.avatar-wrap .avatar-placeholder {
+  display: flex;
+}
+html.u-in .avatar-wrap img {
+  display: block;
+}
+html.u-in .avatar-wrap .avatar-placeholder {
+  display: none;
+}
+html.u-in .avatar-wrap::after {
   content: '';
   position: absolute;
   top: -1px;
@@ -85,12 +91,6 @@
   background: #22ad5c;
   border: 1.5px solid #fff;
   border-radius: 50%;
-}
-.avatar-wrap.logged-out img {
-  display: none;
-}
-.avatar-wrap.logged-out .avatar-placeholder {
-  display: flex;
 }
 
 /* Burger toggle — rigid 24×24, SVGs centered absolutely */
