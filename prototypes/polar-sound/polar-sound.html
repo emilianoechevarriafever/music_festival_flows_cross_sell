@@ -437,7 +437,7 @@
 
       <p>&#128680; <strong>Passes now on sale!</strong> Lori Meyers, Juan Mag&aacute;n, Leire Mart&iacute;nez, Besmaya, and many more to be announced are waiting for you!</p>
 
-      <p>&#127976; Want a Pass + hotel? <a href="polar-sound-accommodation.html" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); }catch(e){}">Click here</a></p>
+      <p>&#127976; Want a Pass + hotel? <a href="polar-sound-accommodation.html" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); sessionStorage.setItem('polar_step_nav','1'); }catch(e){}">Click here</a></p>
       <p>&#128656; Buy your bus and shuttle tickets to Polar Sound <a href="javascript:void(0)">here</a></p>
       <p>&#128176; Not ready to buy add-ons yet? Purchase them later separately <a href="javascript:void(0)">here</a></p>
 
@@ -598,7 +598,7 @@
       </div>
 
       <!-- CTA (sticky handles click; this is fallback) -->
-      <button class="cta-primary" id="cta-get-it" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); }catch(e){} window.location.href=(window.flowHref||function(u){return u})('polar-sound-accommodation.html')">&euro;45.00 &mdash; Get it</button>
+      <button class="cta-primary" id="cta-get-it" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); sessionStorage.setItem('polar_step_nav','1'); }catch(e){} window.location.href=(window.flowHref||function(u){return u})('polar-sound-accommodation.html')">&euro;45.00 &mdash; Get it</button>
     </div>
 
     <!-- User Reviews -->
@@ -792,6 +792,12 @@
     const isOptionalFlow = isOptionE || isHubFlow;
     const flowSuffix = flow ? '?flow=' + flow : '';
 
+    // Entering the tickets page resets hotel/transport selections (fresh flow start)
+    if (!flow || flow === 'a1') {
+      try { localStorage.removeItem('cart_accommodation'); } catch(e) {}
+      try { localStorage.removeItem('cart_transportation'); } catch(e) {}
+    }
+
     if (isOptionalFlow) {
       try { sessionStorage.setItem('polar_flow_mode', flow); } catch (e) {}
       const logoLink = document.querySelector('.navbar .logo-link');
@@ -818,6 +824,13 @@
         }
       } catch (e) {}
     })();
+
+    // Set nav token before any stepper link click so the target page knows it's in-flow
+    document.querySelectorAll('.flow-stepper a.step').forEach(function(link) {
+      link.addEventListener('click', function() {
+        try { sessionStorage.setItem('polar_step_nav', '1'); } catch(e) {}
+      });
+    });
 
     // === SINGLE CTA BEHAVIOR ===
     const stickyBtn = document.getElementById('sticky-btn');
@@ -867,6 +880,7 @@
         // Save ticket selections to localStorage before navigating
         saveTicketsToCart();
         try { sessionStorage.setItem('polar_flow_visited', '1'); } catch (e) {}
+        try { sessionStorage.setItem('polar_step_nav', '1'); } catch (e) {}
         if (isHubFlow) {
           openAddonsHub();
         } else {

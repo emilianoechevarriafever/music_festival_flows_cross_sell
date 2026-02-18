@@ -422,7 +422,7 @@
 
       <p>&#128680; <strong>Passes now on sale!</strong> Lori Meyers, Juan Mag&aacute;n, Leire Mart&iacute;nez, Besmaya, and many more to be announced are waiting for you!</p>
 
-      <p>&#127976; Want a Pass + hotel? <a href="polar-sound-accommodation.html" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); }catch(e){}">Click here</a></p>
+      <p>&#127976; Want a Pass + hotel? <a href="polar-sound-accommodation.html" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); sessionStorage.setItem('polar_step_nav','1'); }catch(e){}">Click here</a></p>
       <p>&#128656; Buy your bus and shuttle tickets to Polar Sound <a href="javascript:void(0)">here</a></p>
       <p>&#128176; Not ready to buy add-ons yet? Purchase them later separately <a href="javascript:void(0)">here</a></p>
 
@@ -583,7 +583,7 @@
       </div>
 
       <!-- CTA (sticky handles click; this is fallback) -->
-      <button class="cta-primary" id="cta-get-it" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); }catch(e){} window.location.href=(window.flowHref||function(u){return u})('polar-sound-accommodation.html')">&euro;45.00 &mdash; Get it</button>
+      <button class="cta-primary" id="cta-get-it" onclick="try{ sessionStorage.setItem('polar_flow_visited','1'); sessionStorage.setItem('polar_step_nav','1'); }catch(e){} window.location.href=(window.flowHref||function(u){return u})('polar-sound-accommodation.html')">&euro;45.00 &mdash; Get it</button>
     </div>
 
     <!-- User Reviews -->
@@ -751,6 +751,10 @@
 
   <script src="../js/burger-menu.js"></script>
   <script>
+    // Entering the tickets page resets hotel/transport selections (fresh flow start)
+    try { localStorage.removeItem('cart_accommodation'); } catch(e) {}
+    try { localStorage.removeItem('cart_transportation'); } catch(e) {}
+
     // Stepper: hidden on first visit to tickets; show only when user has advanced and then comes back
     (function() {
       try {
@@ -760,6 +764,13 @@
         }
       } catch (e) {}
     })();
+
+    // Set nav token before any stepper link click so the target page knows it's in-flow
+    document.querySelectorAll('.flow-stepper a.step').forEach(function(link) {
+      link.addEventListener('click', function() {
+        try { sessionStorage.setItem('polar_step_nav', '1'); } catch(e) {}
+      });
+    });
 
     function hasAnyCartItems() {
       var tickets = [], accommodation = [], transportation = [];
@@ -836,6 +847,7 @@
         // Save ticket selections to localStorage before navigating
         saveTicketsToCart();
         try { sessionStorage.setItem('polar_flow_visited', '1'); } catch (e) {}
+        try { sessionStorage.setItem('polar_step_nav', '1'); } catch (e) {}
         window.location.href = (window.flowHref||function(u){return u})('polar-sound-accommodation.html');
       }
     });
