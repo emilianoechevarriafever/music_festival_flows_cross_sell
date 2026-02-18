@@ -79,23 +79,14 @@
     }
     .nav-icons { display: flex; align-items: center; gap:20px; }
     .nav-icons svg { height:24px; width:auto; color: #031419; cursor: pointer; }
-    .nav-icon-btn {
-      margin: 0;
-      padding: 0;
-      border: none;
-      background: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+    .nav-icon-btn{all:unset;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:inherit;width:24px;height:24px;flex-shrink:0;box-sizing:border-box;overflow:visible}
     .nav-icon-btn svg { height:24px; width:auto; color: #031419; stroke: currentColor; }
     .burger-toggle { width:24px; height:24px; position:relative; }
     .burger-toggle svg { position:absolute; top:0; left:50%; transform:translateX(-50%); }
     .burger-toggle .icon-close { display: none; }
     .phone.is-menu-open .burger-toggle .icon-menu { display: none; }
     .phone.is-menu-open .burger-toggle .icon-close { display: block; }
-    .avatar-wrap { position: relative; display: flex; align-items: center; }
+    .avatar-wrap{all:unset;position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;width:24px;height:24px;flex-shrink:0;box-sizing:border-box}
     .avatar-wrap img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
     .avatar-wrap .avatar-placeholder { display:none; }
     .avatar-wrap.logged-in::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }

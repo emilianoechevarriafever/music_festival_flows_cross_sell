@@ -99,11 +99,23 @@
 
   var hamburgerSvg = null;
   var hamburgerParent = null;
-  var allSvgs = navbar.querySelectorAll('svg');
-  for (var s = 0; s < allSvgs.length; s++) {
-    var lines = allSvgs[s].querySelectorAll('line');
-    if (lines.length === 3) { hamburgerSvg = allSvgs[s]; break; }
+
+  // Strategy 1: find by aria-label="Menu" or "Open menu"
+  var menuBtn = navbar.querySelector('[aria-label="Menu"], [aria-label="Open menu"]');
+  if (menuBtn) {
+    hamburgerSvg = menuBtn.querySelector('svg');
+    if (!hamburgerSvg && menuBtn.tagName === 'SVG') hamburgerSvg = menuBtn;
   }
+
+  // Strategy 2: fall back to SVG with 3 <line> elements (legacy home.html format)
+  if (!hamburgerSvg) {
+    var allSvgs = navbar.querySelectorAll('svg');
+    for (var s = 0; s < allSvgs.length; s++) {
+      var lines = allSvgs[s].querySelectorAll('line');
+      if (lines.length === 3) { hamburgerSvg = allSvgs[s]; break; }
+    }
+  }
+
   if (!hamburgerSvg) return;
 
   hamburgerParent = hamburgerSvg.parentElement;

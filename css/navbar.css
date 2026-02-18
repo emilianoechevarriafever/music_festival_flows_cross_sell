@@ -1,6 +1,6 @@
-/*  Shared navbar stabilisation
-    Every icon container is a fixed 24×24 box so icons never shift
-    between pages regardless of SVG aspect-ratio or dynamic injection. */
+/*  Shared navbar stabilisation — nuclear reset
+    Uses all:unset so <a> and <button> render identically.
+    Every icon slot is a rigid 24×24 box; no icon can shift the layout. */
 
 .navbar {
   display: flex;
@@ -11,9 +11,10 @@
   border-bottom: 1px solid #e6eaee;
 }
 .navbar .logo-link {
-  text-decoration: none;
+  all: unset;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .navbar .logo-link img {
   height: 38px;
@@ -28,23 +29,23 @@
   gap: 20px;
 }
 
+/* Nuclear reset: strips every browser-default from <a> AND <button> */
 .nav-icon-btn {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
+  all: unset;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  text-decoration: none;
   color: inherit;
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  box-sizing: border-box;
   overflow: visible;
+  vertical-align: middle;
 }
 .nav-icon-btn svg {
+  display: block;
   height: 24px;
   width: auto;
   flex-shrink: 0;
@@ -52,14 +53,17 @@
 }
 
 .avatar-wrap {
+  all: unset;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  cursor: pointer;
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
 }
 .avatar-wrap img {
   width: 24px;
@@ -89,7 +93,7 @@
   display: flex;
 }
 
-/* Burger toggle — fixed 24×24 so swap doesn't shift neighbours */
+/* Burger toggle — rigid 24×24, SVGs centered absolutely */
 .burger-toggle {
   width: 24px;
   height: 24px;
