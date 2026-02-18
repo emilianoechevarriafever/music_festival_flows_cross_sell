@@ -881,6 +881,10 @@
       var TICK = 40;
       var elapsed = 0;
       var timer = null;
+      var looping = false;
+
+      var clone = slides[0].cloneNode(true);
+      track.appendChild(clone);
 
       function updateBars() {
         for (var i = 0; i < bars.length; i++) {
@@ -901,8 +905,23 @@
       }
 
       function goTo(idx) {
+        if (looping) return;
         if (idx < 0) idx = total - 1;
-        if (idx >= total) idx = 0;
+        if (idx >= total) {
+          looping = true;
+          track.style.transform = 'translateX(-' + (total * 100) + '%)';
+          current = 0;
+          elapsed = 0;
+          updateBars();
+          setTimeout(function() {
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(0%)';
+            void track.offsetWidth;
+            track.style.transition = '';
+            looping = false;
+          }, 480);
+          return;
+        }
         current = idx;
         track.style.transform = 'translateX(-' + (current * 100) + '%)';
         elapsed = 0;
