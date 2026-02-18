@@ -334,19 +334,24 @@
     /* === FULLSCREEN GALLERY === */
     .fs-gallery { position:fixed; inset:0; z-index:9999; background:#000; display:none; flex-direction:column; }
     .fs-gallery.open { display:flex; }
-    .fs-gallery-topbar { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; flex-shrink:0; }
-    .fs-gallery-close { width:36px; height:36px; border:none; background:rgba(255,255,255,0.12); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-    .fs-gallery-close svg { width:20px; height:20px; color:white; }
-    .fs-gallery-counter { font-family:var(--font); font-size:14px; font-weight:600; color:rgba(255,255,255,0.85); }
-    .fs-gallery-spacer { width:36px; }
+    .fs-gallery-topbar { position:absolute; top:0; right:0; z-index:2; padding:12px 16px; }
+    .fs-gallery-close { width:40px; height:40px; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .fs-gallery-close svg { width:28px; height:28px; color:white; }
     .fs-gallery-viewport { flex:1; position:relative; overflow:hidden; display:flex; align-items:center; }
     .fs-gallery-track { display:flex; height:100%; width:100%; transition:transform 0.3s cubic-bezier(.4,0,.2,1); }
     .fs-gallery-track.no-transition { transition:none; }
-    .fs-gallery-slide { min-width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:0 8px; }
-    .fs-gallery-slide img { max-width:100%; max-height:100%; object-fit:contain; border-radius:4px; user-select:none; -webkit-user-drag:none; }
-    .fs-gallery-dots { display:flex; justify-content:center; gap:6px; padding:16px 0 max(20px, env(safe-area-inset-bottom)); flex-shrink:0; }
-    .fs-gallery-dots .dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.3); transition:background 0.2s, transform 0.2s; }
-    .fs-gallery-dots .dot.active { background:white; transform:scale(1.25); }
+    .fs-gallery-slide { min-width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+    .fs-gallery-slide img { max-width:100%; max-height:100%; object-fit:contain; user-select:none; -webkit-user-drag:none; }
+    .fs-gallery-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:44px; height:44px; border:none; background:rgba(0,0,0,0.25); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+    .fs-gallery-arrow:active { background:rgba(0,0,0,0.5); }
+    .fs-gallery-arrow svg { width:28px; height:28px; color:white; }
+    .fs-gallery-arrow.prev { left:8px; }
+    .fs-gallery-arrow.next { right:8px; }
+    .fs-gallery-thumbs { display:flex; gap:8px; padding:12px 16px max(16px, env(safe-area-inset-bottom)); flex-shrink:0; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .fs-gallery-thumbs::-webkit-scrollbar { display:none; }
+    .fs-gallery-thumb { width:72px; height:72px; min-width:72px; border-radius:6px; overflow:hidden; cursor:pointer; border:2px solid transparent; transition:border-color 0.2s; }
+    .fs-gallery-thumb.active { border-color:#0079ca; }
+    .fs-gallery-thumb img { width:100%; height:100%; object-fit:cover; }
   </style>
 </head>
 <body>
@@ -720,14 +725,14 @@
   <!-- Fullscreen Gallery Overlay -->
   <div class="fs-gallery" id="fsGallery">
     <div class="fs-gallery-topbar">
-      <button type="button" class="fs-gallery-close" id="fsGalleryClose" aria-label="Close gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      <span class="fs-gallery-counter" id="fsGalleryCounter">1 / 1</span>
-      <div class="fs-gallery-spacer"></div>
+      <button type="button" class="fs-gallery-close" id="fsGalleryClose" aria-label="Close gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="fs-gallery-viewport" id="fsGalleryViewport">
       <div class="fs-gallery-track" id="fsGalleryTrack"></div>
+      <button type="button" class="fs-gallery-arrow prev" id="fsGalleryPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button type="button" class="fs-gallery-arrow next" id="fsGalleryNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
     </div>
-    <div class="fs-gallery-dots" id="fsGalleryDots"></div>
+    <div class="fs-gallery-thumbs" id="fsGalleryThumbs"></div>
   </div>
 
   <!-- Bottom sheet 1: Accommodation (ticket selector only) -->
