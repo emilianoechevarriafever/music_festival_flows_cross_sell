@@ -28,6 +28,8 @@
   /* ── CSS ── */
   var style = document.createElement('style');
   style.textContent =
+    '.burger-toggle{width:24px;height:24px;position:relative}' +
+    '.burger-toggle svg{position:absolute;top:0;left:50%;transform:translateX(-50%)}' +
     '.burger-toggle .icon-close{display:none}' +
     '.phone.is-menu-open .burger-toggle .icon-menu{display:none}' +
     '.phone.is-menu-open .burger-toggle .icon-close{display:block}' +
