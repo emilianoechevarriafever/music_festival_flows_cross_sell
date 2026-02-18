@@ -873,8 +873,10 @@
     scrollAccommodationToSelector();
     window.addEventListener('pageshow', scrollAccommodationToSelector);
 
-    // Flow a1 (default): show "Skip hotel" CTA immediately (no hotel preselected)
-    if (!flow) {
+    // Flow a1 (default): show "Skip hotel" / "Add it" CTA immediately.
+    // If restoreAccommodationFromCart() already set stickyMode, this just ensures
+    // hasSeenTickets is true so the CTA doesn't show "Select date and session".
+    if (!flow || flow === 'a1') {
       hasSeenTickets = true;
       stickyMode = 'getit';
       updateSticky();

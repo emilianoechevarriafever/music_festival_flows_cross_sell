@@ -943,8 +943,8 @@
     scrollAccommodationToSelector();
     window.addEventListener('pageshow', scrollAccommodationToSelector);
 
-    // Flow a1 (default): show "Skip hotel" CTA immediately (no hotel preselected)
-    if (!flow) {
+    // Flow a1 (default): show "Skip hotel" / "Add it" CTA immediately.
+    if (!flow || flow === 'a1') {
       hasSeenTickets = true;
       stickyMode = 'getit';
       updateSticky();
