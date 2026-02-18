@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fever - Top 10 in Madrid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    :root {
+      --color-primary: #0079ca;
+      --color-text-main: #031419;
+      --color-text-secondary: #536b75;
+      --color-border: #E6EAEE;
+      --color-bg-neutral: #F5F7F9;
+      --font: 'Montserrat', sans-serif;
+    }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    body { font-family: var(--font); background: var(--color-bg-neutral); display: flex; justify-content: center; color: var(--color-text-main); }
+    .phone { width: 393px; max-width: 100vw; background: white; min-height: 100vh; overflow-x: hidden; position: relative; }
+
+    /* Navbar */
+    .navbar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--color-border); }
+    .nav-left { display: flex; align-items: center; gap: 8px; }
+    .back-btn { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; text-decoration: none; color: var(--color-text-main); }
+    .back-btn svg { width: 24px; height: 24px; }
+    .logo-link { display: flex; }
+    .logo-link img { height: 20px; }
+    .nav-icons { display: flex; align-items: center; gap: 4px; }
+    .nav-icon-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+    .nav-icon-btn svg { width: 24px; height: 24px; color: var(--color-text-main); stroke: currentColor; }
+    .avatar-wrap { position: relative; display: flex; align-items: center; }
+    .avatar-wrap img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+    .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }
+
+    /* Page Header */
+    .top10-header { padding: 20px 16px; border-bottom: 1px solid var(--color-border); }
+    .top10-header h1 { font-size: 24px; font-weight: 700; line-height: 32px; margin-bottom: 4px; }
+    .top10-header p { font-size: 14px; color: var(--color-text-secondary); line-height: 20px; }
+    .top10-count { font-size: 14px; color: var(--color-text-secondary); padding: 12px 16px; }
+
+    /* Card Grid */
+    .top10-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 16px 24px; }
+    .top10-card { text-decoration: none; color: inherit; transition: transform 0.15s; }
+    .top10-card:active { transform: scale(0.97); }
+    .top10-card .card-img {
+      width: 100%; aspect-ratio: 3/4; border-radius: 12px; overflow: hidden; position: relative;
+      background: linear-gradient(90deg, #e8ecf0 25%, #f4f6f8 50%, #e8ecf0 75%);
+      background-size: 200% 100%; animation: shimmer 1.5s infinite ease-in-out;
+    }
+    .top10-card .card-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; }
+    .top10-card .card-img img.loaded { opacity: 1; }
+
+    /* Rank number */
+    .top10-card .card-img .rank {
+      position: absolute; bottom: 4px; left: 6px;
+      font-size: 64px; font-weight: 900; line-height: 1;
+      font-family: var(--font); letter-spacing: -0.02em;
+      z-index: 1; pointer-events: none;
+    }
+    .top10-card .card-img .rank .rank-stroke,
+    .top10-card .card-img .rank .rank-fill {
+      position: absolute; left: 0; bottom: 0;
+      font-size: inherit; font-weight: inherit; line-height: 1;
+      font-family: inherit; letter-spacing: inherit;
+    }
+    .top10-card .card-img .rank .rank-stroke {
+      color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 3px #000;
+    }
+    .top10-card .card-img .rank .rank-fill {
+      color: #fff; -webkit-text-fill-color: #fff; -webkit-text-stroke: 0 transparent;
+    }
+
+    /* Like button */
+    .top10-card .card-like {
+      position: absolute; top: 8px; right: 8px;
+      width: 28px; height: 28px; min-width: 28px; min-height: 28px;
+      border: none; background: rgba(0,0,0,0.4); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; padding: 0; border-radius: 50%; transition: background 0.2s;
+    }
+    .top10-card .card-like:hover { background: rgba(0,0,0,0.55); }
+    .top10-card .card-like svg {
+      width: 14px; height: 14px; flex-shrink: 0;
+      color: white; fill: none; stroke: currentColor;
+      transition: fill 0.2s, color 0.2s;
+    }
+    .top10-card .card-like.liked svg { fill: white; stroke: white; color: white; }
+    .top10-card .card-like.liked { background: rgba(0,0,0,0.5); }
+
+    /* Card text */
+    .top10-card .card-title {
+      font-size: 13px; font-weight: 600; line-height: 18px; margin-top: 8px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .top10-card .card-meta { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+    .top10-card .card-meta .rating { color: #f5a623; }
+    .top10-card .card-venue { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+    .top10-card .card-price { font-size: 13px; font-weight: 600; margin-top: 4px; }
+
+    /* Footer */
+    .footer { padding: 32px 16px 24px; background: var(--color-bg-neutral); border-top: 1px solid var(--color-border); margin-top: 16px; }
+    .footer-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    .footer-col h5 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { font-size: 13px; line-height: 28px; color: var(--color-text-secondary); cursor: pointer; }
+    .legal { font-size: 11px; color: #8a9ba5; line-height: 18px; border-top: 1px solid var(--color-border); padding-top: 16px; }
+
+    /* Snackbar */
+    .snackbar { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(120%); background:#031419; color:white; padding:10px 18px; border-radius:8px; font-size:13px; font-weight:500; z-index:999; opacity:0; transition:transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.35s cubic-bezier(.4,0,.2,1); display:flex; align-items:center; gap:10px; max-width:360px; pointer-events:none; }
+    .snackbar.show { transform:translateX(-50%) translateY(0); opacity:1; }
+    .snackbar .snack-thumb { width:36px; height:36px; border-radius:6px; object-fit:cover; }
+
+    /* Focus-visible & tap feedback */
+    button:focus-visible, a:focus-visible { outline: 2px solid #0079ca; outline-offset: 2px; }
+    .nav-icon-btn:active { opacity: 0.6; }
+    .card-like:active { transform: scale(0.85); }
+
+    @media (max-width: 393px) { .phone { width: 100vw; } }
+  </style>
+</head>
+<body>
+  <div class="phone">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="home.html" class="back-btn" aria-label="Go back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </a>
+        <a href="home.html" class="logo-link" aria-label="Fever"><img src="img/fever-logo.png" alt="Fever"></a>
+      </div>
+      <div class="nav-icons">
+        <a class="nav-icon-btn" href="search.html" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7"/><line x1="15.5" y1="15.5" x2="22" y2="22"/></svg></a>
+        <a class="nav-icon-btn" href="favorites.html" aria-label="Favorites">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </a>
+        <a class="nav-icon-btn" href="home.html" aria-label="Location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </a>
+        <a class="avatar-wrap" href="profile.html" aria-label="Profile" id="avatarBtn">
+          <img src="https://www.figma.com/api/mcp/asset/541291f3-2b10-4d67-b843-70a0add86fab" alt="Profile">
+        </a>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="top10-header">
+      <h1>Top 10 in Madrid</h1>
+      <p>The best experiences and things to do right now</p>
+    </div>
+    <div class="top10-count">10 experiences</div>
+
+    <!-- Grid -->
+    <div class="top10-grid">
+
+      <!-- 1. Polar Sound -->
+      <a href="polar-sound.html" class="top10-card" data-slug="polar-sound">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="img/polar-sound-hero.png" alt="Polar Sound 2026" loading="lazy">
+          <span class="rank"><span class="rank-stroke">1</span><span class="rank-fill">1</span></span>
+        </div>
+        <div class="card-title">Occident - Polar Sound 2026: Tickets &amp; Accommodation</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.5</span> (462) &middot; 12 mar</div>
+        <div class="card-price">From &euro;182.30</div>
+      </a>
+
+      <!-- 2. F1 Grand Prix -->
+      <a href="plan.html?plan=f1-grand-prix" class="top10-card" data-slug="f1-grand-prix">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/aa6979be-8fdc-11f0-86ac-628e8f210c54.jpg" alt="F1 Grand Prix" loading="lazy">
+          <span class="rank"><span class="rank-stroke">2</span><span class="rank-fill">2</span></span>
+        </div>
+        <div class="card-title">FORMULA 1&reg; Spanish Grand Prix 2026</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.5</span> (1840) &middot; 11 sept</div>
+        <div class="card-venue">MADRING</div>
+        <div class="card-price">From &euro;345.00</div>
+      </a>
+
+      <!-- 3. Avatar -->
+      <a href="plan.html?plan=avatar-experience" class="top10-card" data-slug="avatar-experience">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/771d6e2c-efc6-11f0-97d2-1e3ee3bc4382.jpeg" alt="Avatar: The Experience" loading="lazy">
+          <span class="rank"><span class="rank-stroke">3</span><span class="rank-fill">3</span></span>
+        </div>
+        <div class="card-title">Avatar: The Experience</div>
+        <div class="card-meta">18 Feb &ndash; 29 Mar</div>
+        <div class="card-venue">Espacio Delicias</div>
+        <div class="card-price">From &euro;14.50</div>
+      </a>
+
+      <!-- 4. Royal Palace -->
+      <a href="plan.html?plan=royal-palace" class="top10-card" data-slug="royal-palace">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/269173b8-7433-11f0-a746-16871478c800.jpg" alt="Royal Palace of Madrid" loading="lazy">
+          <span class="rank"><span class="rank-stroke">4</span><span class="rank-fill">4</span></span>
+        </div>
+        <div class="card-title">Royal Palace of Madrid</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.5</span> (17302) &middot; 23 feb &ndash; 17 may</div>
+        <div class="card-price">From &euro;12.00</div>
+      </a>
+
+      <!-- 5. Banksy Museum -->
+      <a href="plan.html?plan=museo-banksy" class="top10-card" data-slug="museo-banksy">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/ce0edbfc-52a1-11f0-87c2-fe0e7cbe00f7.jpg" alt="Banksy Museum Madrid" loading="lazy">
+          <span class="rank"><span class="rank-stroke">5</span><span class="rank-fill">5</span></span>
+        </div>
+        <div class="card-title">Banksy Museum Madrid</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.8</span> (5342) &middot; 18 feb &ndash; 30 jun</div>
+        <div class="card-price">&euro;14.00</div>
+      </a>
+
+      <!-- 6. Machu Picchu -->
+      <a href="plan.html?plan=machu-picchu" class="top10-card" data-slug="machu-picchu">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/3a3c9a4a-8311-11f0-8e93-fa85177ab576.jpg" alt="Machu Picchu" loading="lazy">
+          <span class="rank"><span class="rank-stroke">6</span><span class="rank-fill">6</span></span>
+        </div>
+        <div class="card-title">Machu Picchu: Journey to the Lost City</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.3</span> (2940)</div>
+        <div class="card-price">From &euro;18.00</div>
+      </a>
+
+      <!-- 7. IKONO -->
+      <a href="plan.html?plan=ikono-madrid" class="top10-card" data-slug="ikono-madrid">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/3bd77184-9533-11f0-9570-f251230785be.jpg" alt="IKONO Madrid" loading="lazy">
+          <span class="rank"><span class="rank-stroke">7</span><span class="rank-fill">7</span></span>
+        </div>
+        <div class="card-title">IKONO Madrid</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.2</span> (446) &middot; 18 feb &ndash; 30 abr</div>
+        <div class="card-price">Free</div>
+      </a>
+
+      <!-- 8. We Will Rock You -->
+      <a href="plan.html?plan=we-will-rock-you" class="top10-card" data-slug="we-will-rock-you">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/e652f392-407b-11ec-9b6b-9a748ce8397a" alt="We Will Rock You" loading="lazy">
+          <span class="rank"><span class="rank-stroke">8</span><span class="rank-fill">8</span></span>
+        </div>
+        <div class="card-title">We Will Rock You - Musical</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.6</span> (257)</div>
+        <div class="card-venue">Teatro Coliseum</div>
+        <div class="card-price">From &euro;25.00</div>
+      </a>
+
+      <!-- 9. Parque Warner -->
+      <a href="plan.html?plan=parque-warner" class="top10-card" data-slug="parque-warner">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/f805d6b6-79e9-11ec-9353-de64b1790db8" alt="Parque Warner Madrid" loading="lazy">
+          <span class="rank"><span class="rank-stroke">9</span><span class="rank-fill">9</span></span>
+        </div>
+        <div class="card-title">Parque Warner Madrid</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.7</span> (1263)</div>
+        <div class="card-price">From &euro;32.89</div>
+      </a>
+
+      <!-- 10. Sweet Space Museum -->
+      <a href="plan.html?plan=sweet-space-museum" class="top10-card" data-slug="sweet-space-museum">
+        <div class="card-img">
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/7342ce00-8bae-11ef-9248-e6d116a45f62.png" alt="Sweet Space Museum" loading="lazy">
+          <span class="rank"><span class="rank-stroke">10</span><span class="rank-fill">10</span></span>
+        </div>
+        <div class="card-title">Sweet Space Museum</div>
+        <div class="card-meta"><span class="rating">&#9733; 4.2</span> (6648)</div>
+        <div class="card-price">From &euro;15.00</div>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>About Fever</h5>
+          <ul><li>Press</li><li>Careers</li><li>Fellowships</li><li>Gift Card</li></ul>
+        </div>
+        <div class="footer-col">
+          <h5>Work with us</h5>
+          <ul><li>Manage your event</li><li>List your event</li><li>Affiliate program</li><li>Become an influencer</li></ul>
+        </div>
+      </div>
+      <div class="legal">
+        &copy; 2026 Fever Labs, Inc. Fever is a registered trademark. All rights reserved. Terms &amp; Conditions &middot; Privacy Policy
+      </div>
+    </div>
+  </div>
+
+  <!-- Snackbar -->
+  <div class="snackbar" id="snackbar"></div>
+
+  <!-- Favorites sync -->
+  <script>
+    (function() {
+      var FAVORITES_KEY = 'polar_liked_plans';
+      var heartSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+      function readFavorites() { try { return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || {}; } catch(e) { return {}; } }
+      function writeFavorites(f) { localStorage.setItem(FAVORITES_KEY, JSON.stringify(f)); }
+
+      function showSnackbar(imgSrc) {
+        var el = document.getElementById('snackbar');
+        el.innerHTML = (imgSrc ? '<img class="snack-thumb" src="' + imgSrc + '" alt="">' : '') + 'Added to favorites';
+        el.classList.add('show');
+        clearTimeout(el._t);
+        el._t = setTimeout(function() { el.classList.remove('show'); }, 2400);
+      }
+
+      var favorites = readFavorites();
+      var likeButtons = document.querySelectorAll('.card-like');
+      likeButtons.forEach(function(btn) {
+        var card = btn.closest('.top10-card');
+        if (!card) return;
+        var slug = card.getAttribute('data-slug');
+        if (!slug) return;
+        var imgEl = card.querySelector('.card-img img');
+        var title = (card.querySelector('.card-title') || {}).textContent || '';
+        var cardData = { id: slug, title: title, image: imgEl ? imgEl.src : '' };
+
+        if (favorites[slug]) btn.classList.add('liked');
+
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          favorites = readFavorites();
+          if (favorites[slug]) {
+            delete favorites[slug];
+            btn.classList.remove('liked');
+          } else {
+            favorites[slug] = cardData;
+            btn.classList.add('liked');
+            showSnackbar(cardData.image);
+          }
+          writeFavorites(favorites);
+        });
+      });
+    })();
+  </script>
+
+  <!-- Image fade-in -->
+  <script>
+    (function() {
+      document.querySelectorAll('.card-img img').forEach(function(img) {
+        if (img.complete && img.naturalWidth) { img.classList.add('loaded'); return; }
+        img.addEventListener('load', function() { img.classList.add('loaded'); });
+        img.addEventListener('error', function() { img.classList.add('loaded'); });
+      });
+    })();
+  </script>
+
+  <!-- Avatar login state -->
+  <script>
+    (function() {
+      var LOGGED_IN_KEY = 'fever_logged_in';
+      var avatarBtn = document.getElementById('avatarBtn');
+      if (!avatarBtn) return;
+      function isLoggedIn() { return localStorage.getItem(LOGGED_IN_KEY) === 'true'; }
+      function updateAvatar() {
+        if (isLoggedIn()) {
+          avatarBtn.href = 'profile.html';
+        } else {
+          avatarBtn.href = 'login.html?returnTo=' + encodeURIComponent(window.location.pathname);
+        }
+      }
+      updateAvatar();
+    })();
+  </script>
+</body>
+</html>
