@@ -1,0 +1,3 @@
+# Terminología del proyecto
+
+- **Explode pipe**: Elemento visual de tipo toggle/tab que permite al usuario elegir entre opciones mutuamente excluyentes (por ejemplo: "Day pass" / "2-Day pass"). Son los botones pill que aparecen en la parte superior de los ticket selectors. El usuario se refiere a ellos como "explode pipe".
