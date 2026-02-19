@@ -28,6 +28,7 @@
   --color-bg-neutral: #f2f3f3;
   --color-danger: #eb0052;
   --color-success: #24a865;
+  --elevation-04: 0 12px 12px rgba(0,0,0,0.05);
 }
     @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
@@ -140,7 +141,7 @@
       position: absolute; bottom: 8px; left: 8px; z-index: 2;
       display: inline-block; padding: 4px 10px;
       border-radius: 8px; font-size: 12px; font-weight: 600;
-      color: #fff; background: rgba(0,0,0,0.55);
+      color: #fff; background: rgba(0,0,0,0.5);
       backdrop-filter: blur(4px);
     }
     .plan-main { min-width: 0; text-decoration: none; color: inherit; }
@@ -165,7 +166,7 @@
       background: #fff;
       border: 1px solid var(--color-border);
       border-radius: 8px;
-      box-shadow: 0 12px 12px rgba(0,0,0,0.05);
+      box-shadow: var(--elevation-04);
       padding: 12px;
       display: flex;
       align-items: center;

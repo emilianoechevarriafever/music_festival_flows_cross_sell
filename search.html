@@ -24,12 +24,13 @@
       --radius: 0.75rem;
       --elevation-01: 0 1px 3px 0 rgba(0,0,0,0.08);
       --font: 'Montserrat', sans-serif;
-      --font-ui: 'Montserrat', sans-serif;
   --color-text-disable: #a7b2ba;
   --color-bg-dark: #06232c;
   --color-danger: #eb0052;
   --color-success: #24a865;
   --color-accent: #6f41d7;
+  --color-rating: #f5a623;
+  --elevation-04: 0 12px 12px rgba(0,0,0,0.05);
 }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     body {
@@ -213,7 +214,7 @@
       width: 40px; height: 40px;
       display: flex; align-items: center; justify-content: center;
       background: #fff; border-radius: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: var(--elevation-01);
     }
     .cat-chip-btn .cat-chip-icon svg { width: 22px; height: 22px; }
     .cat-chip-btn span { font-size: 12px; font-weight: 600; color: var(--color-text-main); white-space: nowrap; }
@@ -306,7 +307,7 @@
     .cat-card .cat-card-meta {
       font-size: 12px; color: var(--color-text-subtle); margin-top: 2px; line-height: 16px;
     }
-    .cat-card .cat-card-meta .rating { color: #f5a623; }
+    .cat-card .cat-card-meta .rating { color: var(--color-rating); }
     .cat-card .cat-card-dates {
       font-size: 12px; color: var(--color-text-subtle); margin-top: 2px;
     }
@@ -336,7 +337,7 @@
     .suggestions-dropdown {
       position: absolute; top: calc(100%); left: 0; right: 0;
       background: #fff; z-index: 98;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      box-shadow: var(--elevation-04);
       max-height: 280px; overflow-y: auto;
       display: none;
     }
@@ -363,7 +364,7 @@
     .footer-col h5 { font-size: 14px; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.04em; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { font-size: 14px; line-height: 20px; margin-bottom: 4px; }
-    .footer-col ul li a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.15s; }
+    .footer-col ul li a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.15s; }
     .footer-col ul li a:hover { color: white; }
     .footer .legal { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px; font-size: 12px; color: rgba(255,255,255,0.5); }
     .footer .legal a { color: white; }
@@ -566,7 +567,7 @@
     ];
 
     var CATEGORIES = [
-      { label: 'Candlelight', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2c-1 4-4 6-4 10a4 4 0 008 0c0-4-3-6-4-10z"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>' },
+      { label: 'Candlelight', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-rating)" stroke-width="1.8"><path d="M12 2c-1 4-4 6-4 10a4 4 0 008 0c0-4-3-6-4-10z"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>' },
       { label: 'Music', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>' },
       { label: 'Culture', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/></svg>' },
       { label: 'Tourism', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' },

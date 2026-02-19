@@ -14,7 +14,7 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: var(--font);
       background: var(--color-bg-neutral);
       min-height: 100vh;
       display: flex;
@@ -33,6 +33,7 @@
   --color-text-main: #031419;
   --color-border: #ccd2d8;
   --color-bg-neutral: #f2f3f3;
+  --font: 'Montserrat', sans-serif;
 }
     h1 {
       font-size: 24px;
@@ -69,7 +70,7 @@
       transition: border-color 0.15s, box-shadow 0.15s;
       cursor: pointer;
       width: 100%;
-      font-family: 'Montserrat', sans-serif;
+      font-family: var(--font);
     }
     .flow-link:hover {
       border-color: var(--color-action-primary);

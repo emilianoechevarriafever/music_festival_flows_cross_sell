@@ -22,10 +22,11 @@
   --color-text-subtle: #536b75;
   --color-border: #ccd2d8;
   --color-success: #24a865;
+  --elevation-sheet: 0 -4px 20px rgba(0,0,0,0.12);
 }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--font); background: #e8ebef; color: var(--text); }
+    body { font-family: var(--font); background: #eef0f1; color: var(--text); }
 
     .phone {
       width: 100%; max-width: 430px; min-height: 100vh;
@@ -63,7 +64,7 @@
     .sheet-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(3,20,25,0.45);
+      background: rgba(3,20,25,0.35);
       z-index: 20;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -81,7 +82,7 @@
       background: #fff;
       border-radius: 16px 16px 0 0;
       z-index: 21;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+      box-shadow: var(--elevation-sheet);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .sheet.open { transform: translateX(-50%) translateY(0); }
@@ -131,7 +132,7 @@
       padding: 10px 0; cursor: pointer; text-decoration: none; color: var(--text);
     }
     .menu-row span { font-size: 14px; font-weight:600; line-height: 20px; }
-    .menu-row .chevron { width: 18px; height: 18px; color: #a0adb5; flex-shrink: 0; }
+    .menu-row .chevron { width: 18px; height: 18px; color: #a7b2ba; flex-shrink: 0; }
 
     /* External link */
     .ext-link {
@@ -149,12 +150,12 @@
     }
     .club-header .section-title { margin-bottom: 0; }
     .club-header .info-icon {
-      width: 18px; height: 18px; color: #a0adb5; cursor: pointer;
+      width: 18px; height: 18px; color: #a7b2ba; cursor: pointer;
     }
 
     .club-pill {
       display: inline-flex; align-items: center; gap: 8px;
-      border-radius: 64px; background: #f0f1f3;
+      border-radius: 64px; background: #f2f3f3;
       padding: 6px 14px 6px 6px;
       font-size: 14px; font-weight: 600; line-height: 20px;
       color: var(--text); margin-bottom: 8px;
@@ -162,7 +163,7 @@
     .club-pill .star-badge {
       width: 26px; height: 26px; border-radius: 50%;
       display: inline-flex; align-items: center; justify-content: center;
-      background: #dd8400;
+      background: #ff8c00;
     }
     .club-pill .star-badge svg { width: 14px; height: 14px; }
 

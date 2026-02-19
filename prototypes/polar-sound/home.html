@@ -25,12 +25,16 @@
       --radius: 0.75rem;
       --elevation-01: 0 1px 3px 0 rgba(0,0,0,0.08);
       --font: 'Montserrat', sans-serif;
-      --font-ui: 'Montserrat', sans-serif;
   --color-text-disable: #a7b2ba;
   --color-bg-dark: #06232c;
   --color-danger: #eb0052;
   --color-success: #24a865;
   --color-accent: #6f41d7;
+  --color-rating: #f5a623;
+  --color-accent-dark: #1a0533;
+  --elevation-04: 0 12px 12px rgba(0,0,0,0.05);
+  --elevation-02: 0 2px 4px rgba(0,0,0,0.12);
+  --elevation-sheet: 0 -4px 20px rgba(0,0,0,0.12);
 }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     body {
@@ -214,7 +218,7 @@
       position: relative;
       height: 280px;
       overflow: hidden;
-      background: linear-gradient(135deg, #1a0533 0%, var(--color-accent) 40%, var(--color-accent) 100%);
+      background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 40%, var(--color-accent) 100%);
     }
     .hero img {
       width: 100%;
@@ -238,7 +242,7 @@
       gap: 8px;
       letter-spacing: -0.02em;
     }
-    .hero-city svg { width: 20px; height: 20px; padding:4px; border-radius:50%; background:rgba(255,255,255,0.2); vertical-align:middle; }
+    .hero-city svg { width: 20px; height: 20px; padding:4px; border-radius:50%; background:rgba(255,255,255,0.15); vertical-align:middle; }
     .hero-city-trigger {
       margin: 0;
       padding: 0;
@@ -264,7 +268,7 @@
       border-radius: 64px;
       padding: 12px 16px;
       height: 48px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      box-shadow: var(--elevation-02);
     }
     .search-bar svg { width: 18px; height: 18px; color: var(--color-text-disable); flex-shrink: 0; }
     .search-bar .search-static { font-size: 14px; color: var(--color-text-subtle); font-family: var(--font); white-space: nowrap; flex-shrink: 0; line-height: 20px; }
@@ -433,7 +437,7 @@
       color: var(--color-text-subtle);
       line-height: 16px;
     }
-    .event-card .card-meta .rating { color: #f5a623; }
+    .event-card .card-meta .rating { color: var(--color-rating); }
     .event-card .card-price {
       margin-top: 2px;
       font-size: 14px;
@@ -483,7 +487,7 @@
       color: var(--color-text-main);
     }
     .featured-card .card-meta { margin-top: 4px; font-size: 12px; color: var(--color-text-subtle); }
-    .featured-card .card-meta .rating { color: #f5a623; }
+    .featured-card .card-meta .rating { color: var(--color-rating); }
     .featured-card .card-price { margin-top: 2px; font-size: 14px; font-weight: 600; }
 
     /* Recently Viewed */
@@ -525,7 +529,7 @@
       color: var(--color-text-subtle);
       line-height: 16px;
     }
-    .section-recently-viewed .rv-card .card-meta .rating { color: #f5a623; }
+    .section-recently-viewed .rv-card .card-meta .rating { color: var(--color-rating); }
     .section-recently-viewed .rv-card .card-price {
       margin-top: 2px;
       font-size: 14px;
@@ -563,7 +567,7 @@
     /* App Banner */
     .app-banner {
       margin: 40px 16px 0;
-      background: linear-gradient(135deg, #1a0533, var(--color-accent));
+      background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent));
       border-radius: 16px;
       padding: 24px;
       color: white;
@@ -594,7 +598,7 @@
     .footer-col h5 { font-size: 14px; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.04em; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { font-size: 14px; line-height: 20px; margin-bottom: 4px; }
-    .footer-col ul li a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.15s; }
+    .footer-col ul li a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.15s; }
     .footer-col ul li a:hover { color: white; }
     .footer .legal { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px; font-size: 12px; color: rgba(255,255,255,0.5); }
     .footer .legal a { color: white; }
@@ -606,7 +610,7 @@
     .city-sheet-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(6, 35, 44, 0.88);
+      background: rgba(6,35,44,0.88);
       display: flex;
       align-items: flex-end;
       z-index: 1200;
@@ -624,7 +628,7 @@
       width: 100%;
       background: #fff;
       border-radius: 16px 16px 0 0;
-      box-shadow: 0 -6px 6px rgba(0, 70, 121, 0.2);
+      box-shadow: var(--elevation-sheet);
       padding: 16px;
       max-height: calc(100vh - 56px);
       overflow-y: auto;
@@ -643,7 +647,7 @@
       margin-bottom: 16px;
     }
     .city-sheet-title {
-      font-family: var(--font-ui);
+      font-family: var(--font);
       font-size: 16px;
       line-height: 24px;
       font-weight: 600;
@@ -690,7 +694,7 @@
       color: var(--color-text-subtle);
     }
     .city-sheet-section-title {
-      font-family: var(--font-ui);
+      font-family: var(--font);
       font-size: 16px;
       line-height: 24px;
       font-weight: 600;
@@ -723,14 +727,14 @@
       min-width: 0;
     }
     .city-sheet-city {
-      font-family: var(--font-ui);
+      font-family: var(--font);
       font-weight: 600;
       font-size: 14px;
       line-height: 20px;
       color: var(--color-text-main);
     }
     .city-sheet-country {
-      font-family: var(--font-ui);
+      font-family: var(--font);
       font-weight: 400;
       font-size: 12px;
       line-height: 16px;
@@ -755,7 +759,7 @@
       background: #fff;
       border: 1px solid var(--color-border);
       border-radius: 8px;
-      box-shadow: 0 12px 12px rgba(0,0,0,0.05);
+      box-shadow: var(--elevation-04);
       padding: 12px;
       display: flex;
       align-items: center;

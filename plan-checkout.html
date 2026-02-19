@@ -35,6 +35,7 @@
   --color-text-disable: #a7b2ba;
   --color-bg-dark: #06232c;
   --color-accent: #6f41d7;
+  --focus-ring-primary: 0 0 0 4px rgba(0,121,202,0.32);
 }
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     body { font-family:var(--font); background:var(--color-bg-neutral); display:flex; justify-content:center; color:var(--color-text); overflow-x:hidden; }
@@ -76,17 +77,17 @@
     .sticky-pay .pay-btn { pointer-events:auto; }
     .sticky-pay .pay-btn { display:block; width:100%; height:48px; background:var(--color-primary); border:2px solid transparent; border-radius:64px; color:#fff; font-family:var(--font); font-weight:600; font-size:16px; line-height:24px; cursor:pointer; transition:background 0.15s, border-color 0.15s, box-shadow 0.15s, color 0.15s; outline:none; }
     .sticky-pay .pay-btn:hover { background:var(--color-primary); }
-    .sticky-pay .pay-btn:focus-visible { border-color:var(--color-primary-hover); box-shadow:0 0 0 4px rgba(0,121,202,0.32); }
+    .sticky-pay .pay-btn:focus-visible { border-color:var(--color-primary-hover); box-shadow:var(--focus-ring-primary); }
     .sticky-pay .pay-btn:active { background:var(--color-primary); }
     .sticky-pay .pay-btn:disabled, .sticky-pay .pay-btn.disabled { background:var(--color-bg-neutral); color:var(--color-text-disable); border-color:transparent; box-shadow:none; cursor:default; }
     /* Payment-method branded states — Figma ignt.comp.actions / payment button */
     .sticky-pay .pay-btn.method-apple { background:var(--color-bg-dark); }
     .sticky-pay .pay-btn.method-apple:hover { background:var(--color-bg-dark); }
-    .sticky-pay .pay-btn.method-apple:focus-visible { border-color:var(--color-bg-neutral); box-shadow:0 0 0 4px rgba(0,121,202,0.32); }
+    .sticky-pay .pay-btn.method-apple:focus-visible { border-color:var(--color-bg-neutral); box-shadow:var(--focus-ring-primary); }
     .sticky-pay .pay-btn.method-apple:active { background:var(--color-text-main); }
     .sticky-pay .pay-btn.method-paypal { background:var(--color-primary); }
     .sticky-pay .pay-btn.method-paypal:hover { background:var(--color-primary-hover); }
-    .sticky-pay .pay-btn.method-paypal:focus-visible { border-color:var(--color-accent); box-shadow:0 0 0 4px rgba(0,121,202,0.32); }
+    .sticky-pay .pay-btn.method-paypal:focus-visible { border-color:var(--color-accent); box-shadow:var(--focus-ring-primary); }
     .sticky-pay .pay-btn.method-paypal:active { background:var(--color-primary-hover); }
     .alt-payment { display:flex; align-items:center; gap:12px; padding:12px 0; border-top:1px solid var(--color-border); cursor:pointer; }
     .alt-payment .radio-empty { width:18px; height:18px; border-radius:50%; border:2px solid var(--color-border); flex-shrink:0; }
@@ -105,7 +106,7 @@
     .card-type-row svg { width:18px; height:18px; color:var(--color-text); }
     .card-type-row .label { font-size:14px; font-weight:600; flex:1; }
     .card-brands { display:flex; align-items:center; gap:8px; }
-    .card-brands .brand-logo { display:inline-flex; align-items:center; justify-content:center; width:40px; height:28px; border:1px solid var(--color-border); border-radius:4px; padding:3px; flex-shrink:0; }
+    .card-brands .brand-logo { display:inline-flex; align-items:center; justify-content:center; width:40px; height:28px; border:1px solid var(--color-border); border-radius:4px; padding:4px; flex-shrink:0; }
     .card-brands .brand-logo svg { width:100%; height:100%; }
 
     .form-group { margin-bottom:16px; }
