@@ -74,7 +74,7 @@
     .hero { position:relative; width:100%; height:390px; overflow:hidden; }
     .hero .carousel-track { display:flex; height:100%; transition:transform 0.45s cubic-bezier(0.4,0,0.2,1); }
     .hero .carousel-slide { min-width:100%; height:100%; }
-    .hero .carousel-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .hero .carousel-slide img, .hero .carousel-slide video { width:100%; height:100%; object-fit:cover; display:block; }
     .hero .nav-prev, .hero .nav-next { position:absolute; top:0; bottom:60px; z-index:3; cursor:pointer; background:none; border:none; padding:0; }
     .hero .nav-prev { left:0; width:40%; }
     .hero .nav-next { right:0; width:60%; }
@@ -356,7 +356,8 @@
     .fs-gallery-track { display:flex; height:100%; width:100%; transition:transform 0.3s cubic-bezier(.4,0,.2,1); }
     .fs-gallery-track.no-transition { transition:none; }
     .fs-gallery-slide { min-width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
-    .fs-gallery-slide img { max-width:100%; max-height:100%; object-fit:contain; user-select:none; -webkit-user-drag:none; border-radius:4px; }
+    .fs-gallery-slide img, .fs-gallery-slide video { max-width:100%; max-height:100%; object-fit:contain; user-select:none; -webkit-user-drag:none; border-radius:4px; }
+    .fs-gallery-thumb video { width:100%; height:100%; object-fit:cover; }
     .fs-gallery-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:44px; height:44px; border:none; background:rgba(0,0,0,0.3); border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
     .fs-gallery-arrow:active { background:rgba(0,0,0,0.45); }
     .fs-gallery-arrow svg { width:28px; height:28px; color:#fff; }
@@ -396,6 +397,7 @@
     <!-- Hero Gallery Carousel -->
     <div class="hero" id="heroCarousel">
       <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><video src="https://applications-media.feverup.com/video/upload/f_auto,w_900,h_500,c_fill/fever2/plan/video/56fb36f8-a9b0-11f0-8820-5638fea30a91.mp4" poster="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/177ff826-8d70-11f0-b4b3-b26529526013.jpg" autoplay muted loop playsinline></video></div>
         <div class="carousel-slide"><img src="img/polar-sound-hero.png" alt="Polar Sound Festival"></div>
         <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/cabc0d3c-8346-11f0-8816-4a47ae28a019.jpg" alt="Polar Sound stage"></div>
         <div class="carousel-slide"><img src="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/cac66c14-8346-11f0-8816-4a47ae28a019.jpg" alt="Baqueira Beret venue"></div>
@@ -412,6 +414,7 @@
       <div class="shadow-overlay">
         <button type="button" class="gallery-btn"><svg viewBox="0 0 512 512" fill="currentColor"><path d="M224 80c0-26.5-21.5-48-48-48H80C53.5 32 32 53.5 32 80v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V80zm0 256c0-26.5-21.5-48-48-48H80c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V336zM288 80v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48H336c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48H336c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V336z"/></svg>Gallery</button>
         <div class="slide-indicators" id="slideIndicators">
+          <div class="bar"><span class="fill"></span></div>
           <div class="bar"><span class="fill"></span></div>
           <div class="bar"><span class="fill"></span></div>
           <div class="bar"><span class="fill"></span></div>
@@ -1311,39 +1314,69 @@
     var galleryBtn = document.querySelector('.gallery-btn');
     if (!fsGallery || !galleryBtn) return;
 
-    var images = [];
+    var mediaItems = [];
     var fsCurrent = 0;
     var fsTouchStartX = 0;
     var fsTouchStartY = 0;
     var fsSwiping = false;
 
     function collectImages() {
-      images = [];
-      var slides = document.querySelectorAll('.carousel-slide img');
-      slides.forEach(function(img) {
-        if (img.src && !img.closest('.carousel-slide').classList.contains('clone-slide')) images.push(img.src);
+      mediaItems = [];
+      var slides = document.querySelectorAll('.carousel-slide');
+      slides.forEach(function(sl) {
+        if (sl.classList.contains('clone-slide')) return;
+        var vid = sl.querySelector('video');
+        var img = sl.querySelector('img');
+        if (vid && vid.src) {
+          mediaItems.push({ type: 'video', src: vid.src, poster: vid.poster || '' });
+        } else if (img && img.src) {
+          mediaItems.push({ type: 'image', src: img.src });
+        }
       });
     }
 
     function buildSlides() {
       fsTrack.innerHTML = '';
       fsThumbs.innerHTML = '';
-      images.forEach(function(src, i) {
+      mediaItems.forEach(function(item, i) {
         var slide = document.createElement('div');
         slide.className = 'fs-gallery-slide';
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = 'Photo ' + (i + 1);
-        img.draggable = false;
-        slide.appendChild(img);
+        if (item.type === 'video') {
+          var vid = document.createElement('video');
+          vid.src = item.src;
+          vid.poster = item.poster;
+          vid.controls = true;
+          vid.playsInline = true;
+          vid.loop = true;
+          vid.draggable = false;
+          slide.appendChild(vid);
+        } else {
+          var img = document.createElement('img');
+          img.src = item.src;
+          img.alt = 'Photo ' + (i + 1);
+          img.draggable = false;
+          slide.appendChild(img);
+        }
         fsTrack.appendChild(slide);
 
         var thumb = document.createElement('div');
         thumb.className = 'fs-gallery-thumb' + (i === 0 ? ' active' : '');
-        var tImg = document.createElement('img');
-        tImg.src = src;
-        tImg.alt = 'Thumbnail ' + (i + 1);
-        thumb.appendChild(tImg);
+        if (item.type === 'video' && item.poster) {
+          var tImg = document.createElement('img');
+          tImg.src = item.poster;
+          tImg.alt = 'Video thumbnail';
+          thumb.appendChild(tImg);
+        } else if (item.type === 'video') {
+          var tVid = document.createElement('video');
+          tVid.src = item.src;
+          tVid.muted = true;
+          thumb.appendChild(tVid);
+        } else {
+          var tImg = document.createElement('img');
+          tImg.src = item.src;
+          tImg.alt = 'Thumbnail ' + (i + 1);
+          thumb.appendChild(tImg);
+        }
         thumb.addEventListener('click', (function(idx) { return function() { fsGoTo(idx); }; })(i));
         fsThumbs.appendChild(thumb);
       });
@@ -1358,12 +1391,12 @@
 
     function updateArrows() {
       fsPrev.style.display = fsCurrent <= 0 ? 'none' : '';
-      fsNext.style.display = fsCurrent >= images.length - 1 ? 'none' : '';
+      fsNext.style.display = fsCurrent >= mediaItems.length - 1 ? 'none' : '';
     }
 
     function fsGoTo(idx) {
       if (idx < 0) idx = 0;
-      if (idx >= images.length) idx = images.length - 1;
+      if (idx >= mediaItems.length) idx = mediaItems.length - 1;
       fsCurrent = idx;
       fsTrack.style.transform = 'translateX(-' + (idx * 100) + '%)';
       var thumbs = fsThumbs.querySelectorAll('.fs-gallery-thumb');
@@ -1374,7 +1407,7 @@
 
     function openGallery() {
       collectImages();
-      if (!images.length) return;
+      if (!mediaItems.length) return;
       buildSlides();
       fsCurrent = 0;
       fsGoTo(0);

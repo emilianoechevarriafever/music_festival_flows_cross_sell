@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fever Zone - Fever</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --color-primary: #0079ca;
+      --color-primary-weak: #E6F4FF;
+      --color-text-main: #031419;
+      --color-text-secondary: #536b75;
+      --color-text-subtle: #536b75;
+      --color-border: #E6EAEE;
+      --color-bg-neutral: #F5F7F9;
+      --font: 'Montserrat', sans-serif;
+    }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    body { font-family: var(--font); background: #fff; color: var(--color-text-main); max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+    .nav { position: sticky; top: 0; z-index: 100; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--color-border); }
+    .nav-logo { font-family: var(--font); font-weight: 800; font-size: 22px; color: var(--color-text-main); text-decoration: none; letter-spacing: -0.5px; }
+    .nav-back { display: flex; align-items: center; gap: 6px; text-decoration: none; color: var(--color-text-main); font-size: 14px; font-weight: 600; }
+    .nav-back svg { width: 20px; height: 20px; }
+    .page-hero { background: var(--color-bg-neutral); padding: 40px 16px 32px; }
+    .page-hero h1 { font-size: 28px; font-weight: 800; line-height: 36px; color: var(--color-text-main); margin-bottom: 8px; }
+    .page-hero p { font-size: 15px; line-height: 24px; color: var(--color-text-secondary); }
+    .page-content { flex: 1; padding: 24px 16px 40px; }
+    .page-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 12px; margin-top: 28px; color: var(--color-text-main); }
+    .page-content h2:first-child { margin-top: 0; }
+    .page-content h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; margin-top: 20px; color: var(--color-text-main); }
+    .page-content p { font-size: 14px; line-height: 22px; color: var(--color-text-secondary); margin-bottom: 14px; }
+    .page-content ul { list-style: disc; padding-left: 20px; margin-bottom: 14px; }
+    .page-content ul li { font-size: 14px; line-height: 24px; color: var(--color-text-secondary); }
+    .page-content a { color: var(--color-primary); text-decoration: underline; }
+    .page-content .card { background: var(--color-bg-neutral); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    .page-content .card h3 { margin-top: 0; }
+    .page-content .card p:last-child { margin-bottom: 0; }
+    .page-content .btn { display: inline-block; background: var(--color-primary); color: #fff; font-family: var(--font); font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 100px; text-decoration: none; margin-top: 8px; transition: opacity 0.15s; }
+    .page-content .btn:hover { opacity: 0.9; }
+    .page-content .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+    .page-content .stat { text-align: center; background: var(--color-bg-neutral); border-radius: 12px; padding: 20px 12px; }
+    .page-content .stat .num { font-size: 28px; font-weight: 800; color: var(--color-primary); }
+    .page-content .stat .label { font-size: 12px; font-weight: 600; color: var(--color-text-secondary); margin-top: 4px; }
+    .page-content .faq-item { border-bottom: 1px solid var(--color-border); padding: 16px 0; }
+    .page-content .faq-q { font-size: 15px; font-weight: 600; color: var(--color-text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .page-content .faq-q::after { content: '+'; font-size: 20px; color: var(--color-text-subtle); }
+    .page-content .faq-a { display: none; font-size: 14px; line-height: 22px; color: var(--color-text-secondary); margin-top: 10px; }
+    .page-content .faq-item.open .faq-a { display: block; }
+    .page-content .faq-item.open .faq-q::after { content: '\2212'; }
+    .page-content .contact-card { display: flex; gap: 14px; background: var(--color-bg-neutral); border-radius: 12px; padding: 16px; margin-bottom: 12px; align-items: center; text-decoration: none; color: inherit; transition: background 0.15s; }
+    .page-content .contact-card:hover { background: #edf0f3; }
+    .page-content .contact-card .ic { width: 44px; height: 44px; border-radius: 50%; background: var(--color-primary-weak); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .page-content .contact-card .ic svg { width: 22px; height: 22px; stroke: var(--color-primary); fill: none; stroke-width: 2; }
+    .page-content .contact-card .ct { flex: 1; }
+    .page-content .contact-card .ct strong { font-size: 14px; display: block; }
+    .page-content .contact-card .ct span { font-size: 13px; color: var(--color-text-subtle); }
+    .legal-text h2 { font-size: 18px; margin-top: 24px; }
+    .legal-text h3 { font-size: 15px; margin-top: 18px; }
+    .legal-text p, .legal-text li { font-size: 13px; line-height: 21px; }
+    .footer { background: #031419; color: white; padding: 32px 16px 40px; }
+    .footer-cols { display: flex; justify-content: space-between; margin-bottom: 32px; }
+    .footer-col h5 { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { font-size: 13px; line-height: 22px; margin-bottom: 4px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.15s; }
+    .footer-col ul li a:hover { color: white; }
+    .footer .legal { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px; font-size: 12px; color: rgba(255,255,255,0.5); }
+    .footer .legal a { color: white; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="home.html" class="nav-logo">fever</a>
+    <a href="javascript:history.back()" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+  </nav>
+  <div class="page-hero">
+    <h1>Fever Zone</h1>
+    <p>Manage your events and reach millions.</p>
+  </div>
+  <div class="page-content">
+    <h2>Your Event Dashboard</h2>
+    <p>Fever Zone is the all-in-one platform for event organizers. Manage listings, track sales, access analytics, and grow your audience.</p>
+    <h2>What You Can Do</h2>
+    <div class="card"><h3>&#128202; Real-time Analytics</h3><p>Track ticket sales, revenue, and audience demographics with live dashboards.</p></div>
+    <div class="card"><h3>&#127919; Audience Targeting</h3><p>Reach the right audience with AI-powered recommendations and marketing tools.</p></div>
+    <div class="card"><h3>&#128176; Revenue Optimization</h3><p>Dynamic pricing, promo codes, and upselling tools.</p></div>
+    <div class="card"><h3>&#128241; Seamless Check-in</h3><p>QR scanning, guest lists, and real-time capacity tracking.</p></div>
+    <h2>Get Started</h2>
+    <p>Already have an account? Log in. New organizer? Create your free account.</p>
+    <a href="#" class="btn">Log in to Fever Zone</a>
+  </div>
+  <div class="footer">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>About Fever</h5>
+        <ul>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="gift-cards.html">Gift Cards</a></li>
+          <li><a href="help-center.html">Help Center</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Partner with us</h5>
+        <ul>
+          <li><a href="fever-zone.html">Fever Zone</a></li>
+          <li><a href="list-event.html">List your event</a></li>
+          <li><a href="affiliate.html">Affiliate Program</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Follow us</h5>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Twitter / X</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support 24/7</h5>
+        <ul>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <a href="terms.html">Terms of Use</a> | <a href="privacy.html">Privacy Policy</a> | <a href="cookies.html">Cookie Policy</a>
+      <div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div>
+    </div>
+  </div>
+  
+</body>
+</html>

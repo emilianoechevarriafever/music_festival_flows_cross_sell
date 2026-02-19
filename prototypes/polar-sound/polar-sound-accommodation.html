@@ -51,7 +51,9 @@
     html.u-in .avatar-wrap .avatar-placeholder{display:none}
     /* Hero with overlay */
     .hero { position:relative; width:100%; height:390px; overflow:hidden; }
-    .hero img.hero-bg { width:100%; height:100%; object-fit:cover; }
+    .hero img.hero-bg, .hero video.hero-bg { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+    .hero img.hero-bg { z-index:0; }
+    .hero video.hero-bg { z-index:1; }
     .hero .overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,35,44,0.3) 0%, rgba(6,35,44,0.6) 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; pointer-events:none; }
     .hero .overlay .brand-text { font-family:var(--font); font-size:36px; font-weight:800; color:white; letter-spacing:4px; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,0.5); }
     .hero .overlay .brand-sub { font-family:var(--font); font-size:16px; font-weight:600; color:rgba(255,255,255,0.9); letter-spacing:2px; }
@@ -273,6 +275,7 @@
     <!-- Hero Gallery (Figma Channel Filter) -->
     <div class="hero">
       <img class="hero-bg" src="img/baqueira-hotel.png" alt="Hotel Baqueira Beret">
+      <video class="hero-bg" src="https://applications-media.feverup.com/video/upload/f_auto,w_900,h_500,c_fill/fever2/plan/video/56fb36f8-a9b0-11f0-8820-5638fea30a91.mp4" poster="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/177ff826-8d70-11f0-b4b3-b26529526013.jpg" autoplay muted loop playsinline></video>
       <div class="overlay">
         <div class="brand-text">POLAR SOUND</div>
         <div class="brand-sub">&#10070;</div>

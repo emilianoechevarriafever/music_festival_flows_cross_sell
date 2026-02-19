@@ -40,7 +40,9 @@
     html.u-in .avatar-wrap img{display:block}
     html.u-in .avatar-wrap .avatar-placeholder{display:none}
     .hero { position:relative; width:100%; height:390px; overflow:hidden; }
-    .hero img.hero-bg { width:100%; height:100%; object-fit:cover; }
+    .hero img.hero-bg, .hero video.hero-bg { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+    .hero img.hero-bg { z-index:0; }
+    .hero video.hero-bg { z-index:1; }
     .hero .overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,35,44,0.3) 0%, rgba(6,35,44,0.6) 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; pointer-events:none; }
     .hero .overlay .brand-text { font-family:var(--font); font-size:32px; font-weight:800; color:white; letter-spacing:4px; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,0.5); }
     .hero .overlay .brand-sub { font-family:var(--font); font-size:14px; font-weight:600; color:rgba(255,255,255,0.9); letter-spacing:2px; }
@@ -221,6 +223,7 @@
 
     <div class="hero">
       <img class="hero-bg" id="hero-img" src="img/polar-sound-hero.png" alt="Transport to festival">
+      <video class="hero-bg" src="https://applications-media.feverup.com/video/upload/f_auto,w_900,h_500,c_fill/fever2/plan/video/6a2a83fa-f50b-11ef-a02f-7a56ddf7cf04.mp4" poster="https://applications-media.feverup.com/image/upload/f_auto,w_900,h_500,c_fill/fever2/plan/photo/e65a2dd4-a33c-11ef-8f62-322be0a410d7.jpg" autoplay muted loop playsinline></video>
       <div class="overlay">
         <div class="brand-text">POLAR SOUND</div>
         <div class="brand-sub">&#10070;</div>
