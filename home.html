@@ -289,7 +289,7 @@
     .card-scroll > * { scroll-snap-align: start; }
     .card-scroll .card-img {
       width: 150px;
-      aspect-ratio: 2/3;
+      aspect-ratio: 1/1;
       border-radius: 12px;
       overflow: hidden;
       position: relative;
@@ -311,7 +311,7 @@
     .event-card:hover { transform: translateY(-2px); }
     .event-card .card-img {
       width: 150px;
-      aspect-ratio: 2/3;
+      aspect-ratio: 1/1;
       border-radius: 12px;
       overflow: hidden;
       position: relative;
@@ -331,6 +331,7 @@
     .section-top10 .event-card .card-price { display: none; }
     .section-top10 .event-card .card-title { margin-top: 4px; }
     .section-top10 .event-card .card-img {
+      aspect-ratio: 2/3;
       overflow: visible;
       margin-bottom: 6px;
     }
@@ -424,7 +425,7 @@
       color: var(--color-text-main);
     }
 
-    /* Featured Card (same 2:3 aspect ratio as event-card for Top 10 carousel) */
+    /* Featured Card */
     .featured-card {
       flex-shrink: 0;
       width: 150px;
@@ -435,7 +436,7 @@
     .featured-card:hover { transform: translateY(-2px); }
     .featured-card .card-img {
       width: 150px;
-      aspect-ratio: 2/3;
+      aspect-ratio: 1/1;
       border-radius: 12px;
       overflow: hidden;
       position: relative;
