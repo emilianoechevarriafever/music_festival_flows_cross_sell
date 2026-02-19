@@ -665,7 +665,7 @@
             if (cameFromForClear !== 'transportation') {
               try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
             }
-          } else {
+          } else if (!isOptionG) {
             try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
           }
         }

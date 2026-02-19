@@ -91,20 +91,17 @@
 
     /* Like button */
     .top10-card .card-like {
-      position: absolute; top: 8px; right: 8px;
-      width: 32px; height: 32px; min-width: 32px; min-height: 32px;
-      border: none; background: rgba(3,20,25,0.35); cursor: pointer;
+      position: absolute; top: 4px; right: 4px;
+      width: 34px; height: 34px;
+      border: none; background: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      z-index: 2; padding: 0; border-radius: 50%; transition: background 0.2s;
+      z-index: 2; padding: 0; transition: transform 0.15s;
     }
-    .top10-card .card-like:hover { background: rgba(3,20,25,0.5); }
+    .top10-card .card-like:hover { transform: scale(1.1); }
     .top10-card .card-like svg {
-      width: 16px; height: 16px; flex-shrink: 0;
-      color: white; fill: none; stroke: currentColor; stroke-width: 1.5;
-      transition: fill 0.2s, color 0.2s;
+      width: 26px; height: 26px; flex-shrink: 0;
     }
-    .top10-card .card-like.liked svg { fill: white; stroke: white; color: white; }
-    .top10-card .card-like.liked { background: rgba(3,20,25,0.5); }
+    .top10-card .card-like.liked svg path { fill: #FF3B30; fill-opacity: 1; stroke: white; }
 
     /* Card text */
     .top10-card .card-title {
@@ -178,7 +175,7 @@
       <!-- 1. Polar Sound -->
       <a href="polar-sound.html" class="top10-card" data-slug="polar-sound">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="img/polar-sound-hero.png" alt="Polar Sound 2026" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">1</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">1</text></svg></div>
         </div>
@@ -190,7 +187,7 @@
       <!-- 2. F1 Grand Prix -->
       <a href="plan.html?plan=f1-grand-prix" class="top10-card" data-slug="f1-grand-prix">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/aa6979be-8fdc-11f0-86ac-628e8f210c54.jpg" alt="F1 Grand Prix" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">2</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">2</text></svg></div>
         </div>
@@ -203,7 +200,7 @@
       <!-- 3. Avatar -->
       <a href="plan.html?plan=avatar-experience" class="top10-card" data-slug="avatar-experience">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/771d6e2c-efc6-11f0-97d2-1e3ee3bc4382.jpeg" alt="Avatar: The Experience" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">3</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">3</text></svg></div>
         </div>
@@ -216,7 +213,7 @@
       <!-- 4. Royal Palace -->
       <a href="plan.html?plan=royal-palace" class="top10-card" data-slug="royal-palace">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/269173b8-7433-11f0-a746-16871478c800.jpg" alt="Royal Palace of Madrid" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">4</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">4</text></svg></div>
         </div>
@@ -228,7 +225,7 @@
       <!-- 5. Banksy Museum -->
       <a href="plan.html?plan=museo-banksy" class="top10-card" data-slug="museo-banksy">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/ce0edbfc-52a1-11f0-87c2-fe0e7cbe00f7.jpg" alt="Banksy Museum Madrid" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">5</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">5</text></svg></div>
         </div>
@@ -240,7 +237,7 @@
       <!-- 6. Machu Picchu -->
       <a href="plan.html?plan=machu-picchu" class="top10-card" data-slug="machu-picchu">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/3a3c9a4a-8311-11f0-8e93-fa85177ab576.jpg" alt="Machu Picchu" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">6</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">6</text></svg></div>
         </div>
@@ -252,7 +249,7 @@
       <!-- 7. IKONO -->
       <a href="plan.html?plan=ikono-madrid" class="top10-card" data-slug="ikono-madrid">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/3bd77184-9533-11f0-9570-f251230785be.jpg" alt="IKONO Madrid" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">7</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">7</text></svg></div>
         </div>
@@ -264,7 +261,7 @@
       <!-- 8. We Will Rock You -->
       <a href="plan.html?plan=we-will-rock-you" class="top10-card" data-slug="we-will-rock-you">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/e652f392-407b-11ec-9b6b-9a748ce8397a" alt="We Will Rock You" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">8</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">8</text></svg></div>
         </div>
@@ -277,7 +274,7 @@
       <!-- 9. Parque Warner -->
       <a href="plan.html?plan=parque-warner" class="top10-card" data-slug="parque-warner">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/f805d6b6-79e9-11ec-9353-de64b1790db8" alt="Parque Warner Madrid" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">9</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">9</text></svg></div>
         </div>
@@ -289,7 +286,7 @@
       <!-- 10. Sweet Space Museum -->
       <a href="plan.html?plan=sweet-space-museum" class="top10-card" data-slug="sweet-space-museum">
         <div class="card-img">
-          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
           <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/7342ce00-8bae-11ef-9248-e6d116a45f62.png" alt="Sweet Space Museum" loading="lazy">
           <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">10</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">10</text></svg></div>
         </div>
@@ -325,7 +322,7 @@
   <script>
     (function() {
       var FAVORITES_KEY = 'polar_liked_plans';
-      var heartSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+      var heartSvg = '<svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg>';
 
       function readFavorites() { try { return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || {}; } catch(e) { return {}; } }
       function writeFavorites(f) { localStorage.setItem(FAVORITES_KEY, JSON.stringify(f)); }

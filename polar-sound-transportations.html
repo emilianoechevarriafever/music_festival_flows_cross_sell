@@ -445,14 +445,14 @@
         document.getElementById('step4').href = 'checkout.html?flow=' + flow;
         document.getElementById('step4-label').textContent = 'Checkout';
       }
-      // For cross-sell flows, don't clear accommodation if user came from accommodation cross-sell
+      // Don't clear accommodation for d2 (cart flow) or if user came from accommodation cross-sell
       if (isCrossSellFlow) {
         var initCameFrom = '';
         try { initCameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
         if (initCameFrom !== 'accommodation') {
           try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
         }
-      } else {
+      } else if (!isOptionG) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
       }
     } else {
@@ -634,7 +634,6 @@
         var dest = isOptionI ? 'cart.html?flow=e2' : 'checkout.html?flow=e1';
         window.location.href = dest;
       } else if (isOptionG) {
-        try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
         window.location.href = 'cart.html?flow=d2';
       } else if (isOptionF) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}

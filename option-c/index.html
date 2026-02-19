@@ -232,40 +232,30 @@
       border-radius: 4px;
       font-family: var(--font);
     }
-    /* Heart like button (ref: Top 10 Barcelona — circular, pequeño, outline blanco sobre fondo oscuro) */
+    /* Heart like button — Figma fa-icon/heart: filled dark heart with light stroke, no circle */
     .card-like {
       position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      min-height: 32px;
+      top: 4px;
+      right: 4px;
+      width: 34px;
+      height: 34px;
       border: none;
-      background: rgba(3,20,25,0.35);
+      background: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2;
       padding: 0;
-      border-radius: 50%;
-      transition: background 0.2s;
+      transition: transform 0.15s;
     }
-    .card-like:hover { background: rgba(3,20,25,0.5); }
+    .card-like:hover { transform: scale(1.1); }
     .card-like svg {
-      width: 16px;
-      height: 16px;
+      width: 26px;
+      height: 26px;
       flex-shrink: 0;
-      color: white;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.5;
-      transition: fill 0.2s, color 0.2s;
     }
-    .card-like.liked svg { fill: white; stroke: white; color: white; }
-    .card-like.liked { background: rgba(3,20,25,0.5); }
-    .card-like.liked:hover { background: rgba(3,20,25,0.6); }
+    .card-like.liked svg path { fill: #FF3B30; fill-opacity: 1; stroke: white; }
     .event-card .card-title {
       margin-top: 8px;
       font-size: 13px;
@@ -320,7 +310,7 @@
       border-radius: 4px;
       font-family: var(--font);
     }
-    .featured-card .card-img .card-like { top: 8px; right: 8px; }
+    .featured-card .card-img .card-like { top: 4px; right: 4px; }
     .featured-card .card-title {
       margin-top: 8px;
       font-size: 14px;
@@ -508,7 +498,7 @@
         <!-- Card 1: POLAR SOUND - links to polar-sound.html -->
         <a href="polar-sound.html" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="../img/polar-sound-hero.png" alt="Polar Sound 2026">
             <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">1</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">1</text></svg></div>
           </div>
@@ -520,7 +510,7 @@
         <!-- Card 2: F1 Grand Prix -->
         <a href="../plan.html?plan=f1-grand-prix" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/aa6979be-8fdc-11f0-86ac-628e8f210c54.jpg" alt="F1 Grand Prix">
             <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">2</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">2</text></svg></div>
           </div>
@@ -532,7 +522,7 @@
         <!-- Card 3 -->
         <a href="../plan.html?plan=museo-banksy" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/ce0edbfc-52a1-11f0-87c2-fe0e7cbe00f7.jpg" alt="Museo Banksy">
             <div class="rank-number"><svg class="rank-number__svg" viewBox="0 0 100 88"><text class="rank-number__stroke" x="2" y="84" text-anchor="start">3</text><text class="rank-number__fill" x="2" y="84" text-anchor="start">3</text></svg></div>
           </div>
@@ -553,7 +543,7 @@
       <div class="card-scroll">
         <a href="../plan.html?plan=candlelight-vivaldi" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/9f8fa516-1ab3-11f0-acbb-460e748c3556.jpg" alt="Candlelight Vivaldi">
             <span class="card-badge">Fever Original</span>
           </div>
@@ -565,7 +555,7 @@
         <!-- Featured larger card -->
         <div class="featured-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/d41e2e90-570f-11f0-b2c5-f295a86a2f76.jpg" alt="Jazz Room">
             <span class="card-badge">Fever Original</span>
           </div>
@@ -576,7 +566,7 @@
 
         <a href="../plan.html?plan=jazz-room" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/d41e2e90-570f-11f0-b2c5-f295a86a2f76.jpg" alt="Jazz Room">
             <span class="card-badge">Fever Original</span>
           </div>
@@ -596,7 +586,7 @@
       <div class="card-scroll">
         <a href="../plan.html?plan=we-will-rock-you" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/e652f392-407b-11ec-9b6b-9a748ce8397a" alt="We Will Rock You">
           </div>
           <div class="card-title">We Will Rock You - Musical</div>
@@ -606,7 +596,7 @@
 
         <a href="../plan.html?plan=teatro-flamenco" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/7318fc16-008e-11ef-b977-124ef9dd9312.png" alt="Flamenco">
           </div>
           <div class="card-title">Teatro Flamenco: Emociones Show</div>
@@ -625,7 +615,7 @@
       <div class="card-scroll">
         <a href="../plan.html?plan=f1-grand-prix" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/aa6979be-8fdc-11f0-86ac-628e8f210c54.jpg" alt="F1 GP">
           </div>
           <div class="card-title">FORMULA 1&reg; Spanish Grand Prix 2026</div>
@@ -635,7 +625,7 @@
 
         <a href="../plan.html?plan=candlelight-zimmer" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/66cd0d5a-1945-11f0-b4e1-16541c266220.jpg" alt="Candlelight Hans Zimmer">
             <span class="card-badge">Fever Original</span>
           </div>
@@ -646,7 +636,7 @@
 
         <a href="../plan.html?plan=candlelight-zimmer" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/a9430c14-6280-11f0-8664-ae8f95c7ce7e.jpg" alt="Whitney Houston">
           </div>
           <div class="card-title">Whitney Houston Hologram Tour</div>
@@ -665,7 +655,7 @@
       <div class="card-scroll">
         <a href="../plan.html?plan=machu-picchu" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/be11c6f4-82c3-11f0-b568-a287fc4fb2bc.jpg" alt="Escape Room">
           </div>
           <div class="card-title">Chaos Lab - Madrid</div>
@@ -673,7 +663,7 @@
         </a>
         <a href="../plan.html?plan=machu-picchu" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/3a3c9a4a-8311-11f0-8e93-fa85177ab576.jpg" alt="Machu Picchu">
           </div>
           <div class="card-title">Machu Picchu: Journey to the Lost City</div>
@@ -682,7 +672,7 @@
         </a>
         <a href="../plan.html?plan=parque-warner" class="event-card">
           <div class="card-img">
-            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            <button type="button" class="card-like" aria-label="Add to favorites"><svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg></button>
             <img src="https://applications-media.feverup.com/image/upload/f_auto,w_720,h_720/fever2/plan/photo/f805d6b6-79e9-11ec-9353-de64b1790db8" alt="Parque Warner">
           </div>
           <div class="card-title">Parque Warner Madrid</div>
