@@ -606,9 +606,10 @@
     function saveAndRedirect() {
       saveTransportToCart();
 
-      // Sequential c1/c2: go straight to checkout, preserving hotel selection
+      // Sequential c1/c2: preserve hotel selection; c2 goes to cart, c1 to checkout
       if (isSequentialFlow) {
-        window.location.href = 'checkout.html?flow=' + flow;
+        var dest = (flow === 'c2') ? 'cart.html?flow=' + flow : 'checkout.html?flow=' + flow;
+        window.location.href = dest;
         return;
       }
 

@@ -1166,7 +1166,8 @@
             localStorage.setItem('cart_accommodation', '[]');
             localStorage.setItem('cart_transportation', '[]');
           } catch (e) {}
-          window.location.href = 'checkout.html?flow=' + flow;
+          var dest = (flow === 'c2') ? 'cart.html?flow=' + flow : 'checkout.html?flow=' + flow;
+          window.location.href = dest;
         });
       }
     })();
