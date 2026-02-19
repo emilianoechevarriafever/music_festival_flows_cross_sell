@@ -25,7 +25,12 @@
       --elevation-01: 0 1px 3px 0 rgba(0,0,0,0.08);
       --font: 'Montserrat', sans-serif;
       --font-ui: 'Montserrat', sans-serif;
-    }
+  --color-text-disable: #a7b2ba;
+  --color-bg-dark: #06232c;
+  --color-danger: #eb0052;
+  --color-success: #24a865;
+  --color-accent: #6f41d7;
+}
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: var(--font);
@@ -52,7 +57,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid #ccd2d8;
+      border-bottom: 1px solid var(--color-border);
     }
     .nav-left { display: flex; align-items: center; gap: 8px; }
     .back-btn {
@@ -70,7 +75,7 @@
     .avatar-wrap{all:unset;position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;width:24px;height:24px;flex-shrink:0;box-sizing:border-box}
     .avatar-wrap img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; display:none;}
     .avatar-wrap .avatar-placeholder { display:flex;}
-    html.u-in .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:#22ad5c; border:1.5px solid white; border-radius:50%; }
+    html.u-in .avatar-wrap::after { content:''; position:absolute; top:-1px; right:-1px; width:8px; height:8px; background:var(--color-success); border:1.5px solid white; border-radius:50%; }
     html.u-in .avatar-wrap img{display:block}
     html.u-in .avatar-wrap .avatar-placeholder{display:none}
     .burger-toggle { width:24px; height:24px; position:relative; }
@@ -86,18 +91,18 @@
       z-index: 99;
       background: #fff;
       padding: 12px 16px 14px;
-      border-bottom: 1px solid #ccd2d8;
+      border-bottom: 1px solid var(--color-border);
     }
     .search-bar {
       display: flex;
       align-items: center;
-      background: #f2f3f3;
+      background: var(--color-bg-neutral);
       border-radius: 64px;
       padding: 0 14px;
       height: 44px;
       gap: 8px;
       border: 2px solid transparent;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.15s, background 0.15s;
     }
     .search-bar.focused {
       border-color: var(--color-primary);
@@ -105,7 +110,7 @@
     }
     .search-bar .search-icon {
       width: 18px; height: 18px; flex-shrink: 0;
-      color: #a7b2ba; stroke: currentColor; fill: none;
+      color: var(--color-text-disable); stroke: currentColor; fill: none;
     }
     .search-bar input {
       flex: 1;
@@ -117,11 +122,11 @@
       outline: none;
       line-height: 20px;
     }
-    .search-bar input::placeholder { color: #a7b2ba; }
+    .search-bar input::placeholder { color: var(--color-text-disable); }
     .search-clear {
       display: none;
       width: 20px; height: 20px;
-      border: none; background: #ccd2d8;
+      border: none; background: var(--color-border);
       border-radius: 50%; cursor: pointer;
       align-items: center; justify-content: center; padding: 0;
       flex-shrink: 0;
@@ -149,18 +154,18 @@
     .search-chip {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 8px 14px;
-      background: #f2f3f3; border-radius: 64px;
-      font-size: 14px; font-weight: 500;
+      background: var(--color-bg-neutral); border-radius: 64px;
+      font-size: 14px; font-weight:600;
       color: var(--color-text-main); cursor: pointer;
       border: none; font-family: var(--font);
       transition: background 0.15s;
     }
-    .search-chip:hover { background: #ccd2d8; }
-    .search-chip svg { width: 14px; height: 14px; flex-shrink: 0; color: #a7b2ba; }
+    .search-chip:hover { background: var(--color-border); }
+    .search-chip svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--color-text-disable); }
     .search-chip .chip-remove {
       width: 16px; height: 16px;
       display: inline-flex; align-items: center; justify-content: center;
-      border-radius: 50%; background: #ccd2d8;
+      border-radius: 50%; background: var(--color-border);
       cursor: pointer; margin-left: 2px; flex-shrink: 0;
     }
     .search-chip .chip-remove svg { width: 8px; height: 8px; color: #fff; stroke: #fff; stroke-width: 2.5; }
@@ -170,12 +175,12 @@
     .trending-item {
       display: flex; align-items: center; gap: 14px;
       padding: 12px 0;
-      border-bottom: 1px solid #f2f3f3;
+      border-bottom: 1px solid var(--color-bg-neutral);
       cursor: pointer; text-decoration: none; color: inherit;
       transition: background 0.15s;
     }
     .trending-item:last-child { border-bottom: none; }
-    .trending-item:active { background: #f2f3f3; }
+    .trending-item:active { background: var(--color-bg-neutral); }
     .trending-num {
       width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
@@ -184,8 +189,8 @@
       background: var(--color-primary-weak);
       border-radius: 8px; flex-shrink: 0;
     }
-    .trending-text { font-size: 14px; font-weight: 500; line-height: 20px; }
-    .trending-arrow { margin-left: auto; width: 16px; height: 16px; color: #ccd2d8; flex-shrink: 0; }
+    .trending-text { font-size: 14px; font-weight:600; line-height: 20px; }
+    .trending-arrow { margin-left: auto; width: 16px; height: 16px; color: var(--color-border); flex-shrink: 0; }
 
     /* Popular Categories */
     .cat-chips-scroll {
@@ -197,12 +202,12 @@
     .cat-chip-btn {
       display: flex; flex-direction: column; align-items: center;
       gap: 8px; padding: 12px 16px;
-      background: #f2f3f3; border-radius: 16px;
+      background: var(--color-bg-neutral); border-radius: 16px;
       cursor: pointer; border: none; font-family: var(--font);
       min-width: 80px; flex-shrink: 0;
       transition: background 0.15s, transform 0.15s;
     }
-    .cat-chip-btn:hover { background: #ccd2d8; }
+    .cat-chip-btn:hover { background: var(--color-border); }
     .cat-chip-btn:active { transform: scale(0.95); }
     .cat-chip-btn .cat-chip-icon {
       width: 40px; height: 40px;
@@ -218,20 +223,20 @@
       padding: 12px 16px;
       display: flex; gap: 8px;
       overflow-x: auto; -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; border-bottom: 1px solid #ccd2d8;
+      scrollbar-width: none; border-bottom: 1px solid var(--color-border);
     }
     .filter-section::-webkit-scrollbar { display: none; }
     .filter-pill {
       display: inline-flex; align-items: center; gap: 4px;
       padding: 8px 14px;
-      border: 1.5px solid #ccd2d8; border-radius: 64px;
+      border: 1.5px solid var(--color-border); border-radius: 64px;
       background: #fff; font-family: var(--font);
-      font-size: 14px; font-weight: 500;
+      font-size: 14px; font-weight:600;
       color: var(--color-text-main); cursor: pointer;
       white-space: nowrap; flex-shrink: 0;
       transition: border-color 0.15s, background 0.15s, color 0.15s;
     }
-    .filter-pill:hover { border-color: #ccd2d8; }
+    .filter-pill:hover { border-color: var(--color-border); }
     .filter-pill.active {
       background: var(--color-text-main);
       border-color: var(--color-text-main);
@@ -244,10 +249,10 @@
       padding: 24px 16px 0;
     }
     .results-header h2 {
-      font-size: 20px; font-weight: 600; line-height: 28px;
+      font-size: 20px; font-weight: 600; line-height: 24px;
     }
     .results-count {
-      font-size: 14px; color: #536b75;
+      font-size: 14px; color: var(--color-text-subtle);
       padding: 8px 16px 4px;
     }
 
@@ -266,7 +271,7 @@
     .cat-card .cat-card-img {
       width: 100%; aspect-ratio: 3/4;
       border-radius: 16px; overflow: hidden;
-      position: relative; background: #ccd2d8;
+      position: relative; background: var(--color-border);
     }
     .cat-card .cat-card-img img {
       width: 100%; height: 100%; object-fit: cover;
@@ -275,7 +280,7 @@
     .cat-card .cat-card-img img.loaded { opacity: 1; }
     .cat-card .cat-card-badge {
       position: absolute; top: 8px; left: 8px;
-      background: #6f41d7; color: white;
+      background: var(--color-accent); color: white;
       font-size: 10px; font-weight: 600;
       padding: 2px 6px; border-radius: 4px;
     }
@@ -291,40 +296,40 @@
     .cat-card .cat-card-like svg {
       width: 26px; height: 26px; flex-shrink: 0;
     }
-    .cat-card .cat-card-like.liked svg path { fill: #FF3B30; fill-opacity: 1; stroke: white; }
+    .cat-card .cat-card-like.liked svg path { fill: var(--color-danger); fill-opacity: 1; stroke: white; }
     .cat-card .cat-card-title {
       font-size: 14px; font-weight: 600;
-      line-height: 18px; margin-top: 8px;
+      line-height: 20px; margin-top: 8px;
       display: -webkit-box; -webkit-line-clamp: 2;
       -webkit-box-orient: vertical; overflow: hidden;
     }
     .cat-card .cat-card-meta {
-      font-size: 12px; color: #536b75; margin-top: 2px; line-height: 16px;
+      font-size: 12px; color: var(--color-text-subtle); margin-top: 2px; line-height: 16px;
     }
     .cat-card .cat-card-meta .rating { color: #f5a623; }
     .cat-card .cat-card-dates {
-      font-size: 12px; color: #536b75; margin-top: 2px;
+      font-size: 12px; color: var(--color-text-subtle); margin-top: 2px;
     }
     .cat-card .cat-card-price {
       font-size: 14px; font-weight: 600; margin-top: 4px;
     }
     .cat-card .cat-card-price .old-price {
-      text-decoration: line-through; color: #a7b2ba; font-weight: 400; margin-right: 4px;
+      text-decoration: line-through; color: var(--color-text-disable); font-weight: 400; margin-right: 4px;
     }
-    .cat-card .cat-card-price .free-tag { color: #22ad5c; }
+    .cat-card .cat-card-price .free-tag { color: var(--color-success); }
 
     /* ─── Empty State ─── */
     .search-empty {
       padding: 64px 32px; text-align: center;
     }
     .search-empty svg {
-      width: 64px; height: 64px; color: #ccd2d8; margin-bottom: 20px;
+      width: 64px; height: 64px; color: var(--color-border); margin-bottom: 20px;
     }
     .search-empty h3 {
-      font-size: 18px; font-weight: 600; margin-bottom: 8px;
+      font-size: 20px; font-weight: 600; margin-bottom: 8px;
     }
     .search-empty p {
-      font-size: 14px; color: #536b75; line-height: 20px;
+      font-size: 14px; color: var(--color-text-subtle); line-height: 20px;
     }
 
     /* ─── Suggestions dropdown ─── */
@@ -339,23 +344,23 @@
     .suggestion-item {
       display: flex; align-items: center; gap: 12px;
       padding: 12px 16px;
-      cursor: pointer; transition: background 0.1s;
+      cursor: pointer; transition: background 0.15s;
       text-decoration: none; color: inherit;
     }
-    .suggestion-item:hover, .suggestion-item:active { background: #f2f3f3; }
-    .suggestion-item svg { width: 18px; height: 18px; flex-shrink: 0; color: #a7b2ba; }
+    .suggestion-item:hover, .suggestion-item:active { background: var(--color-bg-neutral); }
+    .suggestion-item svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--color-text-disable); }
     .suggestion-item .suggestion-text {
       font-size: 14px; line-height: 20px;
     }
     .suggestion-item .suggestion-text strong { font-weight: 600; }
     .suggestion-item .suggestion-cat {
-      font-size: 12px; color: #a7b2ba; margin-left: auto; flex-shrink: 0;
+      font-size: 12px; color: var(--color-text-disable); margin-left: auto; flex-shrink: 0;
     }
 
     /* ─── Footer ─── */
-    .footer { background: #031419; color: white; padding: 32px 16px 80px; }
+    .footer { background: var(--color-text-main); color: white; padding: 32px 16px 80px; }
     .footer-cols { display: flex; justify-content: space-between; margin-bottom: 32px; }
-    .footer-col h5 { font-size: 14px; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.01em; }
+    .footer-col h5 { font-size: 14px; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.04em; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { font-size: 14px; line-height: 20px; margin-bottom: 4px; }
     .footer-col ul li a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.15s; }
@@ -400,7 +405,7 @@
         </a>
         <a class="avatar-wrap" href="login.html" aria-label="Profile">
           <img src="img/profile-avatar.png" alt="Profile">
-          <svg class="avatar-placeholder" viewBox="0 0 512 512" fill="#536B75"><path d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-64-40a64 64 0 1 0 128 0 64 64 0 1 0-128 0z"/></svg>
+          <svg class="avatar-placeholder" viewBox="0 0 512 512" fill="var(--color-text-subtle)"><path d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-64-40a64 64 0 1 0 128 0 64 64 0 1 0-128 0z"/></svg>
         </a>
         <button type="button" class="nav-icon-btn burger-toggle js-burger-toggle" aria-label="Open menu" aria-expanded="false">
           <svg class="icon-menu" viewBox="0 0 448 512" fill="currentColor"><path d="M0 80c0-8.8 7.2-16 16-16H432c8.8 0 16 7.2 16 16s-7.2 16-16 16H16C7.2 96 0 88.8 0 80zM0 240c0-8.8 7.2-16 16-16H432c8.8 0 16 7.2 16 16s-7.2 16-16 16H16c-8.8 0-16-7.2-16-16zM448 400c0 8.8-7.2 16-16 16H16c-8.8 0-16-7.2-16-16s7.2-16 16-16H432c8.8 0 16 7.2 16 16z"/></svg>
@@ -562,13 +567,13 @@
 
     var CATEGORIES = [
       { label: 'Candlelight', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2c-1 4-4 6-4 10a4 4 0 008 0c0-4-3-6-4-10z"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>' },
-      { label: 'Music', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#6f41d7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>' },
-      { label: 'Culture', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#0079ca" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/></svg>' },
-      { label: 'Tourism', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#22ad5c" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' },
+      { label: 'Music', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>' },
+      { label: 'Culture', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/></svg>' },
+      { label: 'Tourism', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' },
       { label: 'Activities', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#e84393" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
       { label: 'Food', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#fd7e14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>' },
       { label: 'Exhibitions', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' },
-      { label: 'Family', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#eb0052" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>' },
+      { label: 'Family', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-danger)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>' },
       { label: 'Sports', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/></svg>' }
     ];
 
@@ -704,7 +709,7 @@
           '<div class="cat-card-img">' +
             (ev.badge ? '<span class="cat-card-badge">' + ev.badge + '</span>' : '') +
             '<button type="button" class="cat-card-like' + (isLiked ? ' liked' : '') + '" data-like="' + ev.id + '" aria-label="Favorite">' +
-              '<svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="#06232C" fill-opacity="0.7" stroke="#CCD2D8" stroke-width="2"/></svg>' +
+              '<svg viewBox="0 0 26 26" fill="none"><path d="M12.98 5.87C14.47 4.53 16.5 3.93 18.47 4.27l.003-.001c.003 0 .006.001.009.002l.003-.001C21.66 4.79 24 7.55 24 10.77v.19c0 1.92-.82 3.75-2.19 5.03l-7.07 6.6-.001-.001c-.51.5-1.17.66-1.74.66-.59 0-1.26-.16-1.78-.66v.001L4.15 15.99C2.77 14.7 2 12.87 2 10.96v-.19c0-3.21 2.29-5.97 5.47-6.5v-.001l.007-.001.01-.001v.001C9.46 3.93 11.49 4.53 12.98 5.87z" fill="var(--color-bg-dark)" fill-opacity="0.7" stroke="var(--color-border)" stroke-width="2"/></svg>' +
             '</button>' +
             '<img src="' + ev.img + '" alt="' + ev.title.replace(/"/g,'&quot;') + '" onload="this.classList.add(\'loaded\')">' +
           '</div>' +

@@ -18,7 +18,11 @@
       --muted: #536b75;
       --line: #ccd2d8;
       --link: #0079ca;
-    }
+  --color-text-main: #031419;
+  --color-text-subtle: #536b75;
+  --color-border: #ccd2d8;
+  --color-success: #24a865;
+}
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--font); background: #e8ebef; color: var(--text); }
@@ -36,12 +40,12 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 16px;
       background: #fff;
-      border-bottom: 1px solid #ccd2d8;
+      border-bottom: 1px solid var(--color-border);
       flex-shrink: 0;
     }
     .logo-link img { height: 38px; width: auto; display: block; }
     .nav-icons { display: flex; align-items: center; gap:20px; }
-    .nav-icons svg { height:24px; width:auto; color: #031419; }
+    .nav-icons svg { height:24px; width:auto; color: var(--color-text-main); }
     .nav-icon-btn{all:unset;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:inherit;width:24px;height:24px;flex-shrink:0;box-sizing:border-box;overflow:visible}
 
     /* Avatar states */
@@ -50,7 +54,7 @@
     .avatar-wrap .avatar-placeholder { display:flex;}
     html.u-in .avatar-wrap::after {
       content: ''; position: absolute; top: -1px; right: -1px;
-      width: 8px; height: 8px; background: #22ad5c;
+      width: 8px; height: 8px; background: var(--color-success);
       border: 1.5px solid #fff; border-radius: 50%;
     }
     html.u-in .avatar-wrap img{display:block}
@@ -78,10 +82,10 @@
       border-radius: 16px 16px 0 0;
       z-index: 21;
       box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .sheet.open { transform: translateX(-50%) translateY(0); }
-    .sheet-handle { width:36px; height:4px; background:#d7dde2; border-radius:4px; margin:8px auto 0; flex-shrink:0; }
+    .sheet-handle { width:36px; height:4px; background:var(--color-border); border-radius:4px; margin:8px auto 0; flex-shrink:0; }
 
     /* Sheet header */
     .sheet-header {
@@ -126,7 +130,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 0; cursor: pointer; text-decoration: none; color: var(--text);
     }
-    .menu-row span { font-size: 14px; font-weight: 500; line-height: 20px; }
+    .menu-row span { font-size: 14px; font-weight:600; line-height: 20px; }
     .menu-row .chevron { width: 18px; height: 18px; color: #a0adb5; flex-shrink: 0; }
 
     /* External link */
@@ -167,7 +171,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 12px 0;
       border: none; background: none; width: 100%;
-      font-family: var(--font); font-size: 14px; font-weight: 500;
+      font-family: var(--font); font-size: 14px; font-weight:600;
       line-height: 20px; color: var(--text); cursor: pointer;
     }
     .logout-row svg { width: 20px; height: 20px; color: var(--text); flex-shrink: 0; }
@@ -189,7 +193,7 @@
         <a class="nav-icon-btn" href="favorites.html" aria-label="Favorites"><svg viewBox="0 0 512 512" fill="currentColor"><path d="M244 130.6l-12-13.5-4.2-4.7c-26-29.2-65.3-42.8-103.8-35.8c-53.3 9.7-92 56.1-92 110.3v3.5c0 32.3 13.4 63.1 37.1 85.1L253 446.8c.8 .7 1.9 1.2 3 1.2s2.2-.4 3-1.2L443 275.5c23.6-22 37-52.8 37-85.1v-3.5c0-54.2-38.7-100.6-92-110.3c-38.5-7-77.8 6.6-103.8 35.8l-4.2 4.7-12 13.5c-3 3.4-7.4 5.4-12 5.4s-8.9-2-12-5.4zm34.9-57.1C311 48.4 352.7 37.7 393.7 45.1C462.2 57.6 512 117.3 512 186.9v3.5c0 36-13.1 70.6-36.6 97.5c-3.4 3.8-6.9 7.5-10.7 11l-184 171.3c-.8 .8-1.7 1.5-2.6 2.2c-6.3 4.9-14.1 7.5-22.1 7.5c-9.2 0-18-3.5-24.8-9.7L47.2 299c-3.8-3.5-7.3-7.2-10.7-11C13.1 261 0 226.4 0 190.4v-3.5C0 117.3 49.8 57.6 118.3 45.1c40.9-7.4 82.6 3.2 114.7 28.4c6.7 5.3 13 11.1 18.7 17.6l4.2 4.7 4.2-4.7c4.2-4.7 8.6-9.1 13.3-13.1c1.8-1.5 3.6-3 5.4-4.5z"/></svg></a>
         <a class="avatar-wrap" id="avatarBtn" href="login.html" aria-label="Profile">
           <img src="img/profile-avatar.png" alt="Profile">
-          <svg class="avatar-placeholder" viewBox="0 0 512 512" fill="#536B75"><path d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-64-40a64 64 0 1 0 128 0 64 64 0 1 0-128 0z"/></svg>
+          <svg class="avatar-placeholder" viewBox="0 0 512 512" fill="var(--color-text-subtle)"><path d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-64-40a64 64 0 1 0 128 0 64 64 0 1 0-128 0z"/></svg>
         </a>
         <a class="nav-icon-btn" href="category.html" aria-label="Menu"><svg viewBox="0 0 448 512" fill="currentColor"><path d="M0 80c0-8.8 7.2-16 16-16H432c8.8 0 16 7.2 16 16s-7.2 16-16 16H16C7.2 96 0 88.8 0 80zM0 240c0-8.8 7.2-16 16-16H432c8.8 0 16 7.2 16 16s-7.2 16-16 16H16c-8.8 0-16-7.2-16-16zM448 400c0 8.8-7.2 16-16 16H16c-8.8 0-16-7.2-16-16s7.2-16 16-16H432c8.8 0 16 7.2 16 16z"/></svg></a>
       </div>
