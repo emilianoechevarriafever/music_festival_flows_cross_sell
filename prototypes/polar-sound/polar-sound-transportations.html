@@ -685,6 +685,12 @@
       });
     });
 
+    // c1/c2 sequential: clear any previous selections so page starts fresh
+    if (flow === 'c1' || flow === 'c2') {
+      try { localStorage.removeItem('polar_sel_transportation'); } catch(e) {}
+      try { localStorage.removeItem('cart_transportation'); } catch(e) {}
+    }
+
     // Restore transport selections (visual persistence across step navigation)
     (function restoreTransportSelection() {
       try {
