@@ -1406,6 +1406,12 @@
       thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx); });
       scrollThumbIntoView(idx);
       updateArrows();
+      var allSlides = fsTrack.querySelectorAll('.fs-gallery-slide');
+      allSlides.forEach(function(sl, i) {
+        var v = sl.querySelector('video');
+        if (!v) return;
+        if (i === idx) { v.play(); } else { v.pause(); }
+      });
     }
 
     function openGallery() {
@@ -1421,6 +1427,7 @@
     function closeGallery() {
       fsGallery.classList.remove('open');
       document.body.style.overflow = '';
+      fsTrack.querySelectorAll('video').forEach(function(v) { v.pause(); });
     }
 
     galleryBtn.addEventListener('click', function(e) { e.preventDefault(); openGallery(); });
