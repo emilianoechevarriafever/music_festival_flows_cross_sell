@@ -711,15 +711,10 @@
       stickyMode = 'continue';
     }
 
-    // Pre-select first transport when coming from "Add transport" bottom sheet in c1/c2 flows
-    if (params.get('preselect') === '1' && (flow === 'c1' || flow === 'c2')) {
-      var firstAvailable = TRANSPORT_OPTIONS.findIndex(function(opt) { return opt.price > 0; });
-      if (firstAvailable < 0) firstAvailable = 0;
-      if (!counts[firstAvailable]) {
-        counts[firstAvailable] = 1;
-        hasSeenTransport = true;
-        stickyMode = 'continue';
-      }
+    // c1/c2: show "Skip transport" CTA immediately (no pre-selection)
+    if (flow === 'c1' || flow === 'c2') {
+      hasSeenTransport = true;
+      stickyMode = 'continue';
     }
 
     render();

@@ -1096,16 +1096,14 @@
         btnAccommodation.addEventListener('click', function() {
           try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
           if (isCrossSellFlow) { try { sessionStorage.setItem('option_h_came_from', 'hub'); } catch(e) {} }
-          var preselectParam = (flow === 'c1' || flow === 'c2') ? '&preselect=1' : '';
-          window.location.href = 'polar-sound-accommodation.html?flow=' + flow + preselectParam;
+          window.location.href = 'polar-sound-accommodation.html?flow=' + flow;
         });
       }
       if (btnTransport) {
         btnTransport.addEventListener('click', function() {
           try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
           if (isCrossSellFlow) { try { sessionStorage.setItem('option_h_came_from', 'hub'); } catch(e) {} }
-          var preselectParam = (flow === 'c1' || flow === 'c2') ? '&preselect=1' : '';
-          window.location.href = 'polar-sound-transportations.html?flow=' + flow + preselectParam;
+          window.location.href = 'polar-sound-transportations.html?flow=' + flow;
         });
       }
       if (btnNone) {
@@ -1160,7 +1158,7 @@
       if (overlay) overlay.addEventListener('click', closeContinueSheet);
       if (btnKeep) {
         btnKeep.addEventListener('click', function() {
-          window.location.href = 'polar-sound-accommodation.html?flow=' + flow + '&preselect=1';
+          window.location.href = 'polar-sound-accommodation.html?flow=' + flow;
         });
       }
       if (btnCheckout) {
