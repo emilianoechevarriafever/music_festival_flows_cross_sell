@@ -452,7 +452,7 @@
         if (initCameFrom !== 'accommodation') {
           try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
         }
-      } else {
+      } else if (!isOptionG) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
       }
     } else {
@@ -634,7 +634,6 @@
         var dest = isOptionI ? 'cart.html?flow=e2' : 'checkout.html?flow=e1';
         window.location.href = dest;
       } else if (isOptionG) {
-        try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
         window.location.href = 'cart.html?flow=d2';
       } else if (isOptionF) {
         try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}

@@ -1094,14 +1094,14 @@
       if (overlay) overlay.addEventListener('click', closeAddonsHub);
       if (btnAccommodation) {
         btnAccommodation.addEventListener('click', function() {
-          try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {}
+          if (!isOptionG) { try { localStorage.setItem('cart_transportation', '[]'); } catch (e) {} }
           if (isCrossSellFlow) { try { sessionStorage.setItem('option_h_came_from', 'hub'); } catch(e) {} }
           window.location.href = 'polar-sound-accommodation.html?flow=' + flow;
         });
       }
       if (btnTransport) {
         btnTransport.addEventListener('click', function() {
-          try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {}
+          if (!isOptionG) { try { localStorage.setItem('cart_accommodation', '[]'); } catch (e) {} }
           if (isCrossSellFlow) { try { sessionStorage.setItem('option_h_came_from', 'hub'); } catch(e) {} }
           window.location.href = 'polar-sound-transportations.html?flow=' + flow;
         });
