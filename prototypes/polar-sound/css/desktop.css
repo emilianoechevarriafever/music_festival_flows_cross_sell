@@ -1,0 +1,611 @@
+/* ==========================================================================
+   Fever Desktop Responsive — Shared across all Polar Sound pages
+   Mobile styles remain in each page's inline <style>.
+   Everything here is wrapped in media queries — zero mobile impact.
+   ========================================================================== */
+
+/* ---------- TABLET+ (≥768px): phone container + basic layout ---------- */
+@media (min-width: 768px) {
+  .status-bar { display: none !important; }
+
+  body {
+    background: #fff;
+  }
+
+  .phone {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .sticky-cta,
+  .sticky-pay {
+    width: 100% !important;
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .decision-sheet {
+    width: 480px !important;
+    max-width: 90vw;
+  }
+
+  .burger-menu-panel {
+    width: 480px !important;
+    max-width: 90vw;
+  }
+}
+
+/* ---------- DESKTOP (≥1024px): full Fever desktop experience ---------- */
+@media (min-width: 1024px) {
+
+  /* ── Global ── */
+  body {
+    background: #fff;
+    display: block;
+  }
+
+  .phone {
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #fff;
+  }
+
+  /* ── Desktop Navbar ── */
+  .navbar {
+    padding: 12px 40px !important;
+    height: 72px;
+    border-bottom: none !important;
+    box-shadow: 0 12px 12px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 16px;
+  }
+
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .sticky-header .navbar {
+    position: relative;
+  }
+
+  .navbar .logo-link img {
+    height: 28px !important;
+  }
+
+  /* Hide mobile-only burger/menu icon */
+  .navbar .nav-icon-btn[aria-label="Menu"],
+  .navbar .burger-toggle {
+    display: none !important;
+  }
+
+  /* Hide mobile-only search & location icons (replaced by desktop elements) */
+  .navbar .nav-icon-btn[aria-label="Search"],
+  .navbar .nav-icon-btn[aria-label="Location"],
+  .navbar .nav-icon-btn[aria-label="Select your city"] {
+    display: none !important;
+  }
+
+  /* Desktop nav center: location + categories + search */
+  .desktop-nav-center {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    max-width: 700px;
+    margin: 0 24px;
+  }
+
+  .desk-location,
+  .desk-categories {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-family: var(--font, 'Montserrat', sans-serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-main, #031419);
+    white-space: nowrap;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+
+  .desk-location:hover,
+  .desk-categories:hover {
+    background: var(--color-bg-neutral, #f2f3f3);
+  }
+
+  .desk-location svg,
+  .desk-categories svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .desk-search {
+    flex: 1;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-bg-neutral, #f2f3f3);
+    border-radius: 8px;
+    padding: 0 16px;
+    height: 44px;
+    min-width: 200px;
+  }
+
+  .desk-search svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--color-text-disable, #a7b2ba);
+  }
+
+  .desk-search input {
+    all: unset;
+    flex: 1;
+    font-family: var(--font, 'Montserrat', sans-serif);
+    font-size: 14px;
+    color: var(--color-text-main, #031419);
+    width: 100%;
+  }
+
+  .desk-search input::placeholder {
+    color: var(--color-text-disable, #a7b2ba);
+  }
+
+  /* Desktop nav right: language selector */
+  .desktop-nav-right {
+    display: flex !important;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .desk-lang {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-family: var(--font, 'Montserrat', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-main, #031419);
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+
+  .desk-lang:hover {
+    background: var(--color-bg-neutral, #f2f3f3);
+  }
+
+  .desk-lang svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ── Flow Stepper desktop ── */
+  .flow-stepper {
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+    padding: 12px 24px;
+  }
+
+  /* ── Event Detail Two-Column Layout ── */
+  .detail-layout {
+    display: flex;
+    gap: 40px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    align-items: flex-start;
+  }
+
+  .detail-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .detail-sidebar {
+    width: 416px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 96px;
+    align-self: flex-start;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    padding: 0;
+    margin-top: 24px;
+    overflow: hidden;
+  }
+
+  .detail-sidebar .section-header {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .detail-sidebar .ticket-selector {
+    border-bottom: none;
+    padding-bottom: 24px;
+  }
+
+  .detail-sidebar .selling-fast-banner {
+    margin-bottom: 16px;
+  }
+
+  .detail-sidebar .cta-primary {
+    display: block;
+  }
+
+  .detail-sidebar .cta-secondary {
+    display: flex;
+  }
+
+  /* Hide mobile inline ticket section when desktop sidebar exists */
+  .detail-main .section-header.mobile-ticket-header,
+  .detail-main .ticket-selector.mobile-ticket-selector {
+    display: none;
+  }
+
+  /* Hide mobile sticky CTA on desktop (sidebar has its own CTA) */
+  .has-detail-layout .sticky-cta {
+    display: none !important;
+  }
+
+  /* ── Hero on desktop ── */
+  .detail-main .hero,
+  .detail-layout .hero {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 480px;
+    margin-bottom: 8px;
+  }
+
+  .detail-main .hero .rounded-top {
+    display: none;
+  }
+
+  /* ── Title Section ── */
+  .detail-main .title-section h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  /* ── Description ── */
+  .detail-main .description {
+    font-size: 15px;
+    line-height: 22px;
+    padding: 24px 0;
+  }
+
+  .detail-main .title-section {
+    padding: 16px 0;
+  }
+
+  .detail-main .divider {
+    margin: 0;
+  }
+
+  /* ── Section Headers (in main content) ── */
+  .detail-main .section-header {
+    padding: 8px 0;
+  }
+
+  /* ── Reviews ── */
+  .detail-main .reviews {
+    padding: 24px 0;
+  }
+
+  .detail-main .review-card {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(50% - 12px);
+    margin-right: 24px;
+  }
+
+  .detail-main .review-card:nth-child(even) {
+    margin-right: 0;
+  }
+
+  /* ── Help Section ── */
+  .detail-main .help-section {
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .detail-main .help-content {
+    padding: 16px 0;
+  }
+
+  /* ── Venue ── */
+  .detail-main .venue-section {
+    padding: 24px 0;
+  }
+
+  /* ── Location ── */
+  .detail-main .location {
+    padding: 24px 0;
+  }
+
+  .detail-main .location .map-placeholder {
+    height: 240px;
+  }
+
+  /* ── Similar Experiences on desktop ── */
+  .detail-main .similar {
+    padding: 20px 0;
+  }
+
+  .detail-main .similar h3 {
+    padding: 0;
+  }
+
+  .detail-main .sim-scroll {
+    padding: 0;
+  }
+
+  .sim-card {
+    width: 200px !important;
+  }
+
+  .sim-card .sim-img {
+    width: 200px !important;
+    height: 133px !important;
+  }
+
+  /* ── Fullscreen Gallery Desktop ── */
+  .fs-gallery-slide img,
+  .fs-gallery-slide video {
+    max-height: 80vh;
+  }
+
+  /* ── Footer Desktop ── */
+  .footer {
+    padding: 48px 40px 32px !important;
+  }
+
+  .footer-cols {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 32px;
+    max-width: 1280px;
+    margin: 0 auto 32px;
+  }
+
+  .footer .legal {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer .legal div {
+    text-align: right;
+  }
+
+  /* ── Homepage-specific ── */
+
+  /* Desktop hero for homepage */
+  .home-hero {
+    height: 380px !important;
+    border-radius: 0;
+  }
+
+  .home-hero .hero-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px 40px !important;
+    left: 0;
+    right: 0;
+  }
+
+  .home-hero .hero-city {
+    font-size: 48px !important;
+  }
+
+  .home-hero .hero-subtitle {
+    font-size: 18px !important;
+  }
+
+  .home-hero .search-bar {
+    max-width: 560px;
+  }
+
+  /* Homepage sections */
+  .home-sections {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .home-sections .section {
+    padding-top: 48px;
+  }
+
+  .home-sections .section-header {
+    padding: 0;
+  }
+
+  .home-sections .card-scroll {
+    padding: 0;
+    gap: 20px;
+  }
+
+  .home-sections .event-card {
+    width: 243px !important;
+  }
+
+  .home-sections .event-card .card-img {
+    width: 243px !important;
+    height: 243px !important;
+    aspect-ratio: 1/1;
+  }
+
+  /* Category grid on desktop */
+  .home-sections .category-scroll {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .home-sections .category-card {
+    width: auto !important;
+  }
+
+  /* Recently viewed on desktop */
+  .home-sections .rv-scroll {
+    gap: 20px;
+    padding: 0;
+  }
+
+  /* ── Cart Desktop ── */
+  .cart-desktop-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .cart-desktop-wrapper .event-summary {
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .has-cart-layout .sticky-cta {
+    position: static !important;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px;
+    background: transparent !important;
+    transform: none;
+    left: auto;
+  }
+
+  /* ── Checkout Desktop ── */
+  .checkout-desktop-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .has-checkout-layout .sticky-pay {
+    position: static !important;
+    max-width: 720px;
+    margin: 24px auto 0;
+    padding: 0 24px 24px;
+    transform: none;
+    left: auto;
+    width: auto !important;
+    pointer-events: auto;
+  }
+
+  .has-checkout-layout .sticky-pay .pay-btn {
+    pointer-events: auto;
+  }
+
+  /* ── Favorites Desktop ── */
+  .favorites-grid-desktop {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .fav-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .fav-grid .event-card {
+    width: auto !important;
+  }
+
+  .fav-grid .event-card .card-img {
+    width: 100% !important;
+    aspect-ratio: 1/1;
+  }
+
+  /* ── Profile Desktop ── */
+  .profile-desktop-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Accommodation / Transport Detail Pages ── */
+  .detail-sidebar .hotel-cards,
+  .detail-sidebar .transport-cards {
+    padding: 0 16px 16px;
+  }
+
+  /* ── Bottom sheet desktop → centered modal ── */
+  .decision-sheet {
+    bottom: auto !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(calc(-50% + 100vh)) !important;
+    border-radius: 16px !important;
+    width: 480px !important;
+    max-width: 90vw;
+  }
+
+  .decision-sheet.open {
+    transform: translateX(-50%) translateY(-50%) !important;
+  }
+}
+
+/* ---------- WIDE DESKTOP (≥1440px): max comfort ---------- */
+@media (min-width: 1440px) {
+  .navbar {
+    padding: 12px 80px !important;
+  }
+
+  .detail-layout {
+    padding: 0 80px;
+  }
+
+  .footer {
+    padding: 48px 80px 32px !important;
+  }
+
+  .home-hero .hero-content {
+    padding: 0 80px 40px !important;
+  }
+
+  .home-sections {
+    padding: 0 80px;
+  }
+}
+
+/* ---------- Utility: hide on mobile, show on desktop ---------- */
+.desktop-nav-center,
+.desktop-nav-right {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .desktop-nav-center,
+  .desktop-nav-right {
+    display: none !important;
+  }
+  .detail-layout {
+    display: block;
+  }
+  .detail-sidebar {
+    display: none;
+  }
+}
