@@ -1,0 +1,1136 @@
+/* ==========================================================================
+   Fever Desktop Responsive — Shared across all Polar Sound pages
+   Mobile styles remain in each page's inline <style>.
+   Everything here is wrapped in media queries — zero mobile impact.
+   ========================================================================== */
+
+/* ---------- TABLET+ (≥768px): phone container + basic layout ---------- */
+@media (min-width: 768px) {
+  .status-bar { display: none !important; }
+
+  body {
+    background: #fff;
+  }
+
+  .phone {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .sticky-cta,
+  .sticky-pay {
+    width: 100% !important;
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .decision-sheet {
+    width: 480px !important;
+    max-width: 90vw;
+  }
+
+  .burger-menu-panel {
+    width: 480px !important;
+    max-width: 90vw;
+  }
+}
+
+/* ---------- DESKTOP (≥1024px): full Fever desktop experience ---------- */
+@media (min-width: 1024px) {
+
+  /* ── Global ── */
+  html {
+    overflow-x: clip !important;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #fff !important;
+    display: block !important;
+    justify-content: initial !important;
+    overflow: visible !important;
+  }
+
+  .phone {
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #fff !important;
+    margin: 0 auto;
+    overflow: visible !important;
+  }
+
+  /* ── Desktop Navbar ── */
+  .navbar {
+    padding: 12px 40px !important;
+    height: 72px;
+    border-bottom: none !important;
+    box-shadow: 0 12px 12px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 16px;
+  }
+
+  .sticky-header {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+  }
+
+  .sticky-header .navbar {
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .navbar .logo-link img {
+    height: 28px !important;
+  }
+
+  /* Hide mobile-only burger/menu icon and panel */
+  .navbar .nav-icon-btn[aria-label="Menu"],
+  .navbar .burger-toggle {
+    display: none !important;
+  }
+
+  .burger-menu-panel,
+  .burger-menu-backdrop {
+    display: none !important;
+  }
+
+  /* Hide mobile-only search & location icons (replaced by desktop elements) */
+  .navbar .nav-icon-btn[aria-label="Search"],
+  .navbar .nav-icon-btn[aria-label="Location"],
+  .navbar .nav-icon-btn[aria-label="Select your city"] {
+    display: none !important;
+  }
+
+  /* Desktop nav center: location + categories + search */
+  .desktop-nav-center {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    max-width: 700px;
+    margin: 0 24px;
+  }
+
+  .desk-location,
+  .desk-categories {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-family: var(--font, 'Montserrat', sans-serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-main, #031419);
+    white-space: nowrap;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+
+  .desk-location:hover,
+  .desk-categories:hover {
+    background: var(--color-bg-neutral, #f2f3f3);
+  }
+
+  .desk-location svg,
+  .desk-categories svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .desk-search {
+    flex: 1;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-bg-neutral, #f2f3f3);
+    border-radius: 8px;
+    padding: 0 16px;
+    height: 44px;
+    min-width: 200px;
+  }
+
+  .desk-search svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--color-text-disable, #a7b2ba);
+  }
+
+  .desk-search input {
+    all: unset;
+    flex: 1;
+    font-family: var(--font, 'Montserrat', sans-serif);
+    font-size: 14px;
+    color: var(--color-text-main, #031419);
+    width: 100%;
+  }
+
+  .desk-search input::placeholder {
+    color: var(--color-text-disable, #a7b2ba);
+  }
+
+  /* Desktop nav right: language selector */
+  .desktop-nav-right {
+    display: flex !important;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .desk-lang {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-family: var(--font, 'Montserrat', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-main, #031419);
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+
+  .desk-lang:hover {
+    background: var(--color-bg-neutral, #f2f3f3);
+  }
+
+  .desk-lang svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ── Flow Stepper desktop ── */
+  .flow-stepper {
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+    padding: 12px 24px;
+  }
+
+  /* ── Event Detail Two-Column Layout ── */
+  .detail-layout {
+    display: flex;
+    gap: 40px;
+    padding: 0 40px;
+    align-items: flex-start;
+    overflow: visible !important;
+  }
+
+  .detail-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .detail-sidebar {
+    width: 416px;
+    flex-shrink: 0;
+    position: sticky !important;
+    top: 96px;
+    align-self: flex-start;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--color-border, #ccd2d8);
+    -webkit-box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    -moz-box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    padding: 0;
+    margin-top: 24px;
+    overflow: hidden;
+  }
+
+  .detail-sidebar .section-header {
+    border-radius: 12px 12px 0 0;
+    margin: 0;
+    padding: 12px 16px;
+  }
+
+  .detail-sidebar .ticket-selector {
+    border-bottom: none;
+    padding-bottom: 24px;
+  }
+
+  .detail-sidebar .selling-fast-banner {
+    margin-bottom: 16px;
+  }
+
+  .detail-sidebar .cta-primary {
+    display: block;
+  }
+
+  .detail-sidebar .cta-secondary {
+    display: flex;
+  }
+
+  /* Hide mobile inline ticket section when desktop sidebar exists */
+  .detail-main .section-header.mobile-ticket-header,
+  .detail-main .ticket-selector.mobile-ticket-selector,
+  .detail-main .transport-options.mobile-ticket-selector {
+    display: none;
+  }
+
+  .detail-sidebar .transport-options {
+    border-bottom: none;
+    padding-bottom: 24px;
+  }
+
+  /* Hide mobile sticky CTA on desktop (sidebar has its own CTA) */
+  .has-detail-layout .sticky-cta {
+    display: none !important;
+  }
+
+  /* ── Hero on desktop ── */
+  .detail-main .hero,
+  .detail-layout .hero {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 480px;
+    margin-bottom: 8px;
+  }
+
+  .detail-main .hero .rounded-top {
+    display: none;
+  }
+
+  /* ── Title Section ── */
+  .detail-main .title-section h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  /* ── Description ── */
+  .detail-main .description {
+    font-size: 15px;
+    line-height: 22px;
+    padding: 24px 0;
+  }
+
+  .detail-main .title-section {
+    padding: 16px 0;
+  }
+
+  .detail-main .divider {
+    margin: 0;
+  }
+
+  /* ── Section Headers (in main content) ── */
+  .detail-main .section-header {
+    padding: 8px 0;
+  }
+
+  /* ── Reviews: 2-column grid layout ── */
+  .detail-main .reviews {
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+  }
+
+  /* Title, summary bar, verified badge, see-all link span full width */
+  .detail-main .reviews > .reviews-title,
+  .detail-main .reviews > .reviews-summary,
+  .detail-main .reviews > .reviews-verified,
+  .detail-main .reviews > .reviews-see-all {
+    grid-column: 1 / -1;
+  }
+
+  /* Review cards become block items inside the grid (no inline-block whitespace issues) */
+  .detail-main .review-card {
+    display: block !important;
+    width: auto !important;
+    margin-right: 0 !important;
+  }
+
+  /* ── Help Section ── */
+  .detail-main .help-section {
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .detail-main .help-content {
+    padding: 16px 0;
+  }
+
+  /* ── Venue ── */
+  .detail-main .venue-section {
+    padding: 24px 0;
+  }
+
+  /* ── Location ── */
+  .detail-main .location {
+    padding: 24px 0;
+  }
+
+  .detail-main .location .map-placeholder {
+    height: 240px;
+  }
+
+  /* ── Similar Experiences on desktop ── */
+  .detail-main .similar {
+    padding: 20px 0;
+  }
+
+  .detail-main .similar h3 {
+    padding: 0;
+  }
+
+  .detail-main .sim-scroll {
+    padding: 0;
+  }
+
+  .sim-card {
+    width: 200px !important;
+  }
+
+  .sim-card .sim-img {
+    width: 200px !important;
+    height: 133px !important;
+  }
+
+  /* ── Fullscreen Gallery Desktop ── */
+  .fs-gallery-slide img,
+  .fs-gallery-slide video {
+    max-height: 80vh;
+  }
+
+  /* ── Footer Desktop ── */
+  .footer {
+    padding: 48px 40px 32px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 40px;
+    row-gap: 32px;
+    align-items: start;
+    position: relative;
+    z-index: 20;
+  }
+
+  /* Collapse the two footer-cols wrappers so all 4 footer-col
+     divs become direct grid children of .footer */
+  .footer-cols {
+    display: contents !important;
+  }
+
+  .footer .legal {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+  }
+
+  .footer .legal div {
+    text-align: right;
+  }
+
+  /* ── Homepage-specific ── */
+
+  /* Desktop hero for homepage */
+  .home-hero {
+    height: 380px !important;
+    border-radius: 0;
+  }
+
+  /* Full opacity hero image on desktop (gradient overlay below ensures text legibility) */
+  .home-hero img {
+    opacity: 1;
+  }
+
+  .home-hero .hero-content {
+    padding: 0 40px 40px !important;
+    left: 0;
+    right: 0;
+  }
+
+  .home-hero .hero-city {
+    font-size: 48px !important;
+  }
+
+  .home-hero .hero-subtitle {
+    font-size: 18px !important;
+  }
+
+  .home-hero .search-bar {
+    display: none;
+  }
+
+  /* Homepage sections: padding matches navbar padding; no max-width cap
+     so content stays aligned with nav elements at all viewport widths */
+  .home-sections {
+    padding: 0 40px;
+  }
+
+  .home-sections .section {
+    padding-top: 48px;
+  }
+
+  .home-sections .section-header {
+    padding: 0;
+  }
+
+  .home-sections .card-scroll {
+    padding: 0;
+    gap: 20px;
+  }
+
+  .home-sections .event-card {
+    width: 243px !important;
+  }
+
+  .home-sections .event-card .card-img {
+    width: 243px !important;
+    height: 243px !important;
+    aspect-ratio: 1/1;
+  }
+
+  /* Category grid on desktop */
+  .home-sections .category-scroll {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .home-sections .category-card {
+    width: auto !important;
+  }
+
+  /* Recently viewed on desktop */
+  .home-sections .rv-scroll {
+    gap: 20px;
+    padding: 0;
+  }
+
+  /* ── Cart Desktop ── */
+  .cart-desktop-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .cart-desktop-wrapper .event-summary {
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .has-cart-layout .sticky-cta {
+    position: static !important;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px;
+    background: transparent !important;
+    transform: none;
+    left: auto;
+  }
+
+  /* ── Checkout Desktop ── */
+  .checkout-desktop-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .has-checkout-layout .sticky-pay {
+    position: static !important;
+    max-width: 720px;
+    margin: 24px auto 0;
+    padding: 0 24px 24px;
+    transform: none;
+    left: auto;
+    width: auto !important;
+    pointer-events: auto;
+  }
+
+  .has-checkout-layout .sticky-pay .pay-btn {
+    pointer-events: auto;
+  }
+
+  /* ── Favorites Desktop ── */
+  /* favorites.html uses .content and .cards-grid (not .fav-grid / .favorites-grid-desktop) */
+  .favorites-header {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px 40px;
+  }
+
+  main.content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 40px;
+  }
+
+  /* Multi-column card grid on desktop (used by favorites.html) */
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 24px !important;
+  }
+
+  /* ── Profile Desktop ── */
+  /* profile.html uses a fixed bottom-sheet (.sheet); widen it and keep centered */
+  .sheet {
+    max-width: 560px !important;
+    border-radius: 16px 16px 0 0 !important;
+  }
+
+  /* ── Accommodation / Transport Detail Pages ── */
+  .detail-sidebar .hotel-cards,
+  .detail-sidebar .transport-cards {
+    padding: 0 16px 16px;
+  }
+
+  /* ── Bottom sheets → centered desktop modals ── */
+  .decision-sheet,
+  .crosssell-sheet,
+  .continue-sheet {
+    bottom: auto !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(calc(-50% + 100vh)) !important;
+    border-radius: 16px !important;
+    width: 480px !important;
+    max-width: 90vw;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.3s ease !important;
+  }
+
+  .decision-sheet.open,
+  .crosssell-sheet.open,
+  .continue-sheet.open {
+    transform: translateX(-50%) translateY(-50%) !important;
+  }
+
+  .decision-overlay,
+  .crosssell-overlay,
+  .continue-overlay {
+    transition: opacity 0.2s ease !important;
+  }
+
+  /* City selector sheet → centered desktop modal */
+  .city-sheet-overlay .city-sheet {
+    max-width: 560px;
+    margin: 0 auto;
+    border-radius: 16px !important;
+    max-height: 70vh;
+  }
+
+  .city-sheet-overlay {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* ── Hero Carousel desktop adjustments ── */
+  .detail-main .hero .nav-prev,
+  .detail-main .hero .nav-next {
+    cursor: pointer;
+  }
+
+  .detail-main .hero .nav-prev {
+    width: 25%;
+  }
+
+  .detail-main .hero .nav-next {
+    width: 75%;
+  }
+
+  .detail-main .hero .side-buttons {
+    top: 20px;
+    right: 20px;
+  }
+
+  .detail-main .hero .side-btn {
+    width: 44px;
+    height: 44px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .detail-main .hero .side-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .detail-main .hero .gallery-btn {
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .detail-main .hero .gallery-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* ── Fullscreen Gallery Desktop ── */
+  .fs-gallery-arrow {
+    opacity: 1 !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.4) !important;
+    transition: background 0.15s, transform 0.15s !important;
+  }
+
+  .fs-gallery-arrow:hover {
+    background: rgba(0,0,0,0.6) !important;
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .fs-gallery-arrow.prev {
+    left: 24px !important;
+  }
+
+  .fs-gallery-arrow.next {
+    right: 24px !important;
+  }
+
+  .fs-gallery-slide img,
+  .fs-gallery-slide video {
+    max-height: 80vh;
+    border-radius: 8px;
+  }
+
+  .fs-gallery-thumb {
+    width: 80px !important;
+    height: 80px !important;
+    min-width: 80px !important;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .fs-gallery-thumb:hover {
+    transform: scale(1.05);
+  }
+
+  .fs-gallery-thumbs {
+    justify-content: center;
+    padding: 16px 24px !important;
+  }
+
+  /* ── Card Hover Effects ── */
+  .event-card,
+  .featured-card,
+  .sim-card,
+  .rv-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    cursor: pointer;
+  }
+
+  .event-card:hover,
+  .featured-card:hover,
+  .sim-card:hover,
+  .rv-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  .event-card:hover .card-img img,
+  .featured-card:hover .card-img img,
+  .sim-card:hover .sim-img img {
+    transform: scale(1.03);
+  }
+
+  .event-card .card-img img,
+  .featured-card .card-img img,
+  .sim-card .sim-img img {
+    transition: transform 0.3s ease !important;
+  }
+
+  .card-like {
+    transition: transform 0.15s, opacity 0.15s !important;
+    opacity: 0;
+  }
+
+  .event-card:hover .card-like,
+  .featured-card:hover .card-like,
+  .card-like.liked {
+    opacity: 1 !important;
+  }
+
+  .card-like:hover {
+    transform: scale(1.2) !important;
+  }
+
+  /* ── Shimmer animation: stop on desktop for loaded images ── */
+  .event-card .card-img img.loaded,
+  .featured-card .card-img img.loaded {
+    animation: none;
+  }
+
+  /* ── Ticket pill hover ── */
+  .ticket-pill {
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+
+  .ticket-pill:hover:not(.active) {
+    border-color: var(--color-primary, #0079ca);
+    color: var(--color-primary, #0079ca);
+    background: var(--color-primary-light, #f2fbfd);
+  }
+
+  /* ── Ticket row hover ── */
+  .ticket-row {
+    transition: box-shadow 0.15s ease;
+  }
+
+  .ticket-row:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  /* ── Stepper buttons hover ── */
+  .ticket-amount .amt-btn {
+    transition: background 0.15s, color 0.15s, transform 0.15s !important;
+  }
+
+  .ticket-amount .amt-btn:hover {
+    transform: scale(1.1);
+  }
+
+  /* ── CTA buttons hover ── */
+  .cta-primary {
+    transition: background 0.15s, transform 0.1s, box-shadow 0.15s !important;
+  }
+
+  .cta-primary:hover {
+    box-shadow: 0 4px 12px rgba(0,121,202,0.3);
+  }
+
+  .cta-primary:active {
+    transform: scale(0.98);
+  }
+
+  .cta-secondary {
+    transition: background 0.15s, border-color 0.15s, transform 0.1s !important;
+  }
+
+  .cta-secondary:hover {
+    border-color: var(--color-text, #031419);
+    background: var(--color-bg-neutral, #f2f3f3);
+  }
+
+  /* ── Review bar fill animation on scroll ── */
+  .reviews .bar-fill {
+    transition: width 0.8s cubic-bezier(.4,0,.2,1) !important;
+  }
+
+  /* ── Footer link hover ── */
+  .footer-col ul li a {
+    transition: color 0.15s, padding-left 0.15s !important;
+  }
+
+  .footer-col ul li a:hover {
+    color: white !important;
+    padding-left: 4px;
+  }
+
+  /* ── Cart swipe-to-delete: show delete on hover ── */
+  .swipe-actions {
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .swipe-container:hover .swipe-actions {
+    opacity: 1;
+  }
+
+  /* ── Nav icon hover ── */
+  .nav-icon-btn {
+    transition: color 0.15s, opacity 0.15s !important;
+    border-radius: 8px;
+    padding: 6px !important;
+  }
+
+  .nav-icon-btn:hover {
+    background: var(--color-bg-neutral, #f2f3f3);
+    opacity: 1 !important;
+  }
+
+  /* ── Avatar hover ── */
+  .avatar-wrap {
+    transition: transform 0.15s;
+  }
+
+  .avatar-wrap:hover {
+    transform: scale(1.08);
+  }
+
+  /* ── Selling fast banner pulse ── */
+  .selling-fast-banner {
+    animation: none;
+  }
+
+  /* ── Section header "See all" hover ── */
+  .home-sections .section-header a {
+    transition: color 0.15s;
+  }
+
+  .home-sections .section-header a:hover {
+    color: var(--color-primary-hover, #0068b0);
+  }
+
+  /* ── Map placeholder hover ── */
+  .map-placeholder {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .map-placeholder:hover {
+    transform: scale(1.01);
+  }
+
+  /* ── Venue image hover ── */
+  .venue-img {
+    transition: transform 0.3s ease;
+  }
+
+  .venue-section:hover .venue-img {
+    transform: scale(1.02);
+  }
+
+  /* ── Logo hover ── */
+  .navbar .logo-link {
+    transition: opacity 0.15s;
+  }
+
+  .navbar .logo-link:hover {
+    opacity: 0.8;
+  }
+
+  /* ── Review card hover ── */
+  .review-card {
+    transition: background 0.15s;
+    border-radius: 8px;
+    padding: 14px 12px;
+  }
+
+  .review-card:hover {
+    background: var(--color-bg-neutral, #f2f3f3);
+  }
+
+  /* ── Review avatar hover ── */
+  .review-avatar {
+    transition: transform 0.2s ease;
+  }
+
+  .review-card:hover .review-avatar {
+    transform: scale(1.1);
+  }
+
+  /* ── Progress bar fill hover for reviews ── */
+  .bar-row:hover .bar-fill {
+    filter: brightness(1.1);
+  }
+
+  /* ── Checkout form field focus ── */
+  .form-field:focus-within,
+  .form-field:focus {
+    outline: none;
+    box-shadow: var(--focus-ring-primary, 0 0 0 4px rgba(0,121,202,0.2));
+  }
+
+  /* ── Checkout pay button hover ── */
+  .sticky-pay .pay-btn,
+  .pay-btn {
+    transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  }
+
+  .sticky-pay .pay-btn:hover,
+  .pay-btn:hover {
+    box-shadow: 0 4px 12px rgba(0,121,202,0.3);
+  }
+
+  .sticky-pay .pay-btn:active,
+  .pay-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* ── Snackbar position fix for desktop ── */
+  .snackbar {
+    max-width: 400px;
+    width: auto !important;
+  }
+
+  /* ── Decision overlay backdrop blur on desktop ── */
+  .decision-overlay,
+  .crosssell-overlay,
+  .continue-overlay {
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── City sheet overlay backdrop ── */
+  .city-sheet-overlay {
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── Fullscreen gallery close button ── */
+  .fs-gallery-close {
+    transition: transform 0.15s, background 0.15s;
+    border-radius: 50%;
+  }
+
+  .fs-gallery-close:hover {
+    background: var(--color-bg-neutral, #f2f3f3);
+    transform: scale(1.1);
+  }
+
+  /* ── No-fees banner on desktop ── */
+  .no-fees-banner {
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+
+  /* ── Flow stepper dot hover ── */
+  .flow-stepper a.step:hover .dot {
+    border-color: var(--color-primary, #0079ca);
+  }
+
+  .flow-stepper a.step {
+    transition: opacity 0.15s;
+  }
+
+  .flow-stepper a.step:hover {
+    opacity: 0.8;
+  }
+
+  /* ── Ticket info toggle hover ── */
+  .ticket-info-toggle:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Section header background on desktop (main content) ── */
+  .detail-main .section-header {
+    background: transparent;
+  }
+
+  /* ── Desktop carousels: disable scroll-snap, let cards flow naturally ── */
+  .home-sections .card-scroll {
+    scroll-snap-type: none;
+    -webkit-overflow-scrolling: auto;
+  }
+
+  /* Top 10 keeps horizontal scroll; others get grid-like wrapping */
+  .home-sections .section-top10 .card-scroll {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+
+  /* Top 10 portrait cards: keep 2:3 aspect ratio, slightly wider on desktop */
+  .home-sections .section-top10 .event-card {
+    width: 170px !important;
+  }
+
+  .home-sections .section-top10 .event-card .card-img {
+    width: 170px !important;
+    height: auto !important;
+    aspect-ratio: 2/3 !important;
+  }
+
+  .home-sections .section:not(.section-top10) .card-scroll {
+    overflow-x: visible;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /* Featured cards (e.g. larger promos) match event-card sizing */
+  .home-sections .featured-card {
+    width: 243px !important;
+    flex-shrink: 0;
+  }
+
+  .home-sections .featured-card .card-img {
+    width: 243px !important;
+    height: 243px !important;
+    aspect-ratio: 1/1;
+  }
+
+  .home-sections .event-card {
+    scroll-snap-align: none;
+  }
+
+  /* App banner: inside home-sections which already has 40px side padding,
+     so remove the extra 16px side padding from mobile inline CSS */
+  .app-banner {
+    margin: 40px 0 0 !important;
+    border-radius: 20px;
+  }
+
+  /* Selling point and SEO text: remove mobile horizontal padding
+     so they align with section content (home-sections handles the indent) */
+  .selling-point {
+    padding: 40px 0 0 !important;
+  }
+
+  .seo-text {
+    padding: 16px 0 !important;
+    font-size: 13px;
+    line-height: 20px;
+  }
+}
+
+/* ---------- WIDE DESKTOP (≥1440px): max comfort ---------- */
+@media (min-width: 1440px) {
+  .navbar {
+    padding: 12px 80px !important;
+  }
+
+  .detail-layout {
+    padding: 0 80px;
+  }
+
+  .footer {
+    padding: 48px 80px 32px !important;
+    column-gap: 48px;
+  }
+
+  .home-hero .hero-content {
+    padding: 0 80px 40px !important;
+  }
+
+  .home-sections {
+    padding: 0 80px;
+  }
+
+  .fs-gallery-arrow.prev {
+    left: 48px !important;
+  }
+
+  .fs-gallery-arrow.next {
+    right: 48px !important;
+  }
+
+  .fs-gallery-thumbs {
+    padding: 20px 48px !important;
+  }
+}
+
+/* ---------- Utility: hide on mobile, show on desktop ---------- */
+.desktop-nav-center,
+.desktop-nav-right {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .desktop-nav-center,
+  .desktop-nav-right {
+    display: none !important;
+  }
+  .detail-layout {
+    display: block;
+  }
+  .detail-sidebar {
+    display: none !important;
+  }
+  /* Preserve mobile card-like visibility (overrides desktop opacity:0) */
+  .card-like {
+    opacity: 1 !important;
+    transition: transform 0.15s !important;
+  }
+}

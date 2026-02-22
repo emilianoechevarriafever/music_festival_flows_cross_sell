@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicons/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png">
-  <link rel="shortcut icon" href="./favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Occident - Polar Sound 2026: Transport</title>
@@ -147,6 +147,8 @@
     .footer .legal { border-top:1px solid rgba(255,255,255,0.15); padding-top:16px; font-size:12px; color:rgba(255,255,255,0.5); }
     .footer .legal a { color:white; }
 
+    .cta-primary { width:100%; height:48px; background:var(--color-primary); border:none; border-radius:64px; color:white; font-family:var(--font); font-weight:600; font-size:16px; cursor:pointer; margin-bottom:12px; transition:background 0.15s; display:none; }
+    .cta-primary:hover { background:var(--color-primary-hover); }
     .sticky-cta { position:fixed; bottom:0; width:393px; max-width:100vw; z-index:200; background:transparent; padding:12px 16px max(12px, env(safe-area-inset-bottom)); }
     .sticky-cta .cta-btn { width:100%; height:48px; background:var(--color-primary); border:2px solid transparent; border-radius:64px; color:#fff; font-family:var(--font); font-weight:600; font-size:16px; line-height:24px; cursor:pointer; transition:background 0.15s, border-color 0.15s, box-shadow 0.15s, color 0.15s, opacity 0.15s; outline:none; }
     .sticky-cta .cta-btn:hover { background:var(--color-primary); }
@@ -218,14 +220,23 @@
     .ticket-pill:active { transform:scale(0.96); }
   </style>
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/desktop.css">
 <script>if(localStorage.getItem("fever_logged_in")==="true")document.documentElement.classList.add("u-in")</script>
 </head>
 <body>
-  <div class="phone">
+  <div class="phone has-detail-layout">
 
     <header class="sticky-header">
     <nav class="navbar">
       <a href="home.html" id="nav-logo" class="logo-link"><img id="nav-logo-img" src="img/fever-logo.svg" alt="Fever"></a>
+      <div class="desktop-nav-center">
+        <button class="desk-location"><svg viewBox="0 0 384 512" fill="currentColor" width="16" height="16"><path d="M352 192c0-88.4-71.6-160-160-160S32 103.6 32 192c0 15.6 5.4 37 16.6 63.4c10.9 25.9 26.2 54 43.6 82.1c34.1 55.3 74.4 108.2 99.9 140c25.4-31.8 65.8-84.7 99.9-140c17.3-28.1 32.7-56.3 43.6-82.1C346.6 229 352 207.6 352 192zm32 0c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192zm-240 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm48 80a80 80 0 1 1 0-160 80 80 0 1 1 0 160z"/></svg> Madrid</button>
+        <button class="desk-categories"><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg> Categories</button>
+        <div class="desk-search"><svg viewBox="0 0 512 512" fill="currentColor"><path d="M384 208A176 176 0 1 0 32 208a176 176 0 1 0 352 0zM343.3 366C307 397.2 259.7 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 51.7-18.8 99-50 135.3L507.3 484.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L343.3 366z"/></svg><input type="text" placeholder="Search for Madrid"></div>
+      </div>
+      <div class="desktop-nav-right">
+        <button class="desk-lang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> EN</button>
+      </div>
       <div class="nav-icons">
         <a class="nav-icon-btn" href="search.html" aria-label="Search"><svg viewBox="0 0 512 512" fill="currentColor"><path d="M384 208A176 176 0 1 0 32 208a176 176 0 1 0 352 0zM343.3 366C307 397.2 259.7 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 51.7-18.8 99-50 135.3L507.3 484.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L343.3 366z"/></svg></a>
         <a class="nav-icon-btn" href="home.html" aria-label="Location"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M352 192c0-88.4-71.6-160-160-160S32 103.6 32 192c0 15.6 5.4 37 16.6 63.4c10.9 25.9 26.2 54 43.6 82.1c34.1 55.3 74.4 108.2 99.9 140c25.4-31.8 65.8-84.7 99.9-140c17.3-28.1 32.7-56.3 43.6-82.1C346.6 229 352 207.6 352 192zm32 0c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192zm-240 0a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zm48 80a80 80 0 1 1 0-160 80 80 0 1 1 0 160z"/></svg></a>
@@ -241,6 +252,9 @@
       <a href="javascript:void(0)" id="step4" class="step"><span class="dot">4</span><span class="label" id="step4-label">Checkout</span></a>
     </div>
     </header>
+
+    <div class="detail-layout">
+    <div class="detail-main">
 
     <div class="hero">
       <img class="hero-bg" id="hero-img" src="img/polar-sound-hero.png" alt="Transport to festival">
@@ -269,11 +283,11 @@
     <div class="description">
       <p>&#128652; Add round-trip transport to Baqueira Beret from main cities. Buses and shuttles drop you at the festival parking lot. You can also skip and arrange your own transport.</p>
     </div>
-<div class="section-header" id="transport-section">
+<div class="section-header mobile-ticket-header" id="transport-section">
       <img src="img/fa-ticket.svg" alt="">
       <h2>Transport options</h2>
     </div>
-    <div class="transport-options">
+    <div class="transport-options mobile-ticket-selector">
       <div id="transport-rows"></div>
     </div>
 
@@ -339,11 +353,30 @@
       </div>
     </div>
 
+    </div><!-- /detail-main -->
+
+    <aside class="detail-sidebar">
+      <div class="section-header" id="transport-section-desktop">
+        <img src="img/fa-ticket.svg" alt="">
+        <h2>Transport options</h2>
+      </div>
+      <div class="ticket-selector" id="desktop-transport-selector">
+        <div id="desk-transport-rows"></div>
+        <button class="cta-primary" id="desk-cta"></button>
+      </div>
+    </aside>
+
+    </div><!-- /detail-layout -->
+
     <!-- Footer -->
     <div class="footer">
       <div class="footer-cols">
         <div class="footer-col"><h5>About Fever</h5><ul><li><a href="press.html">Press</a></li><li><a href="careers.html">Careers</a></li><li><a href="gift-cards.html">Gift Cards</a></li><li><a href="help-center.html">Help Center</a></li></ul></div>
         <div class="footer-col"><h5>Partner with us</h5><ul><li><a href="fever-zone.html">Fever Zone</a></li><li><a href="list-event.html">List your event</a></li><li><a href="affiliate.html">Affiliate Program</a></li></ul></div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h5>Follow us</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">Twitter / X</a></li><li><a href="#">YouTube</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+        <div class="footer-col"><h5>For Business</h5><ul><li><a href="private-events.html">Private events</a></li><li><a href="corporate.html">Corporate benefits</a></li><li><a href="gift-vouchers.html">Gift vouchers</a></li></ul></div>
       </div>
       <div class="legal"><a href="terms.html">Terms of Use</a> | <a href="privacy.html">Privacy Policy</a> | <a href="cookies.html">Cookie Policy</a><div style="margin-top:8px;text-align:right;">&copy;2026 &ndash; Fever</div></div>
     </div>
@@ -450,7 +483,7 @@
         document.getElementById('step4').href = 'checkout.html?flow=' + flow;
         document.getElementById('step4-label').textContent = 'Checkout';
       }
-      // Don't clear accommodation for d2 (cart flow) or if user came from accommodation cross-sell
+      // For cross-sell flows, don't clear accommodation if user came from accommodation cross-sell
       if (isCrossSellFlow) {
         var initCameFrom = '';
         try { initCameFrom = sessionStorage.getItem('option_h_came_from') || ''; } catch(e) {}
@@ -553,6 +586,45 @@
         });
       });
       updateSticky();
+      syncDesktopSidebar();
+    }
+
+    function syncDesktopSidebar() {
+      var deskRows = document.getElementById('desk-transport-rows');
+      if (!deskRows) return;
+      deskRows.innerHTML = transportRowsEl.innerHTML;
+      deskRows.querySelectorAll('.ticket-row').forEach(function(row) {
+        row.querySelectorAll('.amt-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var i = parseInt(this.dataset.i, 10);
+            var delta = parseInt(this.dataset.delta, 10);
+            var opt = TRANSPORT_OPTIONS[i];
+            var max = opt.price === 0 ? 1 : 20;
+            counts[i] = Math.max(0, Math.min(max, counts[i] + delta));
+            if (opt.price === 0 && counts[i] > 0) {
+              counts = counts.map(function(_, j) { return j === i ? 1 : 0; });
+            }
+            saveTransportSelection();
+            render();
+            updateSticky();
+          });
+        });
+        row.querySelectorAll('.ticket-info-toggle').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var r = this.closest('.ticket-row');
+            var expanded = r.classList.toggle('ticket-info-expanded');
+            this.setAttribute('aria-expanded', expanded);
+            this.textContent = expanded ? 'Less info' : 'More info';
+          });
+        });
+      });
+      var deskCta = document.getElementById('desk-cta');
+      if (deskCta) {
+        var total = getTotal();
+        deskCta.textContent = total > 0 ? '\u20AC' + total.toFixed(2) + ' \u2014 Add it' : 'Skip transport';
+        deskCta.style.display = 'block';
+        deskCta.onclick = function() { stickyBtn.click(); };
+      }
     }
 
     function getTotal() {
@@ -786,7 +858,7 @@
       var sheetEl = document.getElementById('crosssell-sheet');
       if (!sheetEl) return;
       var startY = 0, currentY = 0, isDragging = false;
-      function dragStart(y) { startY = y; currentY = y; isDragging = true; sheetEl.style.transition = 'none'; }
+      function dragStart(y) { if (window.innerWidth >= 1024) return; startY = y; currentY = y; isDragging = true; sheetEl.style.transition = 'none'; }
       function dragMove(y, e) { if (!isDragging) return; currentY = y; var dy = currentY - startY; if (dy < 0) dy = 0; if (dy > 0) { if (e) e.preventDefault(); sheetEl.style.transform = 'translateX(-50%) translateY(' + dy + 'px)'; } }
       function dragEnd() { if (!isDragging) return; isDragging = false; sheetEl.style.transition = ''; sheetEl.style.transform = ''; if (currentY - startY > 80) closeCrossSellSheet(); }
       sheetEl.addEventListener('touchstart', function(e) { dragStart(e.touches[0].clientY); }, { passive: true });
