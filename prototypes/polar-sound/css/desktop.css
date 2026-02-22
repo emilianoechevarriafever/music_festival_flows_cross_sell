@@ -4,37 +4,8 @@
    Everything here is wrapped in media queries — zero mobile impact.
    ========================================================================== */
 
-/* ---------- TABLET+ (≥768px): phone container + basic layout ---------- */
-@media (min-width: 768px) {
-  .status-bar { display: none !important; }
-
-  body {
-    background: #fff;
-  }
-
-  .phone {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .sticky-cta,
-  .sticky-pay {
-    width: 100% !important;
-    max-width: 600px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .decision-sheet {
-    width: 480px !important;
-    max-width: 90vw;
-  }
-
-  .burger-menu-panel {
-    width: 480px !important;
-    max-width: 90vw;
-  }
-}
+/* ---------- MOBILE (< 1024px): always pure mobile layout ---------- */
+/* Phone container stays at 393px below 1024px — no intermediate states */
 
 /* ---------- DESKTOP (≥1024px): full Fever desktop experience ---------- */
 @media (min-width: 1024px) {
