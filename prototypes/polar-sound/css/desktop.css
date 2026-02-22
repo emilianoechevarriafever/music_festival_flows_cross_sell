@@ -221,8 +221,6 @@
   .detail-layout {
     display: flex;
     gap: 40px;
-    max-width: 1280px;
-    margin: 0 auto;
     padding: 0 40px;
     align-items: flex-start;
     overflow: visible !important;
@@ -329,20 +327,27 @@
     padding: 8px 0;
   }
 
-  /* ── Reviews ── */
+  /* ── Reviews: 2-column grid layout ── */
   .detail-main .reviews {
     padding: 24px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
   }
 
+  /* Title, summary bar, verified badge, see-all link span full width */
+  .detail-main .reviews > .reviews-title,
+  .detail-main .reviews > .reviews-summary,
+  .detail-main .reviews > .reviews-verified,
+  .detail-main .reviews > .reviews-see-all {
+    grid-column: 1 / -1;
+  }
+
+  /* Review cards become block items inside the grid (no inline-block whitespace issues) */
   .detail-main .review-card {
-    display: inline-block;
-    vertical-align: top;
-    width: calc(50% - 12px);
-    margin-right: 24px;
-  }
-
-  .detail-main .review-card:nth-child(even) {
-    margin-right: 0;
+    display: block !important;
+    width: auto !important;
+    margin-right: 0 !important;
   }
 
   /* ── Help Section ── */
@@ -399,23 +404,27 @@
   /* ── Footer Desktop ── */
   .footer {
     padding: 48px 40px 32px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 40px;
+    row-gap: 32px;
+    align-items: start;
   }
 
+  /* Collapse the two footer-cols wrappers so all 4 footer-col
+     divs become direct grid children of .footer */
   .footer-cols {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 32px;
-    max-width: 1280px;
-    margin: 0 auto 32px;
+    display: contents !important;
   }
 
   .footer .legal {
-    max-width: 1280px;
-    margin: 0 auto;
+    grid-column: 1 / -1;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
   }
 
   .footer .legal div {
@@ -430,9 +439,12 @@
     border-radius: 0;
   }
 
+  /* Full opacity hero image on desktop (gradient overlay below ensures text legibility) */
+  .home-hero img {
+    opacity: 1;
+  }
+
   .home-hero .hero-content {
-    max-width: 1280px;
-    margin: 0 auto;
     padding: 0 40px 40px !important;
     left: 0;
     right: 0;
@@ -450,10 +462,9 @@
     display: none;
   }
 
-  /* Homepage sections */
+  /* Homepage sections: padding matches navbar padding; no max-width cap
+     so content stays aligned with nav elements at all viewport widths */
   .home-sections {
-    max-width: 1280px;
-    margin: 0 auto;
     padding: 0 40px;
   }
 
@@ -543,34 +554,30 @@
   }
 
   /* ── Favorites Desktop ── */
-  .favorites-grid-desktop {
+  /* favorites.html uses .content and .cards-grid (not .fav-grid / .favorites-grid-desktop) */
+  .favorites-header {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 16px 40px;
   }
 
-  .fav-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-    overflow: visible;
-    padding: 0;
+  main.content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 40px;
   }
 
-  .fav-grid .event-card {
-    width: auto !important;
-  }
-
-  .fav-grid .event-card .card-img {
-    width: 100% !important;
-    aspect-ratio: 1/1;
+  /* Multi-column card grid on desktop (used by favorites.html) */
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 24px !important;
   }
 
   /* ── Profile Desktop ── */
-  .profile-desktop-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 24px;
+  /* profile.html uses a fixed bottom-sheet (.sheet); widen it and keep centered */
+  .sheet {
+    max-width: 560px !important;
+    border-radius: 16px 16px 0 0 !important;
   }
 
   /* ── Accommodation / Transport Detail Pages ── */
@@ -1013,14 +1020,56 @@
     gap: 20px;
   }
 
+  /* Top 10 portrait cards: keep 2:3 aspect ratio, slightly wider on desktop */
+  .home-sections .section-top10 .event-card {
+    width: 170px !important;
+  }
+
+  .home-sections .section-top10 .event-card .card-img {
+    width: 170px !important;
+    height: auto !important;
+    aspect-ratio: 2/3 !important;
+  }
+
   .home-sections .section:not(.section-top10) .card-scroll {
     overflow-x: visible;
     flex-wrap: wrap;
     gap: 20px;
   }
 
+  /* Featured cards (e.g. larger promos) match event-card sizing */
+  .home-sections .featured-card {
+    width: 243px !important;
+    flex-shrink: 0;
+  }
+
+  .home-sections .featured-card .card-img {
+    width: 243px !important;
+    height: 243px !important;
+    aspect-ratio: 1/1;
+  }
+
   .home-sections .event-card {
     scroll-snap-align: none;
+  }
+
+  /* App banner: inside home-sections which already has 40px side padding,
+     so remove the extra 16px side padding from mobile inline CSS */
+  .app-banner {
+    margin: 40px 0 0 !important;
+    border-radius: 20px;
+  }
+
+  /* Selling point and SEO text: remove mobile horizontal padding
+     so they align with section content (home-sections handles the indent) */
+  .selling-point {
+    padding: 40px 0 0 !important;
+  }
+
+  .seo-text {
+    padding: 16px 0 !important;
+    font-size: 13px;
+    line-height: 20px;
   }
 }
 
@@ -1036,6 +1085,7 @@
 
   .footer {
     padding: 48px 80px 32px !important;
+    column-gap: 48px;
   }
 
   .home-hero .hero-content {
