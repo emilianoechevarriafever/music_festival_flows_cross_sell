@@ -24,6 +24,16 @@
     max-width: 100% !important;  /* Fix: pages with body { max-width: 480px } expand to full width */
   }
 
+  /* Flow selector pages (index.html, choose-cart.html) — keep flex centering */
+  body.has-flow-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--color-bg-neutral, #f2f3f3) !important;
+    min-height: 100vh !important;
+  }
+
   .phone {
     width: 100% !important;
     max-width: 100% !important;
