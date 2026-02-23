@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../../favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../favicons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../../favicons/apple-touch-icon.png">
-  <link rel="shortcut icon" href="../../favicon.ico">
+  <link rel="shortcut icon" href="favicon.ico">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Occident - Checkout - Polar Sound 2026</title>
@@ -202,6 +202,15 @@
     .legal-links a svg { width:12px; height:12px; display:inline; margin-left:2px; vertical-align:middle; }
 
     @media (max-width:393px) { .phone { width:100vw; } .sticky-pay { width:100vw; } }
+    /* Desktop-only elements hidden on mobile */
+    .checkout-desktop-nav { display: none; }
+    .checkout-col-title { display: none; }
+    .checkout-desktop-pay { display: none; }
+    .no-fees-banner { display: none; }
+    /* On mobile, summary-col and form-col are plain block, card has no visual treatment */
+    .checkout-summary-col,
+    .checkout-form-col { display: block; }
+    .checkout-summary-card { display: contents; }
     /* Focus-visible & active polish */
     button:focus-visible, a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
     .form-group .input-wrap .form-field:focus-visible { border-color:var(--color-input-border-focus); box-shadow:var(--color-input-focus-ring); }
@@ -210,12 +219,23 @@
     .checkbox-row .cb:active { transform: scale(0.9); }
     .nav-icon-btn:active { opacity: 0.6; }
   </style>
-  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="../../css/desktop.css">
 </head>
 <body>
   <div class="phone has-checkout-layout">
 
     <header class="sticky-header">
+      <!-- Desktop checkout navbar (hidden on mobile via CSS) -->
+      <nav class="checkout-desktop-nav">
+        <a class="checkout-nav-logo" href="../../home.html">
+          <img src="../../img/fever-logo.svg" alt="Fever" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-size:20px;font-weight:800;letter-spacing:-0.5px;color:#031419;\'>fever</span>'">
+        </a>
+        <div class="checkout-desktop-secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Secure checkout
+        </div>
+      </nav>
+      <!-- Mobile topbar -->
       <div class="checkout-topbar">
         <a class="back-chevron" href="javascript:history.back()" aria-label="Go back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -225,61 +245,77 @@
     </header>
 
     <div class="checkout-desktop-wrapper">
-    <!-- Event Summary -->
-    <div class="event-summary">
-      <div class="event-thumb">
-        <img src="img/polar-sound-hero.png" alt="Polar Sound Festival">
-      </div>
-      <div class="event-info">
-        <div class="event-name">Occident - Polar Sound 2026</div>
-        <div class="event-venue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Baqueira Beret Ski Resort
-        </div>
-      </div>
-    </div>
 
-    <!-- Date -->
-    <div class="date-row">
-      <div class="label">Date</div>
-      <div class="value">March 13 &amp; 14, 2026</div>
-    </div>
+      <!-- RIGHT column: order summary -->
+      <div class="checkout-summary-col">
+        <h2 class="checkout-col-title">Your order</h2>
+        <div class="checkout-summary-card">
+          <!-- No booking fees banner -->
+          <div class="no-fees-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            No booking fees
+          </div>
+          <!-- Event Summary -->
+          <div class="event-summary">
+            <div class="event-thumb">
+              <img src="../../img/polar-sound-hero.png" alt="Polar Sound Festival">
+            </div>
+            <div class="event-info">
+              <div class="event-name">Occident - Polar Sound 2026</div>
+              <div class="event-venue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Baqueira Beret Ski Resort
+              </div>
+            </div>
+          </div>
 
-    <!-- Tickets Section (from polar-sound.html) -->
-    <div class="checkout-section" id="section-tickets">
-      <div id="ticket-items"></div>
-    </div>
+          <!-- Date -->
+          <div class="date-row">
+            <div class="label">Date</div>
+            <div class="value">March 13 &amp; 14, 2026</div>
+          </div>
 
-    <!-- Accommodation Section (from polar-sound-accommodation.html) -->
-    <div class="checkout-section" id="section-accommodation">
-      <div id="accommodation-items"></div>
-    </div>
+          <!-- Tickets Section (from polar-sound.html) -->
+          <div class="checkout-section" id="section-tickets">
+            <div id="ticket-items"></div>
+          </div>
 
-    <!-- Transportation Section -->
-    <div class="checkout-section" id="section-transportation">
-      <div id="transportation-items"></div>
-    </div>
+          <!-- Accommodation Section (from polar-sound-accommodation.html) -->
+          <div class="checkout-section" id="section-accommodation">
+            <div id="accommodation-items"></div>
+          </div>
 
-    <!-- Price Details -->
-    <div class="price-details">
-      <h3>Price details</h3>
-      <div class="price-row">
-        <span class="price-label">Subtotal</span>
-        <span class="price-val" id="subtotal-val">&euro;0.00</span>
-      </div>
-      <div class="price-row">
-        <span class="price-label">Fees</span>
-        <span class="price-val" id="fees-val">&euro;0.00</span>
-      </div>
-      <div class="price-row">
-        <span class="price-label">Tax (IVA)</span>
-        <span class="price-val" id="tax-val">&euro;0.00</span>
-      </div>
-      <div class="price-row total">
-        <span class="price-label">Total</span>
-        <span class="price-val" id="grand-total">&euro;0.00</span>
-      </div>
-    </div>
+          <!-- Transportation Section -->
+          <div class="checkout-section" id="section-transportation">
+            <div id="transportation-items"></div>
+          </div>
+
+          <!-- Price Details -->
+          <div class="price-details">
+            <h3>Price details</h3>
+            <div class="price-row">
+              <span class="price-label">Subtotal</span>
+              <span class="price-val" id="subtotal-val">&euro;0.00</span>
+            </div>
+            <div class="price-row">
+              <span class="price-label">Fees</span>
+              <span class="price-val" id="fees-val">&euro;0.00</span>
+            </div>
+            <div class="price-row">
+              <span class="price-label">Tax (IVA)</span>
+              <span class="price-val" id="tax-val">&euro;0.00</span>
+            </div>
+            <div class="price-row total">
+              <span class="price-label">Total</span>
+              <span class="price-val" id="grand-total">&euro;0.00</span>
+            </div>
+          </div>
+        </div><!-- /.checkout-summary-card -->
+      </div><!-- /.checkout-summary-col -->
+
+      <!-- LEFT column: payment form -->
+      <div class="checkout-form-col">
+        <h2 class="checkout-col-title">Confirm and pay</h2>
 
     <!-- Payment Method -->
     <div class="payment-section">
@@ -372,10 +408,17 @@
         <a href="javascript:void(0)">Terms and conditions of use <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
         <a href="javascript:void(0)">Privacy policy <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
       </div>
-    </div>
+    </div><!-- /.payment-section -->
+
+    <!-- Desktop pay button (hidden on mobile via CSS) -->
+    <div class="checkout-desktop-pay">
+      <button class="pay-btn" id="desktop-pay-btn" onclick="alert('Purchase completed! (demo)')">Pay</button>
     </div>
 
-    <!-- Sticky Pay Footer -->
+      </div><!-- /.checkout-form-col -->
+    </div><!-- /.checkout-desktop-wrapper -->
+
+    <!-- Sticky Pay Footer (mobile only) -->
     <div class="sticky-pay">
       <button class="pay-btn" onclick="alert('Purchase completed! (demo)')">Pay</button>
     </div>
@@ -499,9 +542,21 @@
     if (!hasAccommodation) { var s2 = document.getElementById('stepper-step2'); if (s2) s2.classList.add('skipped'); }
     if (!hasTransport) { var s3 = document.getElementById('stepper-step3'); if (s3) s3.classList.add('skipped'); }
 
-    // Update Pay button
-    const payBtn = document.querySelector('.pay-btn');
-    payBtn.textContent = 'Pay ' + formatEur(grandTotal);
+    // Update Pay button(s) — both mobile sticky and desktop inline
+    const payBtn = document.querySelector('.sticky-pay .pay-btn') || document.querySelector('.pay-btn');
+    const deskPayBtn = document.getElementById('desktop-pay-btn');
+    function setAllPayBtnText(text) {
+      if (payBtn) payBtn.textContent = text;
+      if (deskPayBtn) deskPayBtn.textContent = text;
+    }
+    function setAllPayBtnClass(add, remove) {
+      [payBtn, deskPayBtn].forEach(function(b) {
+        if (!b) return;
+        remove.forEach(function(c) { b.classList.remove(c); });
+        if (add) b.classList.add(add);
+      });
+    }
+    setAllPayBtnText('Pay ' + formatEur(grandTotal));
 
     // Payment methods: clickable selection with realistic outcomes
     const paymentSection = document.querySelector('.payment-section');
@@ -534,10 +589,10 @@
         : selectedPaymentMethod === 'paypal'
           ? 'PayPal'
           : 'Pay';
-      payBtn.textContent = methodLabel + ' ' + formatEur(grandTotal);
-      payBtn.classList.remove('method-apple', 'method-paypal');
-      if (selectedPaymentMethod === 'apple') payBtn.classList.add('method-apple');
-      else if (selectedPaymentMethod === 'paypal') payBtn.classList.add('method-paypal');
+      setAllPayBtnText(methodLabel + ' ' + formatEur(grandTotal));
+      const methodClass = selectedPaymentMethod === 'apple' ? 'method-apple'
+        : selectedPaymentMethod === 'paypal' ? 'method-paypal' : null;
+      setAllPayBtnClass(methodClass, ['method-apple', 'method-paypal']);
     }
 
     if (cardRow) {
@@ -651,7 +706,7 @@
       });
     });
 
-    payBtn.onclick = function() {
+    function handlePayClick() {
       if (selectedPaymentMethod !== 'card') {
         if (selectedPaymentMethod === 'apple') {
           alert('Opening Apple Pay to authorize ' + formatEur(grandTotal) + '.');
@@ -675,7 +730,9 @@
         return;
       }
       alert('Payment approved. Your card has been charged ' + formatEur(grandTotal) + '.');
-    };
+    }
+    if (payBtn) payBtn.onclick = handlePayClick;
+    if (deskPayBtn) deskPayBtn.onclick = handlePayClick;
   </script>
   <script src="../../js/flow-param.js"></script>
 </body>

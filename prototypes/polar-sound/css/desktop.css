@@ -506,25 +506,223 @@
   }
 
   /* ── Checkout Desktop ── */
+
+  /* Simplified checkout navbar (desktop-only) */
+  .checkout-desktop-nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+    background: #fff;
+  }
+
+  .checkout-desktop-nav .checkout-nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text-main, #031419);
+  }
+
+  .checkout-desktop-nav .checkout-nav-logo img {
+    height: 24px;
+  }
+
+  .checkout-desktop-secure {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-subtle, #536b75);
+  }
+
+  .checkout-desktop-secure svg {
+    width: 16px;
+    height: 16px;
+    color: #22a861;
+  }
+
+  /* Hide mobile topbar title & back chevron on desktop (title moves to form-col) */
+  .has-checkout-layout .checkout-topbar .topbar-title {
+    display: none !important;
+  }
+
+  .has-checkout-layout .checkout-topbar .back-chevron {
+    display: none !important;
+  }
+
+  .has-checkout-layout .checkout-topbar {
+    display: none !important;
+  }
+
+  /* Body background for checkout */
+  .has-checkout-layout {
+    background: #f8f9fa !important;
+  }
+
+  /* Two-column grid layout */
   .checkout-desktop-wrapper {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 416px;
+    grid-template-rows: auto;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 40px;
+    align-items: start;
   }
 
+  /* LEFT column: payment form */
+  .checkout-form-col {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* RIGHT column: order summary */
+  .checkout-summary-col {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 88px;
+  }
+
+  /* Column headings */
+  .checkout-col-title {
+    display: block !important;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-main, #031419);
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  /* Form column: remove inner padding, let the column manage it */
+  .checkout-form-col .payment-section {
+    padding: 24px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .checkout-form-col .payment-section h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  /* Desktop pay button inside form col */
+  .checkout-desktop-pay {
+    display: block !important;
+    margin-top: 24px;
+  }
+
+  .checkout-desktop-pay .pay-btn {
+    display: block;
+    width: 100%;
+    height: 52px;
+    background: var(--color-primary, #0079ca);
+    border: 2px solid transparent;
+    border-radius: 64px;
+    color: #fff;
+    font-family: var(--font, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    outline: none;
+  }
+
+  .checkout-desktop-pay .pay-btn:hover {
+    background: var(--color-primary-hover, #0068b0);
+    box-shadow: 0 4px 16px rgba(0, 121, 202, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .checkout-desktop-pay .pay-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .checkout-desktop-pay .pay-btn.method-apple {
+    background: #06232c;
+  }
+
+  .checkout-desktop-pay .pay-btn.method-apple:hover {
+    background: #0b3544;
+    box-shadow: 0 4px 16px rgba(6, 35, 44, 0.3);
+  }
+
+  /* Summary column: card style */
+  .checkout-summary-col .checkout-summary-card {
+    background: #fff;
+    border: 1px solid var(--color-border, #ccd2d8);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  /* Increase padding/spacing for summary items inside the card */
+  .checkout-summary-col .event-summary {
+    padding: 20px;
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .checkout-summary-col .event-summary .event-thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+  }
+
+  .checkout-summary-col .event-summary .event-name {
+    font-size: 15px;
+  }
+
+  .checkout-summary-col .date-row {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .checkout-summary-col .checkout-section {
+    padding: 16px 20px 4px;
+  }
+
+  .checkout-summary-col .checkout-section:not(:last-child) {
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .checkout-summary-col .price-details {
+    padding: 16px 20px;
+    border-bottom: none;
+    border-top: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  /* No booking fees banner inside summary */
+  .checkout-summary-col .no-fees-banner {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #e6f4ff;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary, #0079ca);
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .checkout-summary-col .no-fees-banner svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Mobile sticky-pay: hidden on desktop */
   .has-checkout-layout .sticky-pay {
-    position: static !important;
-    max-width: 720px;
-    margin: 24px auto 0;
-    padding: 0 24px 24px;
-    transform: none;
-    left: auto;
-    width: auto !important;
-    pointer-events: auto;
+    display: none !important;
   }
 
-  .has-checkout-layout .sticky-pay .pay-btn {
-    pointer-events: auto;
+  /* .phone padding-bottom reset for checkout on desktop */
+  .has-checkout-layout {
+    padding-bottom: 0 !important;
   }
 
   /* ── Favorites Desktop ── */
