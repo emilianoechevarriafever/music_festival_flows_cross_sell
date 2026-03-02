@@ -15,12 +15,13 @@ gh api repos/emilianoechevarriafever/fever_replica/collaborators/GITHUB_USERNAME
 ```
 Once added, they can fork the repo and deploy via GitHub Pages.
 
-**Option B -- Share the project files via Google Drive / USB / zip**:
-- Zip the `fever_replica` folder (or upload to a shared Google Drive).
-- Tell participants: "Download the `fever_replica` folder from [Drive link] and open it in Cursor."
-- In this scenario, participants will work locally (localhost) and can optionally create their own GitHub repo during setup.
+**Option B -- Share the project files via Google Drive** (already done):
+The fever_replica zip is shared with all Fever employees at:
+https://drive.google.com/file/d/1kIIzRUwQX8CX6rLOM3Dx88bCr56wrgCS/view?usp=sharing
 
-**Note**: If you share the files via Drive, also include the setup prompt (`HACKATHON_SETUP_PROMPT.md`) in the same folder.
+The setup prompt already includes this link and will try to download it automatically via `curl`. If that fails, participants can open the link in their browser.
+
+**Note**: The setup prompt (`HACKATHON_SETUP_PROMPT.md`) should be shared separately via Slack/email so participants can paste it into Cursor.
 
 ### 2. Prepare the Design System Toolkit for sharing
 
@@ -30,10 +31,11 @@ The repo `Feverup/AI-Product-Design-Toolkit` is **private**. Participants outsid
 - Go to https://github.com/orgs/Feverup/people and invite them.
 - They will be able to clone the toolkit automatically during setup.
 
-**Option B -- Share via Google Drive / USB / zip**:
-- Clone the toolkit locally: `git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git`
-- Zip the folder (or upload to a shared Google Drive).
-- Tell participants: "Download the `AI-Product-Design-Toolkit` folder from [Drive link] and rename it to `design-system-toolkit` inside your project root."
+**Option B -- Share via Google Drive** (already done):
+The design system toolkit zip is shared with all Fever employees at:
+https://drive.google.com/file/d/1rRNVN_OXcqGy2KR3GxduRX7DNSr_PFJV/view?usp=sharing
+
+The setup prompt already includes this link and will try to download it automatically via `curl`. If that fails, participants can open the link in their browser and place the contents in a folder called `design-system-toolkit` inside their project root.
 
 ### 3. Confirm participants have Cursor installed
 
@@ -105,9 +107,9 @@ The participant does not have GitHub CLI installed. Two options:
 
 ### "Permission denied cloning AI-Product-Design-Toolkit"
 
-The repo is private. The participant needs either:
+The repo is private. The setup prompt tries to download it from Drive automatically. If that also fails:
 - Feverup org membership on GitHub, or
-- A local copy from the shared Drive folder.
+- Manual download from: https://drive.google.com/file/d/1rRNVN_OXcqGy2KR3GxduRX7DNSr_PFJV/view?usp=sharing
 
 ### "My changes are not showing on GitHub Pages"
 

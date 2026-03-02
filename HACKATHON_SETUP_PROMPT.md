@@ -32,12 +32,25 @@ Then `cd fever_replica`.
 
 ## Step 2B -- Work from local copy (no GitHub access or no CLI)
 
-Check if the current working directory already contains a `fever_replica` folder or if the current folder has an `index.html` file (indicating the participant already has the project files from a shared Drive/zip).
+Check if the current working directory already contains a `fever_replica` folder or if the current folder has an `index.html` file (indicating the participant already has the project files).
 
 - **If the project files are found**: `cd` into them if needed. Set `HAS_FORK=false`. Proceed to Step 2C.
-- **If the project files are NOT found**: tell the participant:
+- **If the project files are NOT found**: try to download them automatically from the shared Drive:
 
-> You need the Fever Replica project files. Ask your hackathon organizer for the shared Drive/zip folder. Download it, unzip it, and open the folder in Cursor. Then re-run this setup prompt.
+```bash
+curl -L -o fever_replica.zip "https://drive.google.com/uc?export=download&confirm=t&id=1kIIzRUwQX8CX6rLOM3Dx88bCr56wrgCS"
+unzip fever_replica.zip
+rm fever_replica.zip
+```
+
+After unzipping, look for the folder that contains `index.html` and `cd` into it.
+
+- **If the download or unzip succeeds**: set `HAS_FORK=false`. Proceed to Step 2C.
+- **If the download fails** (network error, access denied): tell the participant:
+
+> Could not download the project files automatically. Open this link in your browser, download the zip, unzip it, and open the folder in Cursor:
+> https://drive.google.com/file/d/1kIIzRUwQX8CX6rLOM3Dx88bCr56wrgCS/view?usp=sharing
+> Then re-run this setup prompt.
 
 Stop here until the participant has the files.
 
@@ -88,16 +101,31 @@ Proceed to Step 4.
 
 ## Step 4 -- Fever Design System Toolkit
 
-Try to clone the toolkit:
+First, check if a `design-system-toolkit/` folder already exists in the project root. If it does, set `HAS_TOOLKIT=true` and skip to Step 5.
+
+If it does not exist, try to clone the toolkit repo:
 
 ```bash
 git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git design-system-toolkit
 ```
 
-- **If it succeeds**: set `HAS_TOOLKIT_REPO=true`.
-- **If it fails** (authentication error / 404 / private repo): set `HAS_TOOLKIT_REPO=false`. Print this message to the participant:
+- **If it succeeds**: set `HAS_TOOLKIT=true`. Proceed to Step 5.
+- **If it fails** (authentication error / 404 / private repo): try to download it from the shared Drive:
 
-> The AI-Product-Design-Toolkit repo is private. Ask your hackathon organizer for the shared Drive folder and place its contents in a folder called `design-system-toolkit/` at the root of this project. Then re-run this step or just continue -- the Cursor Rule created in Step 6 includes the most important token values inline.
+```bash
+curl -L -o design-toolkit.zip "https://drive.google.com/uc?export=download&confirm=t&id=1rRNVN_OXcqGy2KR3GxduRX7DNSr_PFJV"
+unzip design-toolkit.zip
+rm design-toolkit.zip
+```
+
+After unzipping, look for the extracted folder and rename it to `design-system-toolkit` if needed (the zip may extract as `AI-Product-Design-Toolkit` or similar -- rename it to `design-system-toolkit`).
+
+- **If the download succeeds**: set `HAS_TOOLKIT=true`. Proceed to Step 5.
+- **If the download also fails**: set `HAS_TOOLKIT=false`. Tell the participant:
+
+> Could not access the design system toolkit. Open this link in your browser, download the zip, and place the contents in a folder called `design-system-toolkit/` at the root of this project:
+> https://drive.google.com/file/d/1rRNVN_OXcqGy2KR3GxduRX7DNSr_PFJV/view?usp=sharing
+> You can continue without it -- the Cursor Rule created in Step 6 includes the most important token values inline.
 
 Proceed to Step 5.
 
