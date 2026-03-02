@@ -4,14 +4,23 @@ Instructions for preparing and running the Fever design hackathon.
 
 ## Pre-hackathon checklist
 
-### 1. Verify the fever_replica repo is public
+### 1. Grant access to the fever_replica repo
 
+The repo `emilianoechevarriafever/fever_replica` is **private**. Participants need explicit access to fork it. You have two options:
+
+**Option A -- Add participants as collaborators** (preferred for fork + GitHub Pages workflow):
 ```bash
-gh repo view emilianoechevarriafever/fever_replica --json visibility -q .visibility
-# Should print: PUBLIC
+# Add one participant at a time:
+gh api repos/emilianoechevarriafever/fever_replica/collaborators/GITHUB_USERNAME -X PUT -f permission=read
 ```
+Once added, they can fork the repo and deploy via GitHub Pages.
 
-If it is private, make it public or add all participants as collaborators.
+**Option B -- Share the project files via Google Drive / USB / zip**:
+- Zip the `fever_replica` folder (or upload to a shared Google Drive).
+- Tell participants: "Download the `fever_replica` folder from [Drive link] and open it in Cursor."
+- In this scenario, participants will work locally (localhost) and can optionally create their own GitHub repo during setup.
+
+**Note**: If you share the files via Drive, also include the setup prompt (`HACKATHON_SETUP_PROMPT.md`) in the same folder.
 
 ### 2. Prepare the Design System Toolkit for sharing
 
@@ -49,19 +58,19 @@ If participants need to reference Figma designs:
 
 This table shows what works depending on what access a participant has:
 
-| Capability | GitHub CLI + account | Feverup org member | Figma seat | None of the above |
+| Capability | GitHub CLI + repo collaborator | Feverup org member | Figma seat | None of the above |
 |---|---|---|---|---|
-| **Fork fever_replica** | Yes (it is public) | Yes | -- | No (HTTPS clone, read-only) |
-| **GitHub Pages deploy** | Yes (on their fork) | Yes | -- | No (localhost only) |
+| **Fork fever_replica** | Yes (if added as collaborator) | Yes (if added as collaborator) | -- | No (needs Drive/zip copy) |
+| **GitHub Pages deploy** | Yes (on their fork or own repo) | Yes | -- | No (localhost only) |
 | **Clone Design Toolkit** | Only if Feverup org | Yes | -- | No (needs Drive/zip copy) |
 | **Figma MCP** | -- | -- | Yes | No (manual screenshots) |
 | **Local development** | Yes | Yes | Yes | Yes (always works) |
 | **Cursor Rule (design system)** | Yes | Yes | Yes | Yes (embedded in prompt) |
 
-**Minimum viable setup**: A participant with NO GitHub, NO Figma, and NO org access can still participate. They will:
-1. Clone the public repo via HTTPS (read-only).
-2. Get the toolkit folder from the shared Drive.
-3. Work on localhost.
+**Minimum viable setup**: A participant with NO GitHub, NO Figma, and NO collaborator access can still participate. They will:
+1. Get both the `fever_replica` files and the `design-system-toolkit` from the shared Drive/zip.
+2. Work on localhost.
+3. Optionally create their own private GitHub repo during setup (if they have `gh`).
 4. Have full design system context via the Cursor Rule (tokens are inlined).
 
 ---
@@ -74,6 +83,12 @@ This table shows what works depending on what access a participant has:
 - Verify Pages is enabled: `gh api repos/OWNER/fever_replica/pages --jq '.html_url'`.
 - Verify the source branch is `main`: `gh api repos/OWNER/fever_replica/pages --jq '.source'`.
 - If it says `build_type: workflow`, switch to legacy: `gh api repos/OWNER/fever_replica/pages -X PUT -f build_type=legacy -f source[branch]=main -f source[path]=/`.
+
+### "Permission denied forking fever_replica" / "Could not resolve to a Repository"
+
+The `fever_replica` repo is private. The participant has not been added as a collaborator. Two options:
+- Add them: `gh api repos/emilianoechevarriafever/fever_replica/collaborators/THEIR_USERNAME -X PUT -f permission=read`
+- Give them the project files via the shared Drive/zip. The setup prompt will guide them to create their own repo.
 
 ### "gh: command not found"
 

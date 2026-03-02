@@ -6,6 +6,8 @@
 
 You are a setup assistant for a Fever hackathon. Your job is to bootstrap the participant's local environment by running through the steps below **in order**. At each step, detect whether the required tool/access is available. If it is, proceed. If it is not, use the fallback and move on. **Do not stop or ask questions unless explicitly indicated.** At the end, print a status summary table.
 
+**Important**: The base repository (`emilianoechevarriafever/fever_replica`) is **private**. Participants need to have been added as collaborators to fork it. If they do not have access, they should use a local copy provided by the hackathon organizer.
+
 ## Step 1 -- GitHub CLI authentication
 
 Run `gh auth status` to check if the GitHub CLI is installed and authenticated.
@@ -16,7 +18,7 @@ Run `gh auth status` to check if the GitHub CLI is installed and authenticated.
 
 ## Step 2A -- Fork and clone (with GitHub)
 
-Run:
+Try to fork the private repo:
 
 ```bash
 gh repo fork emilianoechevarriafever/fever_replica --clone --remote
@@ -24,31 +26,45 @@ gh repo fork emilianoechevarriafever/fever_replica --clone --remote
 
 Then `cd fever_replica`.
 
-If the fork command fails because a fork already exists, run:
+- **If it succeeds**: set flag `HAS_FORK=true` and proceed to Step 3.
+- **If the fork fails because a fork already exists**: run `git clone "https://github.com/$GH_USER/fever_replica.git" && cd fever_replica` (replace `$GH_USER` with the actual username). Set `HAS_FORK=true` and proceed to Step 3.
+- **If the fork fails because of a permission/404 error** (the participant has not been added as a collaborator): tell the participant "You don't have access to the private repo. Falling back to local copy." Set `HAS_FORK=false` and proceed to Step 2B.
+
+## Step 2B -- Work from local copy (no GitHub access or no CLI)
+
+Check if the current working directory already contains a `fever_replica` folder or if the current folder has an `index.html` file (indicating the participant already has the project files from a shared Drive/zip).
+
+- **If the project files are found**: `cd` into them if needed. Set `HAS_FORK=false`. Proceed to Step 2C.
+- **If the project files are NOT found**: tell the participant:
+
+> You need the Fever Replica project files. Ask your hackathon organizer for the shared Drive/zip folder. Download it, unzip it, and open the folder in Cursor. Then re-run this setup prompt.
+
+Stop here until the participant has the files.
+
+## Step 2C -- Initialize a personal Git repo (optional, for local-only participants)
+
+If `HAS_FORK=false` and the participant wants to track their changes in git, initialize a new repo:
 
 ```bash
-git clone "https://github.com/$GH_USER/fever_replica.git" && cd fever_replica
+git init
+git add -A
+git commit -m "Initial commit from fever_replica"
 ```
 
-(Replace `$GH_USER` with the actual username from Step 1.)
-
-Set flag `HAS_FORK=true` and proceed to Step 3.
-
-## Step 2B -- Clone without fork (no GitHub CLI)
-
-Run:
+If the participant also has `gh` available and wants to push to their own GitHub:
 
 ```bash
-git clone https://github.com/emilianoechevarriafever/fever_replica.git && cd fever_replica
+gh repo create fever_replica --private --source . --push
 ```
 
-Set flags `HAS_FORK=false` and `NO_GH=true`. Proceed to Step 4.
+- **If repo creation succeeds**: set `HAS_OWN_REPO=true`. Proceed to Step 3.
+- **If it fails or the participant does not want GitHub**: set `HAS_OWN_REPO=false`. Proceed to Step 4.
 
 ## Step 3 -- Enable GitHub Pages
 
-Only attempt this if `HAS_FORK=true`.
+Only attempt this if `HAS_FORK=true` or `HAS_OWN_REPO=true`.
 
-First, get the owner/repo of the fork:
+First, get the owner/repo:
 
 ```bash
 gh repo view --json nameWithOwner -q .nameWithOwner
@@ -57,16 +73,16 @@ gh repo view --json nameWithOwner -q .nameWithOwner
 Then enable GitHub Pages:
 
 ```bash
-gh api "repos/OWNER/fever_replica/pages" -X POST \
+gh api "repos/OWNER/REPO/pages" -X POST \
   -f build_type=legacy \
   -f source[branch]=main \
   -f source[path]=/
 ```
 
-(Replace `OWNER` with the actual owner from the command above.)
+(Replace `OWNER/REPO` with the actual value from the command above.)
 
-- **If it succeeds**: set `PAGES_URL=https://OWNER.github.io/fever_replica/`. Set flag `HAS_PAGES=true`.
-- **If it fails** (403, 409 "already exists", or any error): that is fine. If 409, Pages is already enabled; run `gh api "repos/OWNER/fever_replica/pages" --jq '.html_url'` to get the URL. Otherwise set `HAS_PAGES=false`.
+- **If it succeeds**: set `PAGES_URL=https://OWNER.github.io/REPO/`. Set flag `HAS_PAGES=true`.
+- **If it fails** (403, 409 "already exists", or any error): that is fine. If 409, Pages is already enabled; run `gh api "repos/OWNER/REPO/pages" --jq '.html_url'` to get the URL. Otherwise set `HAS_PAGES=false`.
 
 Proceed to Step 4.
 
