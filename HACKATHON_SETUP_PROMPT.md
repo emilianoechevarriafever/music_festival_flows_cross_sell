@@ -1,0 +1,305 @@
+# Fever Hackathon -- Environment Setup
+
+> **How to use**: Open Cursor, start a **new chat** in **Agent mode** (model: Auto or Claude 4.6 Opus High), and paste this entire document as your first message. Cursor will execute every step automatically and adapt to whatever access you have.
+
+---
+
+You are a setup assistant for a Fever hackathon. Your job is to bootstrap the participant's local environment by running through the steps below **in order**. At each step, detect whether the required tool/access is available. If it is, proceed. If it is not, use the fallback and move on. **Do not stop or ask questions unless explicitly indicated.** At the end, print a status summary table.
+
+## Step 1 -- GitHub CLI authentication
+
+Run `gh auth status` to check if the GitHub CLI is installed and authenticated.
+
+- **If `gh` is installed and authenticated**: note the GitHub username from the output. Store it mentally as `GH_USER`. Proceed to Step 2A.
+- **If `gh` is installed but NOT authenticated**: run `gh auth login --web -p https` and wait for the participant to complete the browser flow. Then proceed to Step 2A.
+- **If `gh` is NOT installed**: set a flag `NO_GH=true`. Proceed to Step 2B.
+
+## Step 2A -- Fork and clone (with GitHub)
+
+Run:
+
+```bash
+gh repo fork emilianoechevarriafever/fever_replica --clone --remote
+```
+
+Then `cd fever_replica`.
+
+If the fork command fails because a fork already exists, run:
+
+```bash
+git clone "https://github.com/$GH_USER/fever_replica.git" && cd fever_replica
+```
+
+(Replace `$GH_USER` with the actual username from Step 1.)
+
+Set flag `HAS_FORK=true` and proceed to Step 3.
+
+## Step 2B -- Clone without fork (no GitHub CLI)
+
+Run:
+
+```bash
+git clone https://github.com/emilianoechevarriafever/fever_replica.git && cd fever_replica
+```
+
+Set flags `HAS_FORK=false` and `NO_GH=true`. Proceed to Step 4.
+
+## Step 3 -- Enable GitHub Pages
+
+Only attempt this if `HAS_FORK=true`.
+
+First, get the owner/repo of the fork:
+
+```bash
+gh repo view --json nameWithOwner -q .nameWithOwner
+```
+
+Then enable GitHub Pages:
+
+```bash
+gh api "repos/OWNER/fever_replica/pages" -X POST \
+  -f build_type=legacy \
+  -f source[branch]=main \
+  -f source[path]=/
+```
+
+(Replace `OWNER` with the actual owner from the command above.)
+
+- **If it succeeds**: set `PAGES_URL=https://OWNER.github.io/fever_replica/`. Set flag `HAS_PAGES=true`.
+- **If it fails** (403, 409 "already exists", or any error): that is fine. If 409, Pages is already enabled; run `gh api "repos/OWNER/fever_replica/pages" --jq '.html_url'` to get the URL. Otherwise set `HAS_PAGES=false`.
+
+Proceed to Step 4.
+
+## Step 4 -- Fever Design System Toolkit
+
+Try to clone the toolkit:
+
+```bash
+git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git design-system-toolkit
+```
+
+- **If it succeeds**: set `HAS_TOOLKIT_REPO=true`.
+- **If it fails** (authentication error / 404 / private repo): set `HAS_TOOLKIT_REPO=false`. Print this message to the participant:
+
+> The AI-Product-Design-Toolkit repo is private. Ask your hackathon organizer for the shared Drive folder and place its contents in a folder called `design-system-toolkit/` at the root of this project. Then re-run this step or just continue -- the Cursor Rule created in Step 6 includes the most important token values inline.
+
+Proceed to Step 5.
+
+## Step 5 -- Figma MCP (optional)
+
+Ask the participant this question (use a structured question if available):
+
+**Do you have a Figma Dev or Designer seat at Fever?**
+- Yes
+- No / Not sure
+
+### If Yes:
+
+Create the file `.cursor/mcp.json` with this content:
+
+```json
+{
+  "mcpServers": {
+    "Figma": {
+      "url": "https://mcp.figma.com/mcp",
+      "headers": {}
+    }
+  }
+}
+```
+
+Tell the participant: "Figma MCP is configured. When Cursor prompts you to approve the Figma MCP connection, click Allow. You can now reference Figma URLs in your prompts and Cursor will read the designs directly."
+
+Set `HAS_FIGMA=true`.
+
+### If No:
+
+Set `HAS_FIGMA=false`. Tell the participant: "No problem -- you can still work on the project. If you have Figma links, you can take screenshots manually and share them with Cursor via image paste."
+
+Proceed to Step 6.
+
+## Step 6 -- Create Cursor Rule
+
+Create the directory `.cursor/rules/` if it does not exist.
+
+Write the file `.cursor/rules/fever-hackathon.mdc` with the EXACT content below (do NOT modify it):
+
+```
+---
+description: Fever Hackathon -- project context and design system reference
+globs: "**/*"
+alwaysApply: true
+---
+
+# Fever Replica -- Hackathon Project
+
+## What this project is
+
+A simplified replica of the Fever web app. It is a static site (HTML + CSS + vanilla JS) with no build tools. Pages link to each other with regular anchor tags and query parameters.
+
+## File structure
+
+| File | Purpose |
+|------|---------|
+| `index.html` | Fever home page (entry point) |
+| `plan.html?plan=SLUG` | Universal plan-view template. Reads `?plan=` to load event data from a JS object (`PLANS`). |
+| `plan-checkout.html?plan=SLUG` | Checkout page. Requires login (redirects to `login.html` if not logged in). |
+| `login.html` | Login page. Sets `localStorage('fever_logged_in','true')`. Supports `?returnTo=` redirect. |
+| `search.html` | Search results page |
+| `category.html` | Category listing |
+| `top10.html` | Top 10 listing |
+| `profile.html` | User profile |
+| `favorites.html` | Saved favorites |
+| `js/burger-menu.js` | Burger menu component (injects HTML + CSS dynamically) |
+| `js/plan-view-gallery.js` | Image gallery for plan views |
+| `js/recently-viewed.js` | Recently viewed carousel logic |
+| `css/desktop.css` | Desktop breakpoint styles |
+| `css/navbar.css` | Bottom navigation bar styles |
+
+## Key JavaScript patterns
+
+- Event data lives in the `PLANS` object inside `plan.html` (keyed by slug).
+- Login state: `localStorage.getItem('fever_logged_in') === 'true'`.
+- Checkout data: `localStorage.getItem('plan_checkout')` (JSON string).
+- The plan view has an add-ons bottom sheet for Polar Sound (Camping / Glamping).
+- Sticky CTA uses IntersectionObserver on the tickets section.
+
+## Fever Design System
+
+ALL changes must follow the Fever design system. If the `design-system-toolkit/` folder exists in this project, reference it for the full token definitions:
+- `design-system-toolkit/knowledge/design-system/tokens.md` -- file map
+- `design-system-toolkit/knowledge/design-system/color/_semantics.scss` -- semantic color tokens
+- `design-system-toolkit/knowledge/design-system/color/_palette.scss` -- primitive palette (reference only)
+- `design-system-toolkit/knowledge/design-system/font/_font.scss` -- typography compositions
+- `design-system-toolkit/knowledge/design-system/dimensions/_spacing.scss` -- spacing tokens
+- `design-system-toolkit/knowledge/design-system/dimensions/_radii.scss` -- border radius tokens
+- `design-system-toolkit/knowledge/design-system/components.md` -- component library
+- `design-system-toolkit/knowledge/design-system/patterns.md` -- layout and interaction patterns
+
+### Quick-reference color tokens (resolved hex values)
+
+Primary (Fever blue):
+- `$color-action-background-primary` = #0079ca (main CTA buttons)
+- `$color-action-background-primary-hover` = #0068b0
+- `$color-action-text-primary` = #0079ca (link-style actions)
+- `$color-background-primary-base` = #0089e3
+- `$color-background-primary-weak` = #e6f4ff (light blue tint)
+- `$color-border-primary-base` = #0089e3
+
+Neutral:
+- `$color-background-main` = #ffffff (page background)
+- `$color-background-main-contrast` = #06232c (dark background)
+- `$color-text-main` = #031419 (body text)
+- `$color-text-subtle` = #536b75 (secondary text)
+- `$color-border-main` = #ccd2d8 (dividers)
+- `$color-background-subtle-weak` = #f2f3f3 (card/section backgrounds)
+
+Status:
+- `$color-text-danger` = #eb0052 (errors)
+- `$color-text-positive` = #18824c (success)
+- `$color-text-warning` = #9f5800 (warnings)
+
+Accent:
+- `$color-text-accent` = #6f41d7 (purple accent)
+
+### Quick-reference spacing scale
+
+| Token | Value |
+|-------|-------|
+| `$space-1` | 0.25rem (4px) |
+| `$space-2` | 0.5rem (8px) |
+| `$space-3` | 0.75rem (12px) |
+| `$space-4` | 1rem (16px) |
+| `$space-6` | 1.5rem (24px) |
+| `$space-8` | 2rem (32px) |
+| `$space-12` | 3rem (48px) |
+
+### Quick-reference border radius
+
+| Token | Value |
+|-------|-------|
+| `$radii-1` | 0.25rem (4px) |
+| `$radii-2` | 0.5rem (8px) |
+| `$radii-4` | 1rem (16px) |
+| `$radii-full` | 4rem (full pill) |
+
+### Token usage rules
+
+1. NEVER use primitive palette values (e.g. `$palette-primary-500`) directly. Always use semantic tokens.
+2. Respect token scope: `$color-text-*` for text, `$color-background-*` for fills, `$color-border-*` for strokes, `$color-action-*` for interactive elements.
+3. `-contrast` suffix means "for use on dark backgrounds" -- it is NOT a dark-mode variant.
+4. If no token exists for a value, use the closest semantic token and flag it.
+
+## Figma integration (if MCP is connected)
+
+If Figma MCP is available, use the cheapest tool first:
+1. `get_screenshot` -- visual reference (preferred)
+2. `get_metadata` -- node structure
+3. `get_design_context` -- full properties (expensive, use only when needed)
+
+Adapt Figma output to this project's stack (vanilla HTML/CSS/JS) and existing component patterns.
+
+## Deploying changes
+
+If the project is a GitHub fork with Pages enabled:
+- After edits, run `git add -A && git commit -m "descriptive message" && git push origin main`.
+- GitHub Pages auto-deploys from the `main` branch. Allow ~60 seconds for propagation.
+
+If working locally without GitHub Pages:
+- Serve with `python3 -m http.server 8000` and view at `http://localhost:8000`.
+```
+
+## Step 7 -- Update .gitignore
+
+If a `.gitignore` file exists, append `design-system-toolkit/` to it (if not already present).
+If no `.gitignore` exists, create one with:
+
+```
+design-system-toolkit/
+.DS_Store
+```
+
+## Step 8 -- Local development server
+
+If `HAS_PAGES=false` or `NO_GH=true`, start a local server:
+
+```bash
+python3 -m http.server 8000
+```
+
+Tell the participant: "Your site is running at http://localhost:8000. Open it in your browser."
+
+## Step 9 -- Status summary
+
+Print a summary table like this:
+
+```
++----------------------------+------------+-----------------------------------+
+| Capability                 | Status     | Details                           |
++----------------------------+------------+-----------------------------------+
+| GitHub CLI                 | OK / SKIP  | username: ...                     |
+| Fork                       | OK / SKIP  | repo: ...                         |
+| GitHub Pages               | OK / SKIP  | url: ... / using localhost:8000   |
+| Design System Toolkit      | OK / SKIP  | cloned / needs manual placement   |
+| Figma MCP                  | OK / SKIP  | connected / skipped               |
+| Cursor Rule                | OK         | .cursor/rules/fever-hackathon.mdc |
++----------------------------+------------+-----------------------------------+
+```
+
+Then tell the participant:
+
+> **You're all set!** Start a new Cursor Agent chat and describe what you want to build or change on the Fever site. The AI already knows the project structure and design system. Happy hacking!
+
+---
+
+## Verification prompt (optional)
+
+If you want to verify everything is working, paste this into a **new** Cursor chat after setup:
+
+```
+Read the file .cursor/rules/fever-hackathon.mdc and confirm it exists.
+Then read index.html (first 20 lines) and confirm this is the Fever replica.
+If design-system-toolkit/ exists, list its contents.
+If .cursor/mcp.json exists, confirm Figma MCP is configured.
+Report what you find.
+```

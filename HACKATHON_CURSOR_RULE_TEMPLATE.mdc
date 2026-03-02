@@ -1,0 +1,122 @@
+---
+description: Fever Hackathon -- project context and design system reference
+globs: "**/*"
+alwaysApply: true
+---
+
+# Fever Replica -- Hackathon Project
+
+## What this project is
+
+A simplified replica of the Fever web app. It is a static site (HTML + CSS + vanilla JS) with no build tools. Pages link to each other with regular anchor tags and query parameters.
+
+## File structure
+
+| File | Purpose |
+|------|---------|
+| `index.html` | Fever home page (entry point) |
+| `plan.html?plan=SLUG` | Universal plan-view template. Reads `?plan=` to load event data from a JS object (`PLANS`). |
+| `plan-checkout.html?plan=SLUG` | Checkout page. Requires login (redirects to `login.html` if not logged in). |
+| `login.html` | Login page. Sets `localStorage('fever_logged_in','true')`. Supports `?returnTo=` redirect. |
+| `search.html` | Search results page |
+| `category.html` | Category listing |
+| `top10.html` | Top 10 listing |
+| `profile.html` | User profile |
+| `favorites.html` | Saved favorites |
+| `js/burger-menu.js` | Burger menu component (injects HTML + CSS dynamically) |
+| `js/plan-view-gallery.js` | Image gallery for plan views |
+| `js/recently-viewed.js` | Recently viewed carousel logic |
+| `css/desktop.css` | Desktop breakpoint styles |
+| `css/navbar.css` | Bottom navigation bar styles |
+
+## Key JavaScript patterns
+
+- Event data lives in the `PLANS` object inside `plan.html` (keyed by slug).
+- Login state: `localStorage.getItem('fever_logged_in') === 'true'`.
+- Checkout data: `localStorage.getItem('plan_checkout')` (JSON string).
+- The plan view has an add-ons bottom sheet for Polar Sound (Camping / Glamping).
+- Sticky CTA uses IntersectionObserver on the tickets section.
+
+## Fever Design System
+
+ALL changes must follow the Fever design system. If the `design-system-toolkit/` folder exists in this project, reference it for the full token definitions:
+- `design-system-toolkit/knowledge/design-system/tokens.md` -- file map
+- `design-system-toolkit/knowledge/design-system/color/_semantics.scss` -- semantic color tokens
+- `design-system-toolkit/knowledge/design-system/color/_palette.scss` -- primitive palette (reference only)
+- `design-system-toolkit/knowledge/design-system/font/_font.scss` -- typography compositions
+- `design-system-toolkit/knowledge/design-system/dimensions/_spacing.scss` -- spacing tokens
+- `design-system-toolkit/knowledge/design-system/dimensions/_radii.scss` -- border radius tokens
+- `design-system-toolkit/knowledge/design-system/components.md` -- component library
+- `design-system-toolkit/knowledge/design-system/patterns.md` -- layout and interaction patterns
+
+### Quick-reference color tokens (resolved hex values)
+
+Primary (Fever blue):
+- `$color-action-background-primary` = #0079ca (main CTA buttons)
+- `$color-action-background-primary-hover` = #0068b0
+- `$color-action-text-primary` = #0079ca (link-style actions)
+- `$color-background-primary-base` = #0089e3
+- `$color-background-primary-weak` = #e6f4ff (light blue tint)
+- `$color-border-primary-base` = #0089e3
+
+Neutral:
+- `$color-background-main` = #ffffff (page background)
+- `$color-background-main-contrast` = #06232c (dark background)
+- `$color-text-main` = #031419 (body text)
+- `$color-text-subtle` = #536b75 (secondary text)
+- `$color-border-main` = #ccd2d8 (dividers)
+- `$color-background-subtle-weak` = #f2f3f3 (card/section backgrounds)
+
+Status:
+- `$color-text-danger` = #eb0052 (errors)
+- `$color-text-positive` = #18824c (success)
+- `$color-text-warning` = #9f5800 (warnings)
+
+Accent:
+- `$color-text-accent` = #6f41d7 (purple accent)
+
+### Quick-reference spacing scale
+
+| Token | Value |
+|-------|-------|
+| `$space-1` | 0.25rem (4px) |
+| `$space-2` | 0.5rem (8px) |
+| `$space-3` | 0.75rem (12px) |
+| `$space-4` | 1rem (16px) |
+| `$space-6` | 1.5rem (24px) |
+| `$space-8` | 2rem (32px) |
+| `$space-12` | 3rem (48px) |
+
+### Quick-reference border radius
+
+| Token | Value |
+|-------|-------|
+| `$radii-1` | 0.25rem (4px) |
+| `$radii-2` | 0.5rem (8px) |
+| `$radii-4` | 1rem (16px) |
+| `$radii-full` | 4rem (full pill) |
+
+### Token usage rules
+
+1. NEVER use primitive palette values (e.g. `$palette-primary-500`) directly. Always use semantic tokens.
+2. Respect token scope: `$color-text-*` for text, `$color-background-*` for fills, `$color-border-*` for strokes, `$color-action-*` for interactive elements.
+3. `-contrast` suffix means "for use on dark backgrounds" -- it is NOT a dark-mode variant.
+4. If no token exists for a value, use the closest semantic token and flag it.
+
+## Figma integration (if MCP is connected)
+
+If Figma MCP is available, use the cheapest tool first:
+1. `get_screenshot` -- visual reference (preferred)
+2. `get_metadata` -- node structure
+3. `get_design_context` -- full properties (expensive, use only when needed)
+
+Adapt Figma output to this project's stack (vanilla HTML/CSS/JS) and existing component patterns.
+
+## Deploying changes
+
+If the project is a GitHub fork with Pages enabled:
+- After edits, run `git add -A && git commit -m "descriptive message" && git push origin main`.
+- GitHub Pages auto-deploys from the `main` branch. Allow ~60 seconds for propagation.
+
+If working locally without GitHub Pages:
+- Serve with `python3 -m http.server 8000` and view at `http://localhost:8000`.
