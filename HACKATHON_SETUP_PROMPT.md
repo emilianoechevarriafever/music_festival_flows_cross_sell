@@ -4,7 +4,7 @@
 
 ---
 
-You are a setup assistant for a Fever hackathon. Execute the steps below **in order**. Steps 2 through 8 are **independent** -- if one fails, skip it and continue to the next. **Do not stop or ask the participant questions** except where explicitly indicated. At the end, print a status summary with access recommendations.
+You are a setup assistant for a Fever hackathon. Execute **only Steps 1 through 10** below (ignore the "How to use" header above and the "Verification prompt" section at the end -- those are for the participant, not for you). Steps 2 through 8 are **independent** -- if one fails, skip it and continue to the next. **Do not stop or ask the participant questions.** At the end, print a status summary with access recommendations.
 
 Track these flags (all start `false`): `HAS_GH`, `HAS_REPO`, `HAS_PAGES`, `HAS_TOOLKIT`, `HAS_FIGMA`.
 
@@ -27,21 +27,27 @@ cd fever-hackathon-starter
 
 **Windows (PowerShell):**
 
-First download:
+First download (try `curl.exe` first, it ships with Windows 10+; fall back to `Invoke-WebRequest`):
+```powershell
+curl.exe -L -o fever-hackathon-starter.zip "https://github.com/emilianoechevarriafever/fever-hackathon-gate/releases/download/v1/fever-hackathon-starter.zip"
+```
+If `curl.exe` is not found:
 ```powershell
 Invoke-WebRequest -Uri "https://github.com/emilianoechevarriafever/fever-hackathon-gate/releases/download/v1/fever-hackathon-starter.zip" -OutFile "fever-hackathon-starter.zip"
 ```
 
 Then extract. Windows built-in "Extract All" does NOT support password-protected zips (it will silently produce corrupt files). You MUST use 7-Zip. Try:
 ```powershell
-& "C:\Program Files\7-Zip\7z.exe" x fever-hackathon-starter.zip -p"FeverHack2026" -ofever-hackathon-starter
+& "C:\Program Files\7-Zip\7z.exe" x fever-hackathon-starter.zip -p"FeverHack2026"
 Remove-Item fever-hackathon-starter.zip
 cd fever-hackathon-starter
 ```
 
+(Do NOT add a `-o` flag -- the zip already contains a `fever-hackathon-starter/` folder. 7-Zip will extract it correctly.)
+
 If 7-Zip is not installed, try WinRAR:
 ```powershell
-& "C:\Program Files\WinRAR\WinRAR.exe" x -p"FeverHack2026" fever-hackathon-starter.zip fever-hackathon-starter\
+& "C:\Program Files\WinRAR\WinRAR.exe" x -p"FeverHack2026" fever-hackathon-starter.zip
 Remove-Item fever-hackathon-starter.zip
 cd fever-hackathon-starter
 ```
@@ -58,12 +64,14 @@ If the download itself fails on any OS, tell the participant:
 
 **After extraction**, verify that `index.html` and `plan.html` exist in the current directory. If they are inside a subfolder, `cd` into it.
 
-Then initialize git (the zip does not include a `.git` directory):
+Then check if a `.git` directory exists (run `git status`). If it does NOT exist, initialize git:
 ```bash
 git init
 git add -A
 git commit -m "Initial commit - Fever hackathon starter"
 ```
+
+This applies both for freshly extracted files AND for the case where the participant already had the files but no git repo.
 
 Stop here if the project files could not be obtained.
 
@@ -103,17 +111,16 @@ Note: the repo is created as **public** so that GitHub Pages works on free GitHu
 
 Skip if `HAS_REPO=false`.
 
-Get the repo identifier:
-```bash
-REPO_FULL=$(gh repo view --json nameWithOwner -q .nameWithOwner)
-```
+First, run `gh repo view --json nameWithOwner -q .nameWithOwner` and note the output (e.g. `username/fever-hackathon`). Use this value as `OWNER/REPO` in the next command.
 
 Enable Pages:
 ```bash
-gh api "repos/$REPO_FULL/pages" -X POST -f build_type=legacy -f "source[branch]=main" -f "source[path]=/"
+gh api "repos/OWNER/REPO/pages" -X POST -f build_type=legacy -f "source[branch]=main" -f "source[path]=/"
 ```
 
-- **Succeeds or returns 409** (already enabled): get the URL with `gh api "repos/$REPO_FULL/pages" --jq '.html_url'`. Set `HAS_PAGES=true`.
+(Replace `OWNER/REPO` with the actual value from above.)
+
+- **Succeeds or returns 409** (already enabled): get the URL with `gh api "repos/OWNER/REPO/pages" --jq '.html_url'`. Set `HAS_PAGES=true`.
 - **Fails with 403 or 422**: this usually means the repo is private on a free account. Try making it public: `gh repo edit --visibility public --accept-visibility-change-consequences` and retry the Pages command. If it still fails, set `HAS_PAGES=false`.
 - **Any other error**: set `HAS_PAGES=false`.
 
@@ -131,9 +138,17 @@ git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git design-system
 
 ## Step 6 -- Figma MCP
 
-Check if `.cursor/mcp.json` already exists with Figma configured. If so, set `HAS_FIGMA=true` and skip.
+Check if `.cursor/mcp.json` already exists. If it exists and already contains a `"Figma"` entry under `mcpServers`, set `HAS_FIGMA=true` and skip.
 
-Otherwise, create `.cursor/mcp.json`:
+If `.cursor/mcp.json` exists but does NOT have a Figma entry, read the file, add the Figma server to the existing `mcpServers` object, and write it back. The entry to add:
+```json
+"Figma": {
+  "url": "https://mcp.figma.com/mcp",
+  "headers": {}
+}
+```
+
+If `.cursor/mcp.json` does not exist at all, create it:
 ```json
 {
   "mcpServers": {
@@ -297,7 +312,7 @@ Then commit: `git add .gitignore && git commit -m "Add .gitignore"`
 
 **IMPORTANT**: The site MUST be viewed through a local server or GitHub Pages. Opening `index.html` directly from the file system (`file:///...`) will break images, SVGs, and CSS. NEVER tell the participant to open the HTML file directly.
 
-Start a local server in the background. Detect the OS:
+Make sure you are in the project root directory (the one that contains `index.html`). Then start a local server in the background. Detect the OS:
 
 **macOS / Linux:**
 ```bash
