@@ -1,10 +1,10 @@
 # Fever Hackathon -- Environment Setup
 
-> **How to use**: Open Cursor, start a **new chat** in **Agent mode** (model: Auto or Claude 4.6 Opus High), and paste this entire document as your first message. Cursor will execute every step automatically and adapt to whatever access you have.
+> **How to use**: Open Cursor, start a **new chat** in **Agent mode** (model: **Claude 4.6 Opus High** recommended -- Auto may select a smaller model that struggles with multi-step setup), and paste this entire document as your first message. Cursor will execute every step automatically and adapt to whatever access you have.
 
 ---
 
-You are a setup assistant for a Fever hackathon. Execute **only Steps 1 through 10** below (ignore the "How to use" header above and the "Verification prompt" section at the end -- those are for the participant, not for you). Steps 2 through 8 are **independent** -- if one fails, skip it and continue to the next. **Do not stop or ask the participant questions.** At the end, print a status summary with access recommendations.
+You are a setup assistant for a Fever hackathon. Execute **only Steps 1 through 10** below (ignore the "How to use" header above and the "Verification prompt" section at the end -- those are for the participant, not for you). Execute the steps **in order**. Steps 2 through 8 can each be skipped without breaking later steps, but they must run sequentially (some depend on earlier results). **Do not stop or ask the participant questions.** At the end, print a status summary with access recommendations.
 
 Track these flags (all start `false`): `HAS_GH`, `HAS_REPO`, `HAS_PAGES`, `HAS_TOOLKIT`, `HAS_FIGMA`.
 
@@ -33,26 +33,41 @@ curl.exe -L -o fever-hackathon-starter.zip "https://github.com/emilianoechevarri
 ```
 If `curl.exe` is not found:
 ```powershell
-Invoke-WebRequest -Uri "https://github.com/emilianoechevarriafever/fever-hackathon-gate/releases/download/v1/fever-hackathon-starter.zip" -OutFile "fever-hackathon-starter.zip"
+Invoke-WebRequest -UseBasicParsing -Uri "https://github.com/emilianoechevarriafever/fever-hackathon-gate/releases/download/v1/fever-hackathon-starter.zip" -OutFile "fever-hackathon-starter.zip"
 ```
 
-Then extract. Windows built-in "Extract All" does NOT support password-protected zips (it will silently produce corrupt files). You MUST use 7-Zip. Try:
+Then extract. Windows built-in "Extract All" does NOT support password-protected zips (it will silently produce corrupt files). You MUST use 7-Zip. Try these locations in order until one works:
+
+1. Check if `7z` is in PATH:
+```powershell
+7z x fever-hackathon-starter.zip -p"FeverHack2026"
+```
+
+2. Try the default 64-bit install path:
 ```powershell
 & "C:\Program Files\7-Zip\7z.exe" x fever-hackathon-starter.zip -p"FeverHack2026"
-Remove-Item fever-hackathon-starter.zip
-cd fever-hackathon-starter
+```
+
+3. Try the 32-bit install path:
+```powershell
+& "C:\Program Files (x86)\7-Zip\7z.exe" x fever-hackathon-starter.zip -p"FeverHack2026"
 ```
 
 (Do NOT add a `-o` flag -- the zip already contains a `fever-hackathon-starter/` folder. 7-Zip will extract it correctly.)
 
-If 7-Zip is not installed, try WinRAR:
+If any of the above succeeds:
 ```powershell
-& "C:\Program Files\WinRAR\WinRAR.exe" x -p"FeverHack2026" fever-hackathon-starter.zip
 Remove-Item fever-hackathon-starter.zip
 cd fever-hackathon-starter
 ```
 
-If neither is installed, tell the participant:
+If 7-Zip is NOT installed, try to install it automatically with winget:
+```powershell
+winget install --id 7zip.7zip --accept-source-agreements --accept-package-agreements
+```
+Then retry extraction using `& "C:\Program Files\7-Zip\7z.exe" x fever-hackathon-starter.zip -p"FeverHack2026"`.
+
+If winget is not available or 7-Zip install fails, tell the participant:
 
 > You need 7-Zip to extract the password-protected zip. Install it from https://7-zip.org/ and re-run this prompt. Alternatively, open https://emilianoechevarriafever.github.io/fever-hackathon-gate/ in your browser, enter the password **FeverHack2026**, download the zip, then right-click it and choose "7-Zip > Extract Here" using password **FeverHack2026**.
 
@@ -65,14 +80,16 @@ If the download itself fails on any OS, tell the participant:
 **After extraction**, you MUST end up in the directory that directly contains `index.html` and `plan.html`. This is critical -- all subsequent steps depend on the working directory being correct.
 
 To find the right directory: run `ls index.html` (or `dir index.html` on Windows). If it fails, the files are in a subfolder. Search for them:
-- macOS/Linux: `find . -name "index.html" -maxdepth 3`
+- macOS/Linux: `find . -maxdepth 3 -name "index.html"`
 - Windows: `Get-ChildItem -Recurse -Filter "index.html" -Depth 3`
 
 Then `cd` into the folder that contains `index.html`. Repeat until `ls index.html` (or `dir index.html`) succeeds.
 
-**IMPORTANT**: Do NOT proceed from a parent folder that contains the project as a subfolder. You must be INSIDE the folder with `index.html`. Every step below assumes the current directory IS the project root.
+**IMPORTANT**: Do NOT proceed from a parent folder that contains the project as a subfolder. You must be INSIDE the folder with `index.html`. Every step below assumes the current directory IS the project root. If the Cursor workspace root is different from this directory, tell the participant: "Please open the project folder in Cursor (File > Open Folder > select the folder containing index.html) and re-run this prompt so that Cursor's workspace matches the project root."
 
-Then check if a `.git` directory exists (run `git status`). If it does NOT exist (or the command errors), initialize git:
+Then check if a `.git` directory exists (run `git status`). If it does NOT exist (or the command errors), initialize git. **Before staging**, create a `.gitignore` file containing these five lines (one entry per line): `.DS_Store`, `Thumbs.db`, `desktop.ini`, `design-system-toolkit/`, `.cursor/mcp.json`. Use whatever file-creation method works on the current OS (e.g. the file-write tool, `echo`/`printf` redirect on macOS/Linux, or `Set-Content` on Windows).
+
+Then:
 ```bash
 git init
 git add -A
@@ -85,7 +102,7 @@ Stop here if the project files could not be obtained.
 
 ---
 
-**From here on, all steps are independent. If any step fails, skip it and continue to the next.**
+**From here on, steps can be skipped if their dependency flag is false. If any step fails for another reason, set its flag to false and continue to the next step.**
 
 ---
 
@@ -103,9 +120,11 @@ Skip if `HAS_GH=false`.
 
 **Safety check**: verify that `index.html` exists in the current directory. If it does NOT, you are in the wrong directory -- find and `cd` into the correct one before proceeding (see Step 1 instructions). NEVER create a repo from a parent folder.
 
-Check if a git remote named `origin` already points to a repo owned by the participant (run `git remote -v`). If so, set `HAS_REPO=true` and skip to Step 4.
+Verify the repo has at least one commit (run `git log -1`). If it has none, stage and commit everything: `git add -A && git commit -m "Initial commit - Fever hackathon starter"`.
 
-Otherwise, create a new repo:
+Check if a git remote named `origin` already points to a repo owned by the participant (run `git remote -v`). If so, set `HAS_REPO=true` and skip to Step 4. If `origin` exists but points to someone else's repo, remove it first: `git remote remove origin`.
+
+Create a new repo:
 
 ```bash
 gh repo create fever-hackathon --public --source . --push
@@ -150,7 +169,7 @@ git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git design-system
 
 Check if `.cursor/mcp.json` already exists. If it exists and already contains a `"Figma"` entry under `mcpServers`, set `HAS_FIGMA=true` and skip.
 
-If `.cursor/mcp.json` exists but does NOT have a Figma entry, read the file, add the Figma server to the existing `mcpServers` object, and write it back. The entry to add:
+If `.cursor/mcp.json` exists but does NOT have a Figma entry, read the file, parse it as JSON (if it is malformed or empty, treat it as if the file does not exist -- see below), add the Figma server to the existing `mcpServers` object, and write it back. The entry to add:
 ```json
 "Figma": {
   "url": "https://mcp.figma.com/mcp",
@@ -306,36 +325,50 @@ If working locally without GitHub Pages:
 - Alternatively, use the VS Code / Cursor "Live Server" extension.
 ```
 
-## Step 8 -- Update .gitignore
+## Step 8 -- Update .gitignore and commit all config
 
-Append these lines to `.gitignore` (create the file if it does not exist). Only add lines that are not already present:
+Verify `.gitignore` exists and contains these entries. If any are missing, append them (do not duplicate existing lines):
 
 ```
 design-system-toolkit/
 .DS_Store
+Thumbs.db
+desktop.ini
 .cursor/mcp.json
 ```
 
-Then commit: `git add .gitignore && git commit -m "Add .gitignore"`
+Then stage and commit **all** config files created during setup (`.gitignore`, `.cursor/rules/`, etc.). Only commit if there are staged changes:
+```bash
+git add .gitignore .cursor/rules/
+git diff --cached --quiet || git commit -m "Add hackathon config files"
+```
+
+If `HAS_REPO=true`, push so that GitHub Pages gets the latest state:
+```bash
+git push origin main
+```
+(If the push fails because the remote already has the same content, that is fine -- ignore the error.)
 
 ## Step 9 -- Local development server
 
 **IMPORTANT**: The site MUST be viewed through a local server or GitHub Pages. Opening `index.html` directly from the file system (`file:///...`) will break images, SVGs, and CSS. NEVER tell the participant to open the HTML file directly.
 
-Make sure you are in the project root directory (the one that contains `index.html`). Then start a local server in the background. Try these options in order until one works:
+Make sure you are in the project root directory (the one that contains `index.html`). Then start a local server. The server runs forever, so **do not wait for it to finish** -- start it and immediately move on to Step 10.
 
-First check if Python is available: run `python3 --version` (macOS/Linux) or `python --version` / `py --version` (Windows).
+Try these options in order until one works. If a command fails with "Address already in use" or similar, retry with port 8001, then 8080.
+
+First check if Python is available. Try these commands in order: `python3 --version`, `python --version`, `py --version`. Note which command succeeded (e.g. `python3`, `python`, or `py`) -- use that same command name in all subsequent Python invocations.
 
 **If Python IS available:**
 
-macOS / Linux:
+macOS / Linux (run in background -- replace `python3` with whichever command worked):
 ```bash
 python3 -m http.server 8000 &
 ```
 
-Windows:
+Windows (run as a detached process -- replace `python` with whichever command worked):
 ```powershell
-Start-Process -NoNewWindow python -ArgumentList "-m","http.server","8000"
+Start-Process python -ArgumentList "-m","http.server","8000" -WindowStyle Hidden
 ```
 
 **If Python is NOT available, try to install it automatically:**
@@ -349,20 +382,20 @@ Windows (winget -- ships with Windows 10/11):
 ```powershell
 winget install --id Python.Python.3.12 --accept-source-agreements --accept-package-agreements
 ```
-After install, **close and reopen the terminal** (so PATH updates), then:
+After install, the current terminal may not see `python` yet. Try running it via its default install path:
 ```powershell
-Start-Process -NoNewWindow python -ArgumentList "-m","http.server","8000"
+Start-Process "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" -ArgumentList "-m","http.server","8000" -WindowStyle Hidden
 ```
+If that path does not exist, try `& "$env:LOCALAPPDATA\Microsoft\WindowsApps\python.exe" -m http.server 8000` or tell the participant to close and reopen their terminal, then re-run the server command.
 
 **If Python install fails or is too slow, use Node.js instead (any OS):**
 ```bash
 npx -y serve -l 8000
 ```
+(This also runs forever -- start it and move on.)
 
 **If nothing above works:**
 Tell the participant: "Install the **Live Server** extension in Cursor: open the Extensions panel (Ctrl+Shift+X), search for 'Live Server' by Ritwick Dey, install it. Then right-click `index.html` in the file explorer and choose 'Open with Live Server'."
-
-If port 8000 is already in use, try 8001, then 8080.
 
 Tell the participant: **"Open http://localhost:8000 in your browser to see the site. Do NOT open the HTML files directly from your file explorer -- they will look broken."**
 
@@ -384,7 +417,7 @@ Print a summary table:
 | Design System Toolkit      | OK/NO  | cloned / using inlined tokens              |
 | Figma MCP                  | OK/NO  | configured / skipped                       |
 | Cursor Rule                | OK     | .cursor/rules/fever-hackathon.mdc          |
-| Local server               | OK     | http://localhost:8000                      |
+| Local server               | OK/NO  | http://localhost:PORT / see instructions    |
 +----------------------------+--------+-------------------------------------------+
 ```
 
@@ -427,6 +460,6 @@ Verify my hackathon setup:
 3. Check if design-system-toolkit/ exists and list its top-level contents.
 4. Check if .cursor/mcp.json exists and show its content.
 5. Run "git remote -v" and report the remotes.
-6. Check if http://localhost:8000 is reachable (curl http://localhost:8000 -o /dev/null -s -w "%{http_code}").
+6. Check if a local server is running: try to fetch http://localhost:8000 (on macOS/Linux: curl -s -o /dev/null -w "%{http_code}" http://localhost:8000 ; on Windows: try curl.exe -s -o NUL -w "%{http_code}" http://localhost:8000 or Invoke-WebRequest -UseBasicParsing -Uri http://localhost:8000 and check the StatusCode).
 Report all results.
 ```

@@ -33,7 +33,7 @@ To give more participants access:
 ### 3. Confirm participants have Cursor installed
 
 - Cursor version: latest stable (any version with Agent mode).
-- Model: Auto or Claude 4.6 Opus High recommended.
+- Model: **Claude 4.6 Opus High** recommended (Auto may pick a smaller model that loses track of the multi-step setup).
 - No specific extensions required (the project is plain HTML/CSS/JS).
 
 ### 4. Distribute the setup prompt
