@@ -6,7 +6,7 @@
 
 You are a setup assistant for a Fever hackathon. Execute **only Steps 1 through 10** below (ignore the "How to use" header above and the "Verification prompt" section at the end -- those are for the participant, not for you). Execute the steps **in order**. Steps 2 through 8 can each be skipped without breaking later steps, but they must run sequentially (some depend on earlier results). **Do not stop or ask the participant questions.** At the end, print a status summary with access recommendations.
 
-Track these flags (all start `false`): `HAS_GH`, `HAS_REPO`, `HAS_PAGES`, `HAS_TOOLKIT`, `HAS_FIGMA`.
+Track these flags (all start `false`): `HAS_GH`, `HAS_REPO`, `IS_ORG_REPO`, `HAS_PAGES`, `HAS_TOOLKIT`, `HAS_FIGMA`.
 
 ---
 
@@ -114,7 +114,7 @@ Run `gh auth status`.
 - **Installed but not authenticated**: run `gh auth login --web -p https`. Wait for browser flow. Set `HAS_GH=true`.
 - **Not installed**: `HAS_GH=false`. Move on.
 
-## Step 3 -- Create a personal GitHub repo (requires HAS_GH)
+## Step 3 -- Create a GitHub repo (requires HAS_GH)
 
 Skip if `HAS_GH=false`.
 
@@ -122,25 +122,46 @@ Skip if `HAS_GH=false`.
 
 Verify the repo has at least one commit (run `git log -1`). If it has none, stage and commit everything: `git add -A && git commit -m "Initial commit - Fever hackathon starter"`.
 
-Check if a git remote named `origin` already points to a repo owned by the participant (run `git remote -v`). If so, set `HAS_REPO=true` and skip to Step 4. If `origin` exists but points to someone else's repo, remove it first: `git remote remove origin`.
+Check if a git remote named `origin` already points to a repo owned by the participant or by the Feverup org (run `git remote -v`). If so, set `HAS_REPO=true` (and `IS_ORG_REPO=true` if the remote contains `Feverup/`) and skip to Step 4. If `origin` exists but points to someone else's repo, remove it first: `git remote remove origin`.
 
-Create a new repo:
+### Determine where to create the repo
 
+Get the authenticated username: `gh api user --jq .login` -- note this as `USERNAME`.
+
+Check if the user is a member of the **Feverup** GitHub organization:
+```bash
+gh api orgs/Feverup/memberships/USERNAME --jq .state
+```
+(Replace `USERNAME` with the actual value.)
+
+**If the user IS a Feverup org member** (command returns `active`):
+
+Create the repo under the org as **private** (the Feverup Team plan supports Pages on private repos):
+```bash
+gh repo create Feverup/fever-hackathon-USERNAME --private --source . --push
+```
+(Replace `USERNAME` with the actual GitHub username, e.g. `Feverup/fever-hackathon-johndoe`.)
+
+- **If it succeeds**: set `HAS_REPO=true`, `IS_ORG_REPO=true`.
+- **If it fails because the name exists**: try `Feverup/fever-hackathon-USERNAME-2`. Set flags if this works.
+- **If it fails for another reason** (e.g. org restricts repo creation): fall through to the personal fallback below.
+
+**If the user is NOT a Feverup org member, or org repo creation failed** (fallback):
+
+Create a personal repo as **public** (needed for Pages on free accounts):
 ```bash
 gh repo create fever-hackathon --public --source . --push
 ```
 
-Note: the repo is created as **public** so that GitHub Pages works on free GitHub accounts (Pages requires a paid plan for private repos).
-
-- **If it succeeds**: set `HAS_REPO=true`.
-- **If it fails because the repo name already exists**: try with a suffix: `gh repo create fever-hackathon-2 --public --source . --push`. Set `HAS_REPO=true` if this works.
+- **If it succeeds**: set `HAS_REPO=true`, `IS_ORG_REPO=false`.
+- **If it fails because the name exists**: try `fever-hackathon-2`. Set flags if this works.
 - **If it fails for any other reason**: set `HAS_REPO=false`.
 
 ## Step 4 -- Enable GitHub Pages (requires HAS_REPO)
 
 Skip if `HAS_REPO=false`.
 
-First, run `gh repo view --json nameWithOwner -q .nameWithOwner` and note the output (e.g. `username/fever-hackathon`). Use this value as `OWNER/REPO` in the next command.
+First, run `gh repo view --json nameWithOwner -q .nameWithOwner` and note the output (e.g. `Feverup/fever-hackathon-johndoe` or `johndoe/fever-hackathon`). Use this value as `OWNER/REPO` in the next command.
 
 Enable Pages:
 ```bash
@@ -150,7 +171,9 @@ gh api "repos/OWNER/REPO/pages" -X POST -f build_type=legacy -f "source[branch]=
 (Replace `OWNER/REPO` with the actual value from above.)
 
 - **Succeeds or returns 409** (already enabled): get the URL with `gh api "repos/OWNER/REPO/pages" --jq '.html_url'`. Set `HAS_PAGES=true`.
-- **Fails with 403 or 422**: this usually means the repo is private on a free account. Try making it public: `gh repo edit --visibility public --accept-visibility-change-consequences` and retry the Pages command. If it still fails, set `HAS_PAGES=false`.
+- **Fails with 403 or 422**:
+  - If `IS_ORG_REPO=true`: the user may not have admin rights. Try `gh api "repos/OWNER/REPO" --jq .permissions.admin`. If `false`, tell the participant: "You don't have admin access on this repo. Ask the hackathon organizer to grant you admin, or re-run the setup prompt after getting access." Set `HAS_PAGES=false`.
+  - If `IS_ORG_REPO=false`: this usually means the repo is private on a free account. Try making it public: `gh repo edit --visibility public --accept-visibility-change-consequences` and retry the Pages command. If it still fails, set `HAS_PAGES=false`.
 - **Any other error**: set `HAS_PAGES=false`.
 
 ## Step 5 -- Fever Design System Toolkit
@@ -412,7 +435,7 @@ Print a summary table:
 | Project files              | OK     | downloaded and extracted                   |
 | Git initialized            | OK     | local repo ready                           |
 | GitHub CLI                 | OK/NO  | username: ... / not installed              |
-| Personal GitHub repo       | OK/NO  | repo: ... / skipped                        |
+| GitHub repo                | OK/NO  | Feverup/... (private) / personal/... (public) / skipped |
 | GitHub Pages               | OK/NO  | url: ... / using localhost:8000            |
 | Design System Toolkit      | OK/NO  | cloned / using inlined tokens              |
 | Figma MCP                  | OK/NO  | configured / skipped                       |
@@ -420,6 +443,9 @@ Print a summary table:
 | Local server               | OK/NO  | http://localhost:PORT / see instructions    |
 +----------------------------+--------+-------------------------------------------+
 ```
+
+If `IS_ORG_REPO=true`, add a note: "Your repo is under the Feverup org (private). GitHub Pages works because Feverup has a Team plan."
+If `IS_ORG_REPO=false` and `HAS_REPO=true`, add a note: "Your repo is under your personal account (public). To get a private repo with Pages, you need Feverup org membership."
 
 Then, **if any of GitHub CLI, GitHub repo, Pages, Toolkit, or Figma has status NO**, print:
 
@@ -431,9 +457,9 @@ Only print the bullets that apply (skip the ones already OK):
 
 - **GitHub CLI** (needed for GitHub repo + Pages): Install with `brew install gh` (macOS) or `winget install --id GitHub.cli` (Windows). Then run `gh auth login`. Once installed, re-run this setup prompt.
 
-- **Personal GitHub repo** (needed for GitHub Pages): If you now have `gh`, run: `gh repo create fever-hackathon --public --source . --push`
+- **GitHub repo** (needed for GitHub Pages): The best option is to join the **Feverup** GitHub org so the repo is created privately under the org. Ask your manager or the hackathon organizer to invite you at https://github.com/orgs/Feverup/people. If you can't join the org, a personal public repo also works. Re-run this setup prompt after getting access.
 
-- **GitHub Pages** (shareable public URL): Requires a GitHub repo (see above). Once you have one, run: `gh api repos/YOUR_USER/fever-hackathon/pages -X POST -f build_type=legacy -f "source[branch]=main" -f "source[path]=/"`
+- **GitHub Pages** (shareable URL): If you have a repo, re-run this prompt. If your repo is under Feverup, Pages works even with private repos (Team plan). If your repo is personal, it must be public for Pages to work on a free account.
 
 - **Design System Toolkit** (full design tokens and component docs): You need membership in the Feverup GitHub org. Ask your manager or the hackathon organizer to invite you at https://github.com/orgs/Feverup/people. Once invited, run: `git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git design-system-toolkit` -- The Cursor Rule already includes the key tokens inline, so this is a nice-to-have.
 
@@ -445,7 +471,7 @@ Only print the bullets that apply (skip the ones already OK):
 
 If ALL capabilities are OK:
 
-> **Perfect setup -- everything is ready!** Your site is live on GitHub Pages and you have the design toolkit and Figma connected. Open http://localhost:8000 to preview locally, or share your Pages URL. Start a new Cursor Agent chat and describe what you want to build. Happy hacking!
+> **Perfect setup -- everything is ready!** Your repo is under the Feverup org (private) with GitHub Pages live. Open http://localhost:8000 to preview locally, or share your Pages URL. Start a new Cursor Agent chat and describe what you want to build. Happy hacking!
 
 ---
 

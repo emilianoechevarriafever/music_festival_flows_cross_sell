@@ -51,11 +51,11 @@ If participants need to reference Figma designs:
 
 ## Access matrix
 
-| Capability | No accounts at all | GitHub CLI | Feverup org member | Figma seat |
+| Capability | No accounts at all | GitHub CLI only | Feverup org member | Figma seat |
 |---|---|---|---|---|
 | **Download starter kit** | Yes (password in prompt) | Yes | Yes | -- |
-| **Personal GitHub repo** | No | Yes | Yes | -- |
-| **GitHub Pages deploy** | No (localhost) | Yes | Yes | -- |
+| **GitHub repo** | No | Personal (public) | **Feverup org (private)** | -- |
+| **GitHub Pages deploy** | No (localhost) | Yes (public repo) | **Yes (private repo)** | -- |
 | **Design System Toolkit** | No (inlined tokens) | No (inlined tokens) | Yes (full clone) | -- |
 | **Figma MCP** | No | No | No | Yes |
 | **Local development** | Yes | Yes | Yes | Yes |
@@ -66,7 +66,16 @@ If participants need to reference Figma designs:
 2. Work on localhost.
 3. Have design system context via the Cursor Rule (tokens inlined).
 
-**Optimal setup**: GitHub CLI + Feverup org + Figma seat = fork, Pages, full toolkit, Figma MCP.
+**Optimal setup**: GitHub CLI + Feverup org member + Figma seat = private org repo, Pages on private repo, full toolkit, Figma MCP.
+
+**Repo strategy**: The setup prompt first tries to create a repo under the **Feverup** org (e.g. `Feverup/fever-hackathon-username`). This is preferred because:
+- The repo stays **private** (only org members can see it).
+- GitHub Pages works on private repos (Feverup has a **Team** plan).
+- The participant gets **admin** access automatically when they create the repo.
+
+If the participant is not a Feverup org member, the prompt falls back to creating a **personal public** repo (required for Pages on free accounts).
+
+To maximize the org-repo experience, invite participants to the Feverup org **before** hackathon day: https://github.com/orgs/Feverup/people
 
 The setup prompt tells each participant exactly what they're missing and how to request it before hackathon day.
 
@@ -116,8 +125,9 @@ git reset --hard HEAD~N
 |-----------|----------|----------|
 | Fever website files | Project root (`index.html`, `plan.html`, etc.) | Yes (always) |
 | AI context (Cursor Rule) | `.cursor/rules/fever-hackathon.mdc` | Yes (always) |
-| Personal GitHub repo | `github.com/USER/fever-hackathon` | Optional |
-| Live deployment | `https://USER.github.io/fever-hackathon/` | Optional |
+| GitHub repo (org) | `github.com/Feverup/fever-hackathon-USER` (private) | Preferred |
+| GitHub repo (personal) | `github.com/USER/fever-hackathon` (public) | Fallback |
+| Live deployment | `https://feverup.github.io/fever-hackathon-USER/` or `https://USER.github.io/fever-hackathon/` | Optional |
 | Design system toolkit | `design-system-toolkit/` folder | Optional (tokens inlined) |
 | Figma connection | `.cursor/mcp.json` | Optional |
 | Local server | `http://localhost:8000` | Fallback if no Pages |
