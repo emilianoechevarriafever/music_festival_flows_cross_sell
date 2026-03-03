@@ -62,9 +62,17 @@ If the download itself fails on any OS, tell the participant:
 > Enter the password: **FeverHack2026**
 > Download the zip. Extract it with 7-Zip (password: **FeverHack2026**). Open the extracted folder in Cursor and re-run this prompt.
 
-**After extraction**, verify that `index.html` and `plan.html` exist in the current directory. If they are inside a subfolder, `cd` into it.
+**After extraction**, you MUST end up in the directory that directly contains `index.html` and `plan.html`. This is critical -- all subsequent steps depend on the working directory being correct.
 
-Then check if a `.git` directory exists (run `git status`). If it does NOT exist, initialize git:
+To find the right directory: run `ls index.html` (or `dir index.html` on Windows). If it fails, the files are in a subfolder. Search for them:
+- macOS/Linux: `find . -name "index.html" -maxdepth 3`
+- Windows: `Get-ChildItem -Recurse -Filter "index.html" -Depth 3`
+
+Then `cd` into the folder that contains `index.html`. Repeat until `ls index.html` (or `dir index.html`) succeeds.
+
+**IMPORTANT**: Do NOT proceed from a parent folder that contains the project as a subfolder. You must be INSIDE the folder with `index.html`. Every step below assumes the current directory IS the project root.
+
+Then check if a `.git` directory exists (run `git status`). If it does NOT exist (or the command errors), initialize git:
 ```bash
 git init
 git add -A
@@ -93,9 +101,11 @@ Run `gh auth status`.
 
 Skip if `HAS_GH=false`.
 
+**Safety check**: verify that `index.html` exists in the current directory. If it does NOT, you are in the wrong directory -- find and `cd` into the correct one before proceeding (see Step 1 instructions). NEVER create a repo from a parent folder.
+
 Check if a git remote named `origin` already points to a repo owned by the participant (run `git remote -v`). If so, set `HAS_REPO=true` and skip to Step 4.
 
-Otherwise, create a new repo. Use the participant's GitHub username to avoid name collisions:
+Otherwise, create a new repo:
 
 ```bash
 gh repo create fever-hackathon --public --source . --push
@@ -312,19 +322,27 @@ Then commit: `git add .gitignore && git commit -m "Add .gitignore"`
 
 **IMPORTANT**: The site MUST be viewed through a local server or GitHub Pages. Opening `index.html` directly from the file system (`file:///...`) will break images, SVGs, and CSS. NEVER tell the participant to open the HTML file directly.
 
-Make sure you are in the project root directory (the one that contains `index.html`). Then start a local server in the background. Detect the OS:
+Make sure you are in the project root directory (the one that contains `index.html`). Then start a local server in the background. Try these options in order until one works:
 
-**macOS / Linux:**
+**Option A -- Python (macOS / Linux):**
 ```bash
 python3 -m http.server 8000 &
 ```
 
-**Windows (PowerShell):**
+**Option A -- Python (Windows):**
 ```powershell
 Start-Process -NoNewWindow python -ArgumentList "-m","http.server","8000"
 ```
+If `python` is not found, try `py -m http.server 8000`.
 
-If `python3` / `python` / `py` are not found, tell the participant: "Install Python from https://www.python.org/downloads/ (make sure to check 'Add to PATH' during install on Windows). Or install the 'Live Server' extension in Cursor and click 'Go Live'."
+**Option B -- Node.js (any OS, if Python is not available):**
+```bash
+npx -y serve -l 8000
+```
+(This works if Node.js is installed. The `-y` flag auto-confirms the package install.)
+
+**Option C -- No Python or Node.js:**
+Tell the participant: "Install the **Live Server** extension in Cursor: open the Extensions panel (Ctrl+Shift+X), search for 'Live Server' by Ritwick Dey, install it. Then right-click `index.html` in the file explorer and choose 'Open with Live Server'."
 
 If port 8000 is already in use, try 8001, then 8080.
 
