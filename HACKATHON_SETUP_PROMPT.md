@@ -111,7 +111,7 @@ Stop here if the project files could not be obtained.
 Run `gh auth status`.
 
 - **Installed and authenticated**: note the username. Set `HAS_GH=true`.
-- **Installed but not authenticated**: run `gh auth login --web -p https`. Wait for browser flow. Set `HAS_GH=true`.
+- **Installed but not authenticated**: run `gh auth login --web -p https`. Tell the participant: "Please complete the GitHub login in the browser window that just opened." Wait for the command to finish. If it succeeds, set `HAS_GH=true`. If the participant cancels or it times out, set `HAS_GH=false` and move on.
 - **Not installed**: `HAS_GH=false`. Move on.
 
 ## Step 3 -- Create a GitHub repo (requires HAS_GH)
@@ -134,7 +134,9 @@ gh api orgs/Feverup/memberships/USERNAME --jq .state
 ```
 (Replace `USERNAME` with the actual value.)
 
-**If the user IS a Feverup org member** (command returns `active`):
+This command returns `active` if the user is in the org. If it fails with 404 or returns anything other than `active`, the user is NOT a member -- skip to the personal fallback below.
+
+**If the user IS a Feverup org member** (command returned `active`):
 
 Create the repo under the org as **private** (the Feverup Team plan supports Pages on private repos):
 ```bash
@@ -180,13 +182,14 @@ gh api "repos/OWNER/REPO/pages" -X POST -f build_type=legacy -f "source[branch]=
 
 Check if `design-system-toolkit/` already exists. If so, set `HAS_TOOLKIT=true` and skip.
 
-Otherwise try:
+Otherwise try cloning (use `GIT_TERMINAL_PROMPT=0` to prevent git from hanging on a credentials prompt if the user lacks access):
 ```bash
-git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git design-system-toolkit
+GIT_TERMINAL_PROMPT=0 git clone https://github.com/Feverup/AI-Product-Design-Toolkit.git design-system-toolkit
 ```
+On Windows PowerShell, set the env var first: `$env:GIT_TERMINAL_PROMPT=0` then run the `git clone`.
 
 - **Succeeds**: set `HAS_TOOLKIT=true`.
-- **Fails**: set `HAS_TOOLKIT=false`. This is fine -- the Cursor Rule in Step 7 includes the key token values inline.
+- **Fails** (access denied, 404, or any error): set `HAS_TOOLKIT=false`. This is fine -- the Cursor Rule in Step 7 includes the key token values inline.
 
 ## Step 6 -- Figma MCP
 
@@ -378,7 +381,7 @@ git push origin main
 
 Make sure you are in the project root directory (the one that contains `index.html`). Then start a local server. The server runs forever, so **do not wait for it to finish** -- start it and immediately move on to Step 10.
 
-Try these options in order until one works. If a command fails with "Address already in use" or similar, retry with port 8001, then 8080.
+Try these options in order until one works. If a command fails with "Address already in use" or similar, retry with port 8001, then 8080. Note which port succeeded -- use it in the summary at Step 10.
 
 First check if Python is available. Try these commands in order: `python3 --version`, `python --version`, `py --version`. Note which command succeeded (e.g. `python3`, `python`, or `py`) -- use that same command name in all subsequent Python invocations.
 
@@ -471,7 +474,11 @@ Only print the bullets that apply (skip the ones already OK):
 
 If ALL capabilities are OK:
 
+If `IS_ORG_REPO=true`:
 > **Perfect setup -- everything is ready!** Your repo is under the Feverup org (private) with GitHub Pages live. Open http://localhost:8000 to preview locally, or share your Pages URL. Start a new Cursor Agent chat and describe what you want to build. Happy hacking!
+
+If `IS_ORG_REPO=false`:
+> **Perfect setup -- everything is ready!** Your repo is on your personal GitHub (public) with Pages live. Open http://localhost:8000 to preview locally, or share your Pages URL. For a private repo, join the Feverup org and re-run this prompt. Start a new Cursor Agent chat and describe what you want to build. Happy hacking!
 
 ---
 
